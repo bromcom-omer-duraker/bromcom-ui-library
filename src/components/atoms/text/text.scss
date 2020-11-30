@@ -1,0 +1,14 @@
+@import '../../../global/global.scss';
+
+:host {
+  display: block;
+}
+
+// Reset user agent styles
+
+h1, h2, h3, h4, h5, h6, p, span, small {
+  margin: 0;
+	padding: 0;
+	border: 0;
+  vertical-align: baseline;
+}

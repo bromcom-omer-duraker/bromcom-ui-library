@@ -1,0 +1,28 @@
+@import './variables/index.scss';
+
+// All Elements
+* {
+    font-family: $font-roboto;
+    box-sizing: border-box;
+}
+
+// Font Sizes
+@each $name, $size in $sizes {
+    .size-#{$name} {
+        font-size: $size;
+        line-height: $size + 8;
+    }
+}
+
+h1 {
+    font-weight: 400;
+}
+
+// Font Weights
+.weight-regular {
+    font-weight: $font-regular;
+}
+
+.weight-semibold {
+    font-weight: $font-semibold;
+}

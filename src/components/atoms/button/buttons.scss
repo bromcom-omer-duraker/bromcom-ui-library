@@ -1,0 +1,122 @@
+:host {
+    display: inline-block;
+}
+
+button {
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: $font-roboto;
+
+    span {
+        display: inline-flex;
+
+        &.left { margin-right: 4px;}
+        &.right { margin-left: 4px;}
+    }
+
+    &.rounded {
+        border-radius: 50px;
+    }
+}
+
+.solid {
+    color: $grey-1;
+    background-color: $prime-blue-6;
+    border: 1px solid $prime-blue-6;
+
+    &.outline {
+        color: $grey-8;
+        background-color: $grey-1;
+        border-color: $grey-5;
+
+        &:hover, &:focus {
+            color: $prime-blue-5;
+            background-color: $grey-1;
+        }
+
+        &:active {
+            color: $prime-blue-7;
+            background-color: $grey-1;
+        }
+    }
+
+    &:hover, &:focus {
+        background-color: $prime-blue-5;
+        border-color: $prime-blue-5;;
+    }
+
+    &:active {
+        background-color: $prime-blue-7;
+        border-color: $prime-blue-7;
+    }
+
+    &:disabled {
+        color: $grey-6 !important;
+        background-color: $grey-3 !important;
+        border-color: $grey-5;
+        cursor: not-allowed;
+    }
+}
+
+.ghost {
+    color: $prime-blue-6;
+    background-color: transparent;
+    border: 1px solid $prime-blue-6;
+
+    &.outline {
+        color: $grey-1;
+        border-color: $grey-1;
+    }
+
+    &:hover, &:focus {
+        color: $prime-blue-5;
+        border-color: $prime-blue-5;
+    }
+
+    &:active {
+        color: $prime-blue-7;
+        border-color: $prime-blue-7;
+    }
+    
+    &:disabled {
+        color: $grey-6;
+        border-color: $grey-5;
+        cursor: not-allowed;
+    }
+
+}
+
+.large {
+    font-size: 16px;
+    padding: 7px 16px;
+    line-height: 24px;
+    
+    &.rounded {
+        padding: 9px;
+    }
+}
+
+.medium {
+    font-size: 14px;
+    padding: 4px 16px;
+    line-height: 22px;
+
+    &.rounded {
+        padding: 6px;
+    }
+}
+
+.small {
+    font-size: 14px;
+    padding: 0 8px;
+    line-height: 22px;
+
+    &.rounded {
+        padding: 3px;
+    }
+}

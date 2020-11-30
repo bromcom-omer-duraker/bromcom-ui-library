@@ -1,0 +1,84 @@
+:host {
+    display: inline-block;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    cursor: default;
+    border-radius: 24px;
+    border: 1px solid $grey-5;
+    user-select: none;
+    
+    &.basic, &.closeable, &.add {
+        
+        background-color: $grey-3;
+        color: $grey-8;
+        
+        &:hover {
+            opacity: 0.85;
+        }
+    }
+
+    &.closeable {
+        span {
+            color: black;
+        }
+    }
+
+    &.add {
+        border-style: dashed;
+        background-color: $grey-1;
+    }
+
+    &.checkable {
+        background-color: $grey-1;
+        color: $grey-8;
+        border-color: $grey-1;
+
+        &:hover {
+            color: $prime-blue-5;
+            cursor: pointer;
+        }
+    }
+
+    span {
+        display: inline-flex;
+
+        &.left { margin-right: 4px;}
+        &.right { margin-left: 4px;}
+    }
+}
+
+button {
+    border: none;
+    outline: 0;
+    cursor: pointer !important;
+    margin: 0;
+}
+
+input[type=checkbox] {
+    margin: 0;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    position: absolute;
+
+    &:checked + label {
+        background-color: $prime-blue-6;
+        color: $grey-1;
+        border-color: $prime-blue-6;
+
+        &:hover {
+            background-color: $prime-blue-5;
+            border-color: $prime-blue-5;
+        }
+
+        &:active {
+            background-color: $prime-blue-7;
+            border-color: $prime-blue-7;
+        }
+    }
+}

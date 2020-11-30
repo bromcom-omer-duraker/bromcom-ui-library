@@ -1,0 +1,48 @@
+bcm-badge {
+    display: inline-block;
+}
+
+$statuses: (
+    'success' $green-6,
+    'error' $red-6,
+    'default' $grey-5,
+    'processing' $prime-blue-6,
+    'warning' $orange-6
+);
+
+@each $status, $color in $statuses {
+    .#{$status} {
+        background-color: $color;
+    }
+};
+
+.badge-basic {
+    padding: 0 7px;
+    border: 1px solid $grey-1;
+    color: $grey-1;
+    border-radius: 16px;
+    font-size: 14px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge-info {
+    display: inline-flex;
+    align-items: center;
+}
+
+.badge-text {
+    color: $grey-7;
+    font-size: 14px;
+}
+
+.badge-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border: 1px solid $grey-1;
+    border-radius: 50%;
+    margin-right: 8px;
+}

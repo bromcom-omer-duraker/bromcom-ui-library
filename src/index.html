@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+
+    <link rel="stylesheet" href="/build/bromcom-ui.css">
+    <script type="module" src="/build/bromcom-ui.esm.js"></script>
+    <script nomodule src="/build/bromcom-ui.js"></script>
+</head>
+
+<body style="background-color: #262626;margin: 10%; display: flex; gap: 10px;">
+
+    <bcm-tag type="basic">Tag</bcm-tag>
+    <bcm-tag type="closeable" id="some">Tag</bcm-tag>
+    <bcm-tag id="addButton" type="add">Tag</bcm-tag>
+    <bcm-tag type="checkable" checked="true">Tag</bcm-tag>
+    <bcm-tag id="checkbox" type="checkable">Tag</bcm-tag>
+    <bcm-tag type="add">Tag</bcm-tag>
+
+    <script>
+
+        document.getElementById('checkbox').addEventListener('checkedChange', e => console.log(e.detail.newValue))
+
+    </script>
+
+</body>
+
+</html>
