@@ -6,7 +6,7 @@ addons.setConfig({
     panelPosition: 'right',
     theme: {
         ...themes.normal,
-        brandUrl: 'https://example.com',
+        brandUrl: 'https://www.bromcom.com/',
         brandImage: logo
     }
 })

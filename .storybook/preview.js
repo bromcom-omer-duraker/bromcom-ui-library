@@ -9,4 +9,20 @@ export const parameters = {
                 ['Text', 'Button']]]
         },
     },
+    backgrounds: {
+        grid: {
+            disable: true
+        },
+        default: 'Light',
+        values: [
+            {
+                name: 'Light',
+                value: '#fff'
+            },
+            {
+                name: 'Dark',
+                value: '#262626'
+            },
+        ]
+    }
 }
