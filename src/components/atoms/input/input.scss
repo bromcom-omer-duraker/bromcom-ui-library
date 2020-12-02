@@ -1,1 +1,138 @@
-// scss
+@import '../../../global/variables/typography.scss';
+
+// Input Sizes
+
+$input-sizes: (
+    'large' 38px 16px,
+    'medium' 30px 14px,
+    'small' 22px 14px
+);
+
+// Caption Types
+
+$caption-types: (
+    'default' $grey-7,
+    'primary' $prime-blue-6,
+    'success' $green-6,
+    'warning' $orange-6,
+    'error' $red-6,
+);
+
+// Container (includes label-input-caption)
+
+.input-container {
+    width: 256px;
+
+    &.full-width {
+        width: 100%;
+    }
+}
+
+// Input Container (includes prefix and suffix)
+
+.input-base {
+    flex: 1 1 auto;
+    display: inline-flex;
+    align-items: stretch;
+    justify-content: start;
+    position: relative;
+    width: 100%;
+    background-color: $grey-1;
+    border: 1px solid $grey-5;
+    border-radius: 2px;
+    vertical-align: middle;
+    overflow: hidden;
+    cursor: text;
+
+    &.focused:not(.disabled) {
+        border-color: $prime-blue-5;
+        box-shadow: 0px 0px 4px $prime-blue-6;
+    }
+
+    &:hover:not(.disabled) {
+        border-color: $prime-blue-6;
+    }
+
+    &.disabled {
+        background-color: $grey-3;
+        cursor: not-allowed;
+    }
+}
+
+// Input element
+
+.input-base input {
+    color: $grey-8;
+    flex: 1 1 auto;
+    width: 100%;
+    border: none;
+    border-radius: 2px;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0 12px;
+    font-size: inherit;
+    cursor: inherit;
+    -webkit-appearance: none;
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+        -webkit-appearance: none;
+    }
+    
+    &::placeholder {
+        color: $grey-6;
+    }
+    
+    &:focus {
+        outline: none;
+    }
+}
+
+// Prefix and Suffix
+
+.input-prefix, .input-suffix {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    cursor: default;
+}
+
+// Every Slotted Element
+
+.input-prefix ::slotted(*) {
+    margin-left: 10px;
+}
+
+.input-suffix ::slotted(*) {
+    margin-right: 10px;
+}
+
+// Label And Caption
+
+.label {
+    display: flex;
+    flex-direction: column;
+    color: $grey-9;
+    margin-bottom: 2px;
+}
+
+.input-caption {
+    display: block;
+    margin-top: 2px;
+}
+
+@each $state, $color in $caption-types {
+    .caption-#{$state} {
+        color: $color;
+    }
+}
+
+@each $name, $size, $font-size in $input-sizes {
+    .input-#{$name} {
+        height: $size;
+        font-size: $font-size;
+    }
+}
