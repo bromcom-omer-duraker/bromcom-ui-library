@@ -3,9 +3,9 @@
 // Input Sizes
 
 $input-sizes: (
-    'large' 38px 16px,
-    'medium' 30px 14px,
-    'small' 22px 14px
+    'large' 7px,
+    'medium' 4px ,
+    'small' 0px
 );
 
 // Caption Types
@@ -57,6 +57,12 @@ $caption-types: (
         background-color: $grey-3;
         cursor: not-allowed;
     }
+
+    &.empty {
+        .input-clear-button {
+            display: none;
+        }
+    }
 }
 
 // Input element
@@ -71,7 +77,7 @@ $caption-types: (
     box-shadow: none;
     padding: 0;
     margin: 0 12px;
-    font-size: inherit;
+    font-family: $font-roboto;
     cursor: inherit;
     -webkit-appearance: none;
 
@@ -84,6 +90,7 @@ $caption-types: (
     
     &::placeholder {
         color: $grey-6;
+        user-select: none;
     }
     
     &:focus {
@@ -103,11 +110,35 @@ $caption-types: (
 // Every Slotted Element
 
 .input-prefix ::slotted(*) {
+    margin-left: 2x;
+}
+
+.input-prefix ::slotted(:first-child) {
     margin-left: 10px;
 }
 
+.input-prefix ::slotted(:last-child) {
+    margin-right: -8px;
+}
+
 .input-suffix ::slotted(*) {
+    margin-right: 2px;
+}
+
+// Clear and password visibility toggle
+
+.input-clear-button, .input-password-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
     margin-right: 10px;
+  
+    &:focus {
+      outline: none;
+    }
 }
 
 // Label And Caption
@@ -130,9 +161,8 @@ $caption-types: (
     }
 }
 
-@each $name, $size, $font-size in $input-sizes {
+@each $name, $size in $input-sizes {
     .input-#{$name} {
-        height: $size;
-        font-size: $font-size;
+        padding: $size 0;
     }
 }

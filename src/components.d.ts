@@ -40,9 +40,14 @@ export namespace Components {
         "disabled": boolean;
         "fullWidth": boolean;
         "label": string;
+        "passwordToggle": boolean;
         "placeholder": string;
+        "removeFocus": () => Promise<void>;
+        "select": () => Promise<void>;
+        "setFocus": () => Promise<void>;
         "size": 'small' | 'medium' | 'large';
         "type": string;
+        "value": string;
     }
     interface BcmTag {
         "checked": boolean;
@@ -142,9 +147,16 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "fullWidth"?: boolean;
         "label"?: string;
+        "onBcm-blur"?: (event: CustomEvent<any>) => void;
+        "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "onBcm-clear"?: (event: CustomEvent<any>) => void;
+        "onBcm-focus"?: (event: CustomEvent<any>) => void;
+        "onBcm-input"?: (event: CustomEvent<any>) => void;
+        "passwordToggle"?: boolean;
         "placeholder"?: string;
         "size"?: 'small' | 'medium' | 'large';
         "type"?: string;
+        "value"?: string;
     }
     interface BcmTag {
         "checked"?: boolean;
