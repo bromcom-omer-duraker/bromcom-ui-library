@@ -14,7 +14,7 @@ export class BcmInput {
     inputElement: HTMLInputElement
 
     @Prop() type: string = 'text'
-    @Prop({ mutable: true }) value: any = ''
+    @Prop({ mutable: true, reflect: true }) value: any = ''
     @Prop() size: 'small' | 'medium' | 'large' = "medium"
     @Prop() label: string
     @Prop() caption: string
@@ -177,6 +177,7 @@ export class BcmInput {
                         type={type === 'password' && isPasswordVisible ? 'text' : type}
                         placeholder={placeholder}
                         value={this.value}
+                        disabled={this.disabled}
                     />
 
                     <span class="input-suffix">
