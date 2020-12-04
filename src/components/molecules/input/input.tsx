@@ -1,6 +1,8 @@
 import { Component, Prop, State, Event, EventEmitter, Method, h } from '@stencil/core';
 import cs from 'classnames'
 
+let id = 0
+
 @Component({
     tag: 'bcm-input',
     styleUrl: 'input.scss',
@@ -8,6 +10,7 @@ import cs from 'classnames'
 })
 export class BcmInput {
 
+    inputId = `input-${++id}`
     inputElement: HTMLInputElement
 
     @Prop({ mutable: true, reflect: true }) value: string = ''
@@ -146,7 +149,7 @@ export class BcmInput {
 
         return (
             <div class={containerClasses}>
-                {label && <label htmlFor="" class="label size-1"> {label} </label>}
+                {label && <label htmlFor={this.inputId} class="label size-1"> {label} </label>}
 
                 <div class={baseClasses} onClick={() => this.inputElement.focus()}>
                     <span class="input-prefix">
@@ -154,6 +157,7 @@ export class BcmInput {
                     </span>
 
                     <input
+                        id={this.inputId}
                         class={inputClass}
                         ref={el => (this.inputElement = el)}
                         onFocus={this.handleFocus}
