@@ -3,9 +3,9 @@
 // Input Sizes
 
 $input-sizes: (
-    'large' 7px,
-    'medium' 4px ,
-    'small' 0px
+    'large' 38px,
+    'medium' 30px ,
+    'small' 20px
 );
 
 // Caption Types
@@ -51,6 +51,10 @@ $caption-types: (
 
     &:hover:not(.disabled) {
         border-color: $prime-blue-6;
+
+        .caret-container {
+            opacity: 1;
+        }
     }
 
     &.disabled {
@@ -70,7 +74,7 @@ $caption-types: (
 .input-base input {
     color: $grey-8;
     flex: 1 1 auto;
-    width: 100%;
+    // width: 100%;
     border: none;
     border-radius: 2px;
     background: none;
@@ -87,7 +91,7 @@ $caption-types: (
     &::-webkit-search-results-decoration {
         -webkit-appearance: none;
     }
-    
+
     &::placeholder {
         color: $grey-6;
         user-select: none;
@@ -96,6 +100,17 @@ $caption-types: (
     &:focus {
         outline: none;
     }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+  -webkit-appearance: none;
+}
+
+input[type=number]
+{
+  -moz-appearance: textfield;
 }
 
 // Prefix and Suffix
@@ -107,7 +122,7 @@ $caption-types: (
     cursor: default;
 }
 
-// Every Slotted Element
+// Slotted Elements
 
 .input-prefix ::slotted(*) {
     margin-left: 2x;
@@ -155,6 +170,43 @@ $caption-types: (
     margin-top: 2px;
 }
 
+// Number Input buttons
+
+.caret-container {
+    
+    opacity: 0;
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid $grey-5;
+    transition: .2s opacity;
+    user-select: none;
+
+    .caret {
+        display: inline-flex;
+        height: 50%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        color: $grey-7;
+        cursor: pointer;
+
+        &:hover {
+            color: $prime-blue-6
+        }
+
+        &:active {
+            background-color: $grey-3;
+        }
+
+        &:last-child {
+            border-top: 1px solid $grey-5;
+        }
+    }
+}
+
 @each $state, $color in $caption-types {
     .caption-#{$state} {
         color: $color;
@@ -163,6 +215,6 @@ $caption-types: (
 
 @each $name, $size in $input-sizes {
     .input-#{$name} {
-        padding: $size 0;
+        height: $size;
     }
 }

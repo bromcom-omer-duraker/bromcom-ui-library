@@ -13,12 +13,12 @@ export class BcmInput {
     inputId = `input-${++id}`
     inputElement: HTMLInputElement
 
-    @Prop({ mutable: true, reflect: true }) value: string = ''
+    @Prop() type: string = 'text'
+    @Prop({ mutable: true }) value: any = ''
     @Prop() size: 'small' | 'medium' | 'large' = "medium"
     @Prop() label: string
     @Prop() caption: string
     @Prop({ attribute: 'caption-type' }) captionType: 'primary' | 'success' | 'warning' | 'error' | 'default' = 'default'
-    @Prop() type: string = 'text'
     @Prop() placeholder: string
     @Prop({ attribute: 'full-width' }) fullWidth: boolean = false
     @Prop() disabled: boolean = false
@@ -110,6 +110,14 @@ export class BcmInput {
         
     }
 
+    incrementNumber() {
+        this.value = parseInt(this.value) + 1
+    }
+
+    decrementNumber() {
+        this.value = parseInt(this.value) - 1
+    }
+
     connectedCallback() {
         this.changePasswordVisibility = this.changePasswordVisibility.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -117,6 +125,8 @@ export class BcmInput {
         this.handleFocus  = this.handleFocus.bind(this)
         this.handleInput  = this.handleInput.bind(this)
         this.handleClear  = this.handleClear.bind(this)
+        this.incrementNumber = this.incrementNumber.bind(this)
+        this.decrementNumber = this.decrementNumber.bind(this)
     }
 
     render() {
@@ -135,7 +145,7 @@ export class BcmInput {
             {
                 'focused': this.hasFocus,
                 'disabled': disabled,
-                'empty': value?.length === 0
+                'empty': value?.length < 1
             }
         )
 
@@ -151,7 +161,7 @@ export class BcmInput {
             <div class={containerClasses}>
                 {label && <label htmlFor={this.inputId} class="label size-1"> {label} </label>}
 
-                <div class={baseClasses} onClick={() => this.inputElement.focus()}>
+                <div class={baseClasses}>
                     <span class="input-prefix">
                         <slot name="prefix" />
                     </span>
@@ -186,6 +196,23 @@ export class BcmInput {
                             <button class="input-clear-button" onClick={this.handleClear}>
                                 {this.clearIcon()}
                             </button>
+                        )
+                    }
+
+                    {
+                        type === 'number' && (
+                            <div class="caret-container">
+                                <span class="caret" onClick={this.incrementNumber}>
+                                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.71027 5.38262L4.14464 2.40762C4.07121 2.32246 3.9298 2.32246 3.85558 2.40762L1.28996 5.38262C1.19464 5.49355 1.28058 5.65605 1.43449 5.65605H6.56574C6.71964 5.65605 6.80558 5.49355 6.71027 5.38262Z" fill="currentColor"/>
+                                    </svg>
+                                </span>
+                                <span class="caret" onClick={this.decrementNumber}>
+                                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.56574 2.34375H1.43449C1.28058 2.34375 1.19464 2.50625 1.28996 2.61719L3.85558 5.59219C3.92902 5.67734 4.07042 5.67734 4.14464 5.59219L6.71027 2.61719C6.80558 2.50625 6.71964 2.34375 6.56574 2.34375Z" fill="currentColor"/>
+                                    </svg>
+                                </span>
+                            </div>
                         )
                     }
 

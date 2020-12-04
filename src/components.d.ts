@@ -47,7 +47,7 @@ export namespace Components {
         "setFocus": () => Promise<void>;
         "size": 'small' | 'medium' | 'large';
         "type": string;
-        "value": string;
+        "value": any;
     }
     interface BcmTag {
         "checked": boolean;
@@ -156,7 +156,7 @@ declare namespace LocalJSX {
         "placeholder"?: string;
         "size"?: 'small' | 'medium' | 'large';
         "type"?: string;
-        "value"?: string;
+        "value"?: any;
     }
     interface BcmTag {
         "checked"?: boolean;
