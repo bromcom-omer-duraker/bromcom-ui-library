@@ -125,7 +125,7 @@ input[type=number]
 // Slotted Elements
 
 .input-prefix ::slotted(*) {
-    margin-left: 2x;
+    margin-left: 2px;
 }
 
 .input-prefix ::slotted(:first-child) {
@@ -138,6 +138,10 @@ input[type=number]
 
 .input-suffix ::slotted(*) {
     margin-right: 2px;
+}
+
+.input-suffix ::slotted(:last-child) {
+    margin-right: 10px;
 }
 
 // Clear and password visibility toggle
