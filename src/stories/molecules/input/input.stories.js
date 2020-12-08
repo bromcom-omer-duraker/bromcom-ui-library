@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions'
 import { h } from 'jsx-dom'
 
 export default {
@@ -92,6 +93,76 @@ export default {
                 defaultValue: { summary: false }
             }
         },
+        'bcm-focus': {
+            description: "Emitted when the input focused.",
+            table: {
+                category: 'Events',
+                type: { summary: 'CustomEvent' },
+            }
+        },
+        'bcm-blur': {
+            description: "Emitted when the input loses focus.",
+            table: {
+                category: 'Events',
+                type: { summary: 'CustomEvent' },
+            }
+        },
+        'bcm-clear': {
+            description: "Emitted when the clear button clicked.",
+            table: {
+                category: 'Events',
+                type: { summary: 'CustomEvent' },
+            }
+        },
+        'bcm-change': {
+            description: "Emitted when the input's value change.",
+            table: {
+                category: 'Events',
+                type: { summary: 'CustomEvent' },
+            }
+        },
+        'bcm-input': {
+            description: "Emitted when the input element receives input.",
+            table: {
+                category: 'Events',
+                type: { summary: 'CustomEvent' },
+            }
+        },
+        setFocus: {
+            description: "	Sets focus on the input.",
+            table: {
+                category: 'Methods',
+                type: { summary: 'setFocus => Promise' },
+            }
+        },
+        removeFocus: {
+            description: "Removes focus from the input.",
+            table: {
+                category: 'Methods',
+                type: { summary: 'removeFocus => Promise' },
+            }
+        },
+        select: {
+            description: "Selects all the text in the input.",
+            table: {
+                category: 'Methods',
+                type: { summary: 'select => Promise' },
+            }
+        },
+        prefix: {
+            description: "Used to prepend an icon or similar element to the input.",
+            table: {
+                category: 'Slots',
+                type: { summary: 'HTMLElement' },
+            }
+        },
+        suffix: {
+            description: "Used to append an icon or similar element to the input.",
+            table: {
+                category: 'Slots',
+                type: { summary: 'HTMLElement' },
+            }
+        },
     },
     parameters: {
         docs: {
@@ -104,6 +175,12 @@ export default {
         },
     }
 }
+
+window.addEventListener('bcm-focus', action('bcm-focus'))
+window.addEventListener('bcm-blur', action('bcm-blur'))
+window.addEventListener('bcm-clear', action('bcm-clear'))
+window.addEventListener('bcm-change', action('bcm-change'))
+window.addEventListener('bcm-input', action('bcm-input'))
 
 const Template = (args) => <bcm-input {...args} ></bcm-input>
 
