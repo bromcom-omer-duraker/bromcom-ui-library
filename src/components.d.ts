@@ -72,6 +72,7 @@ export namespace Components {
         "rows": number;
         "select": () => Promise<void>;
         "setFocus": () => Promise<void>;
+        "size": 'small' | 'medium' | 'large';
         "value": string;
     }
 }
@@ -207,6 +208,7 @@ declare namespace LocalJSX {
         "placeholder"?: string;
         "resize"?: 'vertical' | 'none' | 'auto';
         "rows"?: number;
+        "size"?: 'small' | 'medium' | 'large';
         "value"?: string;
     }
     interface IntrinsicElements {

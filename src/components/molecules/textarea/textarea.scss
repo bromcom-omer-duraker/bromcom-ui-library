@@ -10,6 +10,12 @@ $caption-types: (
     'error' $red-6,
 );
 
+$sizes: (
+    'large' 7px 12px,
+    'medium' 4px 7px,
+    'small' 0px 2px
+);
+
 :host {
     display: block;
 }
@@ -31,12 +37,6 @@ $caption-types: (
             display: none;
         }
     }
-
-    &.clearable {
-        textarea {
-            padding-right: 22px;
-        }
-    }
 }
 
 .textarea-container textarea {
@@ -50,7 +50,6 @@ $caption-types: (
     border: 1px solid $grey-5;
     border-radius: 2px;
     box-shadow: none;
-    padding: 4px 12px;
     font-family: $font-roboto;
     -webkit-appearance: none;
     box-sizing: border-box;
@@ -81,6 +80,12 @@ $caption-types: (
         background-color: $grey-3;
         cursor: not-allowed;
     }
+
+    &.clearable {
+        textarea {
+            padding-right: 22px;
+        }
+    }
 }
 
 .resize-none textarea {
@@ -110,7 +115,7 @@ $caption-types: (
 .clear-button {
     position: absolute;
     right: 10px;
-    top: 5px;
+    top: 7px;
     display: inline-flex;
     align-items: center;
     border: none;
@@ -140,5 +145,15 @@ $caption-types: (
 @each $state, $color in $caption-types {
     .caption-#{$state} {
         color: $color;
+    }
+}
+
+@each $name, $size, $top in $sizes {
+    .size-#{$name} {
+        padding: $size 12px;
+
+        & ~ .clear-button {
+            top: $top;
+        }
     }
 }

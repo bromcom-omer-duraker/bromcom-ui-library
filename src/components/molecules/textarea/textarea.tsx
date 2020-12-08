@@ -19,6 +19,7 @@ export class BcmTextarea {
     @Prop() placeholder: string
     @Prop({ attribute: 'caption-type' }) captionType: 'default' | 'primary' | 'success' | 'warning' | 'error'
     @Prop() rows: number = 1
+    @Prop() size: 'small' | 'medium' | 'large' = 'medium'
     @Prop({ attribute: 'full-width' }) fullWidth: boolean
     @Prop() disabled: boolean
     @Prop() clearable: boolean
@@ -48,7 +49,7 @@ export class BcmTextarea {
 
     clearIcon() {
         return (
-            <svg width="12" height="12" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 9C1.125 4.65117 4.65117 1.125 9 1.125C13.3488 1.125 16.875 4.65117 16.875 9C16.875 13.3488 13.3488 16.875 9 16.875C4.65117 16.875 1.125 13.3488 1.125 9ZM5.78467 6.58035L8.2043 8.99998L5.78467 11.4196C5.72998 11.4743 5.72998 11.5638 5.78467 11.6185L6.38129 12.2151C6.43598 12.2698 6.52547 12.2698 6.58017 12.2151L8.9998 9.79548L11.4194 12.2151C11.4741 12.2698 11.5636 12.2698 11.6183 12.2151L12.2149 11.6185C12.2696 11.5638 12.2696 11.4743 12.2149 11.4196L9.79529 8.99998L12.2149 6.58035C12.2696 6.52566 12.2696 6.43616 12.2149 6.38147L11.6183 5.78485C11.5636 5.73016 11.4741 5.73016 11.4194 5.78485L8.9998 8.20448L6.58017 5.78485C6.52547 5.73016 6.43598 5.73016 6.38129 5.78485L5.78467 6.38147C5.72998 6.43616 5.72998 6.52566 5.78467 6.58035Z" fill="#8C8C8C" />
             </svg>
         )
@@ -102,7 +103,7 @@ export class BcmTextarea {
     }
 
     render() {
-        const { fullWidth, rows, disabled, clearable, label, caption, captionType, value, resize, maxLength } = this
+        const { fullWidth, size, rows, disabled, clearable, label, caption, captionType, value, resize, maxLength } = this
 
         const wrapperClasses = cs(
             'textarea-wrapper',
@@ -114,15 +115,24 @@ export class BcmTextarea {
         const contanerClasses = cs(
             'textarea-container',
             'resize-' + resize,
+            'textarea-' + size,
             {
                 'empty': value?.length < 1,
-                'clearable': clearable,
             }
         )
 
         const captionClasses = cs(
             'textarea-caption',
             'caption-' + captionType
+        )
+
+        const textareaClasses = cs(
+            'size-' + size,
+            {
+                'size-3': size === 'large',
+                'size-2': size === 'small' || size === 'medium',
+                'clearable': clearable
+            }
         )
 
         return (
@@ -134,7 +144,7 @@ export class BcmTextarea {
                     <textarea
                         ref={el => (this.textarea = el)}
                         onInput={this.handleInput}
-                        class="size-2"
+                        class={textareaClasses}
                         id={this.textareaId}
                         value={value}
                         rows={rows}
