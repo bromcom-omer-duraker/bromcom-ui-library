@@ -58,6 +58,22 @@ export namespace Components {
         "scale": string;
         "weight": 'regular' | 'semibold';
     }
+    interface BcmTextarea {
+        "caption": string;
+        "captionType": 'default' | 'primary' | 'success' | 'warning' | 'error';
+        "clearable": boolean;
+        "disabled": boolean;
+        "fullWidth": boolean;
+        "label": string;
+        "maxLength": number;
+        "placeholder": string;
+        "removeFocus": () => Promise<void>;
+        "resize": 'vertical' | 'none' | 'auto';
+        "rows": number;
+        "select": () => Promise<void>;
+        "setFocus": () => Promise<void>;
+        "value": string;
+    }
 }
 declare global {
     interface HTMLBcmAvatarElement extends Components.BcmAvatar, HTMLStencilElement {
@@ -102,6 +118,12 @@ declare global {
         prototype: HTMLBcmTextElement;
         new (): HTMLBcmTextElement;
     };
+    interface HTMLBcmTextareaElement extends Components.BcmTextarea, HTMLStencilElement {
+    }
+    var HTMLBcmTextareaElement: {
+        prototype: HTMLBcmTextareaElement;
+        new (): HTMLBcmTextareaElement;
+    };
     interface HTMLElementTagNameMap {
         "bcm-avatar": HTMLBcmAvatarElement;
         "bcm-badge": HTMLBcmBadgeElement;
@@ -110,6 +132,7 @@ declare global {
         "bcm-input": HTMLBcmInputElement;
         "bcm-tag": HTMLBcmTagElement;
         "bcm-text": HTMLBcmTextElement;
+        "bcm-textarea": HTMLBcmTextareaElement;
     }
 }
 declare namespace LocalJSX {
@@ -168,6 +191,24 @@ declare namespace LocalJSX {
         "scale"?: string;
         "weight"?: 'regular' | 'semibold';
     }
+    interface BcmTextarea {
+        "caption"?: string;
+        "captionType"?: 'default' | 'primary' | 'success' | 'warning' | 'error';
+        "clearable"?: boolean;
+        "disabled"?: boolean;
+        "fullWidth"?: boolean;
+        "label"?: string;
+        "maxLength"?: number;
+        "onBcm-blur"?: (event: CustomEvent<any>) => void;
+        "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "onBcm-clear"?: (event: CustomEvent<any>) => void;
+        "onBcm-focus"?: (event: CustomEvent<any>) => void;
+        "onBcm-input"?: (event: CustomEvent<any>) => void;
+        "placeholder"?: string;
+        "resize"?: 'vertical' | 'none' | 'auto';
+        "rows"?: number;
+        "value"?: string;
+    }
     interface IntrinsicElements {
         "bcm-avatar": BcmAvatar;
         "bcm-badge": BcmBadge;
@@ -176,6 +217,7 @@ declare namespace LocalJSX {
         "bcm-input": BcmInput;
         "bcm-tag": BcmTag;
         "bcm-text": BcmText;
+        "bcm-textarea": BcmTextarea;
     }
 }
 export { LocalJSX as JSX };
@@ -189,6 +231,7 @@ declare module "@stencil/core" {
             "bcm-input": LocalJSX.BcmInput & JSXBase.HTMLAttributes<HTMLBcmInputElement>;
             "bcm-tag": LocalJSX.BcmTag & JSXBase.HTMLAttributes<HTMLBcmTagElement>;
             "bcm-text": LocalJSX.BcmText & JSXBase.HTMLAttributes<HTMLBcmTextElement>;
+            "bcm-textarea": LocalJSX.BcmTextarea & JSXBase.HTMLAttributes<HTMLBcmTextareaElement>;
         }
     }
 }
