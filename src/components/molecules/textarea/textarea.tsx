@@ -26,11 +26,11 @@ export class BcmTextarea {
     @Prop() resize: 'vertical' | 'none' | 'auto' = 'vertical'
     @Prop({ attribute: 'max-length' }) maxLength: number
 
-    @Event({ eventName: 'bcm-focus'}) focus: EventEmitter
-    @Event({ eventName: 'bcm-blur'}) blur: EventEmitter
-    @Event({ eventName: 'bcm-clear'}) clear: EventEmitter
+    @Event({ eventName: 'bcm-focus'})  focus: EventEmitter
+    @Event({ eventName: 'bcm-blur'})   blur: EventEmitter
+    @Event({ eventName: 'bcm-clear'})  clear: EventEmitter
     @Event({ eventName: 'bcm-change'}) change: EventEmitter
-    @Event({ eventName: 'bcm-input'}) input: EventEmitter
+    @Event({ eventName: 'bcm-input'})  input: EventEmitter
 
     @Method()
     async setFocus() {
@@ -56,12 +56,10 @@ export class BcmTextarea {
     }
 
     handleFocus() {
-        this.textarea.focus()
         this.focus.emit()
     }
     
     handleBlur() {
-        this.textarea.blur()
         this.blur.emit()
     }
 
@@ -79,6 +77,7 @@ export class BcmTextarea {
     handleClear(e: MouseEvent) {
 
         this.value = ''
+        this.clear.emit()
         this.textarea.focus()
 
         e.stopPropagation()
@@ -103,7 +102,7 @@ export class BcmTextarea {
     }
 
     render() {
-        const { fullWidth, size, rows, disabled, clearable, label, caption, captionType, value, resize, maxLength } = this
+        const { fullWidth, size, rows, disabled, clearable, label, caption, captionType, value, resize, maxLength, placeholder } = this
 
         const wrapperClasses = cs(
             'textarea-wrapper',
@@ -144,12 +143,16 @@ export class BcmTextarea {
                     <textarea
                         ref={el => (this.textarea = el)}
                         onInput={this.handleInput}
+                        onFocus={this.handleFocus}
+                        onChange={this.handleChange}
+                        onBlur={this.handleBlur}
                         class={textareaClasses}
                         id={this.textareaId}
                         value={value}
                         rows={rows}
                         disabled={disabled}
                         maxlength={maxLength}
+                        placeholder={placeholder}
                     >
                     </textarea>
 

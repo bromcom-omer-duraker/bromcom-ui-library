@@ -28,11 +28,6 @@ export namespace Components {
         "outline": boolean;
         "size": 'small' | 'medium' | 'large';
     }
-    interface BcmIcon {
-        "color": string;
-        "name": string;
-        "size": number;
-    }
     interface BcmInput {
         "caption": string;
         "captionType": 'primary' | 'success' | 'warning' | 'error' | 'default';
@@ -95,12 +90,6 @@ declare global {
         prototype: HTMLBcmButtonElement;
         new (): HTMLBcmButtonElement;
     };
-    interface HTMLBcmIconElement extends Components.BcmIcon, HTMLStencilElement {
-    }
-    var HTMLBcmIconElement: {
-        prototype: HTMLBcmIconElement;
-        new (): HTMLBcmIconElement;
-    };
     interface HTMLBcmInputElement extends Components.BcmInput, HTMLStencilElement {
     }
     var HTMLBcmInputElement: {
@@ -129,7 +118,6 @@ declare global {
         "bcm-avatar": HTMLBcmAvatarElement;
         "bcm-badge": HTMLBcmBadgeElement;
         "bcm-button": HTMLBcmButtonElement;
-        "bcm-icon": HTMLBcmIconElement;
         "bcm-input": HTMLBcmInputElement;
         "bcm-tag": HTMLBcmTagElement;
         "bcm-text": HTMLBcmTextElement;
@@ -158,11 +146,6 @@ declare namespace LocalJSX {
         "kind"?: 'solid' | 'ghost';
         "outline"?: boolean;
         "size"?: 'small' | 'medium' | 'large';
-    }
-    interface BcmIcon {
-        "color"?: string;
-        "name"?: string;
-        "size"?: number;
     }
     interface BcmInput {
         "caption"?: string;
@@ -215,7 +198,6 @@ declare namespace LocalJSX {
         "bcm-avatar": BcmAvatar;
         "bcm-badge": BcmBadge;
         "bcm-button": BcmButton;
-        "bcm-icon": BcmIcon;
         "bcm-input": BcmInput;
         "bcm-tag": BcmTag;
         "bcm-text": BcmText;
@@ -229,7 +211,6 @@ declare module "@stencil/core" {
             "bcm-avatar": LocalJSX.BcmAvatar & JSXBase.HTMLAttributes<HTMLBcmAvatarElement>;
             "bcm-badge": LocalJSX.BcmBadge & JSXBase.HTMLAttributes<HTMLBcmBadgeElement>;
             "bcm-button": LocalJSX.BcmButton & JSXBase.HTMLAttributes<HTMLBcmButtonElement>;
-            "bcm-icon": LocalJSX.BcmIcon & JSXBase.HTMLAttributes<HTMLBcmIconElement>;
             "bcm-input": LocalJSX.BcmInput & JSXBase.HTMLAttributes<HTMLBcmInputElement>;
             "bcm-tag": LocalJSX.BcmTag & JSXBase.HTMLAttributes<HTMLBcmTagElement>;
             "bcm-text": LocalJSX.BcmText & JSXBase.HTMLAttributes<HTMLBcmTextElement>;

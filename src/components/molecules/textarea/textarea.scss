@@ -11,9 +11,9 @@ $caption-types: (
 );
 
 $sizes: (
-    'large' 7px 12px,
-    'medium' 4px 7px,
-    'small' 0px 2px
+    'large' 7px 12px 40px,
+    'medium' 4px 7px 32px,
+    'small' 0px 2px 24px
 );
 
 :host {
@@ -148,9 +148,10 @@ $sizes: (
     }
 }
 
-@each $name, $size, $top in $sizes {
+@each $name, $size, $top, $min-height in $sizes {
     .size-#{$name} {
         padding: $size 12px;
+        min-height: $min-height;
 
         & ~ .clear-button {
             top: $top;
