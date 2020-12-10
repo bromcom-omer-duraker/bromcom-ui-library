@@ -1,5 +1,9 @@
 @import '../../../global/variables/typography.scss';
 
+:host {
+    display: block;
+}
+
 // Input Sizes
 
 $input-sizes: (
@@ -47,12 +51,20 @@ $caption-types: (
     &.focused:not(.disabled) {
         border-color: $prime-blue-5;
         box-shadow: 0px 0px 4px $prime-blue-6;
+        
+        .input-clear-button {
+            opacity: 1;
+        }
     }
 
     &:hover:not(.disabled) {
         border-color: $prime-blue-6;
 
         .caret-container {
+            opacity: 1;
+        }
+
+        .input-clear-button {
             opacity: 1;
         }
     }
@@ -74,7 +86,7 @@ $caption-types: (
 .input-base input {
     color: $grey-8;
     flex: 1 1 auto;
-    // width: 100%;
+    width: 0%;
     border: none;
     border-radius: 2px;
     background: none;
@@ -84,6 +96,7 @@ $caption-types: (
     font-family: $font-roboto;
     cursor: inherit;
     -webkit-appearance: none;
+    appearance: none;
 
     &::-webkit-search-decoration,
     &::-webkit-search-cancel-button,
@@ -100,6 +113,11 @@ $caption-types: (
     &:focus {
         outline: none;
     }
+}
+
+input::-webkit-calendar-picker-indicator {
+    -webkit-appearance: none;
+    display: none;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -153,11 +171,19 @@ input[type=number]
     background: none;
     padding: 0;
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 2px;
   
+    &:last-child, &:last-of-type {
+        margin-right: 10px;
+    }
+
     &:focus {
       outline: none;
     }
+}
+
+.input-clear-button {
+    opacity: 0;
 }
 
 // Label And Caption
@@ -174,6 +200,7 @@ input[type=number]
     margin-top: 2px;
 }
 
+
 // Number Input buttons
 
 .caret-container {
@@ -185,8 +212,16 @@ input[type=number]
     justify-content: center;
     align-items: center;
     border-left: 1px solid $grey-5;
+    border-right: 1px solid $grey-5;
     transition: .2s opacity;
     user-select: none;
+    box-sizing: border-box;
+    margin-right: 2px;
+
+    &:last-of-type {
+        margin-right: 0;
+        border-right: none;
+    }
 
     .caret {
         display: inline-flex;
@@ -209,6 +244,10 @@ input[type=number]
             border-top: 1px solid $grey-5;
         }
     }
+}
+
+.default-icon {
+    margin-right: 10px;
 }
 
 @each $state, $color in $caption-types {
