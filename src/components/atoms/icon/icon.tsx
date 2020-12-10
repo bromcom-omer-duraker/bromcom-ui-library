@@ -1,9 +1,7 @@
 import { Element, Component, Prop, State, h } from '@stencil/core'; 
-import { icons } from '../../../assets/icons';
+import { SVGIcons } from '../../../assets/icons';
 import { extractColor } from '../../../utils/utils';
-import colors from '../../../global/variables/colors';
-
-
+import { ColorPalette, ColorPaletteTypes } from '../../../global/variables/colors';
 
 /**
  * 'type' prop types
@@ -23,7 +21,7 @@ enum SizePropPredefinedValues {
     medium = '24', 
     default = '16', 
     small = '12', 
-    xsmall ='8' 
+    xsmall = '8' 
 }
 
 const defaultIconSize = 16;
@@ -38,16 +36,13 @@ const defaultIconSize = 16;
     shadow: true
 })
 export class BcmIcon {
-    // Host Element
     @Element() el: HTMLElement;
 
-    // Props
+    @Prop() color: ColorPaletteTypes = 'prime-blue-6';
     @Prop() type: TypePropOptions = 'default';
     @Prop() size: SizePropOptions = defaultIconSize;
     @Prop() icon: string;
-    @Prop() color: string = 'prime-blue-6';
-
-    // States
+    
     @State() _icon: string;
     @State() _size: number;
     @State() wrapperStyle: {[key: string]: any} = {};
@@ -58,7 +53,7 @@ export class BcmIcon {
      * @returns {string | SVGElement}
      */
     setIconColor(svgTemplate: string): string {
-        const color = extractColor(colors, this.color);
+        const color = extractColor(ColorPalette, this.color);
         let fillPattern: RegExp = /(<path [\S\s]*?fill=")[^"]+("[\S\s]*?>)/gmi;
 
         // Replace fill colors with given prop
@@ -69,7 +64,6 @@ export class BcmIcon {
         else {
             svgTemplate = svgTemplate.replace(fillPattern, "$1"+ color +"$2");
         }
-
         return svgTemplate;
     }
 
@@ -115,28 +109,39 @@ export class BcmIcon {
      * @ComponentMethod
      */
     componentWillRender() {
+        const svgIcon = SVGIcons[this.icon];
         let iconbase64: string;
         let newIcon: string;
 
-
         this._size = (SizePropPredefinedValues[this.size] || this.size);
 
-        if (!icons[this.icon]) {
+        // Check target icon file
+        // #
+        if (!svgIcon) {
             console.warn('Target icon is not found(!)')
         }
-        else if (!icons[this.icon][this.type]) {
+
+        // Check icon type
+        // #
+        else if (!svgIcon[this.type]) {
             console.warn('Target icon type is not found(!)')
         }
-        else if (!icons[this.icon][this.type][this._size]) {
-            if(!icons[this.icon][this.type][defaultIconSize]) {
+
+        // Check icon size
+        // #
+        else if (!svgIcon[this.type][this._size]) {
+
+            // Use default size if target icon with size
+            // not exist
+            if(!svgIcon[this.type][defaultIconSize]) {
                 console.warn('Target icon default size is not found(!)')
             }
             else {
-                iconbase64 = icons[this.icon][this.type][defaultIconSize];
+                iconbase64 = svgIcon[this.type][defaultIconSize];
             }
         }
         else {
-            iconbase64 = icons[this.icon][this.type][this._size];
+            iconbase64 = svgIcon[this.type][this._size];
         }
         
         if (!iconbase64) {

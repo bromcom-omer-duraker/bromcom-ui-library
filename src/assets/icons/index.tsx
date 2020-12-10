@@ -43,7 +43,7 @@ import user_outlined_24 from './svg/outlined/24/user.svg';
  */
 import close_circle_fill_24 from './svg/fill/24/close-circle.svg';
 
-export const icons = {
+export const SVGIcons = {
     'close-circle': {
         fill: {
             24: close_circle_fill_24

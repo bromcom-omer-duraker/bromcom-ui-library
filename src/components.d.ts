@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { ColorPaletteTypes } from "./global/variables/colors";
 import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/icon";
 export namespace Components {
     interface BcmAvatar {
@@ -30,7 +31,7 @@ export namespace Components {
         "size": 'small' | 'medium' | 'large';
     }
     interface BcmIcon {
-        "color": string;
+        "color": ColorPaletteTypes;
         "icon": string;
         "size": SizePropOptions;
         "type": TypePropOptions;
@@ -124,7 +125,7 @@ declare namespace LocalJSX {
         "size"?: 'small' | 'medium' | 'large';
     }
     interface BcmIcon {
-        "color"?: string;
+        "color"?: ColorPaletteTypes;
         "icon"?: string;
         "size"?: SizePropOptions;
         "type"?: TypePropOptions;

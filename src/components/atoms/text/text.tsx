@@ -1,6 +1,6 @@
 import { Component,  h, Prop } from '@stencil/core';    
 import cs from 'classnames'
-import colors from '../../../global/variables/colors';
+import { ColorPalette } from '../../../global/variables/colors';
 import { extractColor } from '../../../utils/utils';
 
 @Component({
@@ -21,7 +21,7 @@ export class BcmText {
         )
 
         return (
-            <p class={classes} style={{color: extractColor(colors, this.color)}}>
+            <p class={classes} style={{color: extractColor(ColorPalette, this.color)}}>
                 <slot />
             </p>
         )
