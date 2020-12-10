@@ -18,3 +18,10 @@ $sizes: (
     "8" 46px,
     "9" 56px,
 );
+
+@each $name, $size in $sizes {
+    .size-#{$name} {
+        font-size: $size;
+        line-height: $size + 8;
+    }
+}
