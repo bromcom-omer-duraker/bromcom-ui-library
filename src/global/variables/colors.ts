@@ -1,4 +1,4 @@
-export default {
+export const ColorPalette = {
     'prime-blue': {
         1: '#F4FBFE',
         2: '#D4E9F6',
@@ -24,3 +24,25 @@ export default {
         10: '#000000'
     }
 }
+
+export declare type ColorPaletteTypes = 'default'
+    | 'prime-blue-1' 
+    | 'prime-blue-2' 
+    | 'prime-blue-3' 
+    | 'prime-blue-5'
+    | 'prime-blue-6'
+    | 'prime-blue-7'
+    | 'prime-blue-8'
+    | 'prime-blue-9'
+    | 'prime-blue-10'
+
+    | 'grey-1'
+    | 'grey-2'
+    | 'grey-3'
+    | 'grey-4'
+    | 'grey-5'
+    | 'grey-6'
+    | 'grey-7'
+    | 'grey-8'
+    | 'grey-9'
+    | 'grey-10';

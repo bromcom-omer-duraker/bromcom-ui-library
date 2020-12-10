@@ -1,3 +1,5 @@
+@import '../../../global/variables/typography.scss';
+
 :host {
     display: inline-block;
 }
@@ -11,13 +13,7 @@ button {
     justify-content: center;
     text-align: center;
     font-family: $font-roboto;
-
-    span {
-        display: inline-flex;
-
-        &.left { margin-right: 4px;}
-        &.right { margin-left: 4px;}
-    }
+    padding: unset;
 
     &.rounded {
         border-radius: 50px;
@@ -91,32 +87,37 @@ button {
 
 }
 
+button ::slotted([slot="prefix"]) {
+    margin-right: 4px;
+}
+
+button ::slotted([slot="suffix"]) {
+    margin-left: 4px;
+}
+
 .large {
-    font-size: 16px;
-    padding: 7px 16px;
-    line-height: 24px;
-    
-    &.rounded {
-        padding: 9px;
+    min-height: 40px;
+    min-width: 40px;
+
+    &:not(.rounded) {
+        padding: 0 16px;
     }
 }
 
 .medium {
-    font-size: 14px;
-    padding: 4px 16px;
-    line-height: 22px;
+    min-height: 32px;
+    min-width: 32px;
 
-    &.rounded {
-        padding: 6px;
+    &:not(.rounded) {
+        padding: 0 16px;
     }
 }
 
 .small {
-    font-size: 14px;
-    padding: 0 8px;
-    line-height: 22px;
+    min-height: 24px;
+    min-width: 24px;
 
-    &.rounded {
-        padding: 3px;
+    &:not(.rounded) {
+        padding: 0 8px;
     }
 }
