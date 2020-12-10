@@ -46,46 +46,55 @@ import close_circle_fill_24 from './svg/fill/24/close-circle.svg';
 export const SVGIcons = {
     'close-circle': {
         fill: {
+            default: close_circle_fill_24,
             24: close_circle_fill_24
         }
     },
     'caret-down': {
         outlined: {
+            default: caret_down_outlined_24,
             24: caret_down_outlined_24
         }
     },
     'caret-up': {
         outlined: {
+            default: caret_up_outlined_24,
             24: caret_up_outlined_24
         }
     },
     'close': {
         outlined: {
-            24: close_outlined_24,
+            default: close_outlined_24,
+            24: close_outlined_24
         }
     },
     'cloud-upload': {
         outlined: {
+            default: cloud_upload_outlined_24,
             24: cloud_upload_outlined_24
         }
     },
     'eye': {
         outlined: {
+            deafult: eye_outlined_24,
             24: eye_outlined_24
         }
     },
     'eye-invisible': {
         outlined: {
+            deafult: eye_invisible_outlined_24,
             24: eye_invisible_outlined_24
         }
     },
     'plus': {
         outlined: {
+            default: plus_outlined_24,
             24: plus_outlined_24
         }
     },
     'user': {
         outlined: {
+            default: user_outlined_24,
             24: user_outlined_24,
         }
     }

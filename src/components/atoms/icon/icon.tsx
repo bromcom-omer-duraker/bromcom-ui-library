@@ -24,7 +24,7 @@ enum SizePropPredefinedValues {
     xsmall = '8' 
 }
 
-const defaultIconSize = 16;
+const defaultIconSize = 24;
 
 /**
  * 'size' prop values
@@ -133,11 +133,11 @@ export class BcmIcon {
 
             // Use default size if target icon with size
             // not exist
-            if(!svgIcon[this.type][defaultIconSize]) {
+            if(!svgIcon[this.type].default) {
                 console.warn('Target icon default size is not found(!)')
             }
             else {
-                iconbase64 = svgIcon[this.type][defaultIconSize];
+                iconbase64 = svgIcon[this.type].default;
             }
         }
         else {
