@@ -11,7 +11,7 @@
     <script nomodule src="/build/bromcom-ui.js"></script>
 </head>
 
-<body style="background-color: #262626;margin: 10%; display: flex; gap: 10px;">
+<body style="background-color: #292929;margin: 10%; display: flex; gap: 10px;">
 
     <bcm-tag type="basic">Tag</bcm-tag>
     <bcm-tag type="closeable" id="some">Tag</bcm-tag>
@@ -20,12 +20,10 @@
     <bcm-tag id="checkbox" type="checkable">Tag</bcm-tag>
     <bcm-tag type="add">Tag</bcm-tag>
 
+    <bcm-icon icon="caret-up" type="outlined" size="24" color="prime-blue-5"></bcm-icon>
     <script>
-
         document.getElementById('checkbox').addEventListener('checkedChange', e => console.log(e.detail.newValue))
-
     </script>
-
 </body>
 
 </html>
