@@ -8,11 +8,10 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { SizePropOptions, TypePropOptions, UnitPropOptions } from "./components/atoms/icon/icon";
 export namespace Components {
     interface BcmAvatar {
-        "custom": number;
         "image": string;
         "name": string;
         "plate": 'ellipse' | 'square';
-        "size": 'small' | 'medium' | 'large';
+        "size": 'small' | 'medium' | 'large' | string;
         "type": 'normal' | 'button';
     }
     interface BcmBadge {
@@ -103,11 +102,10 @@ declare global {
 }
 declare namespace LocalJSX {
     interface BcmAvatar {
-        "custom"?: number;
         "image"?: string;
         "name"?: string;
         "plate"?: 'ellipse' | 'square';
-        "size"?: 'small' | 'medium' | 'large';
+        "size"?: 'small' | 'medium' | 'large' | string;
         "type"?: 'normal' | 'button';
     }
     interface BcmBadge {
