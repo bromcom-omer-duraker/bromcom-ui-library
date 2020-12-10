@@ -1,7 +1,9 @@
 import { Element, Component, Prop, State, h } from '@stencil/core'; 
-import { icons } from '../../../assets/icons/svg';
+import { icons } from '../../../assets/icons';
 import { extractColor } from '../../../utils/utils';
 import colors from '../../../global/variables/colors';
+
+
 
 /**
  * 'type' prop types
@@ -11,12 +13,24 @@ export declare type TypePropOptions = 'default' | 'fill' | 'outlined' | 'multico
 /**
  * 'size' prop types
  */
-export declare type SizePropOptions = 'xlarge' | 'large' | 'medium' | 'small' | 'xsmall' | string;
+export declare type SizePropOptions = SizePropPredefinedValues | number;
 
 /**
- * 'unit' prop types
+ * 'size' prop predefined values
  */
-export declare type UnitPropOptions = 'px' | 'em';
+enum SizePropPredefinedValues { 
+    large = '48', 
+    medium = '24', 
+    default = '16', 
+    small = '12', 
+    xsmall ='8' 
+}
+
+const defaultIconSize = 16;
+
+/**
+ * 'size' prop values
+ */
 
 @Component({
     tag: 'bcm-icon',
@@ -29,13 +43,13 @@ export class BcmIcon {
 
     // Props
     @Prop() type: TypePropOptions = 'default';
-    @Prop() unit: UnitPropOptions = 'px';
-    @Prop() size: SizePropOptions = '16';
+    @Prop() size: SizePropOptions = defaultIconSize;
     @Prop() icon: string;
     @Prop() color: string = 'prime-blue-6';
 
     // States
     @State() _icon: string;
+    @State() _size: number;
     @State() wrapperStyle: {[key: string]: any} = {};
 
     /**
@@ -45,9 +59,7 @@ export class BcmIcon {
      */
     setIconColor(svgTemplate: string): string {
         const color = extractColor(colors, this.color);
-        let fillPattern: RegExp =   /(<path [\S\s]*?fill=")[^"]+("[\S\s]*?>)/gmi;
-
-        console.log(color)
+        let fillPattern: RegExp = /(<path [\S\s]*?fill=")[^"]+("[\S\s]*?>)/gmi;
 
         // Replace fill colors with given prop
         // -->
@@ -84,7 +96,7 @@ export class BcmIcon {
      * @returns {void}
      */
     setWrapperSize(): void {
-        const size = this.size + this.unit;
+        const size = this._size + 'px';
 
         for (let attribute of [
             'width', 
@@ -94,7 +106,6 @@ export class BcmIcon {
         ]) {
             this.wrapperStyle[attribute] = size;
         }
-
         // Also we need to change host style
         // -->
         this.el.style.cssText = `width: ${size}; height: ${size}`;
@@ -104,8 +115,29 @@ export class BcmIcon {
      * @ComponentMethod
      */
     componentWillRender() {
-        const iconbase64: string = icons[this.icon][this.type];
+        let iconbase64: string;
         let newIcon: string;
+
+
+        this._size = (SizePropPredefinedValues[this.size] || this.size);
+
+        if (!icons[this.icon]) {
+            console.warn('Target icon is not found(!)')
+        }
+        else if (!icons[this.icon][this.type]) {
+            console.warn('Target icon type is not found(!)')
+        }
+        else if (!icons[this.icon][this.type][this._size]) {
+            if(!icons[this.icon][this.type][defaultIconSize]) {
+                console.warn('Target icon default size is not found(!)')
+            }
+            else {
+                iconbase64 = icons[this.icon][this.type][defaultIconSize];
+            }
+        }
+        else {
+            iconbase64 = icons[this.icon][this.type][this._size];
+        }
         
         if (!iconbase64) {
             return;

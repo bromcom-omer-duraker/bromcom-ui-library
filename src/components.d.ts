@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { SizePropOptions, TypePropOptions, UnitPropOptions } from "./components/atoms/icon/icon";
+import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/icon";
 export namespace Components {
     interface BcmAvatar {
         "custom": number;
@@ -34,7 +34,6 @@ export namespace Components {
         "icon": string;
         "size": SizePropOptions;
         "type": TypePropOptions;
-        "unit": UnitPropOptions;
     }
     interface BcmInput {
     }
@@ -129,7 +128,6 @@ declare namespace LocalJSX {
         "icon"?: string;
         "size"?: SizePropOptions;
         "type"?: TypePropOptions;
-        "unit"?: UnitPropOptions;
     }
     interface BcmInput {
     }
