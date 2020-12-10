@@ -41,7 +41,7 @@ export class BcmTag {
                     {
                         type === "add" ? (
                             <span class="left">
-                                <bcm-icon icon="plus" type="outlined" color="grey-8" size="14"></bcm-icon>
+                                <bcm-icon icon="plus" type="outlined" color="grey-8" size={14}></bcm-icon>
                             </span>
                         ) : null
                     }
@@ -49,7 +49,7 @@ export class BcmTag {
                     {
                         type === "closeable" ? (
                             <span class="right">
-                                <bcm-icon icon="close" type="outlined" color="grey-10" size="14"></bcm-icon>
+                                <bcm-icon icon="close" type="outlined" color="grey-10" size={14}></bcm-icon>
                             </span>
                         ) : null
                     }
