@@ -21,11 +21,9 @@ export namespace Components {
     }
     interface BcmButton {
         "disabled": boolean;
-        "icon": string;
-        "iconOnly": boolean;
-        "iconPosition": 'left' | 'right';
         "kind": 'solid' | 'ghost';
         "outline": boolean;
+        "rounded": boolean;
         "size": 'small' | 'medium' | 'large';
     }
     interface BcmIcon {
@@ -115,11 +113,9 @@ declare namespace LocalJSX {
     }
     interface BcmButton {
         "disabled"?: boolean;
-        "icon"?: string;
-        "iconOnly"?: boolean;
-        "iconPosition"?: 'left' | 'right';
         "kind"?: 'solid' | 'ghost';
         "outline"?: boolean;
+        "rounded"?: boolean;
         "size"?: 'small' | 'medium' | 'large';
     }
     interface BcmIcon {
