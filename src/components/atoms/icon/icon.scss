@@ -1,3 +1,7 @@
-span {
+:host {
     display: inline-block;
+}
+
+span {
+    display: flex;
 }

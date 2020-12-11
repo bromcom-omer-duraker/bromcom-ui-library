@@ -39,6 +39,26 @@ import plus_outlined_24 from './svg/outlined/24/plus.svg';
 import user_outlined_24 from './svg/outlined/24/user.svg';
 
 /**
+ * ICON: link
+ */
+import link_outlined_24 from './svg/outlined/24/link.svg';
+
+/**
+ * ICON: mail
+ */
+import mail_outlined_24 from './svg/outlined/24/mail.svg';
+
+/**
+ * ICON: search
+ */
+import search_outlined_24 from './svg/outlined/24/search.svg';
+
+/**
+ * ICON: phone
+ */
+import phone_outlined_24 from './svg/outlined/24/phone.svg';
+
+/**
  * ICON: close-circle
  */
 import close_circle_fill_24 from './svg/fill/24/close-circle.svg';
@@ -76,13 +96,13 @@ export const SVGIcons = {
     },
     'eye': {
         outlined: {
-            deafult: eye_outlined_24,
+            default: eye_outlined_24,
             24: eye_outlined_24
         }
     },
     'eye-invisible': {
         outlined: {
-            deafult: eye_invisible_outlined_24,
+            default: eye_invisible_outlined_24,
             24: eye_invisible_outlined_24
         }
     },
@@ -97,5 +117,29 @@ export const SVGIcons = {
             default: user_outlined_24,
             24: user_outlined_24,
         }
-    }
+    },
+    'link': {
+        outlined: {
+            default: link_outlined_24,
+            24: link_outlined_24
+        }
+    },
+    'mail': {
+        outlined: {
+            default: mail_outlined_24,
+            24: mail_outlined_24
+        }
+    },
+    'search': {
+        outlined: {
+            default: search_outlined_24,
+            24: search_outlined_24
+        }
+    },
+    'phone': {
+        outlined: {
+            default: phone_outlined_24,
+            24: phone_outlined_24,
+        }
+    },
 }

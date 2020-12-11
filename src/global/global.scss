@@ -6,14 +6,6 @@
     box-sizing: border-box;
 }
 
-// Font Sizes
-@each $name, $size in $sizes {
-    .size-#{$name} {
-        font-size: $size;
-        line-height: $size + 8;
-    }
-}
-
 h1 {
     font-weight: 400;
 }

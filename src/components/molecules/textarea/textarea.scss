@@ -1,0 +1,158 @@
+@import '../../../global/variables/typography.scss';
+
+// Caption Types
+
+$caption-types: (
+    'default' $grey-7,
+    'primary' $prime-blue-6,
+    'success' $green-6,
+    'warning' $orange-6,
+    'error' $red-6,
+);
+
+$sizes: (
+    'large' 7px 12px 40px,
+    'medium' 4px 7px 32px,
+    'small' 0px 2px 24px
+);
+
+:host {
+    display: block;
+}
+
+.textarea-wrapper {
+    width: 256px;
+
+    &.full-width {
+        width: 100%;
+    }
+}
+
+.textarea-container {
+    position: relative;
+    width: 100%;
+
+    &.empty {
+        .clear-button {
+            display: none;
+        }
+    }
+}
+
+.textarea-container textarea {
+    resize: vertical;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    color: $grey-8;
+    width: 100%;
+    background-color: $grey-1;
+    border: 1px solid $grey-5;
+    border-radius: 2px;
+    box-shadow: none;
+    font-family: $font-roboto;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+        -webkit-appearance: none;
+    }
+
+    &::placeholder {
+        color: $grey-6;
+        user-select: none;
+    }
+    
+    &:focus:not(:disabled) {
+        outline: none;
+        border-color: $prime-blue-5;
+        box-shadow: 0px 0px 4px $prime-blue-6;
+    }
+
+    &:hover:not(:disabled) {
+        border-color: $prime-blue-6;
+    }
+
+    &:disabled {
+        background-color: $grey-3;
+        cursor: not-allowed;
+    }
+
+    &.clearable {
+        padding-right: 30px;
+    }
+}
+
+.resize-none textarea {
+    resize: none;
+}
+  
+.resize-vertical textarea {
+    resize: vertical;
+}
+  
+.resize-auto textarea {
+    height: auto;
+    resize: none;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    color: $grey-9;
+    margin-bottom: 3px;
+}
+
+.textarea-caption {
+    display: block;
+}
+
+.clear-button {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+  
+    &:focus {
+      outline: none;
+    }
+}
+
+.textarea-footer {
+    display: flex;
+    justify-content: space-between;
+
+    .count {
+        color: $grey-7;
+        margin-left: 4px;
+
+        &:only-child {
+            margin-left: auto;;
+        }
+    }
+}
+
+@each $state, $color in $caption-types {
+    .caption-#{$state} {
+        color: $color;
+    }
+}
+
+@each $name, $size, $top, $min-height in $sizes {
+    .size-#{$name} {
+        padding: $size 12px;
+        min-height: $min-height;
+
+        & ~ .clear-button {
+            top: $top;
+        }
+    }
+}

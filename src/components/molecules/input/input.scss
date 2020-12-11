@@ -1,0 +1,263 @@
+@import '../../../global/variables/typography.scss';
+
+:host {
+    display: block;
+}
+
+// Input Sizes
+
+$input-sizes: (
+    'large' 38px,
+    'medium' 30px ,
+    'small' 20px
+);
+
+// Caption Types
+
+$caption-types: (
+    'default' $grey-7,
+    'primary' $prime-blue-6,
+    'success' $green-6,
+    'warning' $orange-6,
+    'error' $red-6,
+);
+
+// Container (includes label-input-caption)
+
+.input-container {
+    width: 256px;
+
+    &.full-width {
+        width: 100%;
+    }
+}
+
+// Input Container (includes prefix and suffix)
+
+.input-base {
+    flex: 1 1 auto;
+    display: inline-flex;
+    align-items: stretch;
+    justify-content: start;
+    position: relative;
+    width: 100%;
+    background-color: $grey-1;
+    border: 1px solid $grey-5;
+    border-radius: 2px;
+    vertical-align: middle;
+    overflow: hidden;
+    cursor: text;
+
+    &.focused:not(.disabled) {
+        border-color: $prime-blue-5;
+        box-shadow: 0px 0px 4px $prime-blue-6;
+        
+        .input-clear-button {
+            opacity: 1;
+        }
+    }
+
+    &:hover:not(.disabled) {
+        border-color: $prime-blue-6;
+
+        .caret-container {
+            opacity: 1;
+        }
+
+        .input-clear-button {
+            opacity: 1;
+        }
+    }
+
+    &.disabled {
+        background-color: $grey-3;
+        cursor: not-allowed;
+    }
+
+    &.empty {
+        .input-clear-button {
+            display: none;
+        }
+    }
+}
+
+// Input element
+
+.input-base input {
+    color: $grey-8;
+    flex: 1 1 auto;
+    width: 0%;
+    border: none;
+    border-radius: 2px;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0 12px;
+    font-family: $font-roboto;
+    cursor: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+        -webkit-appearance: none;
+    }
+
+    &::placeholder {
+        color: $grey-6;
+        user-select: none;
+    }
+    
+    &:focus {
+        outline: none;
+    }
+}
+
+input::-webkit-calendar-picker-indicator {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+  -webkit-appearance: none;
+}
+
+input[type=number]
+{
+  -moz-appearance: textfield;
+}
+
+// Prefix and Suffix
+
+.input-prefix, .input-suffix {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    cursor: default;
+}
+
+// Slotted Elements
+
+.input-prefix ::slotted(*) {
+    margin-left: 2px;
+}
+
+.input-prefix ::slotted(:first-child) {
+    margin-left: 10px;
+}
+
+.input-prefix ::slotted(:last-child) {
+    margin-right: -8px;
+}
+
+.input-suffix ::slotted(*) {
+    margin-right: 2px;
+}
+
+.input-suffix ::slotted(:last-child) {
+    margin-right: 10px;
+}
+
+// Clear and password visibility toggle
+
+.input-clear-button, .input-password-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    margin-right: 2px;
+  
+    &:last-child, &:last-of-type {
+        margin-right: 10px;
+    }
+
+    &:focus {
+      outline: none;
+    }
+}
+
+.input-clear-button {
+    opacity: 0;
+}
+
+// Label And Caption
+
+.label {
+    display: flex;
+    flex-direction: column;
+    color: $grey-9;
+    margin-bottom: 2px;
+}
+
+.input-caption {
+    display: block;
+    margin-top: 2px;
+}
+
+
+// Number Input buttons
+
+.caret-container {
+    
+    opacity: 0;
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid $grey-5;
+    border-right: 1px solid $grey-5;
+    transition: .2s opacity;
+    user-select: none;
+    box-sizing: border-box;
+    margin-right: 2px;
+
+    &:last-of-type {
+        margin-right: 0;
+        border-right: none;
+    }
+
+    .caret {
+        display: inline-flex;
+        height: 50%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        color: $grey-7;
+        cursor: pointer;
+
+        &:hover {
+            color: $prime-blue-6
+        }
+
+        &:active {
+            background-color: $grey-3;
+        }
+
+        &:last-child {
+            border-top: 1px solid $grey-5;
+        }
+    }
+}
+
+.default-icon {
+    margin-right: 10px;
+}
+
+@each $state, $color in $caption-types {
+    .caption-#{$state} {
+        color: $color;
+    }
+}
+
+@each $name, $size in $input-sizes {
+    .input-#{$name} {
+        height: $size;
+    }
+}
