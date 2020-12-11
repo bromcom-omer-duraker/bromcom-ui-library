@@ -26,6 +26,7 @@ export const ColorPalette = {
 }
 
 export declare type ColorPaletteTypes = 'default'
+    | 'prime-blue'
     | 'prime-blue-1' 
     | 'prime-blue-2' 
     | 'prime-blue-3' 
@@ -35,7 +36,7 @@ export declare type ColorPaletteTypes = 'default'
     | 'prime-blue-8'
     | 'prime-blue-9'
     | 'prime-blue-10'
-
+    | 'grey'
     | 'grey-1'
     | 'grey-2'
     | 'grey-3'
