@@ -49,6 +49,8 @@ const createResolution = (files) => {
         // #
         size == defaultIconSize && (resolution[icon.name][type]['default'] = mockVariable);
 
+        console.log('Registering icon...', icon.base, 'from', file);
+
         resolutionFlat.push({
             ...icon,
             variable: variable,
@@ -85,11 +87,7 @@ function createRegistryFile (cb) {
         // #
         for (let icon in resolutionFlat) {
             iicon = resolutionFlat[icon];
-            tsxContent += `
-/**
- * ICON: ${iicon.name}
- */
-import ${iicon.variable} from '${iicon.importPath}';\n`
+            tsxContent += `import ${iicon.variable} from '${iicon.importPath}';\n`
         }
 
         // Create export in script

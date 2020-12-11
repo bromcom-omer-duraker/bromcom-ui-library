@@ -6,7 +6,7 @@ import { ColorPalette, ColorPaletteTypes } from '../../../global/variables/color
 /**
  * 'type' prop types
  */
-export declare type TypePropOptions = 'default' | 'fill' | 'outlined' | 'multicolor';
+export declare type TypePropOptions = 'fill' | 'outlined' | 'multi-color';
 
 /**
  * 'size' prop types
@@ -39,7 +39,7 @@ export class BcmIcon {
     @Element() el: HTMLElement;
 
     @Prop() color: ColorPaletteTypes = 'prime-blue-6';
-    @Prop() type: TypePropOptions = 'default';
+    @Prop() type: TypePropOptions = 'outlined';
     @Prop() size: SizePropOptions = defaultIconSize;
     @Prop() icon: string;
     
@@ -58,7 +58,7 @@ export class BcmIcon {
 
         // Replace fill colors with given prop
         // -->
-        if (this.type == 'multicolor') {
+        if (this.type == 'multi-color') {
             // multicolor icon
         }
         else {
