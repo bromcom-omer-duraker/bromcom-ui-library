@@ -15,22 +15,16 @@ export default {
             }
         },
         size: {
-            control: { type: 'select', options: ['small', 'medium', 'large']},
+            control: 'text',
             description: 'Size of the avatar.',
             defaultValue: 'medium',
             table: {
                 category: 'Properties',
                 defaultValue: { summary: 'medium' },
-                type: { summary: 'string' }
-            }
-        },
-        custom: {
-            control: 'text',
-            description: 'Custom size.',
-            defaultValue: '',
-            table: {
-                category: 'Properties',
-                type: { summary: 'string' }
+                type: { 
+                    summary: 'string',
+                    detail: 'small | medium | large or custom number' 
+                }
             }
         },
         image: {
@@ -57,16 +51,7 @@ export default {
                 category: 'Properties',
                 type: { summary: 'string' }
             }
-        },
-        onClick: {
-            name: 'onclick',
-            description: 'Fires whenever the avatar button is clicked.',
-            table: {
-                category: 'Events',
-                type: { summary: 'function' },
-            },
-            action: 'clicked'
-        },
+        }
     },
     parameters: {
         docs: {

@@ -4,16 +4,8 @@ export default {
     title: 'Components/Atoms/Badge',
     component: 'bcm-badge',
     argTypes: {
-        text: {
-            control: 'text',
-            description: 'Content of the badge.',
-            table: {
-                category: 'Slots',
-            }
-        },
         type: {
-            control: { type: 'select', options: ['basic', 'info']},
-            description: 'Type of the badge..',
+            description: 'Type of the badge.',
             defaultValue: 'basic',
             table: {
                 category: 'Properties',
@@ -24,22 +16,14 @@ export default {
         status: {
             control: { type: 'select', options: ['default', 'success', 'error', 'processing', 'warning']},
             description: 'Sets badge color..',
-            defaultValue: 'error',
+            defaultValue: 'default',
             table: {
                 category: 'Properties',
                 defaultValue: { summary: 'default' },
                 type: { summary: 'string' }
             }
         },
-        value: {
-            control: 'number',
-            description: 'Value of the badge.',
-            defaultValue: 1,
-            table: {
-                category: 'Properties',
-                type: { summary: 'number' }
-            }
-        }
+
     },
     parameters: {
         docs: {
@@ -53,6 +37,28 @@ export default {
     }
 }
 
-const Template = ({text, ...args}) => <bcm-badge {...args}> {text} </bcm-badge>
+export const Basic = (args) => <bcm-badge {...args} type="basic"></bcm-badge>
+Basic.argTypes = {
+    value: {
+        control: 'number',
+        description: 'Value of the badge.',
+        defaultValue: 1,
+        table: {
+            category: 'Properties',
+            type: { summary: 'number' }
+        }
+    }
+}
 
-export const Default = Template.bind({})
+
+export const Info = ({text, ...args}) => <bcm-badge {...args} type="info"> {text} </bcm-badge>
+Info.argTypes = {
+    text: {
+        control: 'text',
+        description: 'Content of the badge.',
+        defaultValue: 'Default',
+        table: {
+            category: 'Slots',
+        }
+    }
+}

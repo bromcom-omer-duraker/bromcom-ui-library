@@ -25,38 +25,11 @@ export default {
         size: {
             control: { type: 'select', options: ['small', 'medium', 'large'] },
             description: 'Adjust size.',
+            defaultValue: 'medium',
             table: {
                 category: 'Properties',
                 type: { summary: 'string' },
                 defaultValue: { summary: '"medium"' },
-            }
-        },
-        icon: {
-            control: 'text',
-            description: 'If set with existing icon name, button will contain icon.',
-            defaultValue: 'cloud',
-            table: {
-                category: 'Properties',
-                type: { summary: 'string' },
-                defaultValue: { summary: 'cloud' },
-            }
-        },
-        'icon-position': {
-            control: { type: 'inline-radio', options: ['left', 'right'] },
-            description: "Choose icon's position.",
-            table: {
-                category: 'Properties',
-                type: { summary: 'string' },
-                defaultValue: { summary: '"left"' },
-            }
-        },
-        'icon-only': {
-            control: 'boolean',
-            description: 'If set, button will contain only icon.',
-            table: {
-                category: 'Properties',
-                type: { summary: 'boolean' },
-                defaultValue: { summary: 'false' },
             }
         },
         outline: {
@@ -71,21 +44,13 @@ export default {
         disabled: {
             control: 'boolean',
             description: "Button's disabled state.",
+            defaultValue: false,
             table: {
                 category: 'Properties',
                 type: { summary: 'boolean' },
-                defaultValue: { summary: 'false' },
+                defaultValue: { summary: false },
             }
-        },
-        onClick: {
-            name: 'onclick',
-            description: 'Fires whenever the button is clicked.',
-            table: {
-                category: 'Events',
-                type: { summary: 'function' },
-            },
-            action: 'clicked'
-        },
+        }
     },
     parameters: {
         docs: {
@@ -100,12 +65,44 @@ export default {
     }
 }
 
-const Template = ({ label, icon, ...args }) => <bcm-button {...args} icon={icon ? 'cloud' : false} > {label} </bcm-button>
+const Template = ({ label, ...args }) => <bcm-button {...args}> {label} </bcm-button>
 
 export const Default = Template.bind({})
 Default.args = {
     label: 'Press Me',
-    size: 'medium',
-    'icon-position': 'left',
-    'icon-only': false
+}
+
+export const WithIcon = ({label, ...args}) => (
+    <bcm-button {...args}> {label} </bcm-button>
+)
+WithIcon.args = {
+    label: 'Press Me',
+    icon: 'cloud-upload'
+}
+WithIcon.argTypes = {
+    icon: {
+        control: 'text',
+        description: "Button's outlined state.",
+        table: {
+            category: 'Properties',
+            type: { summary: 'string' },
+        }
+    },
+    'icon-position': {
+        control: { type: 'inline-radio', options: ['prefix', 'suffix'] },
+        description: 'Adjust size.',
+        defaultValue: 'prefix',
+        table: {
+            category: 'Properties',
+            type: { summary: 'string' },
+            defaultValue: { summary: '"prefix"' },
+        }
+    }
+}
+
+export const IconOnly = (args) => (
+    <bcm-button {...args}></bcm-button>
+)
+IconOnly.args = {
+    icon: 'cloud-upload'
 }

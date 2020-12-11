@@ -23,6 +23,7 @@ export default {
         size: {
             control: { type: 'select', options: ['small', 'medium', 'large'] },
             description: "The input's size.",
+            defaultValue: 'medium',
             table: {
                 category: 'Properties',
                 type: { summary: 'string' },
@@ -189,11 +190,6 @@ TextInput.args = {
     value: '',
 }
 
-export const NumberInput = (args) => <bcm-input type="number" {...args}></bcm-input>
-NumberInput.args = {
-    value: 13,
-}
-
 export const PasswordInput = (args) => <bcm-input type="password" {...args}></bcm-input>
 PasswordInput.args = {
     value: 'bromcom-ui',
@@ -209,6 +205,26 @@ PasswordInput.argTypes = {
             defaultValue: { summary: false }
         }
     }
+}
+
+export const TelInput = (args) => <bcm-input type="tel" {...args}></bcm-input>
+TelInput.args = {
+    value: '020 8290 7171',
+}
+
+export const UrlInput = (args) => <bcm-input type="url" {...args}></bcm-input>
+UrlInput.args = {
+    value: 'https://www.bromcom.com/',
+}
+
+export const SearchInput = (args) => <bcm-input type="search" {...args}></bcm-input>
+SearchInput.args = {
+    value: '',
+}
+
+export const EmailInput = (args) => <bcm-input type="email" {...args}></bcm-input>
+EmailInput.args = {
+    value: 'example@bromcom.com',
 }
 
 export const WithPrefix = (args) => (
