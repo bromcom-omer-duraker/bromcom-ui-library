@@ -87,17 +87,25 @@ button {
 
 }
 
-button ::slotted([slot="prefix"]) {
-    margin-right: 4px;
+button > bcm-icon.prefix {
+    margin-right: 6px;
 }
 
-button ::slotted([slot="suffix"]) {
-    margin-left: 4px;
+button > bcm-icon.suffix {
+    margin-left: 6px;
 }
 
 .large {
     min-height: 40px;
     min-width: 40px;
+
+    bcm-icon.prefix {
+        margin-right: 16px;
+    }
+
+    bcm-icon.suffix {
+        margin-left: 16px;
+    }
 
     &:not(.rounded) {
         padding: 0 16px;
