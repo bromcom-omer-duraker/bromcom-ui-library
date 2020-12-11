@@ -38,7 +38,7 @@ const defaultIconSize = 24;
 export class BcmIcon {
     @Element() el: HTMLElement;
 
-    @Prop() color: ColorPaletteTypes = 'prime-blue-6';
+    @Prop() color: ColorPaletteTypes | 'currentColor' = 'currentColor';
     @Prop() type: TypePropOptions = 'default';
     @Prop() size: SizePropOptions = defaultIconSize;
     @Prop() icon: string;
@@ -53,7 +53,7 @@ export class BcmIcon {
      * @returns {string | SVGElement}
      */
     setIconColor(svgTemplate: string): string {
-        const color = extractColor(ColorPalette, this.color);
+        const color = this.color === "currentColor" ? this.color : extractColor(ColorPalette, this.color);
         let fillPattern: RegExp = /(<path [\S\s]*?fill=")[^"]+("[\S\s]*?>)/gmi;
 
         // Replace fill colors with given prop
