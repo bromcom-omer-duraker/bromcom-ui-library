@@ -27,4 +27,4 @@ UserInterfaceState.xcuserstate
 .env
 
 src/assets/icons/index.tsx
-src/components.d.ts
+# src/components.d.ts
