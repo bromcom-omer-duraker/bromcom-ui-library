@@ -1,34 +1,10 @@
 import { Element, Component, Prop, State, h } from '@stencil/core'; 
 import { SVGIcons } from '../../../assets/icons';
 import { extractColor } from '../../../utils/utils';
+import { TypePropOptions, SizePropOptions, SizePropPredefinedValues } from './types';
 import { ColorPalette, ColorPaletteTypes } from '../../../global/variables/colors';
 
-/**
- * 'type' prop types
- */
-export declare type TypePropOptions = 'fill' | 'outlined' | 'multi-color';
-
-/**
- * 'size' prop types
- */
-export declare type SizePropOptions = SizePropPredefinedValues | number;
-
-/**
- * 'size' prop predefined values
- */
-enum SizePropPredefinedValues { 
-    large = '48', 
-    medium = '24', 
-    default = '16', 
-    small = '12', 
-    xsmall = '8' 
-}
-
 const defaultIconSize = 24;
-
-/**
- * 'size' prop values
- */
 
 @Component({
     tag: 'bcm-icon',
@@ -36,15 +12,24 @@ const defaultIconSize = 24;
     shadow: true
 })
 export class BcmIcon {
+    /**
+     * Component Element
+     */
     @Element() el: HTMLElement;
 
+    /**
+     * Component Properties
+     */
     @Prop() color: ColorPaletteTypes | 'currentColor' = 'currentColor';
     @Prop() type: TypePropOptions = 'outlined';
     @Prop() size: SizePropOptions = defaultIconSize;
     @Prop() icon: string;
     
+    /**
+     * Component States
+     */
     @State() _icon: string;
-    @State() _size: number;
+    @State() _size: SizePropOptions;
     @State() wrapperStyle: {[key: string]: any} = {};
 
     /**
@@ -113,7 +98,10 @@ export class BcmIcon {
         let iconbase64: string;
         let newIcon: string;
 
-        this._size = (SizePropPredefinedValues[this.size] || this.size);
+        (this.size as any) in SizePropPredefinedValues
+            ? this._size = SizePropPredefinedValues[this.size as any]
+            : this._size = this.size
+        ;
 
         // Check target icon file
         // #

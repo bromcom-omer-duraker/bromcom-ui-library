@@ -1,3 +1,5 @@
+import component_check_disabled_default_12 from './svg/default/12/component-check-disabled.svg';
+import component_check_default_12 from './svg/default/12/component-check.svg';
 import account_book_fill_24 from './svg/fill/24/account-book.svg';
 import alert_fill_24 from './svg/fill/24/alert.svg';
 import alipay_circle_fill_24 from './svg/fill/24/alipay-circle.svg';
@@ -730,6 +732,16 @@ import zoom_out_outlined_24 from './svg/outlined/24/zoom-out.svg';
 
 
 export const SVGIcons = {
+    "component-check-disabled": {
+        "default": {
+            "12": component_check_disabled_default_12
+        }
+    },
+    "component-check": {
+        "default": {
+            "12": component_check_default_12
+        }
+    },
     "account-book": {
         "fill": {
             "24": account_book_fill_24,

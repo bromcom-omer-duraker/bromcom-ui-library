@@ -23,7 +23,18 @@
     <bcm-icon icon="mail" color="prime-blue-8" size="150"></bcm-icon>
     
     <bcm-input type="url" value="15"></bcm-input>
-    
+
+    <br> <br>
+    <bcm-checkbox-group>
+        <bcm-checkbox>
+            Checkbox Label 1
+        </bcm-checkbox>
+        <bcm-checkbox>
+            Checkbox Label 2
+        </bcm-checkbox>
+        <span>Test</span>
+    </bcm-checkbox-group>
+
     <script>
         document.getElementById('checkbox').addEventListener('checkedChange', e => console.log(e.detail.newValue))
     </script>

@@ -28,6 +28,14 @@ export namespace Components {
         "outline": boolean;
         "size": 'small' | 'medium' | 'large';
     }
+    interface BcmCheckbox {
+    }
+    interface BcmCheckboxGroup {
+        /**
+          * Component Properties
+         */
+        "direction": 'horizontal' | 'vertical';
+    }
     interface BcmIcon {
         "color": ColorPaletteTypes | 'currentColor';
         "icon": string;
@@ -97,6 +105,18 @@ declare global {
         prototype: HTMLBcmButtonElement;
         new (): HTMLBcmButtonElement;
     };
+    interface HTMLBcmCheckboxElement extends Components.BcmCheckbox, HTMLStencilElement {
+    }
+    var HTMLBcmCheckboxElement: {
+        prototype: HTMLBcmCheckboxElement;
+        new (): HTMLBcmCheckboxElement;
+    };
+    interface HTMLBcmCheckboxGroupElement extends Components.BcmCheckboxGroup, HTMLStencilElement {
+    }
+    var HTMLBcmCheckboxGroupElement: {
+        prototype: HTMLBcmCheckboxGroupElement;
+        new (): HTMLBcmCheckboxGroupElement;
+    };
     interface HTMLBcmIconElement extends Components.BcmIcon, HTMLStencilElement {
     }
     var HTMLBcmIconElement: {
@@ -131,6 +151,8 @@ declare global {
         "bcm-avatar": HTMLBcmAvatarElement;
         "bcm-badge": HTMLBcmBadgeElement;
         "bcm-button": HTMLBcmButtonElement;
+        "bcm-checkbox": HTMLBcmCheckboxElement;
+        "bcm-checkbox-group": HTMLBcmCheckboxGroupElement;
         "bcm-icon": HTMLBcmIconElement;
         "bcm-input": HTMLBcmInputElement;
         "bcm-tag": HTMLBcmTagElement;
@@ -158,6 +180,18 @@ declare namespace LocalJSX {
         "kind"?: 'solid' | 'ghost';
         "outline"?: boolean;
         "size"?: 'small' | 'medium' | 'large';
+    }
+    interface BcmCheckbox {
+    }
+    interface BcmCheckboxGroup {
+        /**
+          * Component Properties
+         */
+        "direction"?: 'horizontal' | 'vertical';
+        /**
+          * Component Events
+         */
+        "onBcm-change"?: (event: CustomEvent<any>) => void;
     }
     interface BcmIcon {
         "color"?: ColorPaletteTypes | 'currentColor';
@@ -217,6 +251,8 @@ declare namespace LocalJSX {
         "bcm-avatar": BcmAvatar;
         "bcm-badge": BcmBadge;
         "bcm-button": BcmButton;
+        "bcm-checkbox": BcmCheckbox;
+        "bcm-checkbox-group": BcmCheckboxGroup;
         "bcm-icon": BcmIcon;
         "bcm-input": BcmInput;
         "bcm-tag": BcmTag;
@@ -231,6 +267,8 @@ declare module "@stencil/core" {
             "bcm-avatar": LocalJSX.BcmAvatar & JSXBase.HTMLAttributes<HTMLBcmAvatarElement>;
             "bcm-badge": LocalJSX.BcmBadge & JSXBase.HTMLAttributes<HTMLBcmBadgeElement>;
             "bcm-button": LocalJSX.BcmButton & JSXBase.HTMLAttributes<HTMLBcmButtonElement>;
+            "bcm-checkbox": LocalJSX.BcmCheckbox & JSXBase.HTMLAttributes<HTMLBcmCheckboxElement>;
+            "bcm-checkbox-group": LocalJSX.BcmCheckboxGroup & JSXBase.HTMLAttributes<HTMLBcmCheckboxGroupElement>;
             "bcm-icon": LocalJSX.BcmIcon & JSXBase.HTMLAttributes<HTMLBcmIconElement>;
             "bcm-input": LocalJSX.BcmInput & JSXBase.HTMLAttributes<HTMLBcmInputElement>;
             "bcm-tag": LocalJSX.BcmTag & JSXBase.HTMLAttributes<HTMLBcmTagElement>;
