@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ColorPaletteTypes } from "./global/variables/colors";
-import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/icon";
+import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/types";
 export namespace Components {
     interface BcmAvatar {
         "image": string;
@@ -29,14 +29,32 @@ export namespace Components {
         "size": 'small' | 'medium' | 'large';
     }
     interface BcmCheckbox {
+        "checked": boolean;
+        "disabled": boolean;
+        "name": string;
+        "readOnly": boolean;
+        /**
+          * Component Properties
+         */
+        "value": any;
     }
     interface BcmCheckboxGroup {
+        /**
+          * @desc 
+          * @param name -
+          * @returns
+         */
+        "checked": (name: string) => Promise<boolean | any[]>;
         /**
           * Component Properties
          */
         "direction": 'horizontal' | 'vertical';
+        "items": Array<object> | string;
     }
     interface BcmIcon {
+        /**
+          * Component Properties
+         */
         "color": ColorPaletteTypes | 'currentColor';
         "icon": string;
         "size": SizePropOptions;
@@ -182,18 +200,34 @@ declare namespace LocalJSX {
         "size"?: 'small' | 'medium' | 'large';
     }
     interface BcmCheckbox {
+        "checked"?: boolean;
+        "disabled"?: boolean;
+        "name"?: string;
+        /**
+          * Component Events
+         */
+        "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "readOnly"?: boolean;
+        /**
+          * Component Properties
+         */
+        "value"?: any;
     }
     interface BcmCheckboxGroup {
         /**
           * Component Properties
          */
         "direction"?: 'horizontal' | 'vertical';
+        "items"?: Array<object> | string;
         /**
           * Component Events
          */
         "onBcm-change"?: (event: CustomEvent<any>) => void;
     }
     interface BcmIcon {
+        /**
+          * Component Properties
+         */
         "color"?: ColorPaletteTypes | 'currentColor';
         "icon"?: string;
         "size"?: SizePropOptions;

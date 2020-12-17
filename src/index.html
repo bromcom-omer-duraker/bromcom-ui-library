@@ -19,24 +19,56 @@
     <bcm-tag type="checkable" checked="true">Tag</bcm-tag>
     <bcm-tag id="checkbox" type="checkable">Tag</bcm-tag>
     <bcm-tag type="add">Tag</bcm-tag>
-
     <bcm-icon icon="mail" color="prime-blue-8" size="150"></bcm-icon>
-    
     <bcm-input type="url" value="15"></bcm-input>
+    <br><br>
 
-    <br> <br>
-    <bcm-checkbox-group>
-        <bcm-checkbox>
+    <bcm-checkbox-group direction="vertical"
+        items='[{"label": "ch1", "name": "id1"}, {"label": "ch2", "name": "id2", "checked": true}, {"label": "ch3", "name": "id3", "disabled": true}, {"label": "ch4", "name": "id4", "checked": true, "disabled": true}]'>
+        <bcm-checkbox name="checkbox1">
             Checkbox Label 1
         </bcm-checkbox>
-        <bcm-checkbox>
+        <bcm-checkbox name="checkbox2" checked>
             Checkbox Label 2
         </bcm-checkbox>
-        <span>Test</span>
+        <bcm-checkbox name="checkbox3" disabled>
+            Checkbox Label 3
+        </bcm-checkbox>
+        <bcm-checkbox name="checkbox4" checked disabled>
+            Checkbox Label 4
+        </bcm-checkbox>
     </bcm-checkbox-group>
 
+    <!--  -->
+
     <script>
-        document.getElementById('checkbox').addEventListener('checkedChange', e => console.log(e.detail.newValue))
+        (async () => {
+            await customElements.whenDefined('bcm-checkbox-group');
+
+            var checkboxGroup = document.getElementsByTagName('bcm-checkbox-group')[0];
+
+            checkboxGroup.addEventListener('bcm-change', (event) => {
+                console.log(event.detail);
+            })
+
+            checkboxGroup.componentOnReady().then(() => {
+                checkboxGroup.checked('checkbox3')
+                    .then(status => console.log('checkbox3 status:', status))
+                checkboxGroup.checked()
+                    .then(status => console.log('checkbox group status:', status))
+            })
+        })();
+
+
+        /* document.getElementsByTagName('bcm-checkbox-group')[0].items = [{
+            name: "checkbox1",
+            label: "Checkbox 1",
+            value: 1
+        }, {
+            name: "checkbox2",
+            label: "Checkbox 2",
+            value: 2
+        }] */
     </script>
 </body>
 
