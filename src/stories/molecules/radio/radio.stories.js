@@ -6,7 +6,7 @@ export default {
     argTypes: {
         'default-value': {
             control: 'text',
-            description: 'Sets button UI mode to selected kind.',
+            description: "Radio group's default value.",
             defaultValue: "opt2",
             table: {
                 category: 'Properties',
@@ -17,10 +17,10 @@ export default {
     parameters: {
         docs: {
             description: {
-                component: 'Wraps a `<button>` with some modes and events.'
+                component: 'Radio or button group.'
             },
             source: {
-                // code: `<bcm-button>Press Me</bcm-button>`
+                code: `<bcm-radio>Option 1</bcm-radio>`
             }
         },
     }
@@ -37,7 +37,7 @@ export const Default = (args) => (
 Default.argTypes = {
     direction: {
         control: { type: 'select', options: ['vertical', 'horizontal'] },
-        description: 'Adjust size.',
+        description: 'Direction of the radio group.',
         defaultValue: 'horizontal',
         table: {
             category: 'Properties',
@@ -63,7 +63,7 @@ RadioButton.args = {
 RadioButton.argTypes = {
     'option-type': {
         control: { type: 'select', options: ['default', 'button'] },
-        description: 'Adjust size.',
+        description: "Sets visual type of the radio.",
         defaultValue: 'default',
         table: {
             category: 'Properties',
@@ -73,7 +73,7 @@ RadioButton.argTypes = {
     },
     'button-style': {
         control: { type: 'select', options: ['solid', 'outline'] },
-        description: 'Adjust size.',
+        description: 'Sets button style, if option-type is button.',
         defaultValue: 'solid',
         table: {
             category: 'Properties',
@@ -83,7 +83,7 @@ RadioButton.argTypes = {
     },
     'size': {
         control: { type: 'select', options: ['small', 'medium', 'large'] },
-        description: 'Adjust size.',
+        description: 'Sets size of the button, if option-type is button.',
         defaultValue: 'medium',
         table: {
             category: 'Properties',
