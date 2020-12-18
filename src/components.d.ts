@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ColorPaletteTypes } from "./global/variables/colors";
 import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/icon";
+import { OptionType } from "./components/molecules/radio/group";
 export namespace Components {
     interface BcmAvatar {
         "image": string;
@@ -50,6 +51,22 @@ export namespace Components {
         "size": 'small' | 'medium' | 'large';
         "type": string;
         "value": any;
+    }
+    interface BcmRadio {
+        "buttonStyle": 'solid' | 'outline';
+        "checked": boolean;
+        "disabled": boolean;
+        "optionType": 'default' | 'button';
+        "size": 'small' | 'medium' | 'large';
+        "value": string | number;
+    }
+    interface BcmRadioGroup {
+        "buttonStyle": 'solid' | 'outline';
+        "defaultValue": string | number;
+        "direction": 'vertical' | 'horizontal';
+        "optionType": 'default' | 'button';
+        "options": OptionType[] | string;
+        "size": 'small' | 'medium' | 'large';
     }
     interface BcmTag {
         "checked": boolean;
@@ -109,6 +126,18 @@ declare global {
         prototype: HTMLBcmInputElement;
         new (): HTMLBcmInputElement;
     };
+    interface HTMLBcmRadioElement extends Components.BcmRadio, HTMLStencilElement {
+    }
+    var HTMLBcmRadioElement: {
+        prototype: HTMLBcmRadioElement;
+        new (): HTMLBcmRadioElement;
+    };
+    interface HTMLBcmRadioGroupElement extends Components.BcmRadioGroup, HTMLStencilElement {
+    }
+    var HTMLBcmRadioGroupElement: {
+        prototype: HTMLBcmRadioGroupElement;
+        new (): HTMLBcmRadioGroupElement;
+    };
     interface HTMLBcmTagElement extends Components.BcmTag, HTMLStencilElement {
     }
     var HTMLBcmTagElement: {
@@ -133,6 +162,8 @@ declare global {
         "bcm-button": HTMLBcmButtonElement;
         "bcm-icon": HTMLBcmIconElement;
         "bcm-input": HTMLBcmInputElement;
+        "bcm-radio": HTMLBcmRadioElement;
+        "bcm-radio-group": HTMLBcmRadioGroupElement;
         "bcm-tag": HTMLBcmTagElement;
         "bcm-text": HTMLBcmTextElement;
         "bcm-textarea": HTMLBcmTextareaElement;
@@ -184,6 +215,24 @@ declare namespace LocalJSX {
         "type"?: string;
         "value"?: any;
     }
+    interface BcmRadio {
+        "buttonStyle"?: 'solid' | 'outline';
+        "checked"?: boolean;
+        "disabled"?: boolean;
+        "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "optionType"?: 'default' | 'button';
+        "size"?: 'small' | 'medium' | 'large';
+        "value"?: string | number;
+    }
+    interface BcmRadioGroup {
+        "buttonStyle"?: 'solid' | 'outline';
+        "defaultValue"?: string | number;
+        "direction"?: 'vertical' | 'horizontal';
+        "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "optionType"?: 'default' | 'button';
+        "options"?: OptionType[] | string;
+        "size"?: 'small' | 'medium' | 'large';
+    }
     interface BcmTag {
         "checked"?: boolean;
         "onCheckedChange"?: (event: CustomEvent<object>) => void;
@@ -219,6 +268,8 @@ declare namespace LocalJSX {
         "bcm-button": BcmButton;
         "bcm-icon": BcmIcon;
         "bcm-input": BcmInput;
+        "bcm-radio": BcmRadio;
+        "bcm-radio-group": BcmRadioGroup;
         "bcm-tag": BcmTag;
         "bcm-text": BcmText;
         "bcm-textarea": BcmTextarea;
@@ -233,6 +284,8 @@ declare module "@stencil/core" {
             "bcm-button": LocalJSX.BcmButton & JSXBase.HTMLAttributes<HTMLBcmButtonElement>;
             "bcm-icon": LocalJSX.BcmIcon & JSXBase.HTMLAttributes<HTMLBcmIconElement>;
             "bcm-input": LocalJSX.BcmInput & JSXBase.HTMLAttributes<HTMLBcmInputElement>;
+            "bcm-radio": LocalJSX.BcmRadio & JSXBase.HTMLAttributes<HTMLBcmRadioElement>;
+            "bcm-radio-group": LocalJSX.BcmRadioGroup & JSXBase.HTMLAttributes<HTMLBcmRadioGroupElement>;
             "bcm-tag": LocalJSX.BcmTag & JSXBase.HTMLAttributes<HTMLBcmTagElement>;
             "bcm-text": LocalJSX.BcmText & JSXBase.HTMLAttributes<HTMLBcmTextElement>;
             "bcm-textarea": LocalJSX.BcmTextarea & JSXBase.HTMLAttributes<HTMLBcmTextareaElement>;
