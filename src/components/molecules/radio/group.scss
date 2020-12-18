@@ -1,0 +1,26 @@
+.radio-group {
+    display: flex;
+    
+    &.horizontal {
+        flex-direction: row;
+
+        ::slotted(bcm-radio:not(:last-of-type)) {
+            margin-right: 16px;
+        }
+
+        bcm-radio:not(:last-of-type) {
+            margin-right: 16px;
+        }
+    }
+    &.vertical {
+        flex-direction: column;
+
+        ::slotted(bcm-radio:not(:last-of-type)) {
+            margin-bottom: 16px;
+        }
+
+        bcm-radio:not(:last-of-type) {
+            margin-bottom: 16px;
+        }
+    }
+}

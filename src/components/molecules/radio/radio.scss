@@ -1,0 +1,162 @@
+@import '../../../global/variables/typography.scss';
+
+:host {
+    display: inline-block;
+}
+
+input[type="radio"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+label {
+    display: inline-flex;
+    align-items: center;
+    color: $grey-8;
+    cursor: pointer;
+}
+
+/* Default Radio Styles */
+
+.radio-container {
+    
+    .radio {
+        width: 16px;
+        height: 16px;
+        border: 1px solid $grey-5;
+        border-radius: 50%;
+        background-color: $grey-1;
+        box-sizing: border-box;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition-duration: .3s;
+        margin-right: 8px;
+
+        .inner {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: $grey-1;
+        }
+    }
+    
+    &:hover:not(.disabled) {
+        .radio {
+            border-color: $prime-blue-6;
+            filter: drop-shadow(0px 2px 4px rgba(54, 121, 171, 0.5));
+        }
+    }
+
+    &.disabled {
+        color: $grey-6;
+        cursor: not-allowed;
+
+        .radio {
+            border-color: $grey-5;
+        }
+    }
+
+    &.checked {
+        .radio {
+            border-color: $prime-blue-6;
+        }
+
+        .inner {
+            background-color: $prime-blue-6;
+        }
+
+        &.disabled {
+            .radio {
+                background-color: $grey-3;
+                border-color: $grey-5;
+            }
+
+            .inner {
+                background-color: $grey-6;
+            }
+        }
+    }
+}
+
+/* Radio Button Styles */
+
+$sizes: (
+    'large' 40px,
+    'medium' 32px,
+    'small' 24px,
+);
+
+.radio-button {
+    
+    // Inactive State(not checked)
+
+    background-color: $grey-1;
+    color: $grey-8;
+    border: 1px solid $grey-5;
+    padding: 0 16px;
+    box-sizing: border-box;
+
+    &:hover:not(.disabled) {
+        color: $prime-blue-5;
+    }
+
+    &:active:not(.disabled) {
+        color: $prime-blue-7;
+    }
+
+    &.disabled {
+        background-color: $grey-3;
+        color: $grey-6;
+        cursor: not-allowed;
+    }
+
+    // Active State(checked)
+
+    &.checked.disabled {
+        background-color: $grey-4;
+        color: $grey-1;
+        border-color: $grey-5;
+    }
+
+    &.checked.solid {
+        color: $grey-1;
+        background-color: $prime-blue-6;
+        border-color: $prime-blue-6;
+
+        &:hover {
+            background-color: $prime-blue-5;
+            border-color: $prime-blue-5;;
+        }
+    
+        &:active {
+            background-color: $prime-blue-7;
+            border-color: $prime-blue-7;
+        }
+    }
+
+    &.checked.outline {
+        background-color: $grey-1;
+        color: $prime-blue-6;
+        border-color: $prime-blue-6;
+        
+        &:hover {
+            color: $prime-blue-5;
+            border-color: $prime-blue-5;
+        }
+
+        &:active {
+            color: $prime-blue-7;
+            border-color: $prime-blue-7;
+        }
+    }
+
+    @each $name, $size in $sizes {
+        &.#{$name} {
+            height: $size;
+        }
+    }
+
+}
