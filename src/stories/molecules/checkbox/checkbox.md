@@ -1,6 +1,6 @@
 # bcm-button
 
-> Description of the icon component.
+> Description of the checkbox group component.
 
 ## Features
 
