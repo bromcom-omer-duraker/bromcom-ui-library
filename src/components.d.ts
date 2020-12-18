@@ -219,7 +219,9 @@ declare namespace LocalJSX {
         "buttonStyle"?: 'solid' | 'outline';
         "checked"?: boolean;
         "disabled"?: boolean;
+        "onBcm-blur"?: (event: CustomEvent<any>) => void;
         "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "onBcm-focus"?: (event: CustomEvent<any>) => void;
         "optionType"?: 'default' | 'button';
         "size"?: 'small' | 'medium' | 'large';
         "value"?: string | number;
