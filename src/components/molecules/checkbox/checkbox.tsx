@@ -5,7 +5,8 @@ import {
     Prop,
     Event,
     EventEmitter,
-    Host
+    Host,
+    Method
 } from '@stencil/core';
 
 @Component({
@@ -29,7 +30,7 @@ export class BcmCheckbox {
      */
     @Prop({ mutable: true }) value: any = ''
     @Prop({ reflect: true }) name: string = 'checkbox';
-    @Prop() checked: boolean = false;
+    @Prop({ reflect: true }) checked: boolean = false;
     @Prop() disabled: boolean = false;
     @Prop() readOnly: boolean = false;
 
@@ -52,10 +53,22 @@ export class BcmCheckbox {
      */
     handleChange() {
         this.value = this.inputElement.checked
+        this.checked = this.value
         this.change.emit({
             name: this.name,
             value: this.value
         })
+    }
+
+    /**
+     * @desc
+     * @param name -
+     * @returns {void}
+     */
+    @Method()
+    async check(uncheck: boolean) {
+        this.inputElement.checked = uncheck;
+        this.handleChange();
     }
 
     render() {
@@ -74,7 +87,12 @@ export class BcmCheckbox {
                 />
                 <label htmlFor={name}>
                     <span>
-                        <bcm-icon class="icon-checked" icon="component-check" size="small" type="default"></bcm-icon>
+                        <bcm-icon 
+                            class="icon-checked" 
+                            icon="component-check" 
+                            size="small" 
+                            type="default">
+                        </bcm-icon>
                     </span>
                     <slot />
                 </label>

@@ -2,9 +2,6 @@
 
 :host {
     display: inline-block;
-    label {
-        cursor: pointer;
-    }
 }
 
 input {
@@ -16,6 +13,7 @@ label {
     align-items: center;;
     font-size: 14px;
     color: $grey-8;
+    cursor: pointer;
     .icon-checked {
         display: none;
     }
