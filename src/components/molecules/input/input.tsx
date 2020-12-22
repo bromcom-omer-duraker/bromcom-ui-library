@@ -38,6 +38,7 @@ export class BcmInput {
     @Prop() clearable: boolean = false
     @Prop({ attribute: 'password-toggle' }) passwordToggle: boolean
     @Prop({ attribute: 'no-default-icon' }) noDefaultIcon: boolean
+    @Prop({ reflect: true }) name: string
 
     @State() hasFocus: boolean = false
     @State() isPasswordVisible: boolean = false

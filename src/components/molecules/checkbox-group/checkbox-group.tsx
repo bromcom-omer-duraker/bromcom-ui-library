@@ -36,6 +36,8 @@ export class BcmCheckboxGroup {
     @Prop() direction: 'horizontal' | 'vertical' = 'horizontal'
     @Prop() items: Array<object> | string = []
     @Prop() indeterminate: boolean = false
+    @Prop({ reflect: true }) name: string
+    @Prop() value: any;
 
     /**
      * Component State Variables
@@ -84,6 +86,7 @@ export class BcmCheckboxGroup {
      * @desc
      */
     inputChange() {
+        this.checked().then(values => this.value = values);
         this.setIndeterminateState()
     }
 
@@ -160,9 +163,9 @@ export class BcmCheckboxGroup {
      * @returns {boolean | Array<any>}
      */
     @Method()
-    async checked(name: string) {
-        let retVal: Array<any> | boolean = null
-        let checkeds: Array<any> = []
+    async checked(name?: string) {
+        let retVal: Array<any> | boolean | Object = null
+        let checkeds: Object = {}
         let checkboxes: Array<any> = []
 
         if(typeof retVal != 'boolean' && !retVal) {
@@ -174,12 +177,12 @@ export class BcmCheckboxGroup {
         checkboxes = this.getAllInputs();
 
         checkboxes.map(checkbox => {
-            checkbox.checked && checkeds.push({
+            checkbox.checked && (checkeds[checkbox.name] = {
                 value: true,
-                name: checkbox.getAttribute('name')
+                name: checkbox.name
             })
             
-            if(checkbox.getAttribute('name') === name) {
+            if(checkbox.name === name) {
                 retVal = checkbox.checked
             }
         })

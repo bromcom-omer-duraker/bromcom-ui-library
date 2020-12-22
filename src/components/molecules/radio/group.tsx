@@ -18,12 +18,13 @@ export class BcmRadioGroup {
     
     @Element() host: HTMLElement
     
-    @Prop({ mutable: true, reflect: true }) defaultValue: string | number
+    @Prop({ mutable: true, reflect: true }) value: string | number
     @Prop() direction: 'vertical' | 'horizontal' = 'horizontal'
     @Prop() options: OptionType[] | string
     @Prop() optionType: 'default' | 'button' = 'default'
     @Prop() buttonStyle: 'solid' | 'outline' = 'solid'
     @Prop() size: 'small' | 'medium' | 'large' = 'medium'
+    @Prop({ reflect: true }) name: string
 
     @State() radioOptions: OptionType[] = []
     @State() usingSlots: boolean = true
@@ -42,7 +43,7 @@ export class BcmRadioGroup {
     }
 
     // If checked radio changes, emits change event
-    @Watch('defaultValue')
+    @Watch('value')
     handleChange(newValue: string | number) {
         this.change.emit(newValue)
     }
@@ -50,7 +51,7 @@ export class BcmRadioGroup {
     // Controls radios styles and states
     controlRadio(elements: HTMLBcmRadioElement[]) {
         elements.forEach((radio: HTMLBcmRadioElement) => {
-            radio.checked = radio.value === this.defaultValue
+            radio.checked = radio.value === this.value
 
             radio.optionType = this.optionType
             radio.buttonStyle = this.buttonStyle
@@ -58,7 +59,7 @@ export class BcmRadioGroup {
 
             radio.addEventListener('bcm-change', (e: CustomEvent) => {
                 if (e.detail.checked) {
-                    this.defaultValue = radio.value
+                    this.value = radio.value
                 }
             }, { once: true })
         })

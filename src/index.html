@@ -13,38 +13,166 @@
 
 <body style="margin: 10%">
 
-    <bcm-tag type="basic">Tag</bcm-tag>
-    <bcm-tag type="closeable" id="some">Tag</bcm-tag>
-    <bcm-tag id="addButton" type="add">Tag</bcm-tag>
-    <bcm-tag type="checkable" checked="true">Tag</bcm-tag>
-    <bcm-tag id="checkbox" type="checkable">Tag</bcm-tag>
-    <bcm-tag type="add">Tag</bcm-tag>
-    <bcm-icon icon="mail" color="prime-blue-8" size="150"></bcm-icon>
-    <bcm-input type="url" value="15"></bcm-input>
-    <br><br>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    <bcm-checkbox-group 
-        direction="vertical"
-        items='[{"label": "ch1", "name": "id1"}, {"label": "ch2", "name": "id2"}, {"label": "ch3", "name": "id3"}, {"label": "ch4", "name": "id4"}]'
-        indeterminate
-    >
-        <bcm-checkbox name="checkbox1">
-            Checkbox Label 1
-        </bcm-checkbox>
+        h4 {
+            margin-left: 10px;
+            color: #717171;
+        }
 
-        <bcm-checkbox name="checkbox2" checked>
-            Checkbox Label 2
-        </bcm-checkbox>
-        <bcm-checkbox name="checkbox3">
-            Checkbox Label 3
-        </bcm-checkbox>
-        <bcm-checkbox name="checkbox4">
-            Checkbox Label 4
-        </bcm-checkbox>
-    </bcm-checkbox-group>
+        .user-form-wrapper {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            padding: 2em;
+            min-width: 600px;
+            max-width: 600px;
+        }
 
+        .row-group + .row-group {
+            margin-top: 20px;
+        }
+
+        .row-group .group-title {
+            margin: 8px 0;
+        }
+
+        .form-row {
+            display: flex;
+        }
+
+        .form-row + .form-row {
+            margin-top: 10px;
+        }
+
+        .form-row > * + * {
+            margin-left: 10px;
+        }
+    </style>
+
+    <form class="user-form">
+        <h4> Simple User Form </h4>
+        <div class="user-form-wrapper">
+            <div class="row-group">
+                <bcm-text 
+                    class="group-title" 
+                    scale="size-3"
+                >
+                    Personal Information
+                </bcm-text>
+                <div class="form-row">
+                    <bcm-input 
+                        type="text"
+                        name="nickname" 
+                        placeholder="nickname"
+                    >
+                        <bcm-icon slot="prefix" icon="user" color="grey-7"></bcm-icon>
+                    </bcm-input>
+                    <bcm-input 
+                        type="text"
+                        name="mail"
+                        placeholder="e-mail"
+                    >
+                        <bcm-icon slot="prefix" icon="mail" color="grey-7"></bcm-icon>
+                    </bcm-input>
+                </div>
+                <div class="form-row">
+                    <bcm-input 
+                        type="text" 
+                        placeholder="name"
+                        name="name"
+                        value="John">
+                    </bcm-input>
+                    <bcm-input 
+                        type="text" 
+                        placeholder="surname"
+                        name="surname"
+                        value="Doe">
+                    </bcm-input>
+                </div>
+                <div class="form-row">
+                    <bcm-radio-group name="gender">
+                        <bcm-text 
+                            scale="size-2" 
+                            style="margin-right: 10px;"
+                        >
+                            Gender
+                        </bcm-text>
+                        <bcm-radio value="male">Male</bcm-radio>
+                        <bcm-radio value="female">Female</bcm-radio>
+                    </bcm-radio-group>
+                </div>
+            </div>
+            <div class="row-group">
+                <bcm-text 
+                    class="group-title" 
+                    scale="size-3"
+                >
+                    Bio
+                </bcm-text>
+                <div class="form-row">
+                    <bcm-textarea
+                        name="bio"
+                        full-width
+                        max-length="200" 
+                        rows="4">
+                    </bcm-textarea>
+                </div>
+            </div>
+            <div class="row-group">
+                <bcm-text 
+                    class="group-title" 
+                    scale="size-3"
+                >
+                    Additional Information
+                </bcm-text>
+                <div class="form-row">
+                    <bcm-checkbox-group
+                        name="additional" 
+                        direction="vertical"
+                        indeterminate
+                    >
+                        <bcm-checkbox name="checkbox1" checked>
+                            Fusce lobortis hendrerit dapibus. Sed commodo neque eget pulvinar blandit. Praesent sed augue augue. Sed at lobortis elit, non ultricies neque.
+                        </bcm-checkbox>
+                        <bcm-checkbox name="checkbox2">
+                            Kullanıcı Sözleşmesi, Gizlilik Politikası ve Açık Rıza ve Dijital İletişim Metni'ni okudum, kabul ediyorum.
+                        </bcm-checkbox>
+                        <bcm-checkbox name="checkbox3">
+                            Kişisel Verilerin Korunması, İşlenmesine Dair Sözleşme ve Aydınlatma Metni'ni okudum, kabul ediyorum.
+                        </bcm-checkbox>
+                    </bcm-checkbox-group>
+                </div>
+            </div>
+            <div class="row-group" style="display: flex;">
+                <bcm-button id="submit-btn" style="margin-left: auto;">Submit</bcm-button>
+            </div>
+        </div>
+    </form>
+
+
+    <script type="text/javascript" src="./bromcom.js"></script>
+    <script type="text/javascript">
+        var submitBtn = document.querySelector('#submit-btn');
+        var userForm = new Bromcom.forms('.user-form');
+        
+        /**
+         * 
+         * [Event: click --> submitBtn]
+         */
+        submitBtn.addEventListener('click', function() {
+            var formData = userForm.data();
+            console.log(formData);
+        })
+    </script>
     <script>
-        var checkboxGroup = document.getElementsByTagName('bcm-checkbox-group')[0];
+
+       /*  var checkboxGroup = document.getElementsByTagName('bcm-checkbox-group')[0];
 
         (async () => {
             await customElements.whenDefined('bcm-checkbox-group');
@@ -65,7 +193,7 @@
         setTimeout(function() {
             checkboxGroup.checked()
                     .then(status => console.log('checkbox group status:', status))
-        }, 5000)
+        }, 5000) */
 
         /* document.getElementsByTagName('bcm-checkbox-group')[0].items = [{
             name: "checkbox1",

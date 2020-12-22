@@ -25,6 +25,7 @@ export class BcmTextarea {
     @Prop() clearable: boolean
     @Prop() resize: 'vertical' | 'none' | 'auto' = 'vertical'
     @Prop({ attribute: 'max-length' }) maxLength: number
+    @Prop({ reflect: true }) name: string
 
     @Event({ eventName: 'bcm-focus'})  focus: EventEmitter
     @Event({ eventName: 'bcm-blur'})   blur: EventEmitter

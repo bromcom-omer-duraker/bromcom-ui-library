@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ColorPaletteTypes } from "./global/variables/colors";
-import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/icon";
+import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/types";
 import { OptionType } from "./components/molecules/radio/group";
 export namespace Components {
     interface BcmAvatar {
@@ -29,7 +29,42 @@ export namespace Components {
         "outline": boolean;
         "size": 'small' | 'medium' | 'large';
     }
+    interface BcmCheckbox {
+        /**
+          * @desc 
+          * @param name -
+          * @returns
+         */
+        "check": (uncheck: boolean) => Promise<void>;
+        "checked": boolean;
+        "disabled": boolean;
+        "name": string;
+        "readOnly": boolean;
+        /**
+          * Component Properties
+         */
+        "value": any;
+    }
+    interface BcmCheckboxGroup {
+        /**
+          * @desc 
+          * @param name -
+          * @returns
+         */
+        "checked": (name?: string) => Promise<boolean | Object | any[]>;
+        /**
+          * Component Properties
+         */
+        "direction": 'horizontal' | 'vertical';
+        "indeterminate": boolean;
+        "items": Array<object> | string;
+        "name": string;
+        "value": any;
+    }
     interface BcmIcon {
+        /**
+          * Component Properties
+         */
         "color": ColorPaletteTypes | 'currentColor';
         "icon": string;
         "size": SizePropOptions;
@@ -42,6 +77,7 @@ export namespace Components {
         "disabled": boolean;
         "fullWidth": boolean;
         "label": string;
+        "name": string;
         "noDefaultIcon": boolean;
         "passwordToggle": boolean;
         "placeholder": string;
@@ -62,11 +98,12 @@ export namespace Components {
     }
     interface BcmRadioGroup {
         "buttonStyle": 'solid' | 'outline';
-        "defaultValue": string | number;
         "direction": 'vertical' | 'horizontal';
+        "name": string;
         "optionType": 'default' | 'button';
         "options": OptionType[] | string;
         "size": 'small' | 'medium' | 'large';
+        "value": string | number;
     }
     interface BcmTag {
         "checked": boolean;
@@ -85,6 +122,7 @@ export namespace Components {
         "fullWidth": boolean;
         "label": string;
         "maxLength": number;
+        "name": string;
         "placeholder": string;
         "removeFocus": () => Promise<void>;
         "resize": 'vertical' | 'none' | 'auto';
@@ -113,6 +151,18 @@ declare global {
     var HTMLBcmButtonElement: {
         prototype: HTMLBcmButtonElement;
         new (): HTMLBcmButtonElement;
+    };
+    interface HTMLBcmCheckboxElement extends Components.BcmCheckbox, HTMLStencilElement {
+    }
+    var HTMLBcmCheckboxElement: {
+        prototype: HTMLBcmCheckboxElement;
+        new (): HTMLBcmCheckboxElement;
+    };
+    interface HTMLBcmCheckboxGroupElement extends Components.BcmCheckboxGroup, HTMLStencilElement {
+    }
+    var HTMLBcmCheckboxGroupElement: {
+        prototype: HTMLBcmCheckboxGroupElement;
+        new (): HTMLBcmCheckboxGroupElement;
     };
     interface HTMLBcmIconElement extends Components.BcmIcon, HTMLStencilElement {
     }
@@ -160,6 +210,8 @@ declare global {
         "bcm-avatar": HTMLBcmAvatarElement;
         "bcm-badge": HTMLBcmBadgeElement;
         "bcm-button": HTMLBcmButtonElement;
+        "bcm-checkbox": HTMLBcmCheckboxElement;
+        "bcm-checkbox-group": HTMLBcmCheckboxGroupElement;
         "bcm-icon": HTMLBcmIconElement;
         "bcm-input": HTMLBcmInputElement;
         "bcm-radio": HTMLBcmRadioElement;
@@ -190,7 +242,38 @@ declare namespace LocalJSX {
         "outline"?: boolean;
         "size"?: 'small' | 'medium' | 'large';
     }
+    interface BcmCheckbox {
+        "checked"?: boolean;
+        "disabled"?: boolean;
+        "name"?: string;
+        /**
+          * Component Events
+         */
+        "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "readOnly"?: boolean;
+        /**
+          * Component Properties
+         */
+        "value"?: any;
+    }
+    interface BcmCheckboxGroup {
+        /**
+          * Component Properties
+         */
+        "direction"?: 'horizontal' | 'vertical';
+        "indeterminate"?: boolean;
+        "items"?: Array<object> | string;
+        "name"?: string;
+        /**
+          * Component Events
+         */
+        "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "value"?: any;
+    }
     interface BcmIcon {
+        /**
+          * Component Properties
+         */
         "color"?: ColorPaletteTypes | 'currentColor';
         "icon"?: string;
         "size"?: SizePropOptions;
@@ -203,6 +286,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "fullWidth"?: boolean;
         "label"?: string;
+        "name"?: string;
         "noDefaultIcon"?: boolean;
         "onBcm-blur"?: (event: CustomEvent<any>) => void;
         "onBcm-change"?: (event: CustomEvent<any>) => void;
@@ -228,12 +312,13 @@ declare namespace LocalJSX {
     }
     interface BcmRadioGroup {
         "buttonStyle"?: 'solid' | 'outline';
-        "defaultValue"?: string | number;
         "direction"?: 'vertical' | 'horizontal';
+        "name"?: string;
         "onBcm-change"?: (event: CustomEvent<any>) => void;
         "optionType"?: 'default' | 'button';
         "options"?: OptionType[] | string;
         "size"?: 'small' | 'medium' | 'large';
+        "value"?: string | number;
     }
     interface BcmTag {
         "checked"?: boolean;
@@ -253,6 +338,7 @@ declare namespace LocalJSX {
         "fullWidth"?: boolean;
         "label"?: string;
         "maxLength"?: number;
+        "name"?: string;
         "onBcm-blur"?: (event: CustomEvent<any>) => void;
         "onBcm-change"?: (event: CustomEvent<any>) => void;
         "onBcm-clear"?: (event: CustomEvent<any>) => void;
@@ -268,6 +354,8 @@ declare namespace LocalJSX {
         "bcm-avatar": BcmAvatar;
         "bcm-badge": BcmBadge;
         "bcm-button": BcmButton;
+        "bcm-checkbox": BcmCheckbox;
+        "bcm-checkbox-group": BcmCheckboxGroup;
         "bcm-icon": BcmIcon;
         "bcm-input": BcmInput;
         "bcm-radio": BcmRadio;
@@ -284,6 +372,8 @@ declare module "@stencil/core" {
             "bcm-avatar": LocalJSX.BcmAvatar & JSXBase.HTMLAttributes<HTMLBcmAvatarElement>;
             "bcm-badge": LocalJSX.BcmBadge & JSXBase.HTMLAttributes<HTMLBcmBadgeElement>;
             "bcm-button": LocalJSX.BcmButton & JSXBase.HTMLAttributes<HTMLBcmButtonElement>;
+            "bcm-checkbox": LocalJSX.BcmCheckbox & JSXBase.HTMLAttributes<HTMLBcmCheckboxElement>;
+            "bcm-checkbox-group": LocalJSX.BcmCheckboxGroup & JSXBase.HTMLAttributes<HTMLBcmCheckboxGroupElement>;
             "bcm-icon": LocalJSX.BcmIcon & JSXBase.HTMLAttributes<HTMLBcmIconElement>;
             "bcm-input": LocalJSX.BcmInput & JSXBase.HTMLAttributes<HTMLBcmInputElement>;
             "bcm-radio": LocalJSX.BcmRadio & JSXBase.HTMLAttributes<HTMLBcmRadioElement>;
