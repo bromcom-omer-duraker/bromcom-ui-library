@@ -1,0 +1,21 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+.option {
+    display: inline-flex;
+    padding: 5px 12px;
+    cursor: pointer;
+    color: $grey-8;
+    box-sizing: border-box;
+    width: 100%;
+
+    &:hover {
+        background-color: $prime-blue-1;
+    }
+
+    &.selected {
+        background-color: $grey-3;
+    }
+}

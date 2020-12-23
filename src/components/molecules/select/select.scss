@@ -1,0 +1,103 @@
+$sizes: (
+    'large' 40px,
+    'medium' 32px ,
+    'small' 24px
+);
+
+:host {
+    display: inline-block;
+}
+
+.container {
+    position: relative;
+}
+
+.selected {
+    
+    width: 256px;
+    box-sizing: border-box;
+    color: $grey-8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px 8px 12px;
+    border: 1px solid $grey-5;
+    user-select: none;
+    cursor: pointer;
+
+    &:hover:not(.disabled) {
+        border-color: $prime-blue-5;
+    }
+    
+    &:focus:not(.disabled) {
+        border-color: $prime-blue-5;
+        box-shadow: 0px 0px 4px $prime-blue-6;
+        outline: none;
+    }
+
+    .selected-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+    }
+
+    .open, .close {
+        display: inline-flex;
+        // transition: .3s;
+    }
+
+    .close {
+        transform: rotate(180deg);
+    }
+}
+
+.option-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    min-width: 256px;
+    background-color: $grey-1;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+
+    bcm-select-option, ::slotted(bcm-select-option) {
+        white-space: normal;
+    }
+    
+    &.hidden {
+        display: none;
+    }
+
+    &.vertical {
+        overflow-y: auto;
+        max-height: 200px;
+    }
+
+    &.horizontal {
+        overflow-x: auto;
+        max-width: 256px;
+        width: 100%;
+
+        bcm-select-option, ::slotted(bcm-select-option) {
+            white-space: nowrap;
+        }
+    }
+}
+
+.select-clear-button {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    margin-right: 4px;
+}
+
+@each $name, $size in $sizes {
+    .selected-#{$name} {
+        height: $size;
+    }
+}
