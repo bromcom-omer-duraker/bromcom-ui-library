@@ -26,6 +26,13 @@ $sizes: (
     &.full-width {
         width: 100%;
     }
+
+    &:hover {
+        .clear-button {
+            opacity: 1;
+        }
+    }
+
 }
 
 .textarea-container {
@@ -112,6 +119,7 @@ $sizes: (
 
 .clear-button {
     position: absolute;
+    opacity: 0;
     right: 10px;
     top: 7px;
     display: inline-flex;
