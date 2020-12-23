@@ -15,7 +15,7 @@ import { BcmCheckbox } from '../checkbox/checkbox'
 
 @Component({
     tag: 'bcm-checkbox-group',
-    styleUrl: 'checkbox-group.scss',
+    styleUrl: 'group.scss',
     shadow: true
 })
 export class BcmCheckboxGroup {
@@ -23,7 +23,6 @@ export class BcmCheckboxGroup {
      * Private variables
      */
     private checkboxes: HTMLInputElement[] = []
-
 
     /**
      * Component Element
