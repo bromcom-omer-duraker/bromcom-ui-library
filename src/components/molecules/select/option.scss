@@ -1,0 +1,39 @@
+@import '../../../global/variables/typography.scss';
+
+:host {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 256px;
+}
+
+:host-context(bcm-select-group) .option {
+    padding-left: 20px;
+}
+
+.option {
+    display: inline-flex;
+    padding: 5px 12px;
+    cursor: pointer;
+    color: $grey-8;
+    box-sizing: border-box;
+    width: 100%;
+
+    &:hover:not(.disabled) {
+        background-color: $prime-blue-1;
+    }
+
+    &.selected:not(.disabled) {
+        background-color: $grey-3;
+    }
+
+    &.disabled {
+        background-color: $grey-5;
+        color: $grey-6;
+        cursor: not-allowed;
+    
+        &:not(.selected) {
+            background-color: $prime-blue-1;
+        }
+    }
+}

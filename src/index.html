@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="/build/bromcom-ui.css">
     <script type="module" src="/build/bromcom-ui.esm.js"></script>
     <script nomodule src="/build/bromcom-ui.js"></script>
+
+    <style>
+        .select-view {
+            width: 340px;
+        }
+    </style>
 </head>
 
 <body style="margin: 10%">
@@ -174,13 +180,47 @@
 
        /*  var checkboxGroup = document.getElementsByTagName('bcm-checkbox-group')[0];
 
-        (async () => {
-            await customElements.whenDefined('bcm-checkbox-group');
+        // const options = [
+        //     {
+        //         label: 'Besiktas',
+        //         value: 'bjk'
+        //     },
+        //     {
+        //         label: 'Galatasaray',
+        //         value: 'gs'
+        //     },
+        // ]
 
+        // const options = [
+        //     {
+        //         title: 'Ilk 2',
+        //         options: [
+        //             {
+        //                 label: 'Besiktas',
+        //                 value: 'bjk'
+        //             },
+        //             {
+        //                 label: 'Galatasaray',
+        //                 value: 'gs'
+        //             },
+        //         ]
+        //     },
+        //     {
+        //         title: 'Son 2',
+        //         options: [
+        //             {
+        //                 label: 'Fenerbahce',
+        //                 value: 'fb'
+        //             },
+        //             {
+        //                 label: 'Basaksehir',
+        //                 value: 'ibfk'
+        //             },
+        //         ]
+        //     }
+        // ]
 
-            checkboxGroup.addEventListener('bcm-change', (event) => {
-                console.log(event.detail);
-            })
+        document.querySelector('bcm-select').options = options
 
             checkboxGroup.componentOnReady().then(() => {
                 checkboxGroup.checked('checkbox3')
@@ -205,6 +245,7 @@
             value: 2
         }] */
     </script>
+
 </body>
 
 </html>

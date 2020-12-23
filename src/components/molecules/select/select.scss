@@ -1,0 +1,162 @@
+@import '../../../global/variables/typography.scss';
+
+$sizes: (
+    'large' 40px,
+    'medium' 32px ,
+    'small' 24px
+);
+
+$caption-types: (
+    'default' $grey-7,
+    'primary' $prime-blue-6,
+    'success' $green-6,
+    'warning' $orange-6,
+    'error' $red-6,
+);
+
+:host {
+    display: block;
+    min-width: 256px;
+    max-width: 256px;
+}
+
+.container {
+    position: relative;
+}
+
+.selected {
+    
+    width: 100%;
+    box-sizing: border-box;
+    color: $grey-8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px 8px 12px;
+    border: 1px solid $grey-5;
+    user-select: none;
+    cursor: pointer;
+
+    &:hover:not(.disabled) {
+        border-color: $prime-blue-5;
+
+        .select-clear-button {
+            opacity: 1;
+        }
+    }
+    
+    &:focus:not(.disabled) {
+        border-color: $prime-blue-5;
+        box-shadow: 0px 0px 4px $prime-blue-6;
+        
+        .select-clear-button {
+            opacity: 1;
+        }
+    }
+    
+    &:focus {
+        outline: none;
+    }
+
+    &.disabled {
+        background-color: $grey-5;
+        color: $grey-6;
+        cursor: not-allowed;
+    }
+
+    .selected-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+    }
+
+    .open, .close {
+        display: inline-flex;
+        // transition: .3s;
+    }
+
+    .close {
+        transform: rotate(180deg);
+    }
+}
+
+.options-viewport {
+    display: inline-block;
+}
+
+.option-container {
+    display: block;
+    // width: 100%;
+    position: absolute;
+    left: 0;
+    background-color: $grey-1;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+
+    bcm-select-option, ::slotted(bcm-select-option) {
+        white-space: normal;
+    }
+    
+    &.hidden {
+        display: none;
+    }
+
+    &.vertical {
+        overflow-y: auto;
+        max-height: 200px;
+    }
+
+    &.horizontal:not(.flex) {
+        overflow-x: auto;
+        width: 100%;
+
+        bcm-select-option, ::slotted(bcm-select-option) {
+            white-space: nowrap;
+        }
+    }
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons {
+    display: flex;
+}
+
+.select-clear-button {
+    display: inline-flex;
+    align-items: center;
+    outline: none;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    margin-right: 4px;
+    opacity: 0;
+}
+
+.label {
+    display: block;
+    color: $grey-9;
+    margin-bottom: 2px;
+}
+
+.input-caption {
+    display: block;
+    margin-top: 2px;
+}
+
+@each $name, $size in $sizes {
+    .selected-#{$name} {
+        height: $size;
+    }
+}
+
+@each $state, $color in $caption-types {
+    .caption-#{$state} {
+        color: $color;
+    }
+}

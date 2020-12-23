@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ColorPaletteTypes } from "./global/variables/colors";
 import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/types";
 import { OptionType } from "./components/molecules/radio/group";
+import { OptionWithGroupType } from "./components/molecules/select/select";
 export namespace Components {
     interface BcmAvatar {
         "image": string;
@@ -51,15 +52,13 @@ export namespace Components {
           * @param name -
           * @returns
          */
-        "checked": (name?: string) => Promise<boolean | Object | any[]>;
+        "checked": (name: string) => Promise<boolean | any[]>;
         /**
           * Component Properties
          */
         "direction": 'horizontal' | 'vertical';
         "indeterminate": boolean;
         "items": Array<object> | string;
-        "name": string;
-        "value": any;
     }
     interface BcmIcon {
         /**
@@ -77,7 +76,6 @@ export namespace Components {
         "disabled": boolean;
         "fullWidth": boolean;
         "label": string;
-        "name": string;
         "noDefaultIcon": boolean;
         "passwordToggle": boolean;
         "placeholder": string;
@@ -98,12 +96,32 @@ export namespace Components {
     }
     interface BcmRadioGroup {
         "buttonStyle": 'solid' | 'outline';
+        "defaultValue": string | number;
         "direction": 'vertical' | 'horizontal';
-        "name": string;
         "optionType": 'default' | 'button';
         "options": OptionType[] | string;
         "size": 'small' | 'medium' | 'large';
-        "value": string | number;
+    }
+    interface BcmSelect {
+        "caption": string;
+        "captionType": 'primary' | 'success' | 'warning' | 'error' | 'default';
+        "clearable": boolean;
+        "disabled": boolean;
+        "flex": boolean;
+        "labelProp": string;
+        "options": string | string | OptionWithGroupType[];
+        "scrollable": 'none' | 'vertical' | 'horizontal' | 'both';
+        "size": 'small' | 'medium' | 'large';
+        "value": string;
+    }
+    interface BcmSelectGroup {
+        "title": string;
+    }
+    interface BcmSelectOption {
+        "disabled": boolean;
+        "getLabel": () => Promise<string>;
+        "selected": boolean;
+        "value": string;
     }
     interface BcmTag {
         "checked": boolean;
@@ -122,7 +140,6 @@ export namespace Components {
         "fullWidth": boolean;
         "label": string;
         "maxLength": number;
-        "name": string;
         "placeholder": string;
         "removeFocus": () => Promise<void>;
         "resize": 'vertical' | 'none' | 'auto';
@@ -188,6 +205,24 @@ declare global {
         prototype: HTMLBcmRadioGroupElement;
         new (): HTMLBcmRadioGroupElement;
     };
+    interface HTMLBcmSelectElement extends Components.BcmSelect, HTMLStencilElement {
+    }
+    var HTMLBcmSelectElement: {
+        prototype: HTMLBcmSelectElement;
+        new (): HTMLBcmSelectElement;
+    };
+    interface HTMLBcmSelectGroupElement extends Components.BcmSelectGroup, HTMLStencilElement {
+    }
+    var HTMLBcmSelectGroupElement: {
+        prototype: HTMLBcmSelectGroupElement;
+        new (): HTMLBcmSelectGroupElement;
+    };
+    interface HTMLBcmSelectOptionElement extends Components.BcmSelectOption, HTMLStencilElement {
+    }
+    var HTMLBcmSelectOptionElement: {
+        prototype: HTMLBcmSelectOptionElement;
+        new (): HTMLBcmSelectOptionElement;
+    };
     interface HTMLBcmTagElement extends Components.BcmTag, HTMLStencilElement {
     }
     var HTMLBcmTagElement: {
@@ -216,6 +251,9 @@ declare global {
         "bcm-input": HTMLBcmInputElement;
         "bcm-radio": HTMLBcmRadioElement;
         "bcm-radio-group": HTMLBcmRadioGroupElement;
+        "bcm-select": HTMLBcmSelectElement;
+        "bcm-select-group": HTMLBcmSelectGroupElement;
+        "bcm-select-option": HTMLBcmSelectOptionElement;
         "bcm-tag": HTMLBcmTagElement;
         "bcm-text": HTMLBcmTextElement;
         "bcm-textarea": HTMLBcmTextareaElement;
@@ -263,12 +301,10 @@ declare namespace LocalJSX {
         "direction"?: 'horizontal' | 'vertical';
         "indeterminate"?: boolean;
         "items"?: Array<object> | string;
-        "name"?: string;
         /**
           * Component Events
          */
         "onBcm-change"?: (event: CustomEvent<any>) => void;
-        "value"?: any;
     }
     interface BcmIcon {
         /**
@@ -286,7 +322,6 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "fullWidth"?: boolean;
         "label"?: string;
-        "name"?: string;
         "noDefaultIcon"?: boolean;
         "onBcm-blur"?: (event: CustomEvent<any>) => void;
         "onBcm-change"?: (event: CustomEvent<any>) => void;
@@ -312,13 +347,36 @@ declare namespace LocalJSX {
     }
     interface BcmRadioGroup {
         "buttonStyle"?: 'solid' | 'outline';
+        "defaultValue"?: string | number;
         "direction"?: 'vertical' | 'horizontal';
-        "name"?: string;
         "onBcm-change"?: (event: CustomEvent<any>) => void;
         "optionType"?: 'default' | 'button';
         "options"?: OptionType[] | string;
         "size"?: 'small' | 'medium' | 'large';
-        "value"?: string | number;
+    }
+    interface BcmSelect {
+        "caption"?: string;
+        "captionType"?: 'primary' | 'success' | 'warning' | 'error' | 'default';
+        "clearable"?: boolean;
+        "disabled"?: boolean;
+        "flex"?: boolean;
+        "labelProp"?: string;
+        "onBcm-blur"?: (event: CustomEvent<any>) => void;
+        "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "onBcm-clear"?: (event: CustomEvent<any>) => void;
+        "onBcm-focus"?: (event: CustomEvent<any>) => void;
+        "options"?: string | string | OptionWithGroupType[];
+        "scrollable"?: 'none' | 'vertical' | 'horizontal' | 'both';
+        "size"?: 'small' | 'medium' | 'large';
+        "value"?: string;
+    }
+    interface BcmSelectGroup {
+        "title"?: string;
+    }
+    interface BcmSelectOption {
+        "disabled"?: boolean;
+        "selected"?: boolean;
+        "value"?: string;
     }
     interface BcmTag {
         "checked"?: boolean;
@@ -338,7 +396,6 @@ declare namespace LocalJSX {
         "fullWidth"?: boolean;
         "label"?: string;
         "maxLength"?: number;
-        "name"?: string;
         "onBcm-blur"?: (event: CustomEvent<any>) => void;
         "onBcm-change"?: (event: CustomEvent<any>) => void;
         "onBcm-clear"?: (event: CustomEvent<any>) => void;
@@ -360,6 +417,9 @@ declare namespace LocalJSX {
         "bcm-input": BcmInput;
         "bcm-radio": BcmRadio;
         "bcm-radio-group": BcmRadioGroup;
+        "bcm-select": BcmSelect;
+        "bcm-select-group": BcmSelectGroup;
+        "bcm-select-option": BcmSelectOption;
         "bcm-tag": BcmTag;
         "bcm-text": BcmText;
         "bcm-textarea": BcmTextarea;
@@ -378,6 +438,9 @@ declare module "@stencil/core" {
             "bcm-input": LocalJSX.BcmInput & JSXBase.HTMLAttributes<HTMLBcmInputElement>;
             "bcm-radio": LocalJSX.BcmRadio & JSXBase.HTMLAttributes<HTMLBcmRadioElement>;
             "bcm-radio-group": LocalJSX.BcmRadioGroup & JSXBase.HTMLAttributes<HTMLBcmRadioGroupElement>;
+            "bcm-select": LocalJSX.BcmSelect & JSXBase.HTMLAttributes<HTMLBcmSelectElement>;
+            "bcm-select-group": LocalJSX.BcmSelectGroup & JSXBase.HTMLAttributes<HTMLBcmSelectGroupElement>;
+            "bcm-select-option": LocalJSX.BcmSelectOption & JSXBase.HTMLAttributes<HTMLBcmSelectOptionElement>;
             "bcm-tag": LocalJSX.BcmTag & JSXBase.HTMLAttributes<HTMLBcmTagElement>;
             "bcm-text": LocalJSX.BcmText & JSXBase.HTMLAttributes<HTMLBcmTextElement>;
             "bcm-textarea": LocalJSX.BcmTextarea & JSXBase.HTMLAttributes<HTMLBcmTextareaElement>;
