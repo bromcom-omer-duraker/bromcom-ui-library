@@ -52,13 +52,15 @@ export namespace Components {
           * @param name -
           * @returns
          */
-        "checked": (name: string) => Promise<boolean | any[]>;
+        "checked": (name?: string) => Promise<boolean | Object | any[]>;
         /**
           * Component Properties
          */
         "direction": 'horizontal' | 'vertical';
         "indeterminate": boolean;
         "items": Array<object> | string;
+        "name": string;
+        "value": any;
     }
     interface BcmIcon {
         /**
@@ -76,6 +78,7 @@ export namespace Components {
         "disabled": boolean;
         "fullWidth": boolean;
         "label": string;
+        "name": string;
         "noDefaultIcon": boolean;
         "passwordToggle": boolean;
         "placeholder": string;
@@ -96,11 +99,12 @@ export namespace Components {
     }
     interface BcmRadioGroup {
         "buttonStyle": 'solid' | 'outline';
-        "defaultValue": string | number;
         "direction": 'vertical' | 'horizontal';
+        "name": string;
         "optionType": 'default' | 'button';
         "options": OptionType[] | string;
         "size": 'small' | 'medium' | 'large';
+        "value": string | number;
     }
     interface BcmSelect {
         "caption": string;
@@ -140,6 +144,7 @@ export namespace Components {
         "fullWidth": boolean;
         "label": string;
         "maxLength": number;
+        "name": string;
         "placeholder": string;
         "removeFocus": () => Promise<void>;
         "resize": 'vertical' | 'none' | 'auto';
@@ -301,10 +306,12 @@ declare namespace LocalJSX {
         "direction"?: 'horizontal' | 'vertical';
         "indeterminate"?: boolean;
         "items"?: Array<object> | string;
+        "name"?: string;
         /**
           * Component Events
          */
         "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "value"?: any;
     }
     interface BcmIcon {
         /**
@@ -322,6 +329,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "fullWidth"?: boolean;
         "label"?: string;
+        "name"?: string;
         "noDefaultIcon"?: boolean;
         "onBcm-blur"?: (event: CustomEvent<any>) => void;
         "onBcm-change"?: (event: CustomEvent<any>) => void;
@@ -347,12 +355,13 @@ declare namespace LocalJSX {
     }
     interface BcmRadioGroup {
         "buttonStyle"?: 'solid' | 'outline';
-        "defaultValue"?: string | number;
         "direction"?: 'vertical' | 'horizontal';
+        "name"?: string;
         "onBcm-change"?: (event: CustomEvent<any>) => void;
         "optionType"?: 'default' | 'button';
         "options"?: OptionType[] | string;
         "size"?: 'small' | 'medium' | 'large';
+        "value"?: string | number;
     }
     interface BcmSelect {
         "caption"?: string;
@@ -396,6 +405,7 @@ declare namespace LocalJSX {
         "fullWidth"?: boolean;
         "label"?: string;
         "maxLength"?: number;
+        "name"?: string;
         "onBcm-blur"?: (event: CustomEvent<any>) => void;
         "onBcm-change"?: (event: CustomEvent<any>) => void;
         "onBcm-clear"?: (event: CustomEvent<any>) => void;
