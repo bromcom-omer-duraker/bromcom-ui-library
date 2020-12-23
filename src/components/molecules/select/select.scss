@@ -1,12 +1,23 @@
+@import '../../../global/variables/typography.scss';
+
 $sizes: (
     'large' 40px,
     'medium' 32px ,
     'small' 24px
 );
 
+$caption-types: (
+    'default' $grey-7,
+    'primary' $prime-blue-6,
+    'success' $green-6,
+    'warning' $orange-6,
+    'error' $red-6,
+);
+
 :host {
     display: block;
     min-width: 256px;
+    max-width: 256px;
 }
 
 .container {
@@ -28,12 +39,29 @@ $sizes: (
 
     &:hover:not(.disabled) {
         border-color: $prime-blue-5;
+
+        .select-clear-button {
+            opacity: 1;
+        }
     }
     
     &:focus:not(.disabled) {
         border-color: $prime-blue-5;
         box-shadow: 0px 0px 4px $prime-blue-6;
+        
+        .select-clear-button {
+            opacity: 1;
+        }
+    }
+    
+    &:focus {
         outline: none;
+    }
+
+    &.disabled {
+        background-color: $grey-5;
+        color: $grey-6;
+        cursor: not-allowed;
     }
 
     .selected-text {
@@ -59,7 +87,7 @@ $sizes: (
 
 .option-container {
     display: block;
-    width: 100%;
+    // width: 100%;
     position: absolute;
     left: 0;
     background-color: $grey-1;
@@ -79,7 +107,7 @@ $sizes: (
         max-height: 200px;
     }
 
-    &.horizontal {
+    &.horizontal:not(.flex) {
         overflow-x: auto;
         width: 100%;
 
@@ -94,18 +122,41 @@ $sizes: (
     flex-direction: column;
 }
 
+.buttons {
+    display: flex;
+}
+
 .select-clear-button {
     display: inline-flex;
     align-items: center;
+    outline: none;
     border: none;
     background: none;
     padding: 0;
     cursor: pointer;
     margin-right: 4px;
+    opacity: 0;
+}
+
+.label {
+    display: block;
+    color: $grey-9;
+    margin-bottom: 2px;
+}
+
+.input-caption {
+    display: block;
+    margin-top: 2px;
 }
 
 @each $name, $size in $sizes {
     .selected-#{$name} {
         height: $size;
+    }
+}
+
+@each $state, $color in $caption-types {
+    .caption-#{$state} {
+        color: $color;
     }
 }

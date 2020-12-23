@@ -25,3 +25,12 @@ $sizes: (
         line-height: $size + 8;
     }
 }
+
+// Font Weights
+.weight-regular {
+    font-weight: $font-regular;
+}
+
+.weight-semibold {
+    font-weight: $font-semibold;
+}

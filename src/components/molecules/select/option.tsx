@@ -11,6 +11,7 @@ export class BcmSelectOption {
 
     @Prop() value: string
     @Prop({mutable: true, reflect: true}) selected: boolean
+    @Prop() disabled: boolean
 
     @Method()
     async getLabel() {
@@ -22,9 +23,9 @@ export class BcmSelectOption {
         const classes = cs(
             'option',
             'size-2',
-            'weight-semibold',
             {
-                'selected': this.selected
+                'selected weight-semibold': this.selected,
+                'disabled': this.disabled
             }
         )
 

@@ -1,9 +1,14 @@
-import { Component, Element, h, Prop, State, Listen, Event, EventEmitter, Watch } from '@stencil/core'
+import { Component, Element, h, Prop, State, Listen, Event, EventEmitter, Watch, Host } from '@stencil/core'
 import cs from 'classnames'
+
+export declare type SelectOptionType = {
+    label: string,
+    value: string
+}
 
 export declare type OptionWithGroupType = {
     title: string,
-    options: Array<string>
+    options: Array<SelectOptionType>
 }
 
 @Component({
@@ -13,22 +18,30 @@ export declare type OptionWithGroupType = {
 })
 export class BcmSelect {
 
-    renderedOptions: HTMLBcmSelectOptionElement[]
+    renderedOptions: HTMLBcmSelectOptionElement[] = []
 
     @Element() host: HTMLElement
 
     @Prop({ mutable: true, reflect: true }) value: string
     @Prop() size: 'small' | 'medium' | 'large' = 'medium'
-    @Prop() options: string | OptionWithGroupType[]
+    @Prop() options: string | string | OptionWithGroupType[]
     @Prop() scrollable: 'none' | 'vertical' | 'horizontal' | 'both' = 'vertical'
     @Prop() clearable: boolean
+    @Prop({ attribute: 'label' }) labelProp: string
+    @Prop() caption: string
+    @Prop({ attribute: 'caption-type' }) captionType: 'primary' | 'success' | 'warning' | 'error' | 'default' = 'default'
+    @Prop() disabled: boolean
+    @Prop() flex: boolean
 
     @State() label: string
     @State() isOpen: boolean = false
     @State() usingSlots: boolean = true
-    @State() parsedOptions: (string | OptionWithGroupType)[]
+    @State() parsedOptions: (SelectOptionType | OptionWithGroupType)[]
 
     @Event({ eventName: 'bcm-change' }) change: EventEmitter
+    @Event({ eventName: 'bcm-clear' }) clear: EventEmitter
+    @Event({ eventName: 'bcm-focus' }) focus: EventEmitter
+    @Event({ eventName: 'bcm-blur' }) blur: EventEmitter
 
     @Watch('value')
     handleChange(newValue: string) {
@@ -47,10 +60,17 @@ export class BcmSelect {
     }
 
     getOptions() {
-        
+
         if (this.usingSlots) {
             const elements = this.host.shadowRoot.querySelector('slot').assignedElements({ flatten: true }) as HTMLElement[]
-            this.renderedOptions = elements.filter(element => String(element.tagName).toLowerCase() === 'bcm-select-option') as HTMLBcmSelectOptionElement[]
+
+            elements.map(el => {
+                if (String(el.tagName).toLowerCase() === 'bcm-select-group') {
+                    this.renderedOptions = [...this.renderedOptions, ...Array.from(el.querySelectorAll('bcm-select-option'))]
+                }
+            })
+
+            this.renderedOptions = [...this.renderedOptions, ...elements.filter(element => String(element.tagName).toLowerCase() === 'bcm-select-option') as HTMLBcmSelectOptionElement[]]
         }
 
         else {
@@ -59,30 +79,54 @@ export class BcmSelect {
     }
 
     handleOpen() {
-        this.isOpen = !this.isOpen
+        if (!this.disabled) {
+            this.isOpen = !this.isOpen
+        }
+    }
+
+    handleClear(e: MouseEvent) {
+        this.value = ''
+        this.label = ''
+
+        this.clear.emit()
+
+        e.stopPropagation()
+    }
+
+    handleFocus() {
+        this.focus.emit()
+    }
+
+    handleBlur() {
+        this.blur.emit()
     }
 
     @Listen('click', { target: 'window', capture: true })
-    handleClickOutside() {
-        if (this.isOpen) this.isOpen = false
+    handleClickOutside(e: MouseEvent) {
+
+        if (!this.host.contains(e.target as HTMLElement)) {
+            if (this.isOpen) this.isOpen = false
+        }
     }
 
     async setLabel(options: HTMLBcmSelectOptionElement[]) {
         await customElements.whenDefined('bcm-select-option')
 
         options.map((option: HTMLBcmSelectOptionElement) => {
-            option.addEventListener('click', () => {
-
-                option.getLabel().then(label => this.label = label)
-                this.value = option.value
-            }, { once: true })
-
-            if (option.value === this.value) {
-                option.selected = true
-            }
-
-            else {
-                option.selected = false
+            if (!option.disabled) {
+                option.addEventListener('click', () => {
+    
+                    option.getLabel().then(label => this.label = label)
+                    this.value = option.value
+                    this.isOpen = false
+                }, { once: true })
+                if (option.value === this.value) {
+                    option.selected = true
+                }
+    
+                else {
+                    option.selected = false
+                }
             }
         })
     }
@@ -98,7 +142,7 @@ export class BcmSelect {
 
     render() {
 
-        const { size } = this
+        const { size, clearable, value, labelProp, caption, captionType, disabled, flex } = this
 
         const selected = cs(
             'selected',
@@ -107,6 +151,7 @@ export class BcmSelect {
             {
                 'size-3': size === 'large',
                 'size-2': size === 'small' || size === 'medium',
+                'disabled': disabled
             }
         )
 
@@ -115,31 +160,65 @@ export class BcmSelect {
             {
                 'hidden': !this.isOpen,
                 [this.scrollable]: this.scrollable === 'horizontal' || this.scrollable === 'vertical',
-                'horizontal vertical': this.scrollable === 'both'
+                'horizontal vertical': this.scrollable === 'both',
+                'flex': flex
             }
         )
 
+        const captionClasses = cs(
+            'size-1',
+            'input-caption',
+            'caption-' + captionType
+        )
+
         return (
-            <div class="container">
-                <div class={selected} onClick={() => this.handleOpen()} tabIndex={-1}>
-                    <span innerHTML={this.label} class="selected-text"></span>
-                    <span class={this.isOpen ? 'open' : 'close'}>
-                        <bcm-icon icon="caret-up" type="outlined" size={18} color="grey-6"></bcm-icon>
-                    </span>
-                </div>
-                <div class={menu}>
-                    <div class="options-viewport">
-                        <div class="items">
+            <Host onFocus={() => this.handleFocus()} onBlur={() => this.handleBlur()}>
+                <div class="container">
+
+                    {labelProp && <label class="label size-1"> {labelProp} </label>}
+
+                    <div class={selected} onClick={() => this.handleOpen()} tabIndex={-1}>
+                        <span innerHTML={this.label} class="selected-text"></span>
+                        <div class="buttons">
                             {
-                                
-                                this.parsedOptions ? this.parsedOptions.map(option => (
-                                    <bcm-select-option value={option as string}>{option}</bcm-select-option>
-                                )) : <slot />
+                                clearable && value && (
+                                    <button class="select-clear-button" onClick={(e) => this.handleClear(e)}>
+                                        <bcm-icon icon="close-circle" type="fill" size={18} color="grey-7"></bcm-icon>
+                                    </button>
+                                )
                             }
+                            <span class={this.isOpen ? 'open' : 'close'}>
+                                <bcm-icon icon="caret-up" type="outlined" size={18} color="grey-6"></bcm-icon>
+                            </span>
                         </div>
-                    </div>                 
+                    </div>
+                    <div class={menu}>
+                        <div class="options-viewport">
+                            <div class="items">
+                                {
+                                    this.parsedOptions
+                                        ? this.parsedOptions.map(option =>
+                                            'title' in option ? (
+                                                <bcm-select-group title={option.title}>
+                                                    {
+                                                        option.options.map(item => (
+                                                            <bcm-select-option class="group-item" value={item.value}>{item.label}</bcm-select-option>
+                                                        ))
+                                                    }
+                                                </bcm-select-group>
+                                            ) : (
+                                                    <bcm-select-option value={option.value}>{option.label}</bcm-select-option>
+                                                ))
+                                        : <slot />
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    {caption && <span class={captionClasses}> {caption} </span>}
+
                 </div>
-            </div>
+            </Host>
         )
     }
 }

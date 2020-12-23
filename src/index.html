@@ -19,25 +19,60 @@
 
 <body style="margin: 10%">
 
-    <div class="select-view">
-        <bcm-select size='large' clearable>
-            <!-- <bcm-select-option value="bjk">bjk</bcm-select-option>
-            <bcm-select-option value="fb">fb</bcm-select-option>
-            <bcm-select-option value="gs">GS</bcm-select-option>
-            <bcm-select-option value="gs">GS</bcm-select-option>
-            <bcm-select-option value="gs">GS</bcm-select-option>
-            <bcm-select-option value="gs">GS</bcm-select-option>
-            <bcm-select-option value="gs">GS</bcm-select-option>
-            <bcm-select-option value="gs">GS</bcm-select-option>
-            <bcm-select-option value="gs">GS</bcm-select-option>
-            <bcm-select-option value="gs">GS</bcm-select-option>
-            <bcm-select-option value="gs">GS</bcm-select-option> -->
-        </bcm-select>
-    </div>
+    <bcm-select size='large' clearable label="Select Option" caption="Hata mesaji" caption-type="error" flex>
+        <!-- <bcm-select-group title="Group title">
+        </bcm-select-group> -->
+        <bcm-select-option value="first" disabled>Menu item first Menu item first Menu item first Menu item first Menu item first</bcm-select-option>
+        <bcm-select-option value="second">Menu item second</bcm-select-option>
+        <bcm-select-option value="third">Menu item third</bcm-select-option>
+        <bcm-select-option value="fourth">Menu item fourth</bcm-select-option>
+        
+        <!-- <bcm-select-group title="Group title">
+        </bcm-select-group> -->
+    </bcm-select>
+    <bcm-button>Yilmaz</bcm-button>
 
     <script>
-        
-        const options = ['istanbul', 'ankara', 'izmir', 'bursa', 'ardahan ardahan ardahan ardahan ardahan ardahan ardahan ardahan', 'london', 'liverpool']
+
+        // const options = [
+        //     {
+        //         label: 'Besiktas',
+        //         value: 'bjk'
+        //     },
+        //     {
+        //         label: 'Galatasaray',
+        //         value: 'gs'
+        //     },
+        // ]
+
+        // const options = [
+        //     {
+        //         title: 'Ilk 2',
+        //         options: [
+        //             {
+        //                 label: 'Besiktas',
+        //                 value: 'bjk'
+        //             },
+        //             {
+        //                 label: 'Galatasaray',
+        //                 value: 'gs'
+        //             },
+        //         ]
+        //     },
+        //     {
+        //         title: 'Son 2',
+        //         options: [
+        //             {
+        //                 label: 'Fenerbahce',
+        //                 value: 'fb'
+        //             },
+        //             {
+        //                 label: 'Basaksehir',
+        //                 value: 'ibfk'
+        //             },
+        //         ]
+        //     }
+        // ]
 
         document.querySelector('bcm-select').options = options
 
