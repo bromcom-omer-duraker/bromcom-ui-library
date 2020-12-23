@@ -1,4 +1,4 @@
-import { Component, h, Prop, Event, EventEmitter, Method } from '@stencil/core';
+import { Component, h, Prop, Event, EventEmitter, Method, Element } from '@stencil/core';
 import cs from 'classnames'
 
 let id = 0
@@ -13,6 +13,7 @@ export class BcmTextarea {
     textareaId = `textarea-${++id}`
     textarea: HTMLTextAreaElement
 
+    @Element() el: HTMLElement
     @Prop({ mutable: true, reflect: true }) value: string = ''
     @Prop() label: string
     @Prop() caption: string
@@ -92,6 +93,14 @@ export class BcmTextarea {
         this.handleInput  = this.handleInput.bind(this)
         this.handleClear  = this.handleClear.bind(this)
         this.setTextareaHeight = this.setTextareaHeight.bind(this)
+    }
+
+    componentWillRender() {
+
+        
+        this.fullWidth 
+            ? this.el.style.width = '100%'
+            : this.el.style.width = 'initial'
     }
 
     render() {
