@@ -128,11 +128,16 @@ export class BcmSelect {
                     </span>
                 </div>
                 <div class={menu}>
-                    {
-                        this.parsedOptions ? this.parsedOptions.map(option => (
-                            <bcm-select-option value={option as string}>{option}</bcm-select-option>
-                        )) : <slot />
-                    }                    
+                    <div class="options-viewport">
+                        <div class="items">
+                            {
+                                
+                                this.parsedOptions ? this.parsedOptions.map(option => (
+                                    <bcm-select-option value={option as string}>{option}</bcm-select-option>
+                                )) : <slot />
+                            }
+                        </div>
+                    </div>                 
                 </div>
             </div>
         )
