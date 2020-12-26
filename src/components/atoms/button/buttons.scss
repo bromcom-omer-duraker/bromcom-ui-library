@@ -88,11 +88,11 @@ button {
 }
 
 button > bcm-icon.prefix {
-    margin-right: 6px;
+    margin-right: space('xxxs');
 }
 
 button > bcm-icon.suffix {
-    margin-left: 6px;
+    margin-left: space('xxxs');
 }
 
 .large {
@@ -100,15 +100,15 @@ button > bcm-icon.suffix {
     min-width: 40px;
 
     bcm-icon.prefix {
-        margin-right: 16px;
+        margin-right: space('xs');
     }
 
     bcm-icon.suffix {
-        margin-left: 16px;
+        margin-left: space('xs');
     }
 
     &:not(.rounded) {
-        padding: 0 16px;
+        padding: 0 space('xs');
     }
 }
 
@@ -117,7 +117,7 @@ button > bcm-icon.suffix {
     min-width: 32px;
 
     &:not(.rounded) {
-        padding: 0 16px;
+        padding: 0 space('xs');
     }
 }
 
@@ -126,6 +126,6 @@ button > bcm-icon.suffix {
     min-width: 24px;
 
     &:not(.rounded) {
-        padding: 0 8px;
+        padding: 0 space('xxs');
     }
 }
