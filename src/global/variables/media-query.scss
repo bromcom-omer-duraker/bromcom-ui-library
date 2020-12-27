@@ -1,0 +1,13 @@
+// Screen Sizes
+
+$screen-mobile: 36em; // 576px
+$screen-tablet: 64.0625em; // 1025px
+$screen-laptop: 106.25em; // 1700px
+
+@mixin media-query($screen-size) {
+    @media screen and (min-width: #{$screen-size}) {
+        @content;
+    }
+}
+
+// Usage: @include media-query($screen-tablet) { }
