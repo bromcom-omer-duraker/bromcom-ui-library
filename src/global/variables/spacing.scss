@@ -1,5 +1,17 @@
-// Spacing
+$spacing: (
+    'xxxs' : 4px,
+    'xxs'  : 8px,
+    'xs'   : 16px,
+    's'    : 24px,
+    'm'    : 32px,
+    'l'    : 40px,
+    'xl'   : 48px,
+    'xxl'  : 64px,
+    'xxxl' : 96px,
+);
 
-// Values
+@function space($space-size) {
+    @return map-get($spacing, $space-size)
+};
 
-// Const
+// Usage: space('xxs') => 8px

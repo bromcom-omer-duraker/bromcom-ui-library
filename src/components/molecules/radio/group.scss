@@ -5,22 +5,22 @@
         flex-direction: row;
 
         ::slotted(bcm-radio:not(:last-of-type)) {
-            margin-right: 16px;
+            margin-right: space('xs');
         }
 
         bcm-radio:not(:last-of-type) {
-            margin-right: 16px;
+            margin-right: space('xs');
         }
     }
     &.vertical {
         flex-direction: column;
 
         ::slotted(bcm-radio:not(:last-of-type)) {
-            margin-bottom: 16px;
+            margin-bottom: space('xs');
         }
 
         bcm-radio:not(:last-of-type) {
-            margin-bottom: 16px;
+            margin-bottom: space('xs');
         }
     }
 }

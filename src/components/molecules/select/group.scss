@@ -1,7 +1,5 @@
-@import '../../../global/variables/typography.scss';
-
 .group-title {
     color: $grey-7;
-    padding: 5px 12px;
+    padding: space('xxxs') space('xxs');
     display: block;
 }

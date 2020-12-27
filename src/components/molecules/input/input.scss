@@ -92,7 +92,7 @@ $caption-types: (
     background: none;
     box-shadow: none;
     padding: 0;
-    margin: 0 12px;
+    margin: 0 space('xxs');
     font-family: $font-roboto;
     cursor: inherit;
     -webkit-appearance: none;
@@ -143,23 +143,23 @@ input[type=number]
 // Slotted Elements
 
 .input-prefix ::slotted(*) {
-    margin-left: 2px;
+    margin-left: space('xxxs');
 }
 
 .input-prefix ::slotted(:first-child) {
-    margin-left: 10px;
+    margin-left: space('xxs');
 }
 
 .input-prefix ::slotted(:last-child) {
-    margin-right: -8px;
+    margin-right: -#{space('xxs')};
 }
 
 .input-suffix ::slotted(*) {
-    margin-right: 2px;
+    margin-right: space('xxxs');
 }
 
 .input-suffix ::slotted(:last-child) {
-    margin-right: 10px;
+    margin-right: space('xxs');
 }
 
 // Clear and password visibility toggle
@@ -171,10 +171,10 @@ input[type=number]
     background: none;
     padding: 0;
     cursor: pointer;
-    margin-right: 2px;
+    margin-right: space('xxxs');
   
     &:last-child, &:last-of-type {
-        margin-right: 10px;
+        margin-right: space('xxs');
     }
 
     &:focus {
@@ -192,12 +192,12 @@ input[type=number]
     display: flex;
     flex-direction: column;
     color: $grey-9;
-    margin-bottom: 2px;
+    margin-bottom: space('xxxs');
 }
 
 .input-caption {
     display: block;
-    margin-top: 2px;
+    margin-top: space('xxxs');
 }
 
 
@@ -216,7 +216,7 @@ input[type=number]
     transition: .2s opacity;
     user-select: none;
     box-sizing: border-box;
-    margin-right: 2px;
+    margin-right: space('xxxs');
 
     &:last-of-type {
         margin-right: 0;
@@ -247,7 +247,7 @@ input[type=number]
 }
 
 .default-icon {
-    margin-right: 10px;
+    margin-right: space('xxs');
 }
 
 @each $state, $color in $caption-types {
