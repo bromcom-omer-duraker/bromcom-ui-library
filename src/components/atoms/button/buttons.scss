@@ -16,7 +16,7 @@ button {
     padding: unset;
 
     &.rounded {
-        border-radius: 50px;
+        border-radius: border-radius('circle');
     }
 }
 

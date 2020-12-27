@@ -43,7 +43,7 @@ $caption-types: (
     width: 100%;
     background-color: $grey-1;
     border: 1px solid $grey-5;
-    border-radius: 2px;
+    border-radius: border-radius('2');
     vertical-align: middle;
     overflow: hidden;
     cursor: text;
@@ -88,7 +88,7 @@ $caption-types: (
     flex: 1 1 auto;
     width: 0%;
     border: none;
-    border-radius: 2px;
+    border-radius: border-radius('2');
     background: none;
     box-shadow: none;
     padding: 0;

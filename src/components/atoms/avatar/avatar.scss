@@ -27,11 +27,11 @@ button.avatar {
 }
 
 .ellipse, .ellipse > img {
-    border-radius: 50%;
+    border-radius: border-radius('circle');
 }
 
 .square, .square > img {
-    border-radius: 2px;
+    border-radius: border-radius('2');
 }
 
 // Sizes
