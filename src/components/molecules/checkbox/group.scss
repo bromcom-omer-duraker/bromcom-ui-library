@@ -35,8 +35,8 @@
         width: 16px;
         height: 16px;
         border: 1px solid $grey-5;
-        border-radius: 2px;
         margin-right: space('xxs');
+        border-radius: border-radius('2');
     }
 
     span:after {
