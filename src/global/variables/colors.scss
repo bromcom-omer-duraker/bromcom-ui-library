@@ -1,8 +1,16 @@
+// Prime Blue Tones
 $prime-blue-1: #F4FBFE;
+$prime-blue-2: #D4E9F6;
+$prime-blue-3: #B0D3EC;
+$prime-blue-4: #8ABDE2;
 $prime-blue-5: #65A8D9;
 $prime-blue-6: #4293CF;
 $prime-blue-7: #3679AB;
+$prime-blue-8: #285C82;
+$prime-blue-9: #194E75;
+$prime-blue-10: #0E2739;
 
+// Grey Tones
 $grey-1: #FFFFFF;
 $grey-2: #FAFAFA;
 $grey-3: #F5F5F5;
@@ -14,8 +22,146 @@ $grey-8: #595959;
 $grey-9: #262626;
 $grey-10: #000000;
 
+// Blue Tones
+$blue-1: #E6F7FF;
+$blue-2: #BAE7FF;
+$blue-3: #91D5FF;
+$blue-4: #69C0FF;
+$blue-5: #40A9FF;
+$blue-6: #1890FF;
+$blue-7: #096DD9;
+$blue-8: #0050B3;
+$blue-9: #003A8C;
+$blue-10: #002766;
+
+// Warm Yellow Tones
+$warmyellow-1: #FFFBE6;
+$warmyellow-2: #FFF1B8;
+$warmyellow-3: #FFE58F;
+$warmyellow-4: #FFD666;
+$warmyellow-5: #FFC53D;
+$warmyellow-6: #FAAD14;
+$warmyellow-7: #D48806;
+$warmyellow-8: #AD6800;
+$warmyellow-9: #874D00;
+$warmyellow-10: #613400;
+
+// Yellow Tones
+$yellow-1: #FEFFE6;
+$yellow-2: #FFFFB8;
+$yellow-3: #FFFB8F;
+$yellow-4: #FFF566;
+$yellow-5: #FFEC3D;
+$yellow-6: #FADB14;
+$yellow-7: #D4B106;
+$yellow-8: #AD8B00;
+$yellow-9: #876800;
+$yellow-10: #614700;
+
+// Lime Green Tones
+$limegreen-1: #FCFFE6;
+$limegreen-2: #F4FFB8;
+$limegreen-3: #EAFF8F;
+$limegreen-4: #D3F261;
+$limegreen-5: #BAE637;
+$limegreen-6: #A0D911;
+$limegreen-7: #7CB305;
+$limegreen-8: #5B8C00;
+$limegreen-9: #3F66;
+$limegreen-10: #254000;
+
+// Red Tones
+$red-1: #FFF1F0;
+$red-2: #FFCCC7;
+$red-3: #FFA39E;
+$red-4: #FF7875;
+$red-5: #FF4D4F;
 $red-6: #F5222D;
+$red-7: #CF1322;
+$red-8: #A8071A;
+$red-9: #820014;
+$red-10: #5C0011;
 
+// Dark Orange Tones
+$darkorange-1: #FFF2E8;
+$darkorange-2: #FFD8BF;
+$darkorange-3: #FFBB96;
+$darkorange-4: #FF9C6E;
+$darkorange-5: #FF7A45;
+$darkorange-6: #FA541C;
+$darkorange-7: #D4380D;
+$darkorange-8: #AD2102;
+$darkorange-9: #871400;
+$darkorange-10: #610B00;
+
+// Orange Tones
+$orange-1: #FFF7E6;
+$orange-2: #FFE7BA;
+$orange-3: #FFD591;
+$orange-4: #FFC096;
+$orange-5: #FFA940;
 $orange-6: #FA8C16;
+$orange-7: #D46B08;
+$orange-8: #AD4E00;
+$orange-9: #873800;
+$orange-10: #612500;
 
+// Green Tones
+$green-1: #F6FFED;
+$green-2: #D9F7BE;
+$green-3: #B7EB8F;
+$green-4: #95DE64;
+$green-5: #73D13D;
 $green-6: #52C41A;
+$green-7: #389E0D;
+$green-8: #237804;
+$green-9: #135200;
+$green-10: #092B00;
+
+// Turquosie Tones
+$turquosie-1: #E6FFFB;
+$turquosie-2: #B5F5EC;
+$turquosie-3: #87E8DE;
+$turquosie-4: #5CDBD3;
+$turquosie-5: #36CFC9;
+$turquosie-6: #13C2C2;
+$turquosie-7: #08979C;
+$turquosie-8: #006D75;
+$turquosie-9: #00474F;
+$turquosie-10: #002329;
+
+// Cobalt Blue Tones
+$cobaltblue-1: #F0F5FF;
+$cobaltblue-2: #D6E4FF;
+$cobaltblue-3: #ADC6FF;
+$cobaltblue-4: #85A5FF;
+$cobaltblue-5: #597EF7;
+$cobaltblue-6: #2F54EB;
+$cobaltblue-7: #1D39C4;
+$cobaltblue-8: #10239E;
+$cobaltblue-9: #061178;
+$cobaltblue-10: #030852;
+
+// Magenta Tones
+$magenta-1: #FFF0F6;
+$magenta-2: #FFD6E7;
+$magenta-3: #FFADD2;
+$magenta-4: #FF85C0;
+$magenta-5: #F759AB;
+$magenta-6: #EB2F96;
+$magenta-7: #C41D7F;
+$magenta-8: #9E1068;
+$magenta-9: #780650;
+$magenta-10: #520339;
+
+// Purple Tones
+$purple-1: #F9F0FF;
+$purple-2: #EFDBFF;
+$purple-3: #D3ADF7;
+$purple-4: #B37FEB;
+$purple-5: #9254DE;
+$purple-6: #722ED1;
+$purple-7: #531DAB;
+$purple-8: #391085;
+$purple-9: #22075E;
+$purple-10: #120338;

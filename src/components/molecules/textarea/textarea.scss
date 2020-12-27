@@ -7,13 +7,13 @@ $caption-types: (
     'primary' $prime-blue-6,
     'success' $green-6,
     'warning' $orange-6,
-    'error' $red-6,
+    'error'   $red-6,
 );
 
 $sizes: (
-    'large' 7px 12px 40px,
-    'medium' 4px 7px 32px,
-    'small' 0px 2px 24px
+    'large'  7px  12px 40px,
+    'medium' 4px  7px  32px,
+    'small'  0px  2px  24px
 );
 
 :host {
@@ -55,7 +55,7 @@ $sizes: (
     width: 100%;
     background-color: $grey-1;
     border: 1px solid $grey-5;
-    border-radius: 2px;
+    border-radius: border-radius('2');
     box-shadow: none;
     font-family: $font-roboto;
     -webkit-appearance: none;
@@ -89,7 +89,7 @@ $sizes: (
     }
 
     &.clearable {
-        padding-right: 30px;
+        padding-right: space('m');
     }
 }
 
@@ -110,7 +110,7 @@ $sizes: (
     display: flex;
     flex-direction: column;
     color: $grey-9;
-    margin-bottom: 3px;
+    margin-bottom: space('xxxs');
 }
 
 .textarea-caption {
@@ -140,7 +140,7 @@ $sizes: (
 
     .count {
         color: $grey-7;
-        margin-left: 4px;
+        margin-left: space('xxxs');
 
         &:only-child {
             margin-left: auto;;

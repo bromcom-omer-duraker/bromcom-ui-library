@@ -1,5 +1,3 @@
-@import '../../../global/variables/typography.scss';
-
 $sizes: (
     'large' 40px,
     'medium' 32px ,
@@ -32,7 +30,7 @@ $caption-types: (
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 10px 8px 12px;
+    padding: space('xxs');
     border: 1px solid $grey-5;
     user-select: none;
     cursor: pointer;
@@ -134,19 +132,19 @@ $caption-types: (
     background: none;
     padding: 0;
     cursor: pointer;
-    margin-right: 4px;
+    margin-right: space('xxxs');
     opacity: 0;
 }
 
 .label {
     display: block;
     color: $grey-9;
-    margin-bottom: 2px;
+    margin-bottom: space('xxxs');
 }
 
 .input-caption {
     display: block;
-    margin-top: 2px;
+    margin-top: space('xxxs');
 }
 
 @each $name, $size in $sizes {
