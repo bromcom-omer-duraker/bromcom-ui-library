@@ -62,6 +62,10 @@ export namespace Components {
         "name": string;
         "value": any;
     }
+    interface BcmDivider {
+        "direction": 'vertical' | 'horizontal';
+        "width": string;
+    }
     interface BcmIcon {
         /**
           * Component Properties
@@ -186,6 +190,12 @@ declare global {
         prototype: HTMLBcmCheckboxGroupElement;
         new (): HTMLBcmCheckboxGroupElement;
     };
+    interface HTMLBcmDividerElement extends Components.BcmDivider, HTMLStencilElement {
+    }
+    var HTMLBcmDividerElement: {
+        prototype: HTMLBcmDividerElement;
+        new (): HTMLBcmDividerElement;
+    };
     interface HTMLBcmIconElement extends Components.BcmIcon, HTMLStencilElement {
     }
     var HTMLBcmIconElement: {
@@ -252,6 +262,7 @@ declare global {
         "bcm-button": HTMLBcmButtonElement;
         "bcm-checkbox": HTMLBcmCheckboxElement;
         "bcm-checkbox-group": HTMLBcmCheckboxGroupElement;
+        "bcm-divider": HTMLBcmDividerElement;
         "bcm-icon": HTMLBcmIconElement;
         "bcm-input": HTMLBcmInputElement;
         "bcm-radio": HTMLBcmRadioElement;
@@ -312,6 +323,10 @@ declare namespace LocalJSX {
          */
         "onBcm-change"?: (event: CustomEvent<any>) => void;
         "value"?: any;
+    }
+    interface BcmDivider {
+        "direction"?: 'vertical' | 'horizontal';
+        "width"?: string;
     }
     interface BcmIcon {
         /**
@@ -423,6 +438,7 @@ declare namespace LocalJSX {
         "bcm-button": BcmButton;
         "bcm-checkbox": BcmCheckbox;
         "bcm-checkbox-group": BcmCheckboxGroup;
+        "bcm-divider": BcmDivider;
         "bcm-icon": BcmIcon;
         "bcm-input": BcmInput;
         "bcm-radio": BcmRadio;
@@ -444,6 +460,7 @@ declare module "@stencil/core" {
             "bcm-button": LocalJSX.BcmButton & JSXBase.HTMLAttributes<HTMLBcmButtonElement>;
             "bcm-checkbox": LocalJSX.BcmCheckbox & JSXBase.HTMLAttributes<HTMLBcmCheckboxElement>;
             "bcm-checkbox-group": LocalJSX.BcmCheckboxGroup & JSXBase.HTMLAttributes<HTMLBcmCheckboxGroupElement>;
+            "bcm-divider": LocalJSX.BcmDivider & JSXBase.HTMLAttributes<HTMLBcmDividerElement>;
             "bcm-icon": LocalJSX.BcmIcon & JSXBase.HTMLAttributes<HTMLBcmIconElement>;
             "bcm-input": LocalJSX.BcmInput & JSXBase.HTMLAttributes<HTMLBcmInputElement>;
             "bcm-radio": LocalJSX.BcmRadio & JSXBase.HTMLAttributes<HTMLBcmRadioElement>;
