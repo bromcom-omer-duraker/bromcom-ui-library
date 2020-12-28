@@ -9,7 +9,7 @@ import cs from 'classnames'
 export class BcmBadge {
 
     @Prop() direction: 'vertical' | 'horizontal' = 'horizontal'
-    @Prop() width: string = this.direction === 'horizontal' ? '100' : '1'
+    @Prop() width: string = '100'
 
     render() {
 
@@ -19,11 +19,11 @@ export class BcmBadge {
         )
 
         const styles = {
-            width: this.width + (this.direction === 'horizontal' ? '%' : 'px')
+            width: this.width + '%'
         }
 
         return (
-            <div class={classes} style={styles} />
+            <div class={classes} style={this.direction === 'horizontal' && styles} />
         )
     }
 }
