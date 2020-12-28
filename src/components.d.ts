@@ -30,6 +30,13 @@ export namespace Components {
         "outline": boolean;
         "size": 'small' | 'medium' | 'large';
     }
+    interface BcmCard {
+        "size": 'small' | 'medium';
+    }
+    interface BcmCardFooter {
+    }
+    interface BcmCardHeader {
+    }
     interface BcmCheckbox {
         /**
           * @desc 
@@ -178,6 +185,24 @@ declare global {
         prototype: HTMLBcmButtonElement;
         new (): HTMLBcmButtonElement;
     };
+    interface HTMLBcmCardElement extends Components.BcmCard, HTMLStencilElement {
+    }
+    var HTMLBcmCardElement: {
+        prototype: HTMLBcmCardElement;
+        new (): HTMLBcmCardElement;
+    };
+    interface HTMLBcmCardFooterElement extends Components.BcmCardFooter, HTMLStencilElement {
+    }
+    var HTMLBcmCardFooterElement: {
+        prototype: HTMLBcmCardFooterElement;
+        new (): HTMLBcmCardFooterElement;
+    };
+    interface HTMLBcmCardHeaderElement extends Components.BcmCardHeader, HTMLStencilElement {
+    }
+    var HTMLBcmCardHeaderElement: {
+        prototype: HTMLBcmCardHeaderElement;
+        new (): HTMLBcmCardHeaderElement;
+    };
     interface HTMLBcmCheckboxElement extends Components.BcmCheckbox, HTMLStencilElement {
     }
     var HTMLBcmCheckboxElement: {
@@ -260,6 +285,9 @@ declare global {
         "bcm-avatar": HTMLBcmAvatarElement;
         "bcm-badge": HTMLBcmBadgeElement;
         "bcm-button": HTMLBcmButtonElement;
+        "bcm-card": HTMLBcmCardElement;
+        "bcm-card-footer": HTMLBcmCardFooterElement;
+        "bcm-card-header": HTMLBcmCardHeaderElement;
         "bcm-checkbox": HTMLBcmCheckboxElement;
         "bcm-checkbox-group": HTMLBcmCheckboxGroupElement;
         "bcm-divider": HTMLBcmDividerElement;
@@ -295,6 +323,13 @@ declare namespace LocalJSX {
         "kind"?: 'solid' | 'ghost';
         "outline"?: boolean;
         "size"?: 'small' | 'medium' | 'large';
+    }
+    interface BcmCard {
+        "size"?: 'small' | 'medium';
+    }
+    interface BcmCardFooter {
+    }
+    interface BcmCardHeader {
     }
     interface BcmCheckbox {
         "checked"?: boolean;
@@ -436,6 +471,9 @@ declare namespace LocalJSX {
         "bcm-avatar": BcmAvatar;
         "bcm-badge": BcmBadge;
         "bcm-button": BcmButton;
+        "bcm-card": BcmCard;
+        "bcm-card-footer": BcmCardFooter;
+        "bcm-card-header": BcmCardHeader;
         "bcm-checkbox": BcmCheckbox;
         "bcm-checkbox-group": BcmCheckboxGroup;
         "bcm-divider": BcmDivider;
@@ -458,6 +496,9 @@ declare module "@stencil/core" {
             "bcm-avatar": LocalJSX.BcmAvatar & JSXBase.HTMLAttributes<HTMLBcmAvatarElement>;
             "bcm-badge": LocalJSX.BcmBadge & JSXBase.HTMLAttributes<HTMLBcmBadgeElement>;
             "bcm-button": LocalJSX.BcmButton & JSXBase.HTMLAttributes<HTMLBcmButtonElement>;
+            "bcm-card": LocalJSX.BcmCard & JSXBase.HTMLAttributes<HTMLBcmCardElement>;
+            "bcm-card-footer": LocalJSX.BcmCardFooter & JSXBase.HTMLAttributes<HTMLBcmCardFooterElement>;
+            "bcm-card-header": LocalJSX.BcmCardHeader & JSXBase.HTMLAttributes<HTMLBcmCardHeaderElement>;
             "bcm-checkbox": LocalJSX.BcmCheckbox & JSXBase.HTMLAttributes<HTMLBcmCheckboxElement>;
             "bcm-checkbox-group": LocalJSX.BcmCheckboxGroup & JSXBase.HTMLAttributes<HTMLBcmCheckboxGroupElement>;
             "bcm-divider": LocalJSX.BcmDivider & JSXBase.HTMLAttributes<HTMLBcmDividerElement>;

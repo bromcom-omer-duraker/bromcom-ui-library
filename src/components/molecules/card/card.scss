@@ -1,0 +1,39 @@
+:host {
+    display: inline-block;
+    width: 100%;
+}
+
+.card {
+    width: 100%;
+    background-color: $grey-1;
+    border: 1px solid $grey-5;
+    border-radius: border-radius('2');
+
+    &.medium {
+        .header, .footer {
+            padding: space('xs') space('s');
+        }
+
+        .card-body {
+            padding: space('s');
+        }
+    }
+
+    &.small {
+        .header, .footer {
+            padding: space('xxs') space('xs');
+        }
+
+        .card-body {
+            padding: space('xs');
+        }
+    }
+
+    .header {
+        border-bottom: 1px solid $grey-5;
+    }
+
+    .footer {
+        border-top: 1px solid $grey-5;
+    }
+}

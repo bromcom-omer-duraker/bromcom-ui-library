@@ -11,256 +11,31 @@
     <script nomodule src="/build/bromcom-ui.js"></script>
 
     <style>
-        .select-view {
-            width: 340px;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     </style>
 </head>
 
 <body style="margin: 10%">
 
-    <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        h4 {
-            margin-left: 10px;
-            color: #717171;
-        }
-
-        .user-form-wrapper {
-            background-color: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            padding: 2em;
-            min-width: 600px;
-            max-width: 600px;
-        }
-
-        .row-group + .row-group {
-            margin-top: 20px;
-        }
-
-        .row-group .group-title {
-            margin: 8px 0;
-        }
-
-        .form-row {
-            display: flex;
-        }
-
-        .form-row + .form-row {
-            margin-top: 10px;
-        }
-
-        .form-row > * + * {
-            margin-left: 10px;
-        }
-    </style>
-
-    <form class="user-form">
-        <h4> Simple User Form </h4>
-        <div class="user-form-wrapper">
-            <div class="row-group">
-                <bcm-text 
-                    class="group-title" 
-                    scale="size-3"
-                >
-                    Personal Information
-                </bcm-text>
-                <div class="form-row">
-                    <bcm-input 
-                        type="text"
-                        name="nickname" 
-                        placeholder="nickname"
-                    >
-                        <bcm-icon slot="prefix" icon="user" color="grey-7"></bcm-icon>
-                    </bcm-input>
-                    <bcm-input 
-                        type="text"
-                        name="mail"
-                        placeholder="e-mail"
-                    >
-                        <bcm-icon slot="prefix" icon="mail" color="grey-7"></bcm-icon>
-                    </bcm-input>
+    <div style="width: 320px;">
+        <bcm-card size="small">
+            <bcm-card-header>
+                <div class="header">
+                    <bcm-text scale="size-3">Default size card</bcm-text>
+                    <bcm-button size="small">More</bcm-button>
                 </div>
-                <div class="form-row">
-                    <bcm-input 
-                        type="text" 
-                        placeholder="name"
-                        name="name"
-                        value="John">
-                    </bcm-input>
-                    <bcm-input 
-                        type="text" 
-                        placeholder="surname"
-                        name="surname"
-                        value="Doe">
-                    </bcm-input>
-                </div>
-                <div class="form-row">
-                    <bcm-radio-group name="gender">
-                        <bcm-text 
-                            scale="size-2" 
-                            style="margin-right: 10px;"
-                        >
-                            Gender
-                        </bcm-text>
-                        <bcm-radio value="male">Male</bcm-radio>
-                        <bcm-radio value="female">Female</bcm-radio>
-                    </bcm-radio-group>
-                </div>
-            </div>
-            <div class="row-group">
-                <bcm-text 
-                    class="group-title" 
-                    scale="size-3"
-                >
-                    Bio
-                </bcm-text>
-                <div class="form-row">
-                    <bcm-textarea
-                        name="bio"
-                        full-width
-                        max-length="200" 
-                        rows="4">
-                    </bcm-textarea>
-                </div>
-            </div>
-            <div class="row-group">
-                <bcm-text 
-                    class="group-title" 
-                    scale="size-3"
-                >
-                    Additional Information
-                </bcm-text>
-                <div class="form-row">
-                    <bcm-checkbox-group
-                        name="additional" 
-                        direction="vertical"
-                        indeterminate
-                    >
-                        <bcm-checkbox name="checkbox1" checked>
-                            Fusce lobortis hendrerit dapibus. Sed commodo neque eget pulvinar blandit. Praesent sed augue augue. Sed at lobortis elit, non ultricies neque.
-                        </bcm-checkbox>
-                        <bcm-checkbox name="checkbox2">
-                            Kullanıcı Sözleşmesi, Gizlilik Politikası ve Açık Rıza ve Dijital İletişim Metni'ni okudum, kabul ediyorum.
-                        </bcm-checkbox>
-                        <bcm-checkbox name="checkbox3">
-                            Kişisel Verilerin Korunması, İşlenmesine Dair Sözleşme ve Aydınlatma Metni'ni okudum, kabul ediyorum.
-                        </bcm-checkbox>
-                    </bcm-checkbox-group>
-                </div>
-            </div>
-            <div class="row-group" style="display: flex;">
-                <bcm-button id="submit-btn" style="margin-left: auto;">Submit</bcm-button>
-            </div>
-
-            <div>
-                <bcm-text scale="size-5">Baslik</bcm-text>
-                <bcm-divider></bcm-divider>
-                
-                <bcm-text scale="size-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus accusamus blanditiis ut dignissimos culpa, qui officia earum quae animi eligendi esse optio reprehenderit iusto ducimus vero perferendis dolores soluta libero!</bcm-text>
-            </div>
+            </bcm-card-header>
             
+            <bcm-text scale="size-2">Card</bcm-text>
+            <bcm-text scale="size-2">Content</bcm-text>
 
-            <div style="display: flex;">
-                <bcm-text>Link</bcm-text>
-                <bcm-divider direction="vertical"></bcm-divider>
-                <bcm-text>Link</bcm-text>
-                <bcm-divider direction="vertical"></bcm-divider>
-                <bcm-text>Link</bcm-text>
-            </div>
-        </div>
-    </form>
-
-
-    <script type="text/javascript" src="./bromcom.js"></script>
-    <script type="text/javascript">
-        var submitBtn = document.querySelector('#submit-btn');
-        var userForm = new Bromcom.forms('.user-form');
-        
-        /**
-         * 
-         * [Event: click --> submitBtn]
-         */
-        submitBtn.addEventListener('click', function() {
-            var formData = userForm.data();
-            console.log(formData);
-        })
-    </script>
-    <script>
-
-       /*  var checkboxGroup = document.getElementsByTagName('bcm-checkbox-group')[0];
-
-        // const options = [
-        //     {
-        //         label: 'Besiktas',
-        //         value: 'bjk'
-        //     },
-        //     {
-        //         label: 'Galatasaray',
-        //         value: 'gs'
-        //     },
-        // ]
-
-        // const options = [
-        //     {
-        //         title: 'Ilk 2',
-        //         options: [
-        //             {
-        //                 label: 'Besiktas',
-        //                 value: 'bjk'
-        //             },
-        //             {
-        //                 label: 'Galatasaray',
-        //                 value: 'gs'
-        //             },
-        //         ]
-        //     },
-        //     {
-        //         title: 'Son 2',
-        //         options: [
-        //             {
-        //                 label: 'Fenerbahce',
-        //                 value: 'fb'
-        //             },
-        //             {
-        //                 label: 'Basaksehir',
-        //                 value: 'ibfk'
-        //             },
-        //         ]
-        //     }
-        // ]
-
-        document.querySelector('bcm-select').options = options
-
-            checkboxGroup.componentOnReady().then(() => {
-                checkboxGroup.checked('checkbox3')
-                    .then(status => console.log('checkbox3 status:', status))
-                
-                
-            })
-        })();
-
-        setTimeout(function() {
-            checkboxGroup.checked()
-                    .then(status => console.log('checkbox group status:', status))
-        }, 5000) */
-
-        /* document.getElementsByTagName('bcm-checkbox-group')[0].items = [{
-            name: "checkbox1",
-            label: "Checkbox 1",
-            value: 1
-        }, {
-            name: "checkbox2",
-            label: "Checkbox 2",
-            value: 2
-        }] */
-    </script>
+            <bcm-card-footer>Footer</bcm-card-footer>
+        </bcm-card>
+    </div>
 
 </body>
 
