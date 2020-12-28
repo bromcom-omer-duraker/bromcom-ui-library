@@ -1,0 +1,18 @@
+:host {
+    display: flex;
+    justify-content: center;
+}
+
+.divider {
+    background-color: $grey-5;
+}
+
+.divider.horizontal {
+    height: 1px;
+    margin: space('xxxs') 0;
+}
+
+.divider.vertical {
+    height: 100%;
+    margin: 0 space('xxxs');
+}
