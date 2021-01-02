@@ -11,95 +11,22 @@
     <script nomodule src="/build/bromcom-ui.js"></script>
 
     <style>
-        .select-view {
-            width: 340px;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     </style>
 </head>
 
 <body style="margin: 10%">
 
-    <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        h4 {
-            margin-left: 10px;
-            color: #717171;
-        }
-
-        .user-form-wrapper {
-            background-color: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            padding: 2em;
-            min-width: 600px;
-            max-width: 600px;
-        }
-
-        .row-group + .row-group {
-            margin-top: 20px;
-        }
-
-        .row-group .group-title {
-            margin: 8px 0;
-        }
-
-        .form-row {
-            display: flex;
-        }
-
-        .form-row + .form-row {
-            margin-top: 10px;
-        }
-
-        .form-row > * + * {
-            margin-left: 10px;
-        }
-    </style>
-
-    <form class="user-form">
-        <h4> Simple User Form </h4>
-        <div class="user-form-wrapper">
-            <div class="row-group">
-                <bcm-text 
-                    class="group-title" 
-                    scale="size-3"
-                >
-                    Personal Information
-                </bcm-text>
-                <div class="form-row">
-                    <bcm-input 
-                        type="text"
-                        name="nickname" 
-                        placeholder="nickname"
-                    >
-                        <bcm-icon slot="prefix" icon="user" color="grey-7"></bcm-icon>
-                    </bcm-input>
-                    <bcm-input 
-                        type="text"
-                        name="mail"
-                        placeholder="e-mail"
-                    >
-                        <bcm-icon slot="prefix" icon="mail" color="grey-7"></bcm-icon>
-                    </bcm-input>
-                </div>
-                <div class="form-row">
-                    <bcm-input 
-                        type="text" 
-                        placeholder="name"
-                        name="name"
-                        value="John">
-                    </bcm-input>
-                    <bcm-input 
-                        type="text" 
-                        placeholder="surname"
-                        name="surname"
-                        value="Doe">
-                    </bcm-input>
+    <div style="width: 320px;">
+        <bcm-card size="small">
+            <bcm-card-header>
+                <div class="header">
+                    <bcm-text scale="size-3">Default size card</bcm-text>
+                    <bcm-button size="small">More</bcm-button>
                 </div>
                 <div class="form-row">
                     <bcm-radio-group name="gender">
