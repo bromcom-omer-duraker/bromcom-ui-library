@@ -40,6 +40,8 @@ export class BcmRadio {
 
     connectedCallback() {
         this.handleChange = this.handleChange.bind(this)
+        this.handleFocus = this.handleFocus.bind(this)
+        this.handleBlur = this.handleBlur.bind(this)
     }
 
     render() {
