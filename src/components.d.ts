@@ -69,6 +69,13 @@ export namespace Components {
         "name": string;
         "value": any;
     }
+    interface BcmCollapse {
+        "borderless": boolean;
+        "open": boolean;
+    }
+    interface BcmCollapseGroup {
+        "borderless": boolean;
+    }
     interface BcmDivider {
         "direction": 'vertical' | 'horizontal';
         "width": string;
@@ -216,6 +223,18 @@ declare global {
         prototype: HTMLBcmCheckboxGroupElement;
         new (): HTMLBcmCheckboxGroupElement;
     };
+    interface HTMLBcmCollapseElement extends Components.BcmCollapse, HTMLStencilElement {
+    }
+    var HTMLBcmCollapseElement: {
+        prototype: HTMLBcmCollapseElement;
+        new (): HTMLBcmCollapseElement;
+    };
+    interface HTMLBcmCollapseGroupElement extends Components.BcmCollapseGroup, HTMLStencilElement {
+    }
+    var HTMLBcmCollapseGroupElement: {
+        prototype: HTMLBcmCollapseGroupElement;
+        new (): HTMLBcmCollapseGroupElement;
+    };
     interface HTMLBcmDividerElement extends Components.BcmDivider, HTMLStencilElement {
     }
     var HTMLBcmDividerElement: {
@@ -291,6 +310,8 @@ declare global {
         "bcm-card-header": HTMLBcmCardHeaderElement;
         "bcm-checkbox": HTMLBcmCheckboxElement;
         "bcm-checkbox-group": HTMLBcmCheckboxGroupElement;
+        "bcm-collapse": HTMLBcmCollapseElement;
+        "bcm-collapse-group": HTMLBcmCollapseGroupElement;
         "bcm-divider": HTMLBcmDividerElement;
         "bcm-icon": HTMLBcmIconElement;
         "bcm-input": HTMLBcmInputElement;
@@ -359,6 +380,14 @@ declare namespace LocalJSX {
          */
         "onBcm-change"?: (event: CustomEvent<any>) => void;
         "value"?: any;
+    }
+    interface BcmCollapse {
+        "borderless"?: boolean;
+        "onBcm-open"?: (event: CustomEvent<any>) => void;
+        "open"?: boolean;
+    }
+    interface BcmCollapseGroup {
+        "borderless"?: boolean;
     }
     interface BcmDivider {
         "direction"?: 'vertical' | 'horizontal';
@@ -478,6 +507,8 @@ declare namespace LocalJSX {
         "bcm-card-header": BcmCardHeader;
         "bcm-checkbox": BcmCheckbox;
         "bcm-checkbox-group": BcmCheckboxGroup;
+        "bcm-collapse": BcmCollapse;
+        "bcm-collapse-group": BcmCollapseGroup;
         "bcm-divider": BcmDivider;
         "bcm-icon": BcmIcon;
         "bcm-input": BcmInput;
@@ -503,6 +534,8 @@ declare module "@stencil/core" {
             "bcm-card-header": LocalJSX.BcmCardHeader & JSXBase.HTMLAttributes<HTMLBcmCardHeaderElement>;
             "bcm-checkbox": LocalJSX.BcmCheckbox & JSXBase.HTMLAttributes<HTMLBcmCheckboxElement>;
             "bcm-checkbox-group": LocalJSX.BcmCheckboxGroup & JSXBase.HTMLAttributes<HTMLBcmCheckboxGroupElement>;
+            "bcm-collapse": LocalJSX.BcmCollapse & JSXBase.HTMLAttributes<HTMLBcmCollapseElement>;
+            "bcm-collapse-group": LocalJSX.BcmCollapseGroup & JSXBase.HTMLAttributes<HTMLBcmCollapseGroupElement>;
             "bcm-divider": LocalJSX.BcmDivider & JSXBase.HTMLAttributes<HTMLBcmDividerElement>;
             "bcm-icon": LocalJSX.BcmIcon & JSXBase.HTMLAttributes<HTMLBcmIconElement>;
             "bcm-input": LocalJSX.BcmInput & JSXBase.HTMLAttributes<HTMLBcmInputElement>;
