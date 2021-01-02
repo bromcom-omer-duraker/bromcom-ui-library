@@ -108,11 +108,11 @@ export const Default = (args) => (
 
 export const WithGroup = (args) => (
     <bcm-select {...args}>
-        <bcm-select-group title="Group title">
+        <bcm-select-group heading="Group title">
             <bcm-select-option value="first" disabled>Menu item first</bcm-select-option>
             <bcm-select-option value="second">Menu item second</bcm-select-option>
         </bcm-select-group>
-        <bcm-select-group title="Group title">
+        <bcm-select-group heading="Group title">
             <bcm-select-option value="third">Menu item third</bcm-select-option>
             <bcm-select-option value="fourth">Menu item fourth</bcm-select-option>
         </bcm-select-group>

@@ -32,6 +32,7 @@ export class BcmSelect {
     @Prop({ attribute: 'caption-type' }) captionType: 'primary' | 'success' | 'warning' | 'error' | 'default' = 'default'
     @Prop() disabled: boolean
     @Prop() flex: boolean
+    @Prop() name: string
 
     @State() label: string
     @State() isOpen: boolean = false

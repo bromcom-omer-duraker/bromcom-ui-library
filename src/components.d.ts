@@ -124,13 +124,14 @@ export namespace Components {
         "disabled": boolean;
         "flex": boolean;
         "labelProp": string;
+        "name": string;
         "options": string | string | OptionWithGroupType[];
         "scrollable": 'none' | 'vertical' | 'horizontal' | 'both';
         "size": 'small' | 'medium' | 'large';
         "value": string;
     }
     interface BcmSelectGroup {
-        "title": string;
+        "heading": string;
     }
     interface BcmSelectOption {
         "disabled": boolean;
@@ -420,6 +421,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "flex"?: boolean;
         "labelProp"?: string;
+        "name"?: string;
         "onBcm-blur"?: (event: CustomEvent<any>) => void;
         "onBcm-change"?: (event: CustomEvent<any>) => void;
         "onBcm-clear"?: (event: CustomEvent<any>) => void;
@@ -430,7 +432,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface BcmSelectGroup {
-        "title"?: string;
+        "heading"?: string;
     }
     interface BcmSelectOption {
         "disabled"?: boolean;
