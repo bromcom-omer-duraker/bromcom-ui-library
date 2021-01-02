@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ColorPaletteTypes } from "./global/variables/colors";
 import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/types";
+import { TypeProp } from "./components/molecules/notification/types";
 import { OptionType } from "./components/molecules/radio/group";
 import { OptionWithGroupType } from "./components/molecules/select/select";
 export namespace Components {
@@ -92,6 +93,11 @@ export namespace Components {
         "size": 'small' | 'medium' | 'large';
         "type": string;
         "value": any;
+    }
+    interface BcmNotification {
+        "_title": string;
+        "confirmable"?: boolean;
+        "type"?: TypeProp;
     }
     interface BcmRadio {
         "buttonStyle": 'solid' | 'outline';
@@ -208,6 +214,12 @@ declare global {
         prototype: HTMLBcmInputElement;
         new (): HTMLBcmInputElement;
     };
+    interface HTMLBcmNotificationElement extends Components.BcmNotification, HTMLStencilElement {
+    }
+    var HTMLBcmNotificationElement: {
+        prototype: HTMLBcmNotificationElement;
+        new (): HTMLBcmNotificationElement;
+    };
     interface HTMLBcmRadioElement extends Components.BcmRadio, HTMLStencilElement {
     }
     var HTMLBcmRadioElement: {
@@ -265,6 +277,7 @@ declare global {
         "bcm-divider": HTMLBcmDividerElement;
         "bcm-icon": HTMLBcmIconElement;
         "bcm-input": HTMLBcmInputElement;
+        "bcm-notification": HTMLBcmNotificationElement;
         "bcm-radio": HTMLBcmRadioElement;
         "bcm-radio-group": HTMLBcmRadioGroupElement;
         "bcm-select": HTMLBcmSelectElement;
@@ -357,6 +370,11 @@ declare namespace LocalJSX {
         "type"?: string;
         "value"?: any;
     }
+    interface BcmNotification {
+        "_title"?: string;
+        "confirmable"?: boolean;
+        "type"?: TypeProp;
+    }
     interface BcmRadio {
         "buttonStyle"?: 'solid' | 'outline';
         "checked"?: boolean;
@@ -441,6 +459,7 @@ declare namespace LocalJSX {
         "bcm-divider": BcmDivider;
         "bcm-icon": BcmIcon;
         "bcm-input": BcmInput;
+        "bcm-notification": BcmNotification;
         "bcm-radio": BcmRadio;
         "bcm-radio-group": BcmRadioGroup;
         "bcm-select": BcmSelect;
@@ -463,6 +482,7 @@ declare module "@stencil/core" {
             "bcm-divider": LocalJSX.BcmDivider & JSXBase.HTMLAttributes<HTMLBcmDividerElement>;
             "bcm-icon": LocalJSX.BcmIcon & JSXBase.HTMLAttributes<HTMLBcmIconElement>;
             "bcm-input": LocalJSX.BcmInput & JSXBase.HTMLAttributes<HTMLBcmInputElement>;
+            "bcm-notification": LocalJSX.BcmNotification & JSXBase.HTMLAttributes<HTMLBcmNotificationElement>;
             "bcm-radio": LocalJSX.BcmRadio & JSXBase.HTMLAttributes<HTMLBcmRadioElement>;
             "bcm-radio-group": LocalJSX.BcmRadioGroup & JSXBase.HTMLAttributes<HTMLBcmRadioGroupElement>;
             "bcm-select": LocalJSX.BcmSelect & JSXBase.HTMLAttributes<HTMLBcmSelectElement>;

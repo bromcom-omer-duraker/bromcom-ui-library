@@ -4,7 +4,7 @@ import { extractColor } from '../../../utils/utils';
 import { TypePropOptions, SizePropOptions, SizePropPredefinedValues } from './types';
 import { ColorPalette, ColorPaletteTypes } from '../../../global/variables/colors';
 
-const defaultIconSize = 24;
+const defaultIconSize = 16;
 
 @Component({
     tag: 'bcm-icon',
