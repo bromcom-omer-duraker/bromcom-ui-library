@@ -109,6 +109,10 @@ button > bcm-icon.suffix {
 
     &:not(.rounded) {
         padding: 0 space('xs');
+        
+        &.with_suffix {
+            padding-right: 0;
+        }
     }
 }
 
@@ -118,6 +122,10 @@ button > bcm-icon.suffix {
 
     &:not(.rounded) {
         padding: 0 space('xs');
+        
+        &.with_suffix {
+            padding-right: 0;
+        }
     }
 }
 
@@ -127,5 +135,34 @@ button > bcm-icon.suffix {
 
     &:not(.rounded) {
         padding: 0 space('xxs');
+        
+        &.with_suffix {
+            padding-right: 0;
+        }
+    }
+}
+
+:host-context(.split_summary.open) {
+    .solid {
+        background-color: $prime-blue-7;
+        border-color: $prime-blue-7;
+        
+        &.outline {
+            color: $prime-blue-7;
+            border-color: $prime-blue-7;
+            background-color: $grey-1;
+        }
+    }
+}
+
+:host-context(.split_summary) {
+    .large:not(.rounded) {
+        bcm-icon.prefix {
+            margin-right: space('xxxs');
+        }
+    
+        bcm-icon.suffix {
+            margin-left: space('xxxs');
+        }
     }
 }

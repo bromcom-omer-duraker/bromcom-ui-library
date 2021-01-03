@@ -33,7 +33,9 @@ export class BcmButton {
     render() {
 
         const { size, kind, disabled, outline, icon, iconPosition } = this
-        const isIconOnly = this.host.childNodes.length < 1 && icon
+
+        const isIconOnly =  this.host.childNodes.length < 1 && this.icon ? true : false
+        const isSuffixExist = this.host.querySelectorAll('[slot="suffix"]').length > 0
 
         const iconSize = isIconOnly ? iconSizes.iconOnly[size] : iconSizes.default[size]
 
@@ -45,6 +47,7 @@ export class BcmButton {
                 'size-3': size === 'large',
                 'rounded': isIconOnly,
                 'outline': outline,
+                'with_suffix': isSuffixExist
             }
         )
 
@@ -61,6 +64,7 @@ export class BcmButton {
                 { icon && iconPosition === "prefix" && <bcm-icon type="outlined" class="prefix" icon={icon} size={iconSize}></bcm-icon>}
                 <slot />
                 { icon && iconPosition === "suffix" && <bcm-icon type="outlined" class="suffix" icon={icon} size={iconSize}></bcm-icon>}
+                <slot name="suffix" />
             </button>
         )
 
