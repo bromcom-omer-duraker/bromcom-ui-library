@@ -38,8 +38,8 @@ export class BcmCollapse {
 
         return (
             <Host id={this.collapseId}>
-                <details class={classes} open={this.open} onClick={() => this.handleClick()}>
-                    <summary class="collapse-header size-2">
+                <details class={classes} open={this.open}>
+                    <summary class="collapse-header size-2" onClick={() => this.handleClick()}>
                         <bcm-icon class="collapse-icon" size={16} icon={this.open ? 'caret-down' : 'caret-right'} type="fill" color="grey-10"></bcm-icon>
                         <slot name="title" />
                     </summary>
