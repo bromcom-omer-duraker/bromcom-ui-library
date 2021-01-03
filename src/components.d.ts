@@ -166,6 +166,23 @@ export namespace Components {
         "size": 'small' | 'medium' | 'large';
         "value": string;
     }
+    interface BcmTimeline {
+        /**
+          * Component Properties
+         */
+        "icon": string;
+        "type": 'left' | 'right' | 'alternate';
+    }
+    interface BcmTimelineItem {
+        /**
+          * Component Properties
+         */
+        "even": boolean;
+        "first": boolean;
+        "icon": string;
+        "last": boolean;
+        "timelineType": 'left' | 'right' | 'alternate';
+    }
 }
 declare global {
     interface HTMLBcmAvatarElement extends Components.BcmAvatar, HTMLStencilElement {
@@ -282,6 +299,18 @@ declare global {
         prototype: HTMLBcmTextareaElement;
         new (): HTMLBcmTextareaElement;
     };
+    interface HTMLBcmTimelineElement extends Components.BcmTimeline, HTMLStencilElement {
+    }
+    var HTMLBcmTimelineElement: {
+        prototype: HTMLBcmTimelineElement;
+        new (): HTMLBcmTimelineElement;
+    };
+    interface HTMLBcmTimelineItemElement extends Components.BcmTimelineItem, HTMLStencilElement {
+    }
+    var HTMLBcmTimelineItemElement: {
+        prototype: HTMLBcmTimelineItemElement;
+        new (): HTMLBcmTimelineItemElement;
+    };
     interface HTMLElementTagNameMap {
         "bcm-avatar": HTMLBcmAvatarElement;
         "bcm-badge": HTMLBcmBadgeElement;
@@ -302,6 +331,8 @@ declare global {
         "bcm-tag": HTMLBcmTagElement;
         "bcm-text": HTMLBcmTextElement;
         "bcm-textarea": HTMLBcmTextareaElement;
+        "bcm-timeline": HTMLBcmTimelineElement;
+        "bcm-timeline-item": HTMLBcmTimelineItemElement;
     }
 }
 declare namespace LocalJSX {
@@ -469,6 +500,23 @@ declare namespace LocalJSX {
         "size"?: 'small' | 'medium' | 'large';
         "value"?: string;
     }
+    interface BcmTimeline {
+        /**
+          * Component Properties
+         */
+        "icon"?: string;
+        "type"?: 'left' | 'right' | 'alternate';
+    }
+    interface BcmTimelineItem {
+        /**
+          * Component Properties
+         */
+        "even"?: boolean;
+        "first"?: boolean;
+        "icon"?: string;
+        "last"?: boolean;
+        "timelineType"?: 'left' | 'right' | 'alternate';
+    }
     interface IntrinsicElements {
         "bcm-avatar": BcmAvatar;
         "bcm-badge": BcmBadge;
@@ -489,6 +537,8 @@ declare namespace LocalJSX {
         "bcm-tag": BcmTag;
         "bcm-text": BcmText;
         "bcm-textarea": BcmTextarea;
+        "bcm-timeline": BcmTimeline;
+        "bcm-timeline-item": BcmTimelineItem;
     }
 }
 export { LocalJSX as JSX };
@@ -514,6 +564,8 @@ declare module "@stencil/core" {
             "bcm-tag": LocalJSX.BcmTag & JSXBase.HTMLAttributes<HTMLBcmTagElement>;
             "bcm-text": LocalJSX.BcmText & JSXBase.HTMLAttributes<HTMLBcmTextElement>;
             "bcm-textarea": LocalJSX.BcmTextarea & JSXBase.HTMLAttributes<HTMLBcmTextareaElement>;
+            "bcm-timeline": LocalJSX.BcmTimeline & JSXBase.HTMLAttributes<HTMLBcmTimelineElement>;
+            "bcm-timeline-item": LocalJSX.BcmTimelineItem & JSXBase.HTMLAttributes<HTMLBcmTimelineItemElement>;
         }
     }
 }
