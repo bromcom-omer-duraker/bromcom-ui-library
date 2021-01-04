@@ -15,6 +15,9 @@ export class BcmCollapseGroup {
         const elements = Array.from(this.host.querySelectorAll('bcm-collapse'))
 
         elements.map(el => {
+
+            el.borderless = this.borderless
+
             el.addEventListener('bcm-open', (e: CustomEvent) => {
                 this.openId = e.detail
                 
