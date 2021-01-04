@@ -1,3 +1,5 @@
+import { ColorPalette } from '../global/variables/colors'
+
 export const getElementAttributes = (nodeMap: NamedNodeMap) => {
     if (nodeMap) {
         const length = nodeMap.length;
@@ -24,4 +26,15 @@ export const extractColor = (colors: object, colorName: string) => {
     const swatch = splitted.slice(0, splitted.length - 1).join('-')
 
     return colors[swatch][grade]
+}
+
+export const generateCssVariables = () => {
+    let rootColors = '';
+    Object.keys(ColorPalette).forEach((color) => {
+        Object.keys(ColorPalette[color]).forEach((key) => {
+            let variable = `--bcm-color-${color}-${key}: #\{$${color}-${key}\};\n`
+            rootColors += variable
+        })
+    })
+    return rootColors;
 }
