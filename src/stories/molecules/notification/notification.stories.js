@@ -11,7 +11,7 @@ export default {
             table: {
                 category: 'Properties',
                 type: { summary: 'string' },
-                defaultValue: { summary: 'horizontal' },
+                defaultValue: { summary: '' },
             }
         },
         confirmable: {
