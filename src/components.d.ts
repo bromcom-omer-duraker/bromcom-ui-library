@@ -155,6 +155,18 @@ export namespace Components {
         "selected": boolean;
         "value": string;
     }
+    interface BcmSplitButton {
+        "disabled": boolean;
+        "icon": string;
+        "iconPosition": 'prefix' | 'suffix';
+        "outline": boolean;
+        "size": 'small' | 'medium' | 'large';
+        "text": string;
+    }
+    interface BcmSplitItem {
+        "icon": string;
+        "iconPosition": 'prefix' | 'suffix';
+    }
     interface BcmTag {
         "checked": boolean;
         "type": string;
@@ -315,6 +327,18 @@ declare global {
         prototype: HTMLBcmSelectOptionElement;
         new (): HTMLBcmSelectOptionElement;
     };
+    interface HTMLBcmSplitButtonElement extends Components.BcmSplitButton, HTMLStencilElement {
+    }
+    var HTMLBcmSplitButtonElement: {
+        prototype: HTMLBcmSplitButtonElement;
+        new (): HTMLBcmSplitButtonElement;
+    };
+    interface HTMLBcmSplitItemElement extends Components.BcmSplitItem, HTMLStencilElement {
+    }
+    var HTMLBcmSplitItemElement: {
+        prototype: HTMLBcmSplitItemElement;
+        new (): HTMLBcmSplitItemElement;
+    };
     interface HTMLBcmTagElement extends Components.BcmTag, HTMLStencilElement {
     }
     var HTMLBcmTagElement: {
@@ -365,6 +389,8 @@ declare global {
         "bcm-select": HTMLBcmSelectElement;
         "bcm-select-group": HTMLBcmSelectGroupElement;
         "bcm-select-option": HTMLBcmSelectOptionElement;
+        "bcm-split-button": HTMLBcmSplitButtonElement;
+        "bcm-split-item": HTMLBcmSplitItemElement;
         "bcm-tag": HTMLBcmTagElement;
         "bcm-text": HTMLBcmTextElement;
         "bcm-textarea": HTMLBcmTextareaElement;
@@ -527,6 +553,18 @@ declare namespace LocalJSX {
         "selected"?: boolean;
         "value"?: string;
     }
+    interface BcmSplitButton {
+        "disabled"?: boolean;
+        "icon"?: string;
+        "iconPosition"?: 'prefix' | 'suffix';
+        "outline"?: boolean;
+        "size"?: 'small' | 'medium' | 'large';
+        "text"?: string;
+    }
+    interface BcmSplitItem {
+        "icon"?: string;
+        "iconPosition"?: 'prefix' | 'suffix';
+    }
     interface BcmTag {
         "checked"?: boolean;
         "onCheckedChange"?: (event: CustomEvent<object>) => void;
@@ -594,6 +632,8 @@ declare namespace LocalJSX {
         "bcm-select": BcmSelect;
         "bcm-select-group": BcmSelectGroup;
         "bcm-select-option": BcmSelectOption;
+        "bcm-split-button": BcmSplitButton;
+        "bcm-split-item": BcmSplitItem;
         "bcm-tag": BcmTag;
         "bcm-text": BcmText;
         "bcm-textarea": BcmTextarea;
@@ -624,6 +664,8 @@ declare module "@stencil/core" {
             "bcm-select": LocalJSX.BcmSelect & JSXBase.HTMLAttributes<HTMLBcmSelectElement>;
             "bcm-select-group": LocalJSX.BcmSelectGroup & JSXBase.HTMLAttributes<HTMLBcmSelectGroupElement>;
             "bcm-select-option": LocalJSX.BcmSelectOption & JSXBase.HTMLAttributes<HTMLBcmSelectOptionElement>;
+            "bcm-split-button": LocalJSX.BcmSplitButton & JSXBase.HTMLAttributes<HTMLBcmSplitButtonElement>;
+            "bcm-split-item": LocalJSX.BcmSplitItem & JSXBase.HTMLAttributes<HTMLBcmSplitItemElement>;
             "bcm-tag": LocalJSX.BcmTag & JSXBase.HTMLAttributes<HTMLBcmTagElement>;
             "bcm-text": LocalJSX.BcmText & JSXBase.HTMLAttributes<HTMLBcmTextElement>;
             "bcm-textarea": LocalJSX.BcmTextarea & JSXBase.HTMLAttributes<HTMLBcmTextareaElement>;
