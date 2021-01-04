@@ -5,7 +5,7 @@ $screen-tablet: 64.0625em; // 1025px
 $screen-laptop: 106.25em; // 1700px
 
 @mixin media-query($screen-size) {
-    @media screen and (min-width: #{$screen-size}) {
+    @media screen and (max-width: #{$screen-size}) {
         @content;
     }
 }

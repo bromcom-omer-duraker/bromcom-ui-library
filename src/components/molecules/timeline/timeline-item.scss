@@ -1,0 +1,132 @@
+$gap: 30px;
+$item-vert-padding: 8px;
+$dot-size: 9px;
+$dot-top: $item-vert-padding + 6px;
+$line-top: $dot-top + $dot-size + 7px;
+
+.timeline-item {
+    position: relative;
+    font-size: 14px;
+    line-height: 22px;
+    padding: $item-vert-padding 8px $item-vert-padding $gap;
+}
+
+.timeline-item:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: $dot-top;
+    width: $dot-size;
+    height: $dot-size;
+    border-radius: border-radius('circle');
+    background-color: #ffffff;
+    border: 2px solid $prime-blue-6;
+    box-sizing: border-box;
+}
+
+.timeline-item:before {
+    content: '';
+    position: absolute;
+    top: $line-top;
+    left: 3px;
+    width: 2px;
+    height: calc(100% - #{$dot-top + $dot-size});
+    background-color: #e8e8e8;
+}
+
+.timeline-item.last {
+    &:before {
+        display: none;
+    }
+}
+
+.timeline-item.icon:after {
+    display: none;
+}
+
+bcm-icon {
+    position: absolute;
+    top: 10px;
+    left: -4px;
+}
+
+
+/**
+ * Right 
+ */
+.timeline-item.right {
+    text-align: right;
+    padding-left: $item-vert-padding;
+    padding-right: $gap;
+    &:after {
+        left: inherit;
+        right: 0;
+    }
+    &:before {
+        left: inherit;
+        right: 3px;
+    }
+    bcm-icon {
+        left: inherit;
+        right: -4px;
+    }
+}
+
+/**
+ * Alternate
+ */
+:host-context(.timeline.alternate) {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+    .timeline-item.even {
+        text-align: right;
+        padding-left: $item-vert-padding;
+        padding-right: $gap;
+        &:after {
+            left: inherit;
+            right: -5px;
+        }
+        &:before {
+            left: inherit;
+            right: -1px;
+        }
+        bcm-icon {
+            left: inherit;
+            right: -8px;
+        }
+    }
+    .timeline-item:not(.even) {
+        &:after {
+            left: -3px;
+        }
+        &:before {
+            left: 0px;
+        }
+        bcm-icon {
+            left: -7px;
+        }
+    }
+
+    @include media-query($screen-mobile) {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        margin-left: inherit !important;
+        .timeline-item.even {
+            text-align: left;
+            padding-left: $gap;
+            padding-right: $item-vert-padding;
+            &:after {
+                left: -5px;
+                right: inherit;
+            }
+            &:before {
+                left: -1px;
+                right: inherit;
+            }
+            bcm-icon {
+                left: -8px;
+                right: inherit;
+            }
+        }
+    }
+}
