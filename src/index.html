@@ -118,31 +118,31 @@
                     </bcm-notification>
                 </div>
                 <div class="form-row">
-                    <bcm-notification title="Notification Title" type="info">
+                    <bcm-notification title="Notification Title" status="info">
                         Proactively incubate innovative processes for high-payoff architectures.
                         Globally benchmark flexible.
                     </bcm-notification>
                 </div>
                 <div class="form-row">
-                    <bcm-notification title="Notification Title" type="error">
+                    <bcm-notification title="Notification Title" status="error">
                         Proactively incubate innovative processes for high-payoff architectures.
                         Globally benchmark flexible.
                     </bcm-notification>
                 </div>
                 <div class="form-row">
-                    <bcm-notification title="Notification Title" type="warning">
+                    <bcm-notification title="Notification Title" status="warning">
                         Proactively incubate innovative processes for high-payoff architectures.
                         Globally benchmark flexible.
                     </bcm-notification>
                 </div>
                 <div class="form-row">
-                    <bcm-notification title="Notification Title" type="success">
+                    <bcm-notification title="Notification Title" status="success">
                         Proactively incubate innovative processes for high-payoff architectures.
                         Globally benchmark flexible.
                     </bcm-notification>
                 </div>
                 <div class="form-row">
-                    <bcm-notification title="Notification Title" type="info" confirmable>
+                    <bcm-notification id="confirm-1" title="Notification Title" status="info" confirmable>
                         Proactively incubate innovative processes for high-payoff architectures.
                         Globally benchmark flexible.
                     </bcm-notification>
@@ -164,6 +164,10 @@
         submitBtn.addEventListener('click', function() {
             var formData = userForm.data();
             console.log(formData);
+        })
+
+        document.querySelector('#confirm-1').addEventListener('bcm-confirm', function() {
+            console.log('Notification confirmed')
         })
     </script>
     <script>

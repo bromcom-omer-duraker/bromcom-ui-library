@@ -102,9 +102,12 @@ export namespace Components {
         "value": any;
     }
     interface BcmNotification {
+        /**
+          * Component Properties
+         */
         "_title": string;
         "confirmable"?: boolean;
-        "type"?: TypeProp;
+        "status"?: TypeProp;
     }
     interface BcmRadio {
         "buttonStyle": 'solid' | 'outline';
@@ -407,9 +410,16 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface BcmNotification {
+        /**
+          * Component Properties
+         */
         "_title"?: string;
         "confirmable"?: boolean;
-        "type"?: TypeProp;
+        /**
+          * Component Events
+         */
+        "onBcm-confirm"?: (event: CustomEvent<any>) => void;
+        "status"?: TypeProp;
     }
     interface BcmRadio {
         "buttonStyle"?: 'solid' | 'outline';
