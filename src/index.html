@@ -19,226 +19,39 @@
     </style>
 </head>
 
-<body style="margin: 10%">
+<body style="margin: 10%;display: flex;gap: 35px;">
 
-    <div style="width: 320px;">
-        <bcm-card size="small">
-            <bcm-card-header>
-                <div class="header">
-                    <bcm-text scale="size-3">Default size card</bcm-text>
-                    <bcm-button size="small">More</bcm-button>
-                </div>
-                <div class="form-row">
-                    <bcm-radio-group name="gender">
-                        <bcm-text 
-                            scale="size-2" 
-                            style="margin-right: 10px;"
-                        >
-                            Gender
-                        </bcm-text>
-                        <bcm-radio value="male">Male</bcm-radio>
-                        <bcm-radio value="female">Female</bcm-radio>
-                    </bcm-radio-group>
-                </div>
-            </div>
-            <div class="row-group">
-                <bcm-text 
-                    class="group-title" 
-                    scale="size-3"
-                >
-                    Bio
-                </bcm-text>
-                <div class="form-row">
-                    <bcm-textarea
-                        name="bio"
-                        full-width
-                        max-length="200" 
-                        rows="4">
-                    </bcm-textarea>
-                </div>
-            </div>
-            <div class="row-group">
-                <bcm-text 
-                    class="group-title" 
-                    scale="size-3"
-                >
-                    Additional Information
-                </bcm-text>
-                <div class="form-row">
-                    <bcm-checkbox-group
-                        name="additional" 
-                        direction="vertical"
-                        indeterminate
-                    >
-                        <bcm-checkbox name="checkbox1" checked>
-                            Fusce lobortis hendrerit dapibus. Sed commodo neque eget pulvinar blandit. Praesent sed augue augue. Sed at lobortis elit, non ultricies neque.
-                        </bcm-checkbox>
-                        <bcm-checkbox name="checkbox2">
-                            Kullanıcı Sözleşmesi, Gizlilik Politikası ve Açık Rıza ve Dijital İletişim Metni'ni okudum, kabul ediyorum.
-                        </bcm-checkbox>
-                        <bcm-checkbox name="checkbox3">
-                            Kişisel Verilerin Korunması, İşlenmesine Dair Sözleşme ve Aydınlatma Metni'ni okudum, kabul ediyorum.
-                        </bcm-checkbox>
-                    </bcm-checkbox-group>
-                </div>
-            </div>
-            <div class="row-group" style="display: flex;">
-                <bcm-button id="submit-btn" style="margin-left: auto;">Submit</bcm-button>
-            </div>
+    <div style="width: 480px;">
+        <bcm-collapse-group>
+            <bcm-collapse borderless>
+                <span slot="title" color="grey-9">This is panel header</span>
+                <bcm-text slot="body" color="grey-8" scale="size-2">Rapidiously negotiate go forward leadership skills and parallel vortals. Continually reconceptualize top-line solutions whereas just in time growth strategies. Seamlessly procrastinate competitive human.</bcm-text>
+            </bcm-collapse>
+            <bcm-collapse borderless>
+                <span slot="title" color="grey-9">This is panel header</span>
+                <bcm-text slot="body" color="grey-8" scale="size-2">Rapidiously negotiate go forward leadership skills and parallel vortals. Continually reconceptualize top-line solutions whereas just in time growth strategies. Seamlessly procrastinate competitive human.</bcm-text>
+            </bcm-collapse>
+            <bcm-collapse borderless>
+                <span slot="title" color="grey-9">This is panel header</span>
+                <bcm-text slot="body" color="grey-8" scale="size-2">Rapidiously negotiate go forward leadership skills and parallel vortals. Continually reconceptualize top-line solutions whereas just in time growth strategies. Seamlessly procrastinate competitive human.</bcm-text>
+            </bcm-collapse>
+        </bcm-collapse-group>
+    </div>
 
-            <div class="row-group">
-                <div class="form-row">
-                    <bcm-text scale="size-5">Baslik</bcm-text>
-                    <bcm-divider></bcm-divider>
-                    
-                    <bcm-text scale="size-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus accusamus blanditiis ut dignissimos culpa, qui officia earum quae animi eligendi esse optio reprehenderit iusto ducimus vero perferendis dolores soluta libero!</bcm-text>
-                </div>
-                
-    
-                <div class="form-row" style="display: flex;">
-                    <bcm-text>Link</bcm-text>
-                    <bcm-divider direction="vertical"></bcm-divider>
-                    <bcm-text>Link</bcm-text>
-                    <bcm-divider direction="vertical"></bcm-divider>
-                    <bcm-text>Link</bcm-text>
-                </div>
-            </div>
-            
-            <div class="row-group">
-                <div class="form-row">
-                    <bcm-notification title="Notification Title">
-                        Proactively incubate innovative processes for high-payoff architectures.
-                        Globally benchmark flexible.
-                    </bcm-notification>
-                </div>
-                <div class="form-row">
-                    <bcm-notification title="Notification Title" confirmable>
-                        Proactively incubate innovative processes for high-payoff architectures.
-                        Globally benchmark flexible.
-                    </bcm-notification>
-                </div>
-                <div class="form-row">
-                    <bcm-notification title="Notification Title" status="info">
-                        Proactively incubate innovative processes for high-payoff architectures.
-                        Globally benchmark flexible.
-                    </bcm-notification>
-                </div>
-                <div class="form-row">
-                    <bcm-notification title="Notification Title" status="error">
-                        Proactively incubate innovative processes for high-payoff architectures.
-                        Globally benchmark flexible.
-                    </bcm-notification>
-                </div>
-                <div class="form-row">
-                    <bcm-notification title="Notification Title" status="warning">
-                        Proactively incubate innovative processes for high-payoff architectures.
-                        Globally benchmark flexible.
-                    </bcm-notification>
-                </div>
-                <div class="form-row">
-                    <bcm-notification title="Notification Title" status="success">
-                        Proactively incubate innovative processes for high-payoff architectures.
-                        Globally benchmark flexible.
-                    </bcm-notification>
-                </div>
-                <div class="form-row">
-                    <bcm-notification id="confirm-1" title="Notification Title" status="info" confirmable>
-                        Proactively incubate innovative processes for high-payoff architectures.
-                        Globally benchmark flexible.
-                    </bcm-notification>
-                </div>
-            </div>
-        </div>
-    </form>
-
-
-    <script type="text/javascript" src="./bromcom.js"></script>
-    <script type="text/javascript">
-        var submitBtn = document.querySelector('#submit-btn');
-        var userForm = new Bromcom.forms('.user-form');
-        
-        /**
-         * 
-         * [Event: click --> submitBtn]
-         */
-        submitBtn.addEventListener('click', function() {
-            var formData = userForm.data();
-            console.log(formData);
-        })
-
-        document.querySelector('#confirm-1').addEventListener('bcm-confirm', function() {
-            console.log('Notification confirmed')
-        })
-    </script>
-    <script>
-
-       /*  var checkboxGroup = document.getElementsByTagName('bcm-checkbox-group')[0];
-
-        // const options = [
-        //     {
-        //         label: 'Besiktas',
-        //         value: 'bjk'
-        //     },
-        //     {
-        //         label: 'Galatasaray',
-        //         value: 'gs'
-        //     },
-        // ]
-
-        // const options = [
-        //     {
-        //         title: 'Ilk 2',
-        //         options: [
-        //             {
-        //                 label: 'Besiktas',
-        //                 value: 'bjk'
-        //             },
-        //             {
-        //                 label: 'Galatasaray',
-        //                 value: 'gs'
-        //             },
-        //         ]
-        //     },
-        //     {
-        //         title: 'Son 2',
-        //         options: [
-        //             {
-        //                 label: 'Fenerbahce',
-        //                 value: 'fb'
-        //             },
-        //             {
-        //                 label: 'Basaksehir',
-        //                 value: 'ibfk'
-        //             },
-        //         ]
-        //     }
-        // ]
-
-        document.querySelector('bcm-select').options = options
-
-            checkboxGroup.componentOnReady().then(() => {
-                checkboxGroup.checked('checkbox3')
-                    .then(status => console.log('checkbox3 status:', status))
-                
-                
-            })
-        })();
-
-        setTimeout(function() {
-            checkboxGroup.checked()
-                    .then(status => console.log('checkbox group status:', status))
-        }, 5000) */
-
-        /* document.getElementsByTagName('bcm-checkbox-group')[0].items = [{
-            name: "checkbox1",
-            label: "Checkbox 1",
-            value: 1
-        }, {
-            name: "checkbox2",
-            label: "Checkbox 2",
-            value: 2
-        }] */
-    </script>
+    <div style="width: 480px;">
+        <bcm-collapse>
+            <span slot="title" color="grey-9">This is panel header</span>
+            <bcm-text slot="body" color="grey-8" scale="size-2">Rapidiously negotiate go forward leadership skills and parallel vortals. Continually reconceptualize top-line solutions whereas just in time growth strategies. Seamlessly procrastinate competitive human.</bcm-text>
+        </bcm-collapse>
+        <bcm-collapse>
+            <span slot="title" color="grey-9">This is panel header</span>
+            <bcm-text slot="body" color="grey-8" scale="size-2">Rapidiously negotiate go forward leadership skills and parallel vortals. Continually reconceptualize top-line solutions whereas just in time growth strategies. Seamlessly procrastinate competitive human.</bcm-text>
+        </bcm-collapse>
+        <bcm-collapse>
+            <span slot="title" color="grey-9">This is panel header</span>
+            <bcm-text slot="body" color="grey-8" scale="size-2">Rapidiously negotiate go forward leadership skills and parallel vortals. Continually reconceptualize top-line solutions whereas just in time growth strategies. Seamlessly procrastinate competitive human.</bcm-text>
+        </bcm-collapse>
+    </div>
 
 </body>
 
