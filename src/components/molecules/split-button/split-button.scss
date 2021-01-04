@@ -27,7 +27,7 @@ details {
         }
 
         bcm-button {
-            &:focus-within, &:hover, &:active {
+            &:focus-within, &:hover, &:active, &:disabled {
                 .caret {
                     color: currentColor;
                 }
@@ -39,7 +39,7 @@ details {
         }
     }
 
-    &.open bcm-button, bcm-button:active {
+    &.open bcm-button, &:not(.disabled) bcm-button:active {
         .caret {
             border-left-color: $prime-blue-8;
         }
@@ -58,6 +58,14 @@ details {
     &.small .caret {
         height: 22px;
         width: 24px;
+    }
+
+    &.disabled .caret {
+        border-left-color: $grey-5;
+    }
+    
+    &.disabled.outline bcm-button:hover .caret {
+        color: $grey-5;
     }
 }
 

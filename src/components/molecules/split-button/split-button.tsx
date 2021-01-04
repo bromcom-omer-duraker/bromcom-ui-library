@@ -12,7 +12,7 @@ export class BcmSplitButton {
  
     @Prop() text: string
     @Prop() size: 'small' | 'medium' | 'large' = 'medium'
-    @Prop() disabled: boolean = false
+    @Prop() disabled: boolean
     @Prop() outline: boolean = false
     @Prop() icon: string
     @Prop({ attribute: 'icon-position' }) iconPosition: 'prefix' | 'suffix' = 'prefix'
@@ -28,7 +28,9 @@ export class BcmSplitButton {
     }
 
     handleOpen() {
-        this.isOpen = !this.isOpen
+        if (!this.disabled) {
+            this.isOpen = !this.isOpen
+        }
     }
 
     render() {
@@ -40,12 +42,13 @@ export class BcmSplitButton {
             size,
             {
                 'open': this.isOpen,
-                'outline': outline
+                'outline': outline,
+                'disabled': disabled
             }
         )
  
         return (
-            <details open={this.isOpen}>
+            <details open={this.isOpen} onClick={(e) => e.preventDefault()}>
                 <summary onClick={() => this.handleOpen()} class={classes}>
                     <bcm-button
                         icon={icon}
