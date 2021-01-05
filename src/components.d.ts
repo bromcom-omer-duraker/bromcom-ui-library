@@ -25,11 +25,13 @@ export namespace Components {
     }
     interface BcmButton {
         "disabled": boolean;
+        "href": string;
         "icon": string;
         "iconPosition": 'prefix' | 'suffix';
         "kind": 'solid' | 'ghost';
         "outline": boolean;
         "size": 'small' | 'medium' | 'large';
+        "target": string;
     }
     interface BcmCard {
         "size": 'small' | 'medium';
@@ -413,11 +415,13 @@ declare namespace LocalJSX {
     }
     interface BcmButton {
         "disabled"?: boolean;
+        "href"?: string;
         "icon"?: string;
         "iconPosition"?: 'prefix' | 'suffix';
         "kind"?: 'solid' | 'ghost';
         "outline"?: boolean;
         "size"?: 'small' | 'medium' | 'large';
+        "target"?: string;
     }
     interface BcmCard {
         "size"?: 'small' | 'medium';

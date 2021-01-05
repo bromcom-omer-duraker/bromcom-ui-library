@@ -29,17 +29,22 @@ export class BcmButton {
     @Prop() outline: boolean = false
     @Prop() icon: string
     @Prop({ attribute: 'icon-position' }) iconPosition: 'prefix' | 'suffix' = 'prefix'
+    @Prop() href: string
+    @Prop() target: string
 
     render() {
 
-        const { size, kind, disabled, outline, icon, iconPosition } = this
+        const { size, kind, disabled, outline, icon, iconPosition, href, target } = this
 
         const isIconOnly =  this.host.childNodes.length < 1 && this.icon ? true : false
         const isSuffixExist = this.host.querySelectorAll('[slot="suffix"]').length > 0
 
         const iconSize = isIconOnly ? iconSizes.iconOnly[size] : iconSizes.default[size]
 
+        const Component = (href && !disabled) ? 'a' : 'button'
+
         const classes = cs(
+            'button',
             size,
             kind,
             {
@@ -53,19 +58,19 @@ export class BcmButton {
 
         if (isIconOnly) {
             return (
-                <button class={classes} disabled={disabled}>
+                <Component class={classes} disabled={disabled} href={href} target={target}>
                     <bcm-icon icon={icon} size={iconSize} type="outlined"></bcm-icon>
-                </button>
+                </Component>
             )
         }
 
         return (
-            <button class={classes} disabled={disabled}>
+            <Component class={classes} disabled={disabled} href={href} target={target}>
                 { icon && iconPosition === "prefix" && <bcm-icon type="outlined" class="prefix" icon={icon} size={iconSize}></bcm-icon>}
                 <slot />
                 { icon && iconPosition === "suffix" && <bcm-icon type="outlined" class="suffix" icon={icon} size={iconSize}></bcm-icon>}
                 <slot name="suffix" />
-            </button>
+            </Component>
         )
 
     }

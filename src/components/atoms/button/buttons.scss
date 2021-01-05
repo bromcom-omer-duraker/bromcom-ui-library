@@ -4,7 +4,7 @@
     display: inline-block;
 }
 
-button {
+.button {
     border: none;
     outline: 0;
     cursor: pointer;
@@ -14,7 +14,9 @@ button {
     text-align: center;
     font-family: $font-roboto;
     padding: unset;
-
+    text-decoration: none;
+    box-sizing: border-box;
+    
     &.rounded {
         border-radius: border-radius('circle');
     }
@@ -87,11 +89,11 @@ button {
 
 }
 
-button > bcm-icon.prefix {
+.button > bcm-icon.prefix {
     margin-right: space('xxxs');
 }
 
-button > bcm-icon.suffix {
+.button > bcm-icon.suffix {
     margin-left: space('xxxs');
 }
 
