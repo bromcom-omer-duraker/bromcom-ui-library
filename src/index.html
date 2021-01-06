@@ -11,26 +11,29 @@
     <script nomodule src="/build/bromcom-ui.js"></script>
 
     <style>
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        bcm-message {
+            display: block;
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body style="margin: 10%">
-    <bcm-split-button size="large" text="Actions" icon="branches">
-        <bcm-split-item icon="download">Download</bcm-split-item>
-        <bcm-split-item icon="upload">Upload</bcm-split-item>
-    </bcm-split-button>
-
-    
-    <bcm-split-button outline text="Actions">
-        <bcm-split-item icon="plus-circle">Add</bcm-split-item>
-        <bcm-split-item icon="edit">Edit</bcm-split-item>
-        <bcm-split-item icon="delete">Delete</bcm-split-item>
-    </bcm-split-button>
+    <bcm-message>
+        This is success message, lorem ipsum dolor sit amet, consec adipiscing elitThis is success message, lorem ipsum dolor sit amet, consec adipiscing elitThis is success message, lorem ipsum dolor sit amet, consec adipiscing elitThis is success message, lorem ipsum dolor sit amet, consec adipiscing elitThis is success message, lorem ipsum dolor sit amet, consec adipiscing elitThis is success message, lorem ipsum dolor sit amet, consec adipiscing elit
+    </bcm-message>
+    <bcm-message status="warning">
+        This is success message, lorem ipsum dolor sit amet, consec adipiscing elit
+    </bcm-message>
+    <bcm-message status="error">
+        This is success message, lorem ipsum dolor sit amet, consec adipiscing elit
+    </bcm-message>
+    <bcm-message status="success">
+        This is success message, lorem ipsum dolor sit amet, consec adipiscing elit
+    </bcm-message>
+    <bcm-message status="info" full-width>
+        This is success message, lorem ipsum dolor sit amet, consec adipiscing elit
+    </bcm-message>
 </body>
 
 </html>
