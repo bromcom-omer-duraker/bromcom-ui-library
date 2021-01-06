@@ -3,7 +3,7 @@ import notes from './alert.md'
 
 export default {
     title: 'Components/Molecules/Alert',
-    component: 'bcm-checkbox',
+    component: 'bcm-alert',
     argTypes: {
         status: {
             control: { type: 'select', options: ['info', 'error', 'warning', 'success'] },

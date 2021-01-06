@@ -3,7 +3,7 @@ import notes from './timeline.md'
 
 export default {
     title: 'Components/Molecules/Timeline',
-    component: 'bcm-checkbox',
+    component: 'bcm-textarea',
     argTypes: {
         type: {
             control: { type: 'select', options: ['left', 'right', 'alternate'] },
