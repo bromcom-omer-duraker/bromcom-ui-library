@@ -20,17 +20,43 @@
 </head>
 
 <body style="margin: 10%">
-    <bcm-split-button size="large" text="Actions" icon="branches">
-        <bcm-split-item icon="download">Download</bcm-split-item>
-        <bcm-split-item icon="upload">Upload</bcm-split-item>
-    </bcm-split-button>
 
-    
-    <bcm-split-button outline text="Actions">
-        <bcm-split-item icon="plus-circle">Add</bcm-split-item>
-        <bcm-split-item icon="edit">Edit</bcm-split-item>
-        <bcm-split-item icon="delete">Delete</bcm-split-item>
-    </bcm-split-button>
+    <bcm-breadcrumb id="bc"></bcm-breadcrumb>
+
+    <script>
+        const items = [
+            {
+                icon: 'home',
+                href: 'https://google.com',
+            },
+            {
+                label: 'Breadcrumb Link 2',
+                href: 'https://google.com',
+                icon: 'home'
+            },
+            {
+                label: 'Breadcrumb Link 2',
+                href: 'https://google.com',
+                icon: 'home'
+            },
+            {
+                label: 'Breadcrumb Link',
+            },
+            {
+                label: 'Breadcrumb Link',
+                icon: 'user'
+            },
+            {
+                label: 'Breadcrumb Link',
+                href: 'https://google.com',
+            },
+        ]
+
+        document.getElementById('bc').items = items
+        
+        </script>
+
+
 </body>
 
 </html>

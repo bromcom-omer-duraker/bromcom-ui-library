@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { ItemType } from "./components/molecules/breadcrumb/breadcrumb";
 import { ColorPaletteTypes } from "./global/variables/colors";
 import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/types";
 import { TypeProp } from "./components/molecules/notification/types";
@@ -22,6 +23,9 @@ export namespace Components {
         "status": string;
         "type": 'basic' | 'info';
         "value": number;
+    }
+    interface BcmBreadcrumb {
+        "items": Array<ItemType>;
     }
     interface BcmButton {
         "disabled": boolean;
@@ -107,6 +111,11 @@ export namespace Components {
         "size": 'small' | 'medium' | 'large';
         "type": string;
         "value": any;
+    }
+    interface BcmLink {
+        "href": string;
+        "icon": string;
+        "target": string;
     }
     interface BcmNotification {
         /**
@@ -225,6 +234,12 @@ declare global {
         prototype: HTMLBcmBadgeElement;
         new (): HTMLBcmBadgeElement;
     };
+    interface HTMLBcmBreadcrumbElement extends Components.BcmBreadcrumb, HTMLStencilElement {
+    }
+    var HTMLBcmBreadcrumbElement: {
+        prototype: HTMLBcmBreadcrumbElement;
+        new (): HTMLBcmBreadcrumbElement;
+    };
     interface HTMLBcmButtonElement extends Components.BcmButton, HTMLStencilElement {
     }
     var HTMLBcmButtonElement: {
@@ -290,6 +305,12 @@ declare global {
     var HTMLBcmInputElement: {
         prototype: HTMLBcmInputElement;
         new (): HTMLBcmInputElement;
+    };
+    interface HTMLBcmLinkElement extends Components.BcmLink, HTMLStencilElement {
+    }
+    var HTMLBcmLinkElement: {
+        prototype: HTMLBcmLinkElement;
+        new (): HTMLBcmLinkElement;
     };
     interface HTMLBcmNotificationElement extends Components.BcmNotification, HTMLStencilElement {
     }
@@ -372,6 +393,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "bcm-avatar": HTMLBcmAvatarElement;
         "bcm-badge": HTMLBcmBadgeElement;
+        "bcm-breadcrumb": HTMLBcmBreadcrumbElement;
         "bcm-button": HTMLBcmButtonElement;
         "bcm-card": HTMLBcmCardElement;
         "bcm-card-footer": HTMLBcmCardFooterElement;
@@ -383,6 +405,7 @@ declare global {
         "bcm-divider": HTMLBcmDividerElement;
         "bcm-icon": HTMLBcmIconElement;
         "bcm-input": HTMLBcmInputElement;
+        "bcm-link": HTMLBcmLinkElement;
         "bcm-notification": HTMLBcmNotificationElement;
         "bcm-radio": HTMLBcmRadioElement;
         "bcm-radio-group": HTMLBcmRadioGroupElement;
@@ -410,6 +433,9 @@ declare namespace LocalJSX {
         "status"?: string;
         "type"?: 'basic' | 'info';
         "value"?: number;
+    }
+    interface BcmBreadcrumb {
+        "items"?: Array<ItemType>;
     }
     interface BcmButton {
         "disabled"?: boolean;
@@ -494,6 +520,11 @@ declare namespace LocalJSX {
         "size"?: 'small' | 'medium' | 'large';
         "type"?: string;
         "value"?: any;
+    }
+    interface BcmLink {
+        "href"?: string;
+        "icon"?: string;
+        "target"?: string;
     }
     interface BcmNotification {
         /**
@@ -615,6 +646,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "bcm-avatar": BcmAvatar;
         "bcm-badge": BcmBadge;
+        "bcm-breadcrumb": BcmBreadcrumb;
         "bcm-button": BcmButton;
         "bcm-card": BcmCard;
         "bcm-card-footer": BcmCardFooter;
@@ -626,6 +658,7 @@ declare namespace LocalJSX {
         "bcm-divider": BcmDivider;
         "bcm-icon": BcmIcon;
         "bcm-input": BcmInput;
+        "bcm-link": BcmLink;
         "bcm-notification": BcmNotification;
         "bcm-radio": BcmRadio;
         "bcm-radio-group": BcmRadioGroup;
@@ -647,6 +680,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "bcm-avatar": LocalJSX.BcmAvatar & JSXBase.HTMLAttributes<HTMLBcmAvatarElement>;
             "bcm-badge": LocalJSX.BcmBadge & JSXBase.HTMLAttributes<HTMLBcmBadgeElement>;
+            "bcm-breadcrumb": LocalJSX.BcmBreadcrumb & JSXBase.HTMLAttributes<HTMLBcmBreadcrumbElement>;
             "bcm-button": LocalJSX.BcmButton & JSXBase.HTMLAttributes<HTMLBcmButtonElement>;
             "bcm-card": LocalJSX.BcmCard & JSXBase.HTMLAttributes<HTMLBcmCardElement>;
             "bcm-card-footer": LocalJSX.BcmCardFooter & JSXBase.HTMLAttributes<HTMLBcmCardFooterElement>;
@@ -658,6 +692,7 @@ declare module "@stencil/core" {
             "bcm-divider": LocalJSX.BcmDivider & JSXBase.HTMLAttributes<HTMLBcmDividerElement>;
             "bcm-icon": LocalJSX.BcmIcon & JSXBase.HTMLAttributes<HTMLBcmIconElement>;
             "bcm-input": LocalJSX.BcmInput & JSXBase.HTMLAttributes<HTMLBcmInputElement>;
+            "bcm-link": LocalJSX.BcmLink & JSXBase.HTMLAttributes<HTMLBcmLinkElement>;
             "bcm-notification": LocalJSX.BcmNotification & JSXBase.HTMLAttributes<HTMLBcmNotificationElement>;
             "bcm-radio": LocalJSX.BcmRadio & JSXBase.HTMLAttributes<HTMLBcmRadioElement>;
             "bcm-radio-group": LocalJSX.BcmRadioGroup & JSXBase.HTMLAttributes<HTMLBcmRadioGroupElement>;
