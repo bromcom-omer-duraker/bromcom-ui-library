@@ -1,0 +1,22 @@
+:host {
+    display: inline-block;
+}
+
+.anchor {
+    text-decoration: none;
+    color: $grey-7;
+    display: inline-flex;
+    font-size: 14px;
+
+    bcm-icon {
+        margin-right: 4px;
+    }
+
+    &:hover {
+        color: $prime-blue-6;
+    }
+
+    &:active {
+        color: $grey-8;
+    }
+}
