@@ -7,7 +7,7 @@ export default {
     argTypes: {
         status: {
             control: { type: 'select', options: ['none', 'info', 'error', 'warning', 'success'] },
-            description: 'Allows the elements in the group to be arranged horizontally or vertically',
+            description: 'Changes notification appearance',
             table: {
                 category: 'Properties',
                 type: { summary: 'string' },
