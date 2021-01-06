@@ -50,11 +50,25 @@
                 label: 'Breadcrumb Link',
                 href: 'https://google.com',
             },
+            {
+                label: 'Breadcrumb Link',
+                dropdown: [
+                    {
+                        label: 'Item 1',
+                        href: 'https://google.com',
+                        target: '_blank'
+                    },
+                    {
+                        label: 'Item 2',
+                        href: 'https://google.comasd',
+                    },
+                ]
+            },
         ]
 
         document.getElementById('bc').items = items
-        
-        </script>
+
+    </script>
 
 
 </body>
