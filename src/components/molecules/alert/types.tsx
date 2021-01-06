@@ -1,5 +1,5 @@
 /**
- * 'type' prop predefined values
+ * 'status' prop predefined values
  */
 export enum StatusProps { 
     info = 'info',
@@ -10,18 +10,17 @@ export enum StatusProps {
 }
 
 /**
+ * 'status' prop types
+ */
+export declare type StatusProp = keyof typeof StatusProps
+
+/**
  * 'type' prop predefined values
  */
 export enum TypeProps {
     banner = 'banner',
     basic = 'basic'
 }
-
-
-/**
- * 'type' prop types
- */
-export declare type StatusProp = keyof typeof StatusProps
 
 /**
  * 'type' prop types

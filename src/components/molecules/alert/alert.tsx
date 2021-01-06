@@ -19,9 +19,10 @@ export class BcmAlert {
     @Prop({ attribute: 'title'}) _title: string
     @Prop() status?: StatusProp = StatusProps.info
     @Prop() type?: TypeProp = TypeProps.basic
-    @Prop({ reflect: true }) dissmisable?: string | boolean = false
+    @Prop() dissmisable?: string | boolean = false
     @Prop() icon?: boolean = false
     @Prop({ attribute: 'big-icon' }) bigIcon?: boolean = false
+    @Prop({ attribute: 'full-width' }) fullWidth?: boolean = false
     
     /**
      * Component States
@@ -37,35 +38,21 @@ export class BcmAlert {
 
     /**
      * @desc
-     * @returns {BcmIcon}
+     * @param isBigIcon 
      */
-    getIcon() {
-        switch (this.status) {
-            case StatusProps.info:
-                return <bcm-icon type="fill" icon="info-circle" size={14} color="blue-6" />
-            case StatusProps.error:
-                return <bcm-icon type="fill" icon="close-circle" size={14} color="red-6" />
-            case StatusProps.warning:
-                return <bcm-icon type="fill" icon="exclamation-circle" size={14} color="warmyellow-6" />
-            case StatusProps.success:
-                return <bcm-icon type="fill" icon="check-circle" size={14} color="green-6" />
-        }
-    }
+    getIcon(isBigIcon: boolean = false) {
+        const size = isBigIcon ? 'medium' : 14
+        const type = isBigIcon ? 'outlined' : 'fill'
 
-    /**
-     * @desc
-     * @returns {BcmIcon}
-     */
-    getBigIcon() {
         switch (this.status) {
             case StatusProps.info:
-                return <bcm-icon type="outlined" icon="info-circle" size="medium" color="prime-blue-6" />
+                return <bcm-icon type={type} icon="info-circle" size={size} color="blue-6" />
             case StatusProps.error:
-                return <bcm-icon type="outlined" icon="close-circle" size="medium" color="red-6" />
+                return <bcm-icon type={type} icon="close-circle" size={size} color="red-6" />
             case StatusProps.warning:
-                return <bcm-icon type="outlined" icon="exclamation-circle" size="medium" color="warmyellow-6" />
+                return <bcm-icon type={type} icon="exclamation-circle" size={size} color="warmyellow-6" />
             case StatusProps.success:
-                return <bcm-icon type="outlined" icon="check-circle" size="medium" color="green-6" />
+                return <bcm-icon type={type} icon="check-circle" size={size} color="green-6" />
         }
     }
 
@@ -97,21 +84,17 @@ export class BcmAlert {
     }
 
     render() {
-        const { status, type, icon, bigIcon, hasSlot, _title } = this
-        const alertClasses = cs(
-            'alert',
-            type,
-            status,
-            {
-                'has-slot': hasSlot
-            }
-        )
+        const { fullWidth, status, type, icon, bigIcon, hasSlot, _title } = this
+
+        const alertClasses = cs('alert', type, status, {
+            'full-width': fullWidth,
+            'has-slot': hasSlot
+        })
+
         return (
             <div class={alertClasses}>
-                { bigIcon && (
-                    <div class="icon-content">{this.getBigIcon()}</div>
-                )
-                }
+                { bigIcon && (<div class="icon-content">{this.getIcon(true)}</div>)}
+
                 <div class="text-content">
                     <span class="title">
                         {icon && this.getIcon()} {_title} {this.getDismiss()}
