@@ -53,16 +53,18 @@ export class BcmSwitch {
             return (condition && size === 'medium')
         }
 
+        const isMedium = size === 'medium'
+
         return (
             <label class={wrapperClass}>
                 {isPermitted(activeText) && <span class="active-text size-1">{activeText}</span>}
                 
                 <div class={classes}>
-                    {isPermitted(activeIcon) && <bcm-icon icon={activeIcon} size={14} class="icon-active"></bcm-icon>}
+                    {isMedium && <bcm-icon icon={activeIcon} size={14} class="icon-active"></bcm-icon>}
                     <span class="handle">
                         {pending && <span class="spinner"></span>}
                     </span>
-                    {isPermitted(inactiveText) && <bcm-icon icon={inactiveIcon} size={14} class="icon-inactive"></bcm-icon>}
+                    {isMedium && <bcm-icon icon={inactiveIcon} size={14} class="icon-inactive"></bcm-icon>}
                 </div>
                 
                 <input

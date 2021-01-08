@@ -45,7 +45,6 @@ export default {
         'active-text': {
             control: 'text',
             description: 'Sets active text content.',
-            defaultValue: 'Active',
             table: {
                 category: 'Properties',
                 type: { summary: 'string' }
@@ -54,7 +53,6 @@ export default {
         'inactive-text': {
             control: 'text',
             description: 'Sets inactive text content.',
-            defaultValue: 'Inactive',
             table: {
                 category: 'Properties',
                 type: { summary: 'string' }
