@@ -5,13 +5,27 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { StatusProp, TypeProp } from "./components/molecules/alert/types";
 import { ItemType } from "./components/molecules/breadcrumb/breadcrumb";
 import { ColorPaletteTypes } from "./global/variables/colors";
 import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/types";
-import { TypeProp } from "./components/molecules/notification/types";
+import { StatusProp as StatusProp1 } from "./components/molecules/message/types";
+import { TypeProp as TypeProp1 } from "./components/molecules/notification/types";
 import { OptionType } from "./components/molecules/radio/group";
 import { OptionWithGroupType } from "./components/molecules/select/select";
 export namespace Components {
+    interface BcmAlert {
+        /**
+          * Component Properties
+         */
+        "_title": string;
+        "bigIcon"?: boolean;
+        "dissmisable"?: string | boolean;
+        "fullWidth"?: boolean;
+        "icon"?: boolean;
+        "status"?: StatusProp;
+        "type"?: TypeProp;
+    }
     interface BcmAvatar {
         "image": string;
         "name": string;
@@ -117,6 +131,14 @@ export namespace Components {
         "icon": string;
         "target": string;
     }
+    interface BcmMessage {
+        /**
+          * Component Properties
+         */
+        "_title": string;
+        "fullWidth"?: boolean;
+        "status"?: StatusProp;
+    }
     interface BcmNotification {
         /**
           * Component Properties
@@ -220,8 +242,28 @@ export namespace Components {
         "last": boolean;
         "timelineType": 'left' | 'right' | 'alternate';
     }
+    interface BcmUpload {
+        /**
+          * Component Properties
+         */
+        "acceptTypes": string;
+        "data": () => Promise<FormData>;
+        "maxFileSize": number;
+        "maxImageHeight": number;
+        "maxImageWidth": number;
+        "minImageHeight": number;
+        "minImageWidth": number;
+        "multipleFile": number;
+        "showThumbnail": boolean;
+    }
 }
 declare global {
+    interface HTMLBcmAlertElement extends Components.BcmAlert, HTMLStencilElement {
+    }
+    var HTMLBcmAlertElement: {
+        prototype: HTMLBcmAlertElement;
+        new (): HTMLBcmAlertElement;
+    };
     interface HTMLBcmAvatarElement extends Components.BcmAvatar, HTMLStencilElement {
     }
     var HTMLBcmAvatarElement: {
@@ -312,6 +354,12 @@ declare global {
         prototype: HTMLBcmLinkElement;
         new (): HTMLBcmLinkElement;
     };
+    interface HTMLBcmMessageElement extends Components.BcmMessage, HTMLStencilElement {
+    }
+    var HTMLBcmMessageElement: {
+        prototype: HTMLBcmMessageElement;
+        new (): HTMLBcmMessageElement;
+    };
     interface HTMLBcmNotificationElement extends Components.BcmNotification, HTMLStencilElement {
     }
     var HTMLBcmNotificationElement: {
@@ -390,7 +438,14 @@ declare global {
         prototype: HTMLBcmTimelineItemElement;
         new (): HTMLBcmTimelineItemElement;
     };
+    interface HTMLBcmUploadElement extends Components.BcmUpload, HTMLStencilElement {
+    }
+    var HTMLBcmUploadElement: {
+        prototype: HTMLBcmUploadElement;
+        new (): HTMLBcmUploadElement;
+    };
     interface HTMLElementTagNameMap {
+        "bcm-alert": HTMLBcmAlertElement;
         "bcm-avatar": HTMLBcmAvatarElement;
         "bcm-badge": HTMLBcmBadgeElement;
         "bcm-breadcrumb": HTMLBcmBreadcrumbElement;
@@ -406,6 +461,7 @@ declare global {
         "bcm-icon": HTMLBcmIconElement;
         "bcm-input": HTMLBcmInputElement;
         "bcm-link": HTMLBcmLinkElement;
+        "bcm-message": HTMLBcmMessageElement;
         "bcm-notification": HTMLBcmNotificationElement;
         "bcm-radio": HTMLBcmRadioElement;
         "bcm-radio-group": HTMLBcmRadioGroupElement;
@@ -419,9 +475,22 @@ declare global {
         "bcm-textarea": HTMLBcmTextareaElement;
         "bcm-timeline": HTMLBcmTimelineElement;
         "bcm-timeline-item": HTMLBcmTimelineItemElement;
+        "bcm-upload": HTMLBcmUploadElement;
     }
 }
 declare namespace LocalJSX {
+    interface BcmAlert {
+        /**
+          * Component Properties
+         */
+        "_title"?: string;
+        "bigIcon"?: boolean;
+        "dissmisable"?: string | boolean;
+        "fullWidth"?: boolean;
+        "icon"?: boolean;
+        "status"?: StatusProp;
+        "type"?: TypeProp;
+    }
     interface BcmAvatar {
         "image"?: string;
         "name"?: string;
@@ -525,6 +594,14 @@ declare namespace LocalJSX {
         "href"?: string;
         "icon"?: string;
         "target"?: string;
+    }
+    interface BcmMessage {
+        /**
+          * Component Properties
+         */
+        "_title"?: string;
+        "fullWidth"?: boolean;
+        "status"?: StatusProp;
     }
     interface BcmNotification {
         /**
@@ -643,7 +720,21 @@ declare namespace LocalJSX {
         "last"?: boolean;
         "timelineType"?: 'left' | 'right' | 'alternate';
     }
+    interface BcmUpload {
+        /**
+          * Component Properties
+         */
+        "acceptTypes"?: string;
+        "maxFileSize"?: number;
+        "maxImageHeight"?: number;
+        "maxImageWidth"?: number;
+        "minImageHeight"?: number;
+        "minImageWidth"?: number;
+        "multipleFile"?: number;
+        "showThumbnail"?: boolean;
+    }
     interface IntrinsicElements {
+        "bcm-alert": BcmAlert;
         "bcm-avatar": BcmAvatar;
         "bcm-badge": BcmBadge;
         "bcm-breadcrumb": BcmBreadcrumb;
@@ -659,6 +750,7 @@ declare namespace LocalJSX {
         "bcm-icon": BcmIcon;
         "bcm-input": BcmInput;
         "bcm-link": BcmLink;
+        "bcm-message": BcmMessage;
         "bcm-notification": BcmNotification;
         "bcm-radio": BcmRadio;
         "bcm-radio-group": BcmRadioGroup;
@@ -672,12 +764,14 @@ declare namespace LocalJSX {
         "bcm-textarea": BcmTextarea;
         "bcm-timeline": BcmTimeline;
         "bcm-timeline-item": BcmTimelineItem;
+        "bcm-upload": BcmUpload;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "bcm-alert": LocalJSX.BcmAlert & JSXBase.HTMLAttributes<HTMLBcmAlertElement>;
             "bcm-avatar": LocalJSX.BcmAvatar & JSXBase.HTMLAttributes<HTMLBcmAvatarElement>;
             "bcm-badge": LocalJSX.BcmBadge & JSXBase.HTMLAttributes<HTMLBcmBadgeElement>;
             "bcm-breadcrumb": LocalJSX.BcmBreadcrumb & JSXBase.HTMLAttributes<HTMLBcmBreadcrumbElement>;
@@ -693,6 +787,7 @@ declare module "@stencil/core" {
             "bcm-icon": LocalJSX.BcmIcon & JSXBase.HTMLAttributes<HTMLBcmIconElement>;
             "bcm-input": LocalJSX.BcmInput & JSXBase.HTMLAttributes<HTMLBcmInputElement>;
             "bcm-link": LocalJSX.BcmLink & JSXBase.HTMLAttributes<HTMLBcmLinkElement>;
+            "bcm-message": LocalJSX.BcmMessage & JSXBase.HTMLAttributes<HTMLBcmMessageElement>;
             "bcm-notification": LocalJSX.BcmNotification & JSXBase.HTMLAttributes<HTMLBcmNotificationElement>;
             "bcm-radio": LocalJSX.BcmRadio & JSXBase.HTMLAttributes<HTMLBcmRadioElement>;
             "bcm-radio-group": LocalJSX.BcmRadioGroup & JSXBase.HTMLAttributes<HTMLBcmRadioGroupElement>;
@@ -706,6 +801,7 @@ declare module "@stencil/core" {
             "bcm-textarea": LocalJSX.BcmTextarea & JSXBase.HTMLAttributes<HTMLBcmTextareaElement>;
             "bcm-timeline": LocalJSX.BcmTimeline & JSXBase.HTMLAttributes<HTMLBcmTimelineElement>;
             "bcm-timeline-item": LocalJSX.BcmTimelineItem & JSXBase.HTMLAttributes<HTMLBcmTimelineItemElement>;
+            "bcm-upload": LocalJSX.BcmUpload & JSXBase.HTMLAttributes<HTMLBcmUploadElement>;
         }
     }
 }
