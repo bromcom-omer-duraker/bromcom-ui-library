@@ -676,6 +676,9 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "inactiveIcon"?: string;
         "inactiveText"?: string;
+        "onBcm-blur"?: (event: CustomEvent<any>) => void;
+        "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "onBcm-focus"?: (event: CustomEvent<any>) => void;
         "pending"?: boolean;
         "size"?: 'small' | 'medium';
     }

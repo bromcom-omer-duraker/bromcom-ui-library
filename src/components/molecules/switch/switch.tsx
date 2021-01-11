@@ -1,4 +1,4 @@
-import { Component, h, Prop } from '@stencil/core'
+import { Component, h, Prop, Event, EventEmitter } from '@stencil/core'
 import cs from 'classnames'
 
 @Component({
@@ -19,8 +19,22 @@ export class BcmSwitch {
     @Prop() pending: boolean = false
     @Prop({ mutable:true, reflect:true }) disabled: boolean = false
 
+    @Event({eventName: 'bcm-change'}) change: EventEmitter
+    @Event({eventName: 'bcm-focus'}) focus: EventEmitter
+    @Event({eventName: 'bcm-blur'}) blur: EventEmitter
+
     handleClick() {
         this.checked = this.input.checked
+
+        this.change.emit(this.checked)
+    }
+
+    handleFocus() {
+        this.focus.emit()
+    }
+
+    handleBlur() {
+        this.blur.emit()
     }
 
     componentWillRender() {
@@ -49,7 +63,7 @@ export class BcmSwitch {
             }
         )
 
-        const isPermitted = (condition) => {
+        const isPermitted = (condition: string) => {
             return (condition && size === 'medium')
         }
 
@@ -69,6 +83,8 @@ export class BcmSwitch {
                 
                 <input
                     onClick={() => this.handleClick()}
+                    onFocus={() => this.handleFocus()}
+                    onBlur={() => this.handleBlur()}
                     ref={el => (this.input = el)}
                     checked={checked}
                     type="checkbox"

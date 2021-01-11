@@ -37,7 +37,18 @@
 
 <body style="text-align: center;margin-top: 10%;">
     <bcm-switch checked active-icon="like" inactive-icon="dislike" active-text="Like" inactive-text="Dislike" size="medium"></bcm-switch>
-    <!-- <bcm-switch size="small"></bcm-switch> -->
+    <bcm-switch size="small"></bcm-switch>
+
+    <script>
+
+        const sw = document.querySelector('bcm-switch')
+
+        sw.addEventListener('bcm-change', (e) => {
+            console.log(e.detail)
+        })
+
+    </script>
+
 </body>
 
 </html>
