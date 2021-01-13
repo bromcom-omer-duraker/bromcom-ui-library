@@ -40,7 +40,10 @@
     <div style="max-width: 400px; display: flex; flex-direction: column;">
         <div class="row">
             <div class="col">
-                <bcm-upload multiple-file="Infinity"></bcm-upload>
+                <bcm-upload 
+                    accept-types="png|jpg|gif|xlsx" 
+                    multiple-file="5">
+                </bcm-upload>
             </div>
         </div>
         <div class="row">
@@ -54,6 +57,7 @@
         (async () => {
             await customElements.whenDefined('bcm-upload');
             var upload = document.querySelector('bcm-upload')
+
             document.querySelector('bcm-button').addEventListener('click', function() {
                 upload.data().then(function(files) {
                     console.log(files.getAll('userFiles[]'))

@@ -48,8 +48,22 @@
     }
 }
 
+.file.with-thumbnail {
+    background-color: #ffffff;
+    border: 1px solid var(--bcm-color-grey-5);
+    border-radius: border-radius('2');
+}
+
 .remove-btn {
     cursor: pointer;
     margin-left: auto !important;
     padding-left: 10px;
+}
+
+.thumbnail {
+    min-width: 48px;
+    min-height: 48px;
+    background: transparent none no-repeat center center / cover;
+    margin-right: 9px;
+    margin-left: 6px;
 }
