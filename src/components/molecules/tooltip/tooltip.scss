@@ -1,0 +1,19 @@
+@import '../../../global/variables/popover.scss';
+
+:host {
+    display: inline-flex;
+}
+
+:host(:focus) {
+    outline: none;
+}
+
+.tooltip {
+    @include popover($grey-9) {
+        border: 1px solid $grey-9;
+        width: max-content;
+        padding: space('xxxs') space('xxs');
+        border-radius: border-radius('2');
+        color: $grey-1;
+    }
+}

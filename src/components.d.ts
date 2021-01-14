@@ -13,6 +13,7 @@ import { StatusProp as StatusProp1 } from "./components/molecules/message/types"
 import { TypeProp as TypeProp1 } from "./components/molecules/notification/types";
 import { OptionType } from "./components/molecules/radio/group";
 import { OptionWithGroupType } from "./components/molecules/select/select";
+import { placementType } from "./components/molecules/tooltip/tooltip";
 export namespace Components {
     interface BcmAlert {
         /**
@@ -254,6 +255,14 @@ export namespace Components {
         "last": boolean;
         "timelineType": 'left' | 'right' | 'alternate';
     }
+    interface BcmTooltip {
+        "hide": () => Promise<void>;
+        "message": string;
+        "open": boolean;
+        "placement": placementType;
+        "show": () => Promise<void>;
+        "trigger": 'hover' | 'click' | 'focus';
+    }
 }
 declare global {
     interface HTMLBcmAlertElement extends Components.BcmAlert, HTMLStencilElement {
@@ -442,6 +451,12 @@ declare global {
         prototype: HTMLBcmTimelineItemElement;
         new (): HTMLBcmTimelineItemElement;
     };
+    interface HTMLBcmTooltipElement extends Components.BcmTooltip, HTMLStencilElement {
+    }
+    var HTMLBcmTooltipElement: {
+        prototype: HTMLBcmTooltipElement;
+        new (): HTMLBcmTooltipElement;
+    };
     interface HTMLElementTagNameMap {
         "bcm-alert": HTMLBcmAlertElement;
         "bcm-avatar": HTMLBcmAvatarElement;
@@ -474,6 +489,7 @@ declare global {
         "bcm-textarea": HTMLBcmTextareaElement;
         "bcm-timeline": HTMLBcmTimelineElement;
         "bcm-timeline-item": HTMLBcmTimelineItemElement;
+        "bcm-tooltip": HTMLBcmTooltipElement;
     }
 }
 declare namespace LocalJSX {
@@ -733,6 +749,14 @@ declare namespace LocalJSX {
         "last"?: boolean;
         "timelineType"?: 'left' | 'right' | 'alternate';
     }
+    interface BcmTooltip {
+        "message"?: string;
+        "onBcm-hide"?: (event: CustomEvent<any>) => void;
+        "onBcm-show"?: (event: CustomEvent<any>) => void;
+        "open"?: boolean;
+        "placement"?: placementType;
+        "trigger"?: 'hover' | 'click' | 'focus';
+    }
     interface IntrinsicElements {
         "bcm-alert": BcmAlert;
         "bcm-avatar": BcmAvatar;
@@ -765,6 +789,7 @@ declare namespace LocalJSX {
         "bcm-textarea": BcmTextarea;
         "bcm-timeline": BcmTimeline;
         "bcm-timeline-item": BcmTimelineItem;
+        "bcm-tooltip": BcmTooltip;
     }
 }
 export { LocalJSX as JSX };
@@ -802,6 +827,7 @@ declare module "@stencil/core" {
             "bcm-textarea": LocalJSX.BcmTextarea & JSXBase.HTMLAttributes<HTMLBcmTextareaElement>;
             "bcm-timeline": LocalJSX.BcmTimeline & JSXBase.HTMLAttributes<HTMLBcmTimelineElement>;
             "bcm-timeline-item": LocalJSX.BcmTimelineItem & JSXBase.HTMLAttributes<HTMLBcmTimelineItemElement>;
+            "bcm-tooltip": LocalJSX.BcmTooltip & JSXBase.HTMLAttributes<HTMLBcmTooltipElement>;
         }
     }
 }
