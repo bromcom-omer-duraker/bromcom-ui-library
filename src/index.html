@@ -12,9 +12,23 @@
 </head>
 
 <body style="display: flex;align-items: center;justify-content: center;height: 100vh;margin: 0;">
-    <bcm-popover placement="top" message="Popover content goes here and here and here" heading="Popover title">
-        <bcm-tag>Tooltip Top Center</bcm-tag>
-    </bcm-popover>
+    <bcm-popconfirm
+        id="confirm"
+        placement="right-start"
+        message="Are you sure to delete this homework?"
+        cancel-text="No"
+        okey-text="Yes"
+        status="warning"
+    >
+        <bcm-button>Delete</bcm-button>
+    </bcm-popconfirm>
+
+
+    <script>
+        document.getElementById('confirm').addEventListener('bcm-confirm', () => {
+            console.log('confirmed')
+        })
+    </script>
 </body>
 
 </html>
