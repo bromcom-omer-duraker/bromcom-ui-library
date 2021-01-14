@@ -1,5 +1,8 @@
-@mixin popover($bg-color) {
+@mixin popover($bg-color, $margin: 8px, $arrow_place: 8px) {
     
+    $arrow_width: 6px;
+    $arrow_margin: $margin - ($arrow_width * 2);
+
     /*
     BASE STYLES
     -----------
@@ -12,9 +15,11 @@
     .box {
         position: absolute;
         display: none;
-        z-index: 999;
         background-color: $bg-color;
-        
+        border: 1px solid $bg-color;
+        border-radius: border-radius('2');
+        z-index: 999; // will change with built-in z-index values
+
         @content;
     }
 
@@ -22,7 +27,8 @@
         content: "";
         position: absolute;
         display: none;
-        border: 8px solid;
+        border: $arrow_width solid;
+        z-index: 999; // will change with built-in z-index values
     }
 
     &.open {
@@ -44,12 +50,12 @@
     &.top {
         .box {
             bottom: 100%;
-            margin-bottom: 8px;
+            margin-bottom: $margin;
         }
 
         &::after {
             bottom: 100%;
-            margin-bottom: -5px;
+            margin-bottom: $arrow_margin;
             border-color: $bg-color transparent transparent transparent;
         }
     }
@@ -57,12 +63,12 @@
     &.bottom {
         .box {
             top: 100%;
-            margin-top: 8px;
+            margin-top: $margin;
         }
 
         &::after {
             top: 100%;
-            margin-top: -5px;
+            margin-top: $arrow_margin;
             border-color: transparent transparent $bg-color transparent;
         }
     }
@@ -70,12 +76,12 @@
     &.left {
         .box {
             right:100%;
-            margin-right: 8px;
+            margin-right: $margin;
         }
 
         &::after {
             right: 100%;
-            margin-right: -5px;
+            margin-right: $arrow_margin;
             border-color: transparent transparent transparent $bg-color;
         }
     }
@@ -83,12 +89,12 @@
     &.right {
         .box {
             left: 100%;
-            margin-left: 8px;
+            margin-left: $margin;
         }
 
         &::after {
             left: 100%;
-            margin-left: -5px;
+            margin-left: $arrow_margin;
             border-color: transparent $bg-color transparent transparent;
         }
     }
@@ -115,7 +121,7 @@
         }
 
         &::after {
-            left: 5px;
+            left: $arrow_place;
         }
     }
 
@@ -126,7 +132,7 @@
         }
 
         &::after {
-            right: 5px;
+            right: $arrow_place;
         }
     }
 
@@ -150,7 +156,7 @@
         }
         
         &::after {
-            top: 5px;
+            top: $arrow_place - 4px;
         }
     }
 
@@ -161,7 +167,7 @@
         }
 
         &::after {
-            bottom: 5px;
+            bottom: $arrow_place -4px;
         }
     }
 }

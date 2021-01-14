@@ -1,0 +1,31 @@
+@import '../../../global/variables/popover.scss';
+
+:host {
+    display: inline-flex;
+}
+
+:host(:focus) {
+    outline: none;
+}
+
+.popover {
+    @include popover($grey-1, space('xs'), space('xs')) {
+        width: 224px; // + 6px arrow = 230px
+        filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.25));
+
+        .heading, .content {
+            display: block;
+        }
+
+        .heading {
+            padding: space('xxxs') space('xs');
+            border-bottom: 1px solid $grey-5;
+            color: $grey-9;
+        }
+        
+        .content {
+            padding: space('xxs') space('xs');
+            color: $grey-8;
+        }
+    }
+}

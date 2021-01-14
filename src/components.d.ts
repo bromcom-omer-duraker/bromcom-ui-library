@@ -11,9 +11,10 @@ import { ColorPaletteTypes } from "./global/variables/colors";
 import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/types";
 import { StatusProp as StatusProp1 } from "./components/molecules/message/types";
 import { TypeProp as TypeProp1 } from "./components/molecules/notification/types";
+import { placementType } from "./components/molecules/tooltip/tooltip";
 import { OptionType } from "./components/molecules/radio/group";
 import { OptionWithGroupType } from "./components/molecules/select/select";
-import { placementType } from "./components/molecules/tooltip/tooltip";
+import { placementType as placementType1 } from "./components/molecules/tooltip/tooltip";
 export namespace Components {
     interface BcmAlert {
         /**
@@ -149,6 +150,15 @@ export namespace Components {
         "_title": string;
         "confirmable"?: boolean;
         "status"?: TypeProp;
+    }
+    interface BcmPopover {
+        "heading": string;
+        "hide": () => Promise<void>;
+        "message": string;
+        "open": boolean;
+        "placement": placementType;
+        "show": () => Promise<void>;
+        "trigger": 'hover' | 'click' | 'focus';
     }
     interface BcmRadio {
         "buttonStyle": 'solid' | 'outline';
@@ -373,6 +383,12 @@ declare global {
         prototype: HTMLBcmNotificationElement;
         new (): HTMLBcmNotificationElement;
     };
+    interface HTMLBcmPopoverElement extends Components.BcmPopover, HTMLStencilElement {
+    }
+    var HTMLBcmPopoverElement: {
+        prototype: HTMLBcmPopoverElement;
+        new (): HTMLBcmPopoverElement;
+    };
     interface HTMLBcmRadioElement extends Components.BcmRadio, HTMLStencilElement {
     }
     var HTMLBcmRadioElement: {
@@ -476,6 +492,7 @@ declare global {
         "bcm-link": HTMLBcmLinkElement;
         "bcm-message": HTMLBcmMessageElement;
         "bcm-notification": HTMLBcmNotificationElement;
+        "bcm-popover": HTMLBcmPopoverElement;
         "bcm-radio": HTMLBcmRadioElement;
         "bcm-radio-group": HTMLBcmRadioGroupElement;
         "bcm-select": HTMLBcmSelectElement;
@@ -631,6 +648,15 @@ declare namespace LocalJSX {
         "onBcm-confirm"?: (event: CustomEvent<any>) => void;
         "status"?: TypeProp;
     }
+    interface BcmPopover {
+        "heading"?: string;
+        "message"?: string;
+        "onBcm-hide"?: (event: CustomEvent<any>) => void;
+        "onBcm-show"?: (event: CustomEvent<any>) => void;
+        "open"?: boolean;
+        "placement"?: placementType;
+        "trigger"?: 'hover' | 'click' | 'focus';
+    }
     interface BcmRadio {
         "buttonStyle"?: 'solid' | 'outline';
         "checked"?: boolean;
@@ -776,6 +802,7 @@ declare namespace LocalJSX {
         "bcm-link": BcmLink;
         "bcm-message": BcmMessage;
         "bcm-notification": BcmNotification;
+        "bcm-popover": BcmPopover;
         "bcm-radio": BcmRadio;
         "bcm-radio-group": BcmRadioGroup;
         "bcm-select": BcmSelect;
@@ -814,6 +841,7 @@ declare module "@stencil/core" {
             "bcm-link": LocalJSX.BcmLink & JSXBase.HTMLAttributes<HTMLBcmLinkElement>;
             "bcm-message": LocalJSX.BcmMessage & JSXBase.HTMLAttributes<HTMLBcmMessageElement>;
             "bcm-notification": LocalJSX.BcmNotification & JSXBase.HTMLAttributes<HTMLBcmNotificationElement>;
+            "bcm-popover": LocalJSX.BcmPopover & JSXBase.HTMLAttributes<HTMLBcmPopoverElement>;
             "bcm-radio": LocalJSX.BcmRadio & JSXBase.HTMLAttributes<HTMLBcmRadioElement>;
             "bcm-radio-group": LocalJSX.BcmRadioGroup & JSXBase.HTMLAttributes<HTMLBcmRadioGroupElement>;
             "bcm-select": LocalJSX.BcmSelect & JSXBase.HTMLAttributes<HTMLBcmSelectElement>;
