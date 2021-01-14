@@ -1,0 +1,167 @@
+@mixin popover($bg-color) {
+    
+    /*
+    BASE STYLES
+    -----------
+
+    box =  box
+    after  =  arrow
+    */
+    position:relative;
+
+    .box {
+        position: absolute;
+        display: none;
+        z-index: 999;
+        background-color: $bg-color;
+        
+        @content;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        display: none;
+        border: 8px solid;
+    }
+
+    &.open {
+        .box, &::after {
+            display:block;
+        }
+    }
+
+    /*
+    PLACEMENTS
+    ----------
+
+    box =  box
+    after  =  arrow
+    */
+
+    /* basic tooltip placement */
+
+    &.top {
+        .box {
+            bottom: 100%;
+            margin-bottom: 8px;
+        }
+
+        &::after {
+            bottom: 100%;
+            margin-bottom: -5px;
+            border-color: $bg-color transparent transparent transparent;
+        }
+    }
+
+    &.bottom {
+        .box {
+            top: 100%;
+            margin-top: 8px;
+        }
+
+        &::after {
+            top: 100%;
+            margin-top: -5px;
+            border-color: transparent transparent $bg-color transparent;
+        }
+    }
+
+    &.left {
+        .box {
+            right:100%;
+            margin-right: 8px;
+        }
+
+        &::after {
+            right: 100%;
+            margin-right: -5px;
+            border-color: transparent transparent transparent $bg-color;
+        }
+    }
+
+    &.right {
+        .box {
+            left: 100%;
+            margin-left: 8px;
+        }
+
+        &::after {
+            left: 100%;
+            margin-left: -5px;
+            border-color: transparent $bg-color transparent transparent;
+        }
+    }
+
+    /* advanced tooltip box placement */
+
+    /* top & bottom */
+    &.top.center, &.bottom.center {
+        .box {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        &::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    
+    /* top-start & bottom-start */
+    &.top.start, &.bottom.start {
+        .box {
+            left: 0
+        }
+
+        &::after {
+            left: 5px;
+        }
+    }
+
+    /* top-end & bottom-end */
+    &.top.end, &.bottom.end {
+        .box {
+            right: 0
+        }
+
+        &::after {
+            right: 5px;
+        }
+    }
+
+    /* left & right */
+    &.left.center, &.right.center {
+        .box {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &::after {
+            top:50%;
+            transform:translateY(-50%);
+        }
+    }
+
+    /* left-start & right-start */
+    &.left.start, &.right.start {
+        .box {
+            top: 0;
+        }
+        
+        &::after {
+            top: 5px;
+        }
+    }
+
+    /* left-end & right-end */
+    &.left.end, &.right.end {
+        .box {
+            bottom: 0;
+        }
+
+        &::after {
+            bottom: 5px;
+        }
+    }
+}
