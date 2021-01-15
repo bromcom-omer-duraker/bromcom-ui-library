@@ -9,12 +9,24 @@
     <link rel="stylesheet" href="/build/bromcom-ui.css">
     <script type="module" src="/build/bromcom-ui.esm.js"></script>
     <script nomodule src="/build/bromcom-ui.js"></script>
+    <style>
+        a {
+            text-decoration: none;
+        }
+        bcm-divider {
+            margin: 10px 0;
+        }
+    </style>
 </head>
 
 <body style="display: flex;align-items: center;justify-content: center;height: 100vh;margin: 0;">
-    <bcm-popover placement="top" message="Popover content goes here and here and here" heading="Popover title">
-        <bcm-tag>Tooltip Top Center</bcm-tag>
-    </bcm-popover>
+    <bcm-empty image="simple">
+        <bcm-text scale="size-3">
+            Customize <a href="#">Description</a>
+        </bcm-text>
+        <bcm-divider></bcm-divider>
+        <bcm-button>Button</bcm-button>
+    </bcm-empty>
 </body>
 
 </html>
