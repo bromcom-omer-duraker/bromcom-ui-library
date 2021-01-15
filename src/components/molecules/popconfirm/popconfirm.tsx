@@ -17,13 +17,11 @@ const statuses = {
 export class BcmPopconfirm {
 
     @Element() host: HTMLElement
-    box: HTMLElement
 
     @Prop() message: string
-    @Prop() heading: string
     @Prop() status: 'warning' | 'error' = 'warning'
-    @Prop({ attribute: 'cancel-text' }) cancelText: string
-    @Prop({ attribute: 'okey-text' }) okeyText: string
+    @Prop({ attribute: 'cancel-text' }) cancelText: string = "No"
+    @Prop({ attribute: 'okey-text' }) okeyText: string = "Yes"
     @Prop({ mutable: true, reflect: true }) placement: placementType = 'top'
     @Prop() trigger: 'hover' | 'click' | 'focus' = 'click'
     @Prop({ mutable: true, reflect: true }) open: boolean
@@ -107,9 +105,7 @@ export class BcmPopconfirm {
     componentDidRender() {
 
         const box = this.host.shadowRoot.querySelector('.box') as HTMLElement
-        popoverPlacement(box, this.placement, (place: placementType) => this.placement = place)
-
-        this.box = this.host.shadowRoot.querySelector('.popconfirm')
+        popoverPlacement(box, this.host, this.placement, (place: placementType) => this.placement = place)
     }
 
     render() {

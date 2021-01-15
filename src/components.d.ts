@@ -153,7 +153,6 @@ export namespace Components {
     }
     interface BcmPopconfirm {
         "cancelText": string;
-        "heading": string;
         "hide": () => Promise<void>;
         "message": string;
         "okeyText": string;
@@ -669,7 +668,6 @@ declare namespace LocalJSX {
     }
     interface BcmPopconfirm {
         "cancelText"?: string;
-        "heading"?: string;
         "message"?: string;
         "okeyText"?: string;
         "onBcm-confirm"?: (event: CustomEvent<any>) => void;

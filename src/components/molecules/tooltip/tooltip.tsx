@@ -112,7 +112,7 @@ export class BcmTooltip {
         
         const box = this.host.shadowRoot.querySelector('.box') as HTMLElement
         
-        popoverPlacement(box, this.placement, (place: placementType) => this.placement = place)
+        popoverPlacement(box, this.host, this.placement, (place: placementType) => this.placement = place)
 
     }
 
