@@ -248,7 +248,7 @@ export namespace Components {
          */
         "acceptTypes": string;
         "data": () => Promise<FormData>;
-        "maxFileSize": number;
+        "maxFileSize": string;
         "maxImageHeight": number;
         "maxImageWidth": number;
         "minImageHeight": number;
@@ -725,7 +725,7 @@ declare namespace LocalJSX {
           * Component Properties
          */
         "acceptTypes"?: string;
-        "maxFileSize"?: number;
+        "maxFileSize"?: string;
         "maxImageHeight"?: number;
         "maxImageWidth"?: number;
         "minImageHeight"?: number;

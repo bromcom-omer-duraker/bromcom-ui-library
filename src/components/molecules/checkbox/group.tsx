@@ -1,15 +1,4 @@
-import {
-    h, 
-    Element, 
-    Component, 
-    Event, 
-    EventEmitter, 
-    Prop, 
-    State, 
-    Watch, 
-    Method,
-    Host
-} from '@stencil/core'
+import { h, Element, Component, Event, EventEmitter, Prop, State, Watch, Method, Host } from '@stencil/core'
 import cs from 'classnames'
 import { BcmCheckbox } from '../checkbox/checkbox'
 

@@ -1,13 +1,4 @@
-import {
-    h,
-    Element,
-    Component,
-    Prop,
-    Event,
-    EventEmitter,
-    Host,
-    Method
-} from '@stencil/core';
+import { h, Element, Component, Prop, Event, EventEmitter, Host, Method } from '@stencil/core';
 
 @Component({
     tag: 'bcm-checkbox',

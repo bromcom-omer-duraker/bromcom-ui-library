@@ -1,4 +1,7 @@
 import { Component, h, Element, Host, Prop, State, forceUpdate, Watch, Method } from '@stencil/core'
+import { IImageSizes, FileSizeUnit, FileSizeUnits } from './types'
+import { Errors } from './errors'
+import { createError } from '../../../utils/utils'
 
 @Component({
     tag: 'bcm-upload',
@@ -6,8 +9,12 @@ import { Component, h, Element, Host, Prop, State, forceUpdate, Watch, Method } 
     shadow: true
 })
 export class BcmUpload {
+    /**
+     * Private variables
+     */
     private fileInput: HTMLInputElement
     private imageTypes: string = 'png|jpg|jpeg|gif|bmp'
+    private componentDisabled: boolean = false
 
     /**
      * Component Element
@@ -19,6 +26,9 @@ export class BcmUpload {
      */
     @State() files: Array<{image: boolean, thumbnail: string, source: File}> = []
     @State() types: Array<string> = []
+    @State() maxFileSizeValue: number = 1024
+    @State() maxFileSizeUnit: FileSizeUnit = 'kb'
+
     
     /**
      * Component Properties
@@ -31,7 +41,7 @@ export class BcmUpload {
     }) multipleFile: number = 1
     @Prop({ 
         attribute: 'max-file-size' 
-    }) maxFileSize: number = 1024 // in Kilobytes
+    }) maxFileSize: string = (this.maxFileSizeValue + this.maxFileSizeUnit) as string
     @Prop({ 
         attribute: 'max-image-width' 
     }) maxImageWidth: number = Infinity
@@ -53,17 +63,53 @@ export class BcmUpload {
      */
     componentWillLoad() {
         this.parseTypes(this.acceptTypes)
+        this.parseMaxFileSize(this.maxFileSize)
     }
 
     /**
-     * @desc
-     * @param newValue 
+     * @desc Parse accepted file size
      * @returns {void}
      */
     @Watch('acceptTypes')
     parseTypes(newValue: string) {
-        if (newValue) {
-            this.types = newValue.split('|')
+        if (!newValue) return
+        this.types = newValue.split('|')
+    }
+
+    /**
+     * @desc Extract file size unit from
+     * size string eg: '500mb' -> mb
+     * @returns {void}
+     */
+    @Watch('maxFileSize')
+    parseMaxFileSize(newValue: string) {
+        if (!newValue) return
+        const unit = newValue.replace(/[0-9]/g, '').trim()
+        const value = newValue.replace(/\D/g, '')
+
+        // Validate size unit
+        // #
+        if (unit && unit in FileSizeUnits) {
+            this.maxFileSizeUnit = unit as FileSizeUnit
+        }
+        else {
+            console.error(createError(
+                Errors.INVALID_FILE_SIZE_UNIT, 
+                Object.keys(FileSizeUnits).join('|')
+            ))
+
+            this.componentDisabled = true
+            return
+        }
+
+        // Validate size
+        // #
+        if (value) {
+            this.maxFileSizeValue = Number(value)
+        }
+        else {
+            console.error(Errors.INVALID_FILE_SIZE)
+            return
         }
     }
 
@@ -79,6 +125,9 @@ export class BcmUpload {
      */
     handleFiles() {
         const files = Array.from(this.fileInput.files).slice(0, this.multipleFile)
+
+        if (this.componentDisabled) 
+            return
 
         // Add all selected user files
         // to files array if not exist
@@ -114,19 +163,65 @@ export class BcmUpload {
     }
 
     /**
+     * 
+     * @param src 
+     */
+    async getImageSizes(src: string): Promise<IImageSizes> {
+        return new Promise((resolve) => {
+            const image = new Image()
+
+            image.onload = () => resolve({
+                width: image.width,
+                height: image.height
+            })
+            image.src = src
+        })
+    }
+
+
+    /**
      * @desc
-     * @param file 
+     */
+    async validateImage(src: string): Promise<{errors?: Array<string>}> {
+        const errors: Array<string> = []
+        const sizes: IImageSizes = await this.getImageSizes(src)
+
+        sizes.width > this.maxImageWidth && errors.push(
+            createError(Errors.INVALID_MAX_IMAGE_WIDTH, this.maxImageWidth)
+        )
+        sizes.width < this.minImageWidth && errors.push(
+            createError(Errors.INVALID_MIN_IMAGE_WIDTH, this.minImageWidth)
+        )
+        sizes.height > this.maxImageHeight && errors.push(
+            createError(Errors.INVALID_MAX_IMAGE_HEIGHT, this.maxImageHeight)
+        )
+        sizes.height < this.minImageHeight && errors.push(
+            createError(Errors.INVALID_MIN_IMAGE_HEIGHT, this.minImageHeight)
+        )
+        return { errors }
+    }
+
+    /**
+     * @desc
      * @param idx 
      */
-    createItemThumbnail(idx: number) {
+    async createItemThumbnail(idx: number) {
         const reader: FileReader = new FileReader()
         const file: File = this.files[idx].source
 
-        reader.onloadend = (e: any) => {
-            this.files[idx].thumbnail = 
-                (e.target.result)
+        reader.onloadend = async (e: any) => {
+            const imageSrc = e.target.result
+            const validate = await this.validateImage(imageSrc)
             
-            forceUpdate(this.el)
+            if (validate.errors.length === 0) {
+                this.files[idx].thumbnail = (imageSrc)
+                forceUpdate(this.el)
+            }
+            else {
+                this.remove(idx)
+                validate.errors.forEach(error => console.error(error))
+            }
+            
         }
         reader.readAsDataURL(file)
     }
@@ -136,7 +231,8 @@ export class BcmUpload {
      * @param idx 
      */
     remove(idx: number) {
-        console.log(idx)
+        this.files.splice(idx, 1)
+        forceUpdate(this.el)
     }
     
     @Method()
@@ -175,16 +271,20 @@ export class BcmUpload {
                 <div class="files">
                     {files.length > 0 && files.map((file, idx) => (
                         <div class={'file ' + (file.image ? 'with-thumbnail' : '')}>
+
                             { !file.image && (
                                 <bcm-icon icon="paper-clip" size={16} color="grey-7"></bcm-icon>
                             )}
+
                             { file.image && (file.thumbnail && (
                                 <div
                                     class="thumbnail"
                                     style={{backgroundImage: 'url('+ file.thumbnail +')'}}>
                                 </div>
                             ))}
+
                             {file.source.name}
+
                             <bcm-icon
                                 icon="close"
                                 color="grey-10"
