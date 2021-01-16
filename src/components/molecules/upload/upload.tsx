@@ -136,10 +136,15 @@ export class BcmUpload {
             let type = userFile.name.split('.').pop()
             let isImage = this.imageTypes.indexOf(type) !== -1
 
+            // Check max file limit
+            // #
+            if (this.files.length == this.multipleFile)
+                return
+
             // Check file type
             // #
             if (this.types.length > 0 && this.types.indexOf(type) === -1)
-                return;
+                return
 
             this.files.map(file => {
                 // Check existance
@@ -244,6 +249,7 @@ export class BcmUpload {
             file.source.name
         ))
         
+        console.log(this)
         return form
     }
 
