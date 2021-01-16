@@ -1,0 +1,132 @@
+:host {
+    display: inline-block;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+$sizes: (
+    'small' 28px 16px 12px space('xxxs'),
+    'medium' 44px 22px 16px space('xxxs'),
+);
+
+.wrapper {
+    display: inline-flex;
+    align-items: center;
+
+    .active-text {
+        color: $prime-blue-6;
+        margin-right: space('xxxs');
+    }
+
+    .inactive-text {
+        color: $grey-6;
+        margin-left: space('xxxs')
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
+    background-color: $grey-6;
+    position: relative;
+
+    .handle {
+        padding: 1px;
+        position: absolute;
+        background-color: $grey-1;
+        display: inline-flex;
+        align-items: center;;
+        justify-content: center;
+        border-radius: 16px;
+        transition: all .2s ease-in-out;
+        box-shadow: box-shadow('2');
+    }
+
+    .icon-active {
+        opacity: 0;;
+    }
+
+    .icon-inactive {
+        opacity: 1;
+    }
+
+    @each $size, $width, $height, $handle, $padding in $sizes {
+
+        &.#{$size} {
+
+            // Container
+            width: $width;
+            height: $height;
+            padding: $padding;
+
+            // Handle
+            .handle {
+                width: $handle;
+                height: $handle;
+                left: $padding;
+            }
+
+            // Checked
+            &.switch-checked .handle{
+                left: $width - ($handle + $padding);
+            }
+
+            // Active
+            &:active:not(.disabled) .handle {
+                width: $height;
+            }
+
+            // Active + Checked
+            &:active.switch-checked:not(.disabled) .handle {
+                left: $width - ($height + $padding);
+            }
+
+            .spinner {
+                box-sizing: border-box;
+                display: inline-flex;
+                width: $handle - 3px;
+                height: $handle - 3px;
+                border-radius: 50%;
+                border: 1px solid $grey-1;
+                border-top-color: $grey-6;
+                animation: spinner 1.5s linear infinite;
+            }
+        }
+    }
+
+    &.switch-checked {
+        background-color: $prime-blue-6;
+
+        .icon-active {
+            color: $grey-1;
+            opacity: 1;
+        }
+
+        .icon-inactive {
+            opacity: 0;
+        }
+
+        .spinner {
+            border-top-color:$prime-blue-6;
+        }
+    }
+}
+
+.wrapper.disabled {
+    opacity: 40%;
+    cursor: not-allowed;
+}
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+}
+
+input[type="checkbox"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+}

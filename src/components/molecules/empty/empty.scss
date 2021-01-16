@@ -1,0 +1,24 @@
+.empty {
+    &.small {
+        max-width: 100px;
+    }
+    &.medium {
+        max-width: 140px;
+    }
+    &.big {
+        max-width: 200px;
+    }
+}
+
+.text {
+    font-size: 14px;
+    color: var(--bcm-color-grey-8);
+}
+
+.content {
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+}

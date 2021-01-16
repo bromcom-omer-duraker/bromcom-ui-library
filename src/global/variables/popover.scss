@@ -1,0 +1,174 @@
+@mixin popover($bg-color, $margin: 8px, $arrow_place: 8px) {
+    
+    $arrow_width: 6px;
+    $arrow_margin: $margin - ($arrow_width * 2);
+
+    /*
+    BASE STYLES
+    -----------
+
+    box =  box
+    after  =  arrow
+    */
+    position:relative;
+
+    .box {
+        position: absolute;
+        display: none;
+        box-sizing: border-box;
+        background-color: $bg-color;
+        border: 1px solid $bg-color;
+        border-radius: border-radius('2');
+        z-index: 999; // will change with built-in z-index values
+
+        @content;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        display: none;
+        border: $arrow_width solid;
+        z-index: 999; // will change with built-in z-index values
+    }
+
+    &.open {
+        .box, &::after {
+            display:block;
+        }
+    }
+
+    /*
+    PLACEMENTS
+    ----------
+
+    box =  box
+    after  =  arrow
+    */
+
+    /* basic tooltip placement */
+
+    &.top {
+        .box {
+            bottom: 100%;
+            margin-bottom: $margin;
+        }
+
+        &::after {
+            bottom: 100%;
+            margin-bottom: $arrow_margin;
+            border-color: $bg-color transparent transparent transparent;
+        }
+    }
+
+    &.bottom {
+        .box {
+            top: 100%;
+            margin-top: $margin;
+        }
+
+        &::after {
+            top: 100%;
+            margin-top: $arrow_margin;
+            border-color: transparent transparent $bg-color transparent;
+        }
+    }
+
+    &.left {
+        .box {
+            right:100%;
+            margin-right: $margin;
+        }
+
+        &::after {
+            right: 100%;
+            margin-right: $arrow_margin;
+            border-color: transparent transparent transparent $bg-color;
+        }
+    }
+
+    &.right {
+        .box {
+            left: 100%;
+            margin-left: $margin;
+        }
+
+        &::after {
+            left: 100%;
+            margin-left: $arrow_margin;
+            border-color: transparent $bg-color transparent transparent;
+        }
+    }
+
+    /* advanced tooltip box placement */
+
+    /* top & bottom */
+    &.top.center, &.bottom.center {
+        .box {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        &::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    
+    /* top-start & bottom-start */
+    &.top.start, &.bottom.start {
+        .box {
+            left: 0
+        }
+
+        &::after {
+            left: $arrow_place;
+        }
+    }
+
+    /* top-end & bottom-end */
+    &.top.end, &.bottom.end {
+        .box {
+            right: 0
+        }
+
+        &::after {
+            right: $arrow_place;
+        }
+    }
+
+    /* left & right */
+    &.left.center, &.right.center {
+        .box {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &::after {
+            top:50%;
+            transform:translateY(-50%);
+        }
+    }
+
+    /* left-start & right-start */
+    &.left.start, &.right.start {
+        .box {
+            top: 0;
+        }
+        
+        &::after {
+            top: $arrow_place - 4px;
+        }
+    }
+
+    /* left-end & right-end */
+    &.left.end, &.right.end {
+        .box {
+            bottom: 0;
+        }
+
+        &::after {
+            bottom: $arrow_place - 4px;
+        }
+    }
+}

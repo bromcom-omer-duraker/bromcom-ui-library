@@ -1,7 +1,7 @@
 import { h } from 'jsx-dom'
 
 export default {
-    title: 'Components/Molecules/Card',
+    title: 'Layout/Card',
     component: 'bcm-card',
     argTypes: {
         size: {

@@ -11,8 +11,10 @@ import { ColorPaletteTypes } from "./global/variables/colors";
 import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/types";
 import { StatusProp as StatusProp1 } from "./components/molecules/message/types";
 import { TypeProp as TypeProp1 } from "./components/molecules/notification/types";
+import { placementType } from "./components/molecules/tooltip/tooltip";
 import { OptionType } from "./components/molecules/radio/group";
 import { OptionWithGroupType } from "./components/molecules/select/select";
+import { placementType as placementType1 } from "./components/molecules/tooltip/tooltip";
 export namespace Components {
     interface BcmAlert {
         /**
@@ -43,11 +45,13 @@ export namespace Components {
     }
     interface BcmButton {
         "disabled": boolean;
+        "href": string;
         "icon": string;
         "iconPosition": 'prefix' | 'suffix';
         "kind": 'solid' | 'ghost';
         "outline": boolean;
         "size": 'small' | 'medium' | 'large';
+        "target": string;
     }
     interface BcmCard {
         "size": 'small' | 'medium';
@@ -147,6 +151,26 @@ export namespace Components {
         "confirmable"?: boolean;
         "status"?: TypeProp;
     }
+    interface BcmPopconfirm {
+        "cancelText": string;
+        "hide": () => Promise<void>;
+        "message": string;
+        "okeyText": string;
+        "open": boolean;
+        "placement": placementType;
+        "show": () => Promise<void>;
+        "status": 'warning' | 'error';
+        "trigger": 'hover' | 'click' | 'focus';
+    }
+    interface BcmPopover {
+        "heading": string;
+        "hide": () => Promise<void>;
+        "message": string;
+        "open": boolean;
+        "placement": placementType;
+        "show": () => Promise<void>;
+        "trigger": 'hover' | 'click' | 'focus';
+    }
     interface BcmRadio {
         "buttonStyle": 'solid' | 'outline';
         "checked": boolean;
@@ -198,6 +222,16 @@ export namespace Components {
         "icon": string;
         "iconPosition": 'prefix' | 'suffix';
     }
+    interface BcmSwitch {
+        "activeIcon": string;
+        "activeText": string;
+        "checked": boolean;
+        "disabled": boolean;
+        "inactiveIcon": string;
+        "inactiveText": string;
+        "pending": boolean;
+        "size": 'small' | 'medium';
+    }
     interface BcmTag {
         "checked": boolean;
         "type": string;
@@ -242,19 +276,13 @@ export namespace Components {
         "last": boolean;
         "timelineType": 'left' | 'right' | 'alternate';
     }
-    interface BcmUpload {
-        /**
-          * Component Properties
-         */
-        "acceptTypes": string;
-        "data": () => Promise<FormData>;
-        "maxFileSize": string;
-        "maxImageHeight": number;
-        "maxImageWidth": number;
-        "minImageHeight": number;
-        "minImageWidth": number;
-        "multipleFile": number;
-        "showThumbnail": boolean;
+    interface BcmTooltip {
+        "hide": () => Promise<void>;
+        "message": string;
+        "open": boolean;
+        "placement": placementType;
+        "show": () => Promise<void>;
+        "trigger": 'hover' | 'click' | 'focus';
     }
 }
 declare global {
@@ -366,6 +394,18 @@ declare global {
         prototype: HTMLBcmNotificationElement;
         new (): HTMLBcmNotificationElement;
     };
+    interface HTMLBcmPopconfirmElement extends Components.BcmPopconfirm, HTMLStencilElement {
+    }
+    var HTMLBcmPopconfirmElement: {
+        prototype: HTMLBcmPopconfirmElement;
+        new (): HTMLBcmPopconfirmElement;
+    };
+    interface HTMLBcmPopoverElement extends Components.BcmPopover, HTMLStencilElement {
+    }
+    var HTMLBcmPopoverElement: {
+        prototype: HTMLBcmPopoverElement;
+        new (): HTMLBcmPopoverElement;
+    };
     interface HTMLBcmRadioElement extends Components.BcmRadio, HTMLStencilElement {
     }
     var HTMLBcmRadioElement: {
@@ -408,6 +448,12 @@ declare global {
         prototype: HTMLBcmSplitItemElement;
         new (): HTMLBcmSplitItemElement;
     };
+    interface HTMLBcmSwitchElement extends Components.BcmSwitch, HTMLStencilElement {
+    }
+    var HTMLBcmSwitchElement: {
+        prototype: HTMLBcmSwitchElement;
+        new (): HTMLBcmSwitchElement;
+    };
     interface HTMLBcmTagElement extends Components.BcmTag, HTMLStencilElement {
     }
     var HTMLBcmTagElement: {
@@ -438,11 +484,11 @@ declare global {
         prototype: HTMLBcmTimelineItemElement;
         new (): HTMLBcmTimelineItemElement;
     };
-    interface HTMLBcmUploadElement extends Components.BcmUpload, HTMLStencilElement {
+    interface HTMLBcmTooltipElement extends Components.BcmTooltip, HTMLStencilElement {
     }
-    var HTMLBcmUploadElement: {
-        prototype: HTMLBcmUploadElement;
-        new (): HTMLBcmUploadElement;
+    var HTMLBcmTooltipElement: {
+        prototype: HTMLBcmTooltipElement;
+        new (): HTMLBcmTooltipElement;
     };
     interface HTMLElementTagNameMap {
         "bcm-alert": HTMLBcmAlertElement;
@@ -463,6 +509,8 @@ declare global {
         "bcm-link": HTMLBcmLinkElement;
         "bcm-message": HTMLBcmMessageElement;
         "bcm-notification": HTMLBcmNotificationElement;
+        "bcm-popconfirm": HTMLBcmPopconfirmElement;
+        "bcm-popover": HTMLBcmPopoverElement;
         "bcm-radio": HTMLBcmRadioElement;
         "bcm-radio-group": HTMLBcmRadioGroupElement;
         "bcm-select": HTMLBcmSelectElement;
@@ -470,12 +518,13 @@ declare global {
         "bcm-select-option": HTMLBcmSelectOptionElement;
         "bcm-split-button": HTMLBcmSplitButtonElement;
         "bcm-split-item": HTMLBcmSplitItemElement;
+        "bcm-switch": HTMLBcmSwitchElement;
         "bcm-tag": HTMLBcmTagElement;
         "bcm-text": HTMLBcmTextElement;
         "bcm-textarea": HTMLBcmTextareaElement;
         "bcm-timeline": HTMLBcmTimelineElement;
         "bcm-timeline-item": HTMLBcmTimelineItemElement;
-        "bcm-upload": HTMLBcmUploadElement;
+        "bcm-tooltip": HTMLBcmTooltipElement;
     }
 }
 declare namespace LocalJSX {
@@ -508,11 +557,13 @@ declare namespace LocalJSX {
     }
     interface BcmButton {
         "disabled"?: boolean;
+        "href"?: string;
         "icon"?: string;
         "iconPosition"?: 'prefix' | 'suffix';
         "kind"?: 'solid' | 'ghost';
         "outline"?: boolean;
         "size"?: 'small' | 'medium' | 'large';
+        "target"?: string;
     }
     interface BcmCard {
         "size"?: 'small' | 'medium';
@@ -615,6 +666,27 @@ declare namespace LocalJSX {
         "onBcm-confirm"?: (event: CustomEvent<any>) => void;
         "status"?: TypeProp;
     }
+    interface BcmPopconfirm {
+        "cancelText"?: string;
+        "message"?: string;
+        "okeyText"?: string;
+        "onBcm-confirm"?: (event: CustomEvent<any>) => void;
+        "onBcm-hide"?: (event: CustomEvent<any>) => void;
+        "onBcm-show"?: (event: CustomEvent<any>) => void;
+        "open"?: boolean;
+        "placement"?: placementType;
+        "status"?: 'warning' | 'error';
+        "trigger"?: 'hover' | 'click' | 'focus';
+    }
+    interface BcmPopover {
+        "heading"?: string;
+        "message"?: string;
+        "onBcm-hide"?: (event: CustomEvent<any>) => void;
+        "onBcm-show"?: (event: CustomEvent<any>) => void;
+        "open"?: boolean;
+        "placement"?: placementType;
+        "trigger"?: 'hover' | 'click' | 'focus';
+    }
     interface BcmRadio {
         "buttonStyle"?: 'solid' | 'outline';
         "checked"?: boolean;
@@ -673,6 +745,19 @@ declare namespace LocalJSX {
         "icon"?: string;
         "iconPosition"?: 'prefix' | 'suffix';
     }
+    interface BcmSwitch {
+        "activeIcon"?: string;
+        "activeText"?: string;
+        "checked"?: boolean;
+        "disabled"?: boolean;
+        "inactiveIcon"?: string;
+        "inactiveText"?: string;
+        "onBcm-blur"?: (event: CustomEvent<any>) => void;
+        "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "onBcm-focus"?: (event: CustomEvent<any>) => void;
+        "pending"?: boolean;
+        "size"?: 'small' | 'medium';
+    }
     interface BcmTag {
         "checked"?: boolean;
         "onCheckedChange"?: (event: CustomEvent<object>) => void;
@@ -720,18 +805,13 @@ declare namespace LocalJSX {
         "last"?: boolean;
         "timelineType"?: 'left' | 'right' | 'alternate';
     }
-    interface BcmUpload {
-        /**
-          * Component Properties
-         */
-        "acceptTypes"?: string;
-        "maxFileSize"?: string;
-        "maxImageHeight"?: number;
-        "maxImageWidth"?: number;
-        "minImageHeight"?: number;
-        "minImageWidth"?: number;
-        "multipleFile"?: number;
-        "showThumbnail"?: boolean;
+    interface BcmTooltip {
+        "message"?: string;
+        "onBcm-hide"?: (event: CustomEvent<any>) => void;
+        "onBcm-show"?: (event: CustomEvent<any>) => void;
+        "open"?: boolean;
+        "placement"?: placementType;
+        "trigger"?: 'hover' | 'click' | 'focus';
     }
     interface IntrinsicElements {
         "bcm-alert": BcmAlert;
@@ -752,6 +832,8 @@ declare namespace LocalJSX {
         "bcm-link": BcmLink;
         "bcm-message": BcmMessage;
         "bcm-notification": BcmNotification;
+        "bcm-popconfirm": BcmPopconfirm;
+        "bcm-popover": BcmPopover;
         "bcm-radio": BcmRadio;
         "bcm-radio-group": BcmRadioGroup;
         "bcm-select": BcmSelect;
@@ -759,12 +841,13 @@ declare namespace LocalJSX {
         "bcm-select-option": BcmSelectOption;
         "bcm-split-button": BcmSplitButton;
         "bcm-split-item": BcmSplitItem;
+        "bcm-switch": BcmSwitch;
         "bcm-tag": BcmTag;
         "bcm-text": BcmText;
         "bcm-textarea": BcmTextarea;
         "bcm-timeline": BcmTimeline;
         "bcm-timeline-item": BcmTimelineItem;
-        "bcm-upload": BcmUpload;
+        "bcm-tooltip": BcmTooltip;
     }
 }
 export { LocalJSX as JSX };
@@ -789,6 +872,8 @@ declare module "@stencil/core" {
             "bcm-link": LocalJSX.BcmLink & JSXBase.HTMLAttributes<HTMLBcmLinkElement>;
             "bcm-message": LocalJSX.BcmMessage & JSXBase.HTMLAttributes<HTMLBcmMessageElement>;
             "bcm-notification": LocalJSX.BcmNotification & JSXBase.HTMLAttributes<HTMLBcmNotificationElement>;
+            "bcm-popconfirm": LocalJSX.BcmPopconfirm & JSXBase.HTMLAttributes<HTMLBcmPopconfirmElement>;
+            "bcm-popover": LocalJSX.BcmPopover & JSXBase.HTMLAttributes<HTMLBcmPopoverElement>;
             "bcm-radio": LocalJSX.BcmRadio & JSXBase.HTMLAttributes<HTMLBcmRadioElement>;
             "bcm-radio-group": LocalJSX.BcmRadioGroup & JSXBase.HTMLAttributes<HTMLBcmRadioGroupElement>;
             "bcm-select": LocalJSX.BcmSelect & JSXBase.HTMLAttributes<HTMLBcmSelectElement>;
@@ -796,12 +881,13 @@ declare module "@stencil/core" {
             "bcm-select-option": LocalJSX.BcmSelectOption & JSXBase.HTMLAttributes<HTMLBcmSelectOptionElement>;
             "bcm-split-button": LocalJSX.BcmSplitButton & JSXBase.HTMLAttributes<HTMLBcmSplitButtonElement>;
             "bcm-split-item": LocalJSX.BcmSplitItem & JSXBase.HTMLAttributes<HTMLBcmSplitItemElement>;
+            "bcm-switch": LocalJSX.BcmSwitch & JSXBase.HTMLAttributes<HTMLBcmSwitchElement>;
             "bcm-tag": LocalJSX.BcmTag & JSXBase.HTMLAttributes<HTMLBcmTagElement>;
             "bcm-text": LocalJSX.BcmText & JSXBase.HTMLAttributes<HTMLBcmTextElement>;
             "bcm-textarea": LocalJSX.BcmTextarea & JSXBase.HTMLAttributes<HTMLBcmTextareaElement>;
             "bcm-timeline": LocalJSX.BcmTimeline & JSXBase.HTMLAttributes<HTMLBcmTimelineElement>;
             "bcm-timeline-item": LocalJSX.BcmTimelineItem & JSXBase.HTMLAttributes<HTMLBcmTimelineItemElement>;
-            "bcm-upload": LocalJSX.BcmUpload & JSXBase.HTMLAttributes<HTMLBcmUploadElement>;
+            "bcm-tooltip": LocalJSX.BcmTooltip & JSXBase.HTMLAttributes<HTMLBcmTooltipElement>;
         }
     }
 }
