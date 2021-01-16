@@ -162,7 +162,8 @@ export class BcmSelect {
                 'hidden': !this.isOpen,
                 [this.scrollable]: this.scrollable === 'horizontal' || this.scrollable === 'vertical',
                 'horizontal vertical': this.scrollable === 'both',
-                'flex': flex
+                'flex': flex,
+                'empty': this.renderedOptions.length === 0
             }
         )
 
@@ -213,6 +214,11 @@ export class BcmSelect {
                                         : <slot />
                                 }
                             </div>
+                            {
+                                (this.renderedOptions.length === 0) && (
+                                    <bcm-empty size="small" text="No Data"></bcm-empty>
+                                )
+                            }
                         </div>
                     </div>
 

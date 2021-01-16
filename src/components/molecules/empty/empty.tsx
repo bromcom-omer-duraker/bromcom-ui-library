@@ -1,5 +1,6 @@
 import { Component, Prop, h, Element, getAssetPath, Host, Watch, State } from '@stencil/core'
-import { ImageProps } from './types'
+import cs from 'classnames'
+import { ImageProps, SizeProps, SizeProp } from './types'
 
 @Component({
     tag: 'bcm-empty',
@@ -17,6 +18,8 @@ export class BcmEmpty {
      * Component Properties
      */
     @Prop({ attribute: 'image' }) _image: ImageProps = ImageProps.default;
+    @Prop() size: SizeProp = SizeProps.medium;
+    @Prop() text: string;
 
     /**
      * Component States
@@ -46,11 +49,25 @@ export class BcmEmpty {
     }
 
     render() {
+        const classes = cs(
+            'empty',
+            {
+                [this.size]: this.size
+            }
+        )
+
         return (
             <Host>
-                <img src={getAssetPath(`./static/${this.image}`)} />
-                <div class="content">
-                    <slot />
+                <div class={classes}>
+                    <img src={getAssetPath(`./static/${this.image}`)} />
+                    <div class="content">
+                        {
+                            this.text && (
+                                <span class="text">{this.text}</span>
+                            )
+                        }
+                        <slot />
+                    </div>
                 </div>
             </Host>
         )

@@ -95,6 +95,12 @@ $caption-types: (
     bcm-select-option, ::slotted(bcm-select-option) {
         white-space: normal;
     }
+
+    &.empty {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
     
     &.hidden {
         display: none;
