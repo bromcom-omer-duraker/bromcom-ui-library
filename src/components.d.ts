@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { StatusProp, TypeProp } from "./components/molecules/alert/types";
 import { ItemType } from "./components/molecules/breadcrumb/breadcrumb";
+import { ImageProps, SizeProp } from "./components/molecules/empty/types";
 import { ColorPaletteTypes } from "./global/variables/colors";
 import { SizePropOptions, TypePropOptions } from "./components/atoms/icon/types";
 import { StatusProp as StatusProp1 } from "./components/molecules/message/types";
@@ -102,6 +103,14 @@ export namespace Components {
     interface BcmDivider {
         "direction": 'vertical' | 'horizontal';
         "width": string;
+    }
+    interface BcmEmpty {
+        /**
+          * Component Properties
+         */
+        "_image": ImageProps;
+        "size": SizeProp;
+        "text": string;
     }
     interface BcmIcon {
         /**
@@ -284,6 +293,20 @@ export namespace Components {
         "show": () => Promise<void>;
         "trigger": 'hover' | 'click' | 'focus';
     }
+    interface BcmUpload {
+        /**
+          * Component Properties
+         */
+        "acceptTypes": string;
+        "data": () => Promise<FormData>;
+        "maxFileSize": string;
+        "maxImageHeight": number;
+        "maxImageWidth": number;
+        "minImageHeight": number;
+        "minImageWidth": number;
+        "multipleFile": number;
+        "showThumbnail": boolean;
+    }
 }
 declare global {
     interface HTMLBcmAlertElement extends Components.BcmAlert, HTMLStencilElement {
@@ -363,6 +386,12 @@ declare global {
     var HTMLBcmDividerElement: {
         prototype: HTMLBcmDividerElement;
         new (): HTMLBcmDividerElement;
+    };
+    interface HTMLBcmEmptyElement extends Components.BcmEmpty, HTMLStencilElement {
+    }
+    var HTMLBcmEmptyElement: {
+        prototype: HTMLBcmEmptyElement;
+        new (): HTMLBcmEmptyElement;
     };
     interface HTMLBcmIconElement extends Components.BcmIcon, HTMLStencilElement {
     }
@@ -490,6 +519,12 @@ declare global {
         prototype: HTMLBcmTooltipElement;
         new (): HTMLBcmTooltipElement;
     };
+    interface HTMLBcmUploadElement extends Components.BcmUpload, HTMLStencilElement {
+    }
+    var HTMLBcmUploadElement: {
+        prototype: HTMLBcmUploadElement;
+        new (): HTMLBcmUploadElement;
+    };
     interface HTMLElementTagNameMap {
         "bcm-alert": HTMLBcmAlertElement;
         "bcm-avatar": HTMLBcmAvatarElement;
@@ -504,6 +539,7 @@ declare global {
         "bcm-collapse": HTMLBcmCollapseElement;
         "bcm-collapse-group": HTMLBcmCollapseGroupElement;
         "bcm-divider": HTMLBcmDividerElement;
+        "bcm-empty": HTMLBcmEmptyElement;
         "bcm-icon": HTMLBcmIconElement;
         "bcm-input": HTMLBcmInputElement;
         "bcm-link": HTMLBcmLinkElement;
@@ -525,6 +561,7 @@ declare global {
         "bcm-timeline": HTMLBcmTimelineElement;
         "bcm-timeline-item": HTMLBcmTimelineItemElement;
         "bcm-tooltip": HTMLBcmTooltipElement;
+        "bcm-upload": HTMLBcmUploadElement;
     }
 }
 declare namespace LocalJSX {
@@ -611,6 +648,14 @@ declare namespace LocalJSX {
     interface BcmDivider {
         "direction"?: 'vertical' | 'horizontal';
         "width"?: string;
+    }
+    interface BcmEmpty {
+        /**
+          * Component Properties
+         */
+        "_image"?: ImageProps;
+        "size"?: SizeProp;
+        "text"?: string;
     }
     interface BcmIcon {
         /**
@@ -813,6 +858,19 @@ declare namespace LocalJSX {
         "placement"?: placementType;
         "trigger"?: 'hover' | 'click' | 'focus';
     }
+    interface BcmUpload {
+        /**
+          * Component Properties
+         */
+        "acceptTypes"?: string;
+        "maxFileSize"?: string;
+        "maxImageHeight"?: number;
+        "maxImageWidth"?: number;
+        "minImageHeight"?: number;
+        "minImageWidth"?: number;
+        "multipleFile"?: number;
+        "showThumbnail"?: boolean;
+    }
     interface IntrinsicElements {
         "bcm-alert": BcmAlert;
         "bcm-avatar": BcmAvatar;
@@ -827,6 +885,7 @@ declare namespace LocalJSX {
         "bcm-collapse": BcmCollapse;
         "bcm-collapse-group": BcmCollapseGroup;
         "bcm-divider": BcmDivider;
+        "bcm-empty": BcmEmpty;
         "bcm-icon": BcmIcon;
         "bcm-input": BcmInput;
         "bcm-link": BcmLink;
@@ -848,6 +907,7 @@ declare namespace LocalJSX {
         "bcm-timeline": BcmTimeline;
         "bcm-timeline-item": BcmTimelineItem;
         "bcm-tooltip": BcmTooltip;
+        "bcm-upload": BcmUpload;
     }
 }
 export { LocalJSX as JSX };
@@ -867,6 +927,7 @@ declare module "@stencil/core" {
             "bcm-collapse": LocalJSX.BcmCollapse & JSXBase.HTMLAttributes<HTMLBcmCollapseElement>;
             "bcm-collapse-group": LocalJSX.BcmCollapseGroup & JSXBase.HTMLAttributes<HTMLBcmCollapseGroupElement>;
             "bcm-divider": LocalJSX.BcmDivider & JSXBase.HTMLAttributes<HTMLBcmDividerElement>;
+            "bcm-empty": LocalJSX.BcmEmpty & JSXBase.HTMLAttributes<HTMLBcmEmptyElement>;
             "bcm-icon": LocalJSX.BcmIcon & JSXBase.HTMLAttributes<HTMLBcmIconElement>;
             "bcm-input": LocalJSX.BcmInput & JSXBase.HTMLAttributes<HTMLBcmInputElement>;
             "bcm-link": LocalJSX.BcmLink & JSXBase.HTMLAttributes<HTMLBcmLinkElement>;
@@ -888,6 +949,7 @@ declare module "@stencil/core" {
             "bcm-timeline": LocalJSX.BcmTimeline & JSXBase.HTMLAttributes<HTMLBcmTimelineElement>;
             "bcm-timeline-item": LocalJSX.BcmTimelineItem & JSXBase.HTMLAttributes<HTMLBcmTimelineItemElement>;
             "bcm-tooltip": LocalJSX.BcmTooltip & JSXBase.HTMLAttributes<HTMLBcmTooltipElement>;
+            "bcm-upload": LocalJSX.BcmUpload & JSXBase.HTMLAttributes<HTMLBcmUploadElement>;
         }
     }
 }
