@@ -16,7 +16,7 @@ export default {
         },
         'multiple-file': {
             control: 'text',
-            description: "Max. accepted multiple file",
+            description: "Number of files",
             table: {
                 category: 'Properties',
                 type: { summary: 'number' },
@@ -29,7 +29,43 @@ export default {
             table: {
                 category: 'Properties',
                 type: { summary: 'number' },
-                defaultValue: { summary: 1024 },
+                defaultValue: { summary: '10mb' },
+            }
+        },
+        'max-image-width': {
+            control: 'text',
+            description: "Max. width for image files in pixels",
+            table: {
+                category: 'Properties',
+                type: { summary: 'number' },
+                defaultValue: { summary: 'Infinity(px)' },
+            }
+        },
+        'min-image-width': {
+            control: 'text',
+            description: "Min. height for image files in pixels",
+            table: {
+                category: 'Properties',
+                type: { summary: 'number' },
+                defaultValue: { summary: '1px' },
+            }
+        },
+        'max-image-height': {
+            control: 'text',
+            description: "Max. height for image files in pixels",
+            table: {
+                category: 'Properties',
+                type: { summary: 'number' },
+                defaultValue: { summary: 'Infinity(px)' },
+            }
+        },
+        'min-image-height': {
+            control: 'text',
+            description: "Min. height for image files in pixels",
+            table: {
+                category: 'Properties',
+                type: { summary: 'number' },
+                defaultValue: { summary: '1px' },
             }
         },
         data: {
@@ -49,4 +85,5 @@ const Template = (args) => (
 
 export const Default = Template.bind({})
 Default.args = {
+    'max-file-size': '10mb'
 }
