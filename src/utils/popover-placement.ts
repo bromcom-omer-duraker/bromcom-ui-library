@@ -16,9 +16,10 @@ const join = (places: Array<string>) => {
     return [opposites[places[0]], places[1]].join('-')
 }
 
-const popoverPlacement = (box: HTMLElement, placement: placementType, changePlacement: Function) => {
-    const rect = box.getBoundingClientRect()
-    const { left, right, top, bottom, width, height } = rect
+const popoverPlacement = (box: HTMLElement, host: HTMLElement, placement: placementType, changePlacement: Function) => {
+    const { width, height } = box.getBoundingClientRect()
+    const { left, right, top, bottom } = host.getBoundingClientRect()
+    
     const places = placement.split('-')
 
     const bodyWidth = document.documentElement.clientWidth
@@ -26,25 +27,25 @@ const popoverPlacement = (box: HTMLElement, placement: placementType, changePlac
 
     switch (places[0]) {
         case 'left':
-            if (left < width) {
+            if (left < (width + 8)) {
                 changePlacement(join(places))
             }
             break;
 
         case 'right':
-            if (bodyWidth < (right + width)) {
+            if (bodyWidth < (right + width + 8)) {
                 changePlacement(join(places))
             }
             break;
 
         case 'top':
-            if (top < height) {
+            if (top < (height + 8)) {
                 changePlacement(join(places))
             }
             break;
 
         case 'bottom':
-            if (bodyHeight < (bottom + height)) {
+            if (bodyHeight < (bottom + height + 8)) {
                 changePlacement(join(places))
             }
             break;

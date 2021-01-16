@@ -151,6 +151,17 @@ export namespace Components {
         "confirmable"?: boolean;
         "status"?: TypeProp;
     }
+    interface BcmPopconfirm {
+        "cancelText": string;
+        "hide": () => Promise<void>;
+        "message": string;
+        "okeyText": string;
+        "open": boolean;
+        "placement": placementType;
+        "show": () => Promise<void>;
+        "status": 'warning' | 'error';
+        "trigger": 'hover' | 'click' | 'focus';
+    }
     interface BcmPopover {
         "heading": string;
         "hide": () => Promise<void>;
@@ -383,6 +394,12 @@ declare global {
         prototype: HTMLBcmNotificationElement;
         new (): HTMLBcmNotificationElement;
     };
+    interface HTMLBcmPopconfirmElement extends Components.BcmPopconfirm, HTMLStencilElement {
+    }
+    var HTMLBcmPopconfirmElement: {
+        prototype: HTMLBcmPopconfirmElement;
+        new (): HTMLBcmPopconfirmElement;
+    };
     interface HTMLBcmPopoverElement extends Components.BcmPopover, HTMLStencilElement {
     }
     var HTMLBcmPopoverElement: {
@@ -492,6 +509,7 @@ declare global {
         "bcm-link": HTMLBcmLinkElement;
         "bcm-message": HTMLBcmMessageElement;
         "bcm-notification": HTMLBcmNotificationElement;
+        "bcm-popconfirm": HTMLBcmPopconfirmElement;
         "bcm-popover": HTMLBcmPopoverElement;
         "bcm-radio": HTMLBcmRadioElement;
         "bcm-radio-group": HTMLBcmRadioGroupElement;
@@ -648,6 +666,18 @@ declare namespace LocalJSX {
         "onBcm-confirm"?: (event: CustomEvent<any>) => void;
         "status"?: TypeProp;
     }
+    interface BcmPopconfirm {
+        "cancelText"?: string;
+        "message"?: string;
+        "okeyText"?: string;
+        "onBcm-confirm"?: (event: CustomEvent<any>) => void;
+        "onBcm-hide"?: (event: CustomEvent<any>) => void;
+        "onBcm-show"?: (event: CustomEvent<any>) => void;
+        "open"?: boolean;
+        "placement"?: placementType;
+        "status"?: 'warning' | 'error';
+        "trigger"?: 'hover' | 'click' | 'focus';
+    }
     interface BcmPopover {
         "heading"?: string;
         "message"?: string;
@@ -802,6 +832,7 @@ declare namespace LocalJSX {
         "bcm-link": BcmLink;
         "bcm-message": BcmMessage;
         "bcm-notification": BcmNotification;
+        "bcm-popconfirm": BcmPopconfirm;
         "bcm-popover": BcmPopover;
         "bcm-radio": BcmRadio;
         "bcm-radio-group": BcmRadioGroup;
@@ -841,6 +872,7 @@ declare module "@stencil/core" {
             "bcm-link": LocalJSX.BcmLink & JSXBase.HTMLAttributes<HTMLBcmLinkElement>;
             "bcm-message": LocalJSX.BcmMessage & JSXBase.HTMLAttributes<HTMLBcmMessageElement>;
             "bcm-notification": LocalJSX.BcmNotification & JSXBase.HTMLAttributes<HTMLBcmNotificationElement>;
+            "bcm-popconfirm": LocalJSX.BcmPopconfirm & JSXBase.HTMLAttributes<HTMLBcmPopconfirmElement>;
             "bcm-popover": LocalJSX.BcmPopover & JSXBase.HTMLAttributes<HTMLBcmPopoverElement>;
             "bcm-radio": LocalJSX.BcmRadio & JSXBase.HTMLAttributes<HTMLBcmRadioElement>;
             "bcm-radio-group": LocalJSX.BcmRadioGroup & JSXBase.HTMLAttributes<HTMLBcmRadioGroupElement>;
