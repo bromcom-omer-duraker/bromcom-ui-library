@@ -4,7 +4,7 @@
 
 .anchor {
     text-decoration: none;
-    color: $grey-7;
+    color: var(--bcm-color-grey-7);
     display: inline-flex;
     font-size: 14px;
     width: 100%;
@@ -14,10 +14,10 @@
     }
 
     &:hover {
-        color: $prime-blue-6;
+        color: var(--bcm-color-prime-blue-6);
     }
 
     &:active {
-        color: $grey-8;
+        color: var(--bcm-color-grey-8);
     }
 }

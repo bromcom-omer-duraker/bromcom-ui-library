@@ -1,4 +1,6 @@
 export const ColorPalette = {
+    'black': '#000000',
+    'white': '#ffffff',
     'prime-blue': {
         1: '#F4FBFE',
         2: '#D4E9F6',
@@ -170,6 +172,8 @@ export const ColorPalette = {
 }
 
 export declare type ColorPaletteTypes = 'default'
+    | 'black'
+    | 'white'
     | 'prime-blue'
     | 'prime-blue-1' 
     | 'prime-blue-2' 

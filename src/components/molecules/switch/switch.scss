@@ -16,12 +16,12 @@ $sizes: (
     align-items: center;
 
     .active-text {
-        color: $prime-blue-6;
+        color: var(--bcm-color-prime-blue-6);
         margin-right: space('xxxs');
     }
 
     .inactive-text {
-        color: $grey-6;
+        color: var(--bcm-color-grey-6);
         margin-left: space('xxxs')
     }
 }
@@ -31,13 +31,13 @@ $sizes: (
     justify-content: space-between;
     align-items: center;
     border-radius: 16px;
-    background-color: $grey-6;
+    background-color: var(--bcm-color-grey-6);
     position: relative;
 
     .handle {
         padding: 1px;
         position: absolute;
-        background-color: $grey-1;
+        background-color: var(--bcm-color-grey-1);
         display: inline-flex;
         align-items: center;;
         justify-content: center;
@@ -91,18 +91,18 @@ $sizes: (
                 width: $handle - 3px;
                 height: $handle - 3px;
                 border-radius: 50%;
-                border: 1px solid $grey-1;
-                border-top-color: $grey-6;
+                border: 1px solid var(--bcm-color-grey-1);
+                border-top-color: var(--bcm-color-grey-6);
                 animation: spinner 1.5s linear infinite;
             }
         }
     }
 
     &.switch-checked {
-        background-color: $prime-blue-6;
+        background-color: var(--bcm-color-prime-blue-6);
 
         .icon-active {
-            color: $grey-1;
+            color: var(--bcm-color-grey-1);
             opacity: 1;
         }
 
@@ -111,7 +111,7 @@ $sizes: (
         }
 
         .spinner {
-            border-top-color:$prime-blue-6;
+            border-top-color: var(--bcm-color-prime-blue-6);
         }
     }
 }

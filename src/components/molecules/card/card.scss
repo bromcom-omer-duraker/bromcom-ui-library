@@ -5,8 +5,8 @@
 
 .card {
     width: 100%;
-    background-color: $grey-1;
-    border: 1px solid $grey-5;
+    background-color: var(--bcm-color-grey-1);
+    border: 1px solid var(--bcm-color-grey-5);
     border-radius: border-radius('2');
 
     &.medium {

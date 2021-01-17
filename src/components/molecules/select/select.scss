@@ -26,17 +26,17 @@ $caption-types: (
     
     width: 100%;
     box-sizing: border-box;
-    color: $grey-8;
+    color: var(--bcm-color-grey-8);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: space('xxs');
-    border: 1px solid $grey-5;
+    border: 1px solid var(--bcm-color-grey-5);
     user-select: none;
     cursor: pointer;
 
     &:hover:not(.disabled) {
-        border-color: $prime-blue-5;
+        border-color: var(--bcm-color-prime-blue-5);
 
         .select-clear-button {
             opacity: 1;
@@ -44,8 +44,8 @@ $caption-types: (
     }
     
     &:focus:not(.disabled) {
-        border-color: $prime-blue-5;
-        box-shadow: 0px 0px 4px $prime-blue-6;
+        border-color: var(--bcm-color-prime-blue-5);
+        box-shadow: 0px 0px 4px var(--bcm-color-prime-blue-6);
         
         .select-clear-button {
             opacity: 1;
@@ -57,8 +57,8 @@ $caption-types: (
     }
 
     &.disabled {
-        background-color: $grey-5;
-        color: $grey-6;
+        background-color: var(--bcm-color-grey-5);
+        color: var(--bcm-color-grey-6);
         cursor: not-allowed;
     }
 
@@ -88,7 +88,7 @@ $caption-types: (
     // width: 100%;
     position: absolute;
     left: 0;
-    background-color: $grey-1;
+    background-color: var(--bcm-color-grey-1);
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
 
@@ -144,7 +144,7 @@ $caption-types: (
 
 .label {
     display: block;
-    color: $grey-9;
+    color: var(--bcm-color-grey-9);
     margin-bottom: space('xxxs');
 }
 

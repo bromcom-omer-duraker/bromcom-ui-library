@@ -13,25 +13,25 @@
     display: inline-flex;
     padding: space('xxxs') space('xxs');
     cursor: pointer;
-    color: $grey-8;
+    color: var(--bcm-color-grey-8);
     box-sizing: border-box;
     width: 100%;
 
     &:hover:not(.disabled) {
-        background-color: $prime-blue-1;
+        background-color: var(--bcm-color-prime-blue-1);
     }
 
     &.selected:not(.disabled) {
-        background-color: $grey-3;
+        background-color: var(--bcm-color-grey-3);
     }
 
     &.disabled {
-        background-color: $grey-5;
-        color: $grey-6;
+        background-color: var(--bcm-color-grey-5);
+        color: var(--bcm-color-grey-6);
         cursor: not-allowed;
     
         &:not(.selected) {
-            background-color: $prime-blue-1;
+            background-color: var(--bcm-color-prime-blue-1);
         }
     }
 }

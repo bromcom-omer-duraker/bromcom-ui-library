@@ -1,5 +1,15 @@
 @import './variables/index.scss';
 
+/**
+ * Variables: Z-index
+ */
+:root {
+    @include generatorZIndex();
+}
+
+/**
+ * Variables: Colors
+ */
 :root {
     --bcm-color-prime-blue-1: #{$prime-blue-1};
     --bcm-color-prime-blue-2: #{$prime-blue-2};

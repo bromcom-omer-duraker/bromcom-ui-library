@@ -20,7 +20,7 @@
         display: flex;
         align-items: center;;
         font-size: 14px;
-        color: $grey-8;
+        color: var(--bcm-color-grey-8);
         cursor: pointer;
         .icon-checked {
             display: none;
@@ -46,7 +46,7 @@
         left: 50%;
         width: 10px;
         height: 10px;
-        background-color: $prime-blue-6;
+        background-color: var(--bcm-color-prime-blue-6);
         transform: translate( -50%, -50% );
         opacity: 0;
     }
@@ -61,8 +61,8 @@
     input[disabled] + label {
         cursor: not-allowed;
         span {
-            background-color: $grey-3;
-            border-color: $grey-5;
+            background-color: var(--bcm-color-grey-3);
+            border-color: var(--bcm-color-grey-5);
         }
         bcm-icon {
             filter: brightness(0);
@@ -75,7 +75,7 @@
     */
     input:not([disabled]) + label:hover {
         span {
-            border-color: $prime-blue-6;
+            border-color: var(--bcm-color-prime-blue-6);
             box-shadow: 0px 2px 4px rgba(54, 121, 171, 0.5);
         }
     }
@@ -100,7 +100,7 @@
         }
         label {
             span {
-                background-color: $prime-blue-6;
+                background-color: var(--bcm-color-prime-blue-6);
                 border-color: transparent;
                 &:after {
                     opacity: 0;

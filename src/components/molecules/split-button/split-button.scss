@@ -22,7 +22,7 @@ details {
     &.outline {
 
         .caret {
-            color: $grey-5;
+            color: var(--bcm-color-grey-5);
             border-color: currentColor;
         }
 
@@ -35,13 +35,13 @@ details {
         }
 
         &.open bcm-button .caret {
-            color: $prime-blue-7;
+            color: var(--bcm-color-prime-blue-7);
         }
     }
 
     &.open bcm-button, &:not(.disabled) bcm-button:active {
         .caret {
-            border-left-color: $prime-blue-8;
+            border-left-color: var(--bcm-color-prime-blue-8);
         }
     }
 
@@ -61,11 +61,11 @@ details {
     }
 
     &.disabled .caret {
-        border-left-color: $grey-5;
+        border-left-color: var(--bcm-color-grey-5);
     }
     
     &.disabled.outline bcm-button:hover .caret {
-        color: $grey-5;
+        color: var(--bcm-color-grey-5);
     }
 }
 
@@ -75,18 +75,18 @@ details {
     align-items: center;
     justify-content: center;
     padding: 0 space('xxs');
-    border-left: 1px solid $prime-blue-7;
+    border-left: 1px solid var(--bcm-color-prime-blue-7);
     margin-left: 16px;
 }
 
 .items-container {
     border-radius: 4px;
-    background-color: $grey-1;
+    background-color: var(--bcm-color-grey-1);
     width: 150px;
     position: absolute;
     left: 0;
     display: flex;
     flex-direction: column;
-    border: 1px solid $prime-blue-6;
-    z-index: 999;
+    border: 1px solid var(--bcm-color-prime-blue-6);
+    z-index: var(--bcm-z-index-100);
 }

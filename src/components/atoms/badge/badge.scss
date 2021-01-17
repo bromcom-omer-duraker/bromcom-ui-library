@@ -19,7 +19,7 @@ $statuses: (
 .badge-basic {
     padding: 0 space('xxs');
     border: 1px solid $grey-1;
-    color: $grey-1;
+    color: var(--bcm-color-grey-1);
     border-radius: border-radius('16');
     font-size: 14px;
     height: 22px;
@@ -34,7 +34,7 @@ $statuses: (
 }
 
 .badge-text {
-    color: $grey-7;
+    color: var(--bcm-color-grey-7);
     font-size: 14px;
 }
 

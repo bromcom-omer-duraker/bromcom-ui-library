@@ -4,8 +4,8 @@
 }
 
 .avatar {
-    background-color: $grey-6;
-    color: $grey-1;
+    background-color: var(--bcm-color-grey-6);
+    color: var(--bcm-color-grey-1);
     display: flex;
     justify-content: center;
     align-items: center;

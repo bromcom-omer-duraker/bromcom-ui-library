@@ -23,67 +23,67 @@
 }
 
 .solid {
-    color: $grey-1;
-    background-color: $prime-blue-6;
-    border: 1px solid $prime-blue-6;
+    color: var(--bcm-color-grey-1);
+    background-color: var(--bcm-color-prime-blue-6);
+    border: 1px solid var(--bcm-color-prime-blue-6);
 
     &.outline {
-        color: $grey-8;
-        background-color: $grey-1;
-        border-color: $grey-5;
+        color: var(--bcm-color-grey-8);
+        background-color: var(--bcm-color-grey-1);
+        border-color: var(--bcm-color-grey-5);
 
         &:hover, &:focus {
-            color: $prime-blue-5;
-            background-color: $grey-1;
+            color: var(--bcm-color-prime-blue-5);
+            background-color: var(--bcm-color-grey-1);
         }
 
         &:active {
-            color: $prime-blue-7;
-            background-color: $grey-1;
+            color: var(--bcm-color-prime-blue-7);
+            background-color: var(--bcm-color-grey-1);
         }
     }
 
     &:hover, &:focus {
-        background-color: $prime-blue-5;
-        border-color: $prime-blue-5;;
+        background-color: var(--bcm-color-prime-blue-5);
+        border-color: var(--bcm-color-prime-blue-5);
     }
 
     &:active {
-        background-color: $prime-blue-7;
-        border-color: $prime-blue-7;
+        background-color: var(--bcm-color-prime-blue-7);
+        border-color: var(--bcm-color-prime-blue-7);
     }
 
     &:disabled {
-        color: $grey-6 !important;
-        background-color: $grey-3 !important;
-        border-color: $grey-5;
+        color: var(--bcm-color-grey-6) !important;
+        background-color: var(--bcm-color-grey-3) !important;
+        border-color: var(--bcm-color-grey-5);
         cursor: not-allowed;
     }
 }
 
 .ghost {
-    color: $prime-blue-6;
+    color: var(--bcm-color-prime-blue-6);
     background-color: transparent;
-    border: 1px solid $prime-blue-6;
+    border: 1px solid var(--bcm-color-prime-blue-6);
 
     &.outline {
-        color: $grey-1;
-        border-color: $grey-1;
+        color: var(--bcm-color-grey-1);
+        border-color: var(--bcm-color-grey-1);
     }
 
     &:hover, &:focus {
-        color: $prime-blue-5;
-        border-color: $prime-blue-5;
+        color: var(--bcm-color-prime-blue-5);
+        border-color: var(--bcm-color-prime-blue-5);
     }
 
     &:active {
-        color: $prime-blue-7;
-        border-color: $prime-blue-7;
+        color: var(--bcm-color-prime-blue-7);
+        border-color: var(--bcm-color-prime-blue-7);
     }
     
     &:disabled {
-        color: $grey-6;
-        border-color: $grey-5;
+        color: var(--bcm-color-grey-6);
+        border-color: var(--bcm-color-grey-5);
         cursor: not-allowed;
     }
 
@@ -146,13 +146,13 @@
 
 :host-context(.split_summary.open) {
     .solid {
-        background-color: $prime-blue-7;
-        border-color: $prime-blue-7;
+        background-color: var(--bcm-color-prime-blue-7);
+        border-color: var(--bcm-color-prime-blue-7);
         
         &.outline {
-            color: $prime-blue-7;
-            border-color: $prime-blue-7;
-            background-color: $grey-1;
+            color: var(--bcm-color-prime-blue-7);
+            border-color: var(--bcm-color-prime-blue-7);
+            background-color: var(--bcm-color-grey-1);
         }
     }
 }

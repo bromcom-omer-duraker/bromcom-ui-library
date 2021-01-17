@@ -12,6 +12,6 @@
     @include popover($grey-9) {
         width: max-content;
         padding: space('xxxs') space('xxs');
-        color: $grey-1;
+        color: var(--bcm-color-grey-1);
     }
 }

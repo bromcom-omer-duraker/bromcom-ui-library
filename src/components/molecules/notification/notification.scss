@@ -18,7 +18,7 @@
     padding-top: space('xxs');
     padding-bottom: space('xxs');
     font-size: 16px;
-    color: $grey-9;
+    color: var(--bcm-color-grey-9);
     bcm-icon {
         position: absolute;
         right: 0;
@@ -32,7 +32,7 @@ p {
     margin-bottom: 0;
     font-size: 14px;
     line-height: 22px;
-    color: $grey-8;
+    color: var(--bcm-color-grey-8);
 }
 
 .icon-content {

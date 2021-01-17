@@ -9,13 +9,13 @@
     padding: 0 space('xxs');
     cursor: default;
     border-radius: border-radius('24');
-    border: 1px solid $grey-5;
+    border: 1px solid var(--bcm-color-grey-5);
     user-select: none;
     
     &.basic, &.closeable, &.add {
         
-        background-color: $grey-3;
-        color: $grey-8;
+        background-color: var(--bcm-color-grey-3);
+        color: var(--bcm-color-grey-8);
         
         &:hover {
             opacity: 0.85;
@@ -24,22 +24,22 @@
 
     &.closeable {
         span {
-            color: $grey-10;
+            color: var(--bcm-color-grey-10);
         }
     }
 
     &.add {
         border-style: dashed;
-        background-color: $grey-1;
+        background-color: var(--bcm-color-grey-1);
     }
 
     &.checkable {
-        background-color: $grey-1;
-        color: $grey-8;
-        border-color: $grey-1;
+        background-color: var(--bcm-color-grey-1);
+        color: var(--bcm-color-grey-8);
+        border-color: var(--bcm-color-grey-1);
 
         &:hover {
-            color: $prime-blue-5;
+            color: var(--bcm-color-prime-blue-5);
             cursor: pointer;
         }
     }
@@ -67,18 +67,18 @@ input[type=checkbox] {
     position: absolute;
 
     &:checked + label {
-        background-color: $prime-blue-6;
-        color: $grey-1;
-        border-color: $prime-blue-6;
+        background-color: var(--bcm-color-prime-blue-6);
+        color: var(--bcm-color-grey-1);
+        border-color: var(--bcm-color-prime-blue-6);
 
         &:hover {
-            background-color: $prime-blue-5;
-            border-color: $prime-blue-5;
+            background-color: var(--bcm-color-prime-blue-5);
+            border-color: var(--bcm-color-prime-blue-5);
         }
 
         &:active {
-            background-color: $prime-blue-7;
-            border-color: $prime-blue-7;
+            background-color: var(--bcm-color-prime-blue-7);
+            border-color: var(--bcm-color-prime-blue-7);
         }
     }
 }

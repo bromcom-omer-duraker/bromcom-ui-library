@@ -1,0 +1,12 @@
+$level-multiplier: 5000;
+
+/**
+ * Generator
+ */
+@mixin generatorZIndex() {
+    --bcm-z-index--1: #{$level-multiplier * -1};
+    --bcm-z-index--0: 0;
+    @for $i from 0 through 100 {
+        --bcm-z-index-#{$i}: #{$level-multiplier + $i}; 
+    }
+}

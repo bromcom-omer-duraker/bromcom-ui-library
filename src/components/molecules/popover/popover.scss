@@ -20,12 +20,12 @@
         .heading {
             padding: space('xxxs') space('xs');
             border-bottom: 1px solid $grey-5;
-            color: $grey-9;
+            color: var(--bcm-color-grey-9);
         }
         
         .content {
             padding: space('xxs') space('xs');
-            color: $grey-8;
+            color: var(--bcm-color-grey-8);
         }
     }
 }
