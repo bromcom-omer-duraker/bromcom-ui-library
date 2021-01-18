@@ -14,37 +14,28 @@ $slider-step-font-size: 12px;
     min-height: $size;
 }
 
+
+/**
+ * Slider Rules
+ */
 .slider {
     display: flex;
     align-items: center;
 }
 
-/**
- * Slider direction: horizontal
- */
 .slider.horizontal {
     width: 100%;
     height: $slider-bounds;
-    .track-container {
-        height: $slider-track-bounds;
-        width: 100%;
-        margin: 0 10px;
-    }
 }
 
-/**
- * Slider direction: vertical
- */
 .slider.vertical {
     width: $slider-bounds;
     flex-direction: column;
-    .track-container {
-        width: $slider-track-bounds;
-        min-height: 325px;
-        margin: 10px 0;
-    }
 }
 
+/**
+ * Track Rules
+ */
 .track-container {
     position: relative;
 }
@@ -58,38 +49,99 @@ $slider-step-font-size: 12px;
     background-color: var(--bcm-color-grey-5);
 }
 
+.slider.horizontal {
+    .track-container {
+        height: $slider-track-bounds;
+        width: 100%;
+        margin: 0 10px;
+    }
+}
+
+.slider.vertical {
+    .track-container {
+        width: $slider-track-bounds;
+        min-height: 325px;
+        margin: 10px 0;
+    }
+}
+
+/**
+ * Steps Rules
+ */
 .steps {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: $slider-track-bounds;
-    .step {
-        display: flex;
-        position: relative;
-        text-align: center;
-        justify-content: center;
-        font-size: 12px;
-        color: var(--bcm-color-grey-5);
-        line-height: ($slider-step-font-size * 2) + $slider-step-line-bounds + $slider-track-bounds + 1px + 1px;
-        @include fix-size(1px);
-        &:before, &:after {
-            content: '';
-            position: absolute;
-            width: 1px;
-            background-color: var(--bcm-color-grey-5);
-            height: $slider-step-line-bounds;
-        }
-        &:before {
-            top: calc(100% + #{$slider-track-bounds / 2} + 1px);
-            left: 0;
-        }
-        &:after {
-            bottom: calc(100% + #{$slider-track-bounds / 2} + 1px);
-            left: 0;
-        }
+    z-index: var(--bcm-z-index-0);
+}
+
+.steps .step {
+    position: relative;
+    @include fix-size(1px);
+    &:before, &:after {
+        content: '';
+        position: absolute;
+        width: 1px;
+        background-color: var(--bcm-color-grey-5);
+        height: $slider-step-line-bounds;
+    }
+    &:before {
+        top: calc(100% + #{$slider-track-bounds / 2} + 1px);
+        left: 0;
+    }
+    &:after {
+        bottom: calc(100% + #{$slider-track-bounds / 2} + 1px);
+        left: 0;
     }
 }
 
+.steps .label {
+    position: absolute;
+    left: 50%;
+    top: ($slider-track-bounds / 2) + $slider-step-line-bounds + 3px;
+    font-size: 12px;
+    line-height: 12px;;
+    pointer-events: none;
+    user-select: none;
+    transform: translateX(-50%);
+    color: var(--bcm-color-grey-5);
+}
+
+
+/**
+ * Thumb Rules
+ */
+.thumb {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    border-radius: border-radius('circle');
+    background-color: var(--bcm-color-prime-blue-6);
+    z-index: var(--bcm-z-index-1);
+}
+
+.slider.horizontal {
+    .thumb {
+        top: 50%;
+        left: 0;
+        transform: translateX(-8px) translateY(-50%);
+    }
+}
+
+.slider.vertical {
+    .thumb {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(-8px);
+    }
+}
+
+/**
+ * Control Button Rules
+ */
 .button-control {
     display: flex;
     flex: 0 0 32px;
@@ -115,5 +167,5 @@ $slider-step-font-size: 12px;
         border-color: var(--bcm-color-prime-blue-6);
         color: var(--bcm-color-prime-blue-6);
         box-shadow: 0px 2px 4px rgba(54, 121, 171, 0);
-}
+    }
 }
