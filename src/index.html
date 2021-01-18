@@ -10,9 +10,6 @@
     <script type="module" src="/build/bromcom-ui.esm.js"></script>
     <script nomodule src="/build/bromcom-ui.js"></script>
     <style>
-        a {
-            text-decoration: none;
-        }
         bcm-divider {
             margin: 10px 0;
         }
@@ -20,34 +17,16 @@
 </head>
 
 <body style="margin: 10%">
-    <h1>Upload <small>component</small></h1>
+    <h1>Slider <small>component</small></h1>
     <div style="max-width: 400px; display: flex; flex-direction: column;">
         <div class="row">
             <div class="col">
-                <bcm-upload 
-                    multiple-file="4"
-                    max-file-size="1024kb">
-                </bcm-upload>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <bcm-button>Test</bcm-button>
+                <bcm-slider></bcm-slider>
             </div>
         </div>
     </div>
 
     <script>
-        (async () => {
-            await customElements.whenDefined('bcm-upload');
-            var upload = document.querySelector('bcm-upload')
-
-            document.querySelector('bcm-button').addEventListener('click', function() {
-                upload.data().then(function(files) {
-                    console.log(files.getAll('userFiles[]'))
-                })
-            })
-        })();
        
     </script>
 </body>
