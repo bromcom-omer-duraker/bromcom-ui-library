@@ -83,9 +83,7 @@ $slider-step-font-size: 12px;
     &:before, &:after {
         content: '';
         position: absolute;
-        width: 1px;
         background-color: var(--bcm-color-grey-5);
-        height: $slider-step-line-bounds;
     }
     &:before {
         top: calc(100% + #{$slider-track-bounds / 2} + 1px);
@@ -109,6 +107,50 @@ $slider-step-font-size: 12px;
     color: var(--bcm-color-grey-5);
 }
 
+.slider.horizontal {
+    .steps .step {
+        &:before, &:after {
+            width: 1px;
+            height: $slider-step-line-bounds;
+        }
+        &:before {
+            top: calc(100% + #{$slider-track-bounds / 2} + 1px);
+            left: 0;
+        }
+        &:after {
+            bottom: calc(100% + #{$slider-track-bounds / 2} + 1px);
+            left: 0;
+        }
+    }
+}
+
+.slider.vertical {
+    .steps {
+        flex-direction: column;
+        height: 100%;
+        width: $slider-track-bounds;
+    }
+    .steps .step {
+        &:before, &:after {
+            width: $slider-step-line-bounds;
+            height: 1px;
+        }
+        &:before {
+            top: 0;
+            right: calc(100% + #{$slider-track-bounds / 2} + 1px);
+            left: auto;
+        }
+        &:after {
+            top: 0;
+            left: calc(100% + #{$slider-track-bounds / 2} + 1px);
+        }
+    }
+    .steps .label {
+        top: 50%;
+        left: ($slider-track-bounds / 2) + $slider-step-line-bounds + 3px;
+        transform: translateY(-50%);
+    }
+}
 
 /**
  * Thumb Rules
@@ -119,8 +161,10 @@ $slider-step-font-size: 12px;
     height: 16px;
     cursor: pointer;
     border-radius: border-radius('circle');
+    user-select: none;
+    touch-action: pan-x pan-y;
     background-color: var(--bcm-color-prime-blue-6);
-    z-index: var(--bcm-z-index-1);
+    z-index: var(--bcm-z-index-2);
 }
 
 .slider.horizontal {
@@ -138,6 +182,33 @@ $slider-step-font-size: 12px;
         transform: translateX(-50%) translateY(-8px);
     }
 }
+
+/**
+ * Fill Rules
+ */
+.fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    background-color: var(--bcm-color-prime-blue-6);
+    z-index: var(--bcm-z-index-1);
+}
+
+
+.slider.horizontal {
+    .fill {
+        height: 100%;
+    }
+}
+
+.slider.vertical {
+    .fill {
+        width: 100%;
+    }
+}
+
 
 /**
  * Control Button Rules

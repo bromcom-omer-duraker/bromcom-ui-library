@@ -8,10 +8,11 @@ import cs from 'classnames'
     shadow: true
 })
 export class BcmSlider {
+    private fill: HTMLElement
     private thumb: HTMLElement
     private track: HTMLElement
     private mouseDown: boolean = false
-
+    
     /**
      * Component Element
      */
@@ -93,10 +94,7 @@ export class BcmSlider {
      * @desc
      * @param event 
      */
-    @Listen('mousemove', { target: 'window' })
-    handleMouseMove(event: MouseEvent) {
-        if (!this.mouseDown) return
-
+    setThumbPosition(event: MouseEvent) {
         const offsets: any = this.calculateOffsets(event, this.thumb)
         const trackRect: any = this.elementRect(this.track)
         const thumbRect: any = this.elementRect(this.thumb)
@@ -140,10 +138,98 @@ export class BcmSlider {
 
     /**
      * @desc
+     */
+    setFill() {
+        const thumbTransform = this.getThumbTransform()
+        let thumbTransformX = parseInt(thumbTransform.x)
+        let thumbTransformY = parseInt(thumbTransform.y)
+
+        thumbTransformX < 0 && (thumbTransformX = 0)
+        thumbTransformY < 0 && (thumbTransformY = 0)
+
+        this.direction === Directions.horizontal
+            ? this.fill.style.width = `${thumbTransformX}px`
+            : this.fill.style.height = `${thumbTransformY}px`
+    }
+
+    /**
+     * @desc
+     */
+    calculateValue() {
+        const isHorizontal = this.direction === Directions.horizontal
+        const trackRect = this.elementRect(this.track)
+        const thumbRect = this.elementRect(this.thumb)
+        const thumbTransform = this.getThumbTransform()
+        const thumbTransformDirection = isHorizontal ? 'x' : 'y'
+        const rectDirectionSize = isHorizontal ? 'width' : 'height'
+        const value = Math.floor((
+            parseInt(thumbTransform[thumbTransformDirection]) + 
+            (thumbRect[rectDirectionSize] / 2) + 1) / 
+            (trackRect[rectDirectionSize] / (this.steps.length))
+        )
+
+        return value
+    }
+
+    /**
+     * @desc
+     * @param type 
+     */
+    buttonChange(type: string) {
+        const value = this.calculateValue()
+
+        this.changeValue(type === 'increase'
+            ? value + 1
+            : value - 1 
+        )
+    }
+
+    /**
+     * @desc
+     * @param type 
+     */
+    changeValue(idx: number) {
+        const thumbRect = this.elementRect(this.thumb)
+        const isHorizontal: boolean = this.direction === Directions.horizontal
+        const stepElements: NodeListOf<HTMLElement> = this.el.shadowRoot.querySelectorAll('.step')
+
+        if (idx < 0 || idx > this.steps.length - 1) 
+            return
+        
+        const targetStepEl: HTMLElement = stepElements[idx]
+        const thumbMovingPos = isHorizontal
+            ? targetStepEl.offsetLeft - (thumbRect.width / 2)
+            : targetStepEl.offsetTop - (thumbRect.height / 2)
+
+        this.thumb.style.transform = this.direction === Directions.horizontal
+                ? `translate(${thumbMovingPos}px, -50%)`
+                : `translate(-50%, ${thumbMovingPos}px)`
+        
+        this.setFill()
+    }
+
+    /**
+     * @desc
+     * @param event 
+     */
+    @Listen('mousemove', { target: 'window' })
+    handleMouseMove(event: MouseEvent) {
+        if (!this.mouseDown) return
+
+        this.setThumbPosition(event)
+        this.setFill()
+    }
+
+    /**
+     * @desc
      * @param event 
      */
     @Listen('mouseup', { target: 'window' })
-    handleMouseUp(event: MouseEvent) {
+    handleMouseUp() {
+        if (this.mouseDown) {
+            this.changeValue(this.calculateValue())
+        }
+
         this.mouseDown = false
     }
 
@@ -151,9 +237,8 @@ export class BcmSlider {
      * @desc
      * @param event 
      */
-    handleMouseDown(event: MouseEvent) {
+    handleMouseDown() {
         this.mouseDown = true
-        console.log('down', event)
     }
 
     render() {
@@ -166,7 +251,10 @@ export class BcmSlider {
             <Host>
                 <div class={sliderClasses}>
                     {/* Control Left/Top */}
-                    <button class="button-control lt">
+                    <button
+                        class="button-control"
+                        onClick={_ => this.buttonChange('decrease')}
+                    >
                         <bcm-icon
                             icon={this.direction === Directions.horizontal ? 'caret-left' : 'caret-up'} 
                             type="fill">
@@ -179,11 +267,18 @@ export class BcmSlider {
                             class="track"
                             ref={el => (this.track = el)}
                         >
+                            {/* Fill */}
+                            <div 
+                                class="fill"
+                                ref={el => (this.fill = el)}
+                            >
+                            </div>
+
                             {/* Track Thumb */}
                             <div
                                 class="thumb"
                                 ref={el => (this.thumb = el)}
-                                onMouseDown={(e) => this.handleMouseDown(e)}
+                                onMouseDown={() => this.handleMouseDown()}
                             >
                             </div>
                             
@@ -201,7 +296,10 @@ export class BcmSlider {
                     </div>
 
                     {/* Control Right/Bottom */}
-                    <button class="button-control rb">
+                    <button
+                        class="button-control"
+                        onClick={_ => this.buttonChange('increase')}
+                    >
                         <bcm-icon
                             icon={this.direction === Directions.horizontal ? 'caret-right' : 'caret-down'} 
                             type="fill">
