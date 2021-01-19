@@ -11,24 +11,20 @@
     <script nomodule src="/build/bromcom-ui.js"></script>
 </head>
 
-<body style="display: flex;align-items: center;justify-content: center;height: 100vh;margin: 0;">
-    <bcm-popconfirm
-        id="confirm"
-        placement="right-start"
-        message="Are you sure to delete this homework?"
-        cancel-text="No"
-        okey-text="Yes"
-        status="warning"
+<body>
+    <bcm-result
+        heading="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        status="info"
+        primary-button-text="Go Console"
+        secondary-button-text="Buy Again"
     >
-        <bcm-button>Delete</bcm-button>
-    </bcm-popconfirm>
-
-
-    <script>
-        document.getElementById('confirm').addEventListener('bcm-confirm', () => {
-            console.log('confirmed')
-        })
-    </script>
+        <bcm-text weight="semibold" scale="size-3">The content you submitted has the following error:</bcm-text>
+        <div style="display: flex;align-items: center;">
+            <bcm-icon icon='close-circle' type="outlined" color="red-6"></bcm-icon>
+            <bcm-text style="display: inline-block;" scale="size-2">Your account has been frozen Thaw immediately</bcm-text>
+        </div>
+    </bcm-result>
 </body>
 
 </html>
