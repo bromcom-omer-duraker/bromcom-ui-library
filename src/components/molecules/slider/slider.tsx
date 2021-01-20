@@ -1,5 +1,5 @@
 import { Component, h, Element, Host, Prop, State, Listen } from '@stencil/core'
-import { Direction, Directions } from './types'
+import { Direction, Directions, IAxisKeys, IThumbsOrder, ITransformPositions, IDragPoint } from './types'
 import cs from 'classnames'
 
 @Component({
@@ -9,9 +9,14 @@ import cs from 'classnames'
 })
 export class BcmSlider {
     private fill: HTMLElement
-    private thumb: HTMLElement
     private track: HTMLElement
+    private thumb: HTMLElement
+    private thumb2: HTMLElement
+    private current: HTMLElement
+    private activeThumb: HTMLElement
     private mouseDown: boolean = false
+    private initialized: boolean = false
+    private hiddenTimeout: any = null
     
     /**
      * Component Element
@@ -21,34 +26,102 @@ export class BcmSlider {
     /**
      * Component Properties
      */
-    @Prop({ attribute: 'min' }) min: number = 0
-    @Prop({ attribute: 'max' }) max: number = 13 // temp
-    @Prop({ attribute: 'value' }) value: number = 5
-    @Prop({ attribute: 'direction' }) direction: Direction = Directions.horizontal
+    @Prop({ attribute: 'min'            }) min: number = 1
+    @Prop({ attribute: 'max'            }) max: number = 10
+    @Prop({ attribute: 'range'          }) range: boolean = false
+    @Prop({ attribute: 'range-start'    }) rangeStart: number = 1
+    @Prop({ attribute: 'range-end'      }) rangeEnd: number = 2
+    @Prop({ attribute: 'label-prefix'   }) labelPrefix: string = ''
+    @Prop({ attribute: 'label-suffix'   }) labelSuffix: string = ''
+    @Prop({ attribute: 'step'           }) step : number = 1
+    @Prop({ attribute: 'value'          }) value: number | Array<number> = 0
+    @Prop({ attribute: 'direction'      }) direction: Direction = Directions.horizontal
 
     /**
      * Component States
      */
-    @State() steps: Array<number> = []
+    @State() items: Array<any> = []
+    @State() currentContent: string = ''
 
     /**
      * @ComponentMethod
      */
-    componentWillRender() {
+    componentWillLoad() {
+        const { min, max, step, labelPrefix, labelSuffix } = this
+
         // Fill steps
         // #
-        this.steps = Array.from(
-            { length: this.max + 1 }, 
-            (_, idx) => idx
+        this.items = this.generateRange(min, max, step).map(
+            item => labelPrefix + item + labelSuffix 
         )
+    }
+
+
+    /**
+     * @ComponentMethod
+     */
+    componentDidRender() {
+        if (this.initialized) return
+        !this.activeThumb && (this.activeThumb = this.thumb)
+
+        if (this.range) {
+            this.changeValue(this.rangeEnd - 1, this.thumb2)
+            this.changeValue(this.rangeStart - 1, this.thumb)
+        } else {
+            this.changeValue((this.value as number - 1))
+        }
+        this.initialized = true
+    }
+
+    /**
+     * 
+     * @param min 
+     * @param max 
+     * @param step 
+     */
+    generateRange(min: number, max: number, step: number){
+        let arr = [];
+        for(let i: number = min; i <= max; i += step){
+           arr.push(i);
+        }
+        
+        return arr;
+      }
+
+    /**
+     * @desc
+     * @param element 
+     */
+    getRect(element: HTMLElement): DOMRect {
+        return element.getBoundingClientRect()
     }
 
     /**
      * @desc
      * @param element 
      */
-    elementRect(element: HTMLElement) {
-        return element.getBoundingClientRect()
+    getTransform(element: HTMLElement): ITransformPositions {
+        let transform: string = getComputedStyle(element).getPropertyValue('transform')
+        let values: Array<string> | string
+
+        values = transform.replace(/(matrix|\(|\)|px)/g, '')
+        values = values.split(', ')
+
+        return { x: parseInt(values[4]), y: parseInt(values[5]) }
+    }
+
+    /**
+     * @desc
+     */
+    keysByAxis(): IAxisKeys {
+        const isHorizontal = this.direction === Directions.horizontal
+        
+        return {
+            pos: isHorizontal ? 'left' : 'top',
+            size: isHorizontal ? 'width' : 'height',
+            coord: isHorizontal ? 'x' : 'y',
+            posOffset: isHorizontal ? 'offsetLeft' : 'offsetTop'
+        }
     }
 
     /**
@@ -56,156 +129,245 @@ export class BcmSlider {
      * @param mouseEvent 
      * @param element 
      */
-    calculateOffsets(mouseEvent: MouseEvent, element: any) {
-        const elRect: any = this.elementRect(element)
-        const mouseX: number = Math.floor(mouseEvent.clientX)
-        const mouseY: number = Math.floor(mouseEvent.clientY)
-        const elPageX: number = Math.floor(elRect.x)
-        const elPageY: number = Math.floor(elRect.y)
-        const elDragPointX: number = mouseX - (elPageX + (elRect.width / 2))
-        const elDragPointY: number = mouseY - (elPageY + (elRect.height / 2))
+    getDragPoint(event: MouseEvent, element: HTMLElement): IDragPoint {
+        const rectElement: DOMRect = this.getRect(element)
 
         return {
-            rect: elRect,
-            mouseX: mouseX,
-            mouseY: mouseY,
-            elPageX: elPageX,
-            elPageY: elPageY,
-            elDragPointX: elDragPointX,
-            elDragPointY: elDragPointY
+            x: Math.floor(event.clientX) - (rectElement.x + (rectElement.width / 2)),
+            y: Math.floor(event.clientY) - (rectElement.y + (rectElement.height / 2))
         }
-    }
-
-    /**
-     * @desc
-     */
-    getThumbTransform() {
-        let transform: string
-        let values: Array<string> | string
-
-        transform = getComputedStyle(this.thumb).getPropertyValue('transform')
-        values = transform.replace(/(matrix|\(|\)|px)/g, '')
-        values = values.split(', ')
-
-        return { x: values[4], y: values[5] }
     }
 
     /**
      * @desc
      * @param event 
      */
-    setThumbPosition(event: MouseEvent) {
-        const offsets: any = this.calculateOffsets(event, this.thumb)
-        const trackRect: any = this.elementRect(this.track)
-        const thumbRect: any = this.elementRect(this.thumb)
-        const thumbTransform: any = this.getThumbTransform()
+    setThumbPosition(event: MouseEvent): void {
         const isHorizontal: boolean = this.direction === Directions.horizontal
+        const axisKeys: IAxisKeys = this.keysByAxis()
+        const rectTrack: DOMRect = this.getRect(this.track)
+        const rectThumb: DOMRect = this.getRect(this.activeThumb)
+        const dragPoint: IDragPoint = this.getDragPoint(event, this.activeThumb)
+        const transformThumb: ITransformPositions = this.getTransform(this.activeThumb)
 
-        const directionSize = isHorizontal
-            ? 'width'
-            : 'height'
-        
         // Determine sliding positive or 
         // negative direction
-        const movingPositive: boolean = isHorizontal
-            ? offsets.elDragPointX > 0
-            : offsets.elDragPointY > 0
+        const movingPositive: boolean = dragPoint[axisKeys.coord] > 0
         
         // Find Which direction value 
         // needed
-        const movingDirectionValue = isHorizontal
-            ? offsets.elDragPointX
-            : offsets.elDragPointY
+        const movingDirectionValue = dragPoint[axisKeys.coord]
 
         // Current thumb css position
         // #
-        let thumbMovingPos: number = parseInt(isHorizontal
-            ? thumbTransform.x
-            : thumbTransform.y
-        )
-        
+        let thumbMovingPos: number = transformThumb[axisKeys.coord]
+
         movingPositive
             ? (thumbMovingPos += movingDirectionValue)
             : (thumbMovingPos -= -movingDirectionValue)
         
         // Restrict thumb position
         // #
-        if ((thumbMovingPos <= (trackRect[directionSize] - (thumbRect[directionSize] / 2)) && thumbMovingPos >= -(thumbRect[directionSize] / 2)))
-            this.thumb.style.transform = isHorizontal
-                ? `translate(${thumbMovingPos}px, -50%)`
-                : `translate(-50%, ${thumbMovingPos}px)`
+        if ((thumbMovingPos <= (rectTrack[axisKeys.size] - (rectThumb[axisKeys.size] / 2)) && thumbMovingPos >= -(rectThumb[axisKeys.size] / 2)))
+            this.activeThumb.style.transform = isHorizontal
+                ? `translate(${thumbMovingPos}px, -50%)` // horizontal
+                : `translate(-50%, ${thumbMovingPos}px)` // vertical
     }
 
     /**
      * @desc
      */
-    setFill() {
-        const thumbTransform = this.getThumbTransform()
-        let thumbTransformX = parseInt(thumbTransform.x)
-        let thumbTransformY = parseInt(thumbTransform.y)
+    getThumbsOrder(): IThumbsOrder {
+        const axisKeys: IAxisKeys = this.keysByAxis()
+        const transformThumb1: ITransformPositions = this.getTransform(this.thumb)
+        const transformThumb2: ITransformPositions = this.getTransform(this.thumb2)
 
-        thumbTransformX < 0 && (thumbTransformX = 0)
-        thumbTransformY < 0 && (thumbTransformY = 0)
-
-        this.direction === Directions.horizontal
-            ? this.fill.style.width = `${thumbTransformX}px`
-            : this.fill.style.height = `${thumbTransformY}px`
+        if (transformThumb1[axisKeys.coord] >= transformThumb2[axisKeys.coord]) 
+             return { first: this.thumb2, second: this.thumb }
+        else return { first: this.thumb, second: this.thumb2 }
     }
 
     /**
      * @desc
      */
-    calculateValue() {
-        const isHorizontal = this.direction === Directions.horizontal
-        const trackRect = this.elementRect(this.track)
-        const thumbRect = this.elementRect(this.thumb)
-        const thumbTransform = this.getThumbTransform()
-        const thumbTransformDirection = isHorizontal ? 'x' : 'y'
-        const rectDirectionSize = isHorizontal ? 'width' : 'height'
-        const value = Math.floor((
-            parseInt(thumbTransform[thumbTransformDirection]) + 
-            (thumbRect[rectDirectionSize] / 2) + 1) / 
-            (trackRect[rectDirectionSize] / (this.steps.length))
+    setFillPosition(): void {
+        const axisKeys: IAxisKeys = this.keysByAxis()
+        const style: CSSStyleDeclaration = this.fill.style
+
+        if (this.range) {
+            const thumbs: IThumbsOrder = this.getThumbsOrder()
+            const thumbFirst: ITransformPositions = this.getTransform(thumbs.first)
+            const thumbSecond: ITransformPositions = this.getTransform(thumbs.second)
+            
+            style[axisKeys.pos] = `${thumbFirst[axisKeys.coord]}px`
+            style[axisKeys.size] = `${thumbSecond[axisKeys.coord] - thumbFirst[axisKeys.coord]}px`
+        }
+        else {
+            const transformThumb: ITransformPositions = this.getTransform(this.activeThumb)
+            style[axisKeys.size] = `${transformThumb[axisKeys.coord]}px`
+        }
+    }
+
+    /**
+     * @desc
+     */
+    setCurrentPosition(): void {
+        const axisKeys: IAxisKeys = this.keysByAxis()
+        const rectFill: DOMRect = this.getRect(this.fill)
+        const rectCurrent: DOMRect = this.getRect(this.current)
+        const thumb: HTMLElement = this.range ? this.getThumbsOrder().first : this.activeThumb
+        const transformThumb: ITransformPositions = this.getTransform(thumb)
+        
+        let style: string = ''
+
+        this.range
+            ? (style = `${transformThumb[axisKeys.coord] + (rectFill[axisKeys.size] / 2) - (rectCurrent[axisKeys.size] / 4)}px`)
+            : (style = `${transformThumb[axisKeys.coord] - (rectCurrent[axisKeys.size] / 4)}px`)
+ 
+        this.current.style[axisKeys.pos] = style
+    }
+
+    /**
+     * @desc
+     * @param visible 
+     */
+    setCurrentVisibilty(visible: boolean): void {
+        const classList = this.current.classList
+
+        // Toggle shown class
+        // #
+        classList[visible ? 'add' : 'remove']('shown')
+        
+        // Handle smooth animation
+        // #
+        classList.remove('in-hidden')
+        this.hiddenTimeout && clearTimeout(this.hiddenTimeout)
+        
+        if (!visible) {
+            this.hiddenTimeout = setTimeout(() => {
+                classList.add('in-hidden')
+                this.hiddenTimeout = null
+            }, 1100)
+        }
+    }
+
+    /**
+     * @desc
+     * @param thumb
+     */
+    calculateValue(thumb: HTMLElement = this.activeThumb): number {
+        if (!thumb) return
+
+        const axisKeys: IAxisKeys = this.keysByAxis()
+        const rectTrack: DOMRect = this.getRect(this.track)
+        const rectThumb: DOMRect = this.getRect(thumb)
+        const transformThumb: ITransformPositions = this.getTransform(thumb)
+
+        // Calculate exact value from
+        // thumb position
+        let value = Math.floor((
+            transformThumb[axisKeys.coord] + 
+            (rectThumb[axisKeys.size] / 2) + 1) / 
+            (rectTrack[axisKeys.size] / (this.items.length))
         )
+        
+        if (value > this.items.length - 1 )
+            value = this.items.length - 1
 
         return value
     }
 
     /**
      * @desc
-     * @param type 
+     * @param idx 
+     * @param thumb 
      */
-    buttonChange(type: string) {
-        const value = this.calculateValue()
+    changeValue(idx: number, thumb: HTMLElement = this.activeThumb): void {
+        if (idx < 0 || idx > this.items.length - 1) return
+        
+        const axisKeys: IAxisKeys = this.keysByAxis()
+        const isHorizontal: boolean = this.direction === Directions.horizontal
+        const stepElements: NodeListOf<HTMLElement> = this.el.shadowRoot.querySelectorAll('.step')
+        const rectThumb: DOMRect = this.getRect(thumb)
+        const targetStepElement: HTMLElement = stepElements[idx]
+        const thumbMovingPos = targetStepElement[axisKeys.posOffset] - (rectThumb[axisKeys.size] / 2)
 
-        this.changeValue(type === 'increase'
-            ? value + 1
-            : value - 1 
-        )
+        thumb.style.transform = isHorizontal
+            ? `translate(${thumbMovingPos}px, -50%)`
+            : `translate(-50%, ${thumbMovingPos}px)`
+        
+        this.updateValue()
+        this.setFillPosition()
+    }
+
+    /**
+     * @desc
+     */
+    updateValue() {
+        if (!this.range) {
+            this.value = this.calculateValue()
+        }
+
+        if (this.range) {
+            const thumbs: IThumbsOrder = this.getThumbsOrder()
+
+            this.value = [
+                this.calculateValue(thumbs.first),
+                this.calculateValue(thumbs.second)
+            ]
+        }
+
+        console.log( this.value)
+    }
+
+    /**
+     * @desc
+     * @param value 
+     */
+    idxBounds(value: number) {
+        return value > this.items.length - 1 
+            ? this.items.length - 1  
+            : value < 0  
+                ? 0 
+                : value
+    }
+
+    /**
+     * @desc
+     */
+    getCurrentContent() {
+        if (!this.thumb) return
+        let content: string = ''
+
+        if (this.range) {
+            const thumbs: IThumbsOrder = this.getThumbsOrder()
+            const valueFirstThumb = this.calculateValue(thumbs.first)
+            const valueSecondThumb = this.calculateValue(thumbs.second)
+
+            content = `
+                ${this.items[this.idxBounds(valueFirstThumb)]} - 
+                ${this.items[this.idxBounds(valueSecondThumb)]}`
+        }
+        else {
+            content = this.items[this.idxBounds(this.value as number)]
+        }
+    
+        this.currentContent = content
     }
 
     /**
      * @desc
      * @param type 
      */
-    changeValue(idx: number) {
-        const thumbRect = this.elementRect(this.thumb)
-        const isHorizontal: boolean = this.direction === Directions.horizontal
-        const stepElements: NodeListOf<HTMLElement> = this.el.shadowRoot.querySelectorAll('.step')
+    buttonChange(type: string): void {
+        const value = this.calculateValue()
 
-        if (idx < 0 || idx > this.steps.length - 1) 
-            return
-        
-        const targetStepEl: HTMLElement = stepElements[idx]
-        const thumbMovingPos = isHorizontal
-            ? targetStepEl.offsetLeft - (thumbRect.width / 2)
-            : targetStepEl.offsetTop - (thumbRect.height / 2)
+        this.changeValue(type === 'increase'
+            ? value + 1
+            : value - 1 
+        )
 
-        this.thumb.style.transform = this.direction === Directions.horizontal
-                ? `translate(${thumbMovingPos}px, -50%)`
-                : `translate(-50%, ${thumbMovingPos}px)`
-        
-        this.setFill()
+        this.setCurrentPosition()
     }
 
     /**
@@ -213,11 +375,24 @@ export class BcmSlider {
      * @param event 
      */
     @Listen('mousemove', { target: 'window' })
-    handleMouseMove(event: MouseEvent) {
+    handleMouseMove(event: MouseEvent): void {
         if (!this.mouseDown) return
 
+        // Set elements position 
+        // #
         this.setThumbPosition(event)
-        this.setFill()
+        this.setFillPosition()
+        this.setCurrentPosition()
+
+        // Update value
+        // #
+        this.updateValue()
+
+        this.getCurrentContent()
+
+        // Show current popup while
+        // user sliding
+        this.setCurrentVisibilty(true)
     }
 
     /**
@@ -225,9 +400,11 @@ export class BcmSlider {
      * @param event 
      */
     @Listen('mouseup', { target: 'window' })
-    handleMouseUp() {
+    handleMouseUp(): void {
         if (this.mouseDown) {
             this.changeValue(this.calculateValue())
+            this.setCurrentPosition()
+            this.setCurrentVisibilty(false)
         }
 
         this.mouseDown = false
@@ -237,14 +414,21 @@ export class BcmSlider {
      * @desc
      * @param event 
      */
-    handleMouseDown() {
+    handleMouseDown(thumb: string): void {
         this.mouseDown = true
+        this.activeThumb = thumb == 'thumb-1'
+            ? this.thumb
+            : this.thumb2
+        ;
     }
 
     render() {
         const sliderClasses = cs(
             'slider', 
-            [this.direction]
+            [this.direction],
+            {
+                range: this.range
+            }
         )
 
         return (
@@ -274,20 +458,35 @@ export class BcmSlider {
                             >
                             </div>
 
-                            {/* Track Thumb */}
+                            {/* Current Value */}
                             <div
-                                class="thumb"
+                                class="current in-hidden"
+                                ref={el => (this.current = el)}
+                            >
+                                <div class="inner">{this.currentContent}</div>
+                            </div>
+
+                            {/* Track Thumbs */}
+                            <div
+                                class="thumb thumb-1"
                                 ref={el => (this.thumb = el)}
-                                onMouseDown={() => this.handleMouseDown()}
+                                onMouseDown={() => this.handleMouseDown('thumb-1')}
+                            >
+                            </div>
+
+                            <div
+                                class="thumb thumb-2"
+                                ref={el => (this.thumb2 = el)}
+                                onMouseDown={() => this.handleMouseDown('thumb-2')}
                             >
                             </div>
                             
                             {/* Steps */}
                             <div class="steps">
                                {
-                                   this.steps.map(step => (
+                                   this.items.map(item => (
                                        <span class="step">
-                                           <span class="label">{step}</span>
+                                           <span class="label">{item}</span>
                                        </span>
                                    ))
                                }
