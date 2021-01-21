@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+        <title>Stencil Component Starter</title>
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
+        <link rel="stylesheet" href="/build/bromcom-ui.css">
+        <script type="module" src="/build/bromcom-ui.esm.js"></script>
+        <script nomodule src="/build/bromcom-ui.js"></script>
+        <style>
+            bcm-divider {
+                margin: 10px 0;
+            }
+        </style>
+    </head>
 
-    <link rel="stylesheet" href="/build/bromcom-ui.css">
-    <script type="module" src="/build/bromcom-ui.esm.js"></script>
-    <script nomodule src="/build/bromcom-ui.js"></script>
-    <style>
-        bcm-divider {
-            margin: 10px 0;
-        }
-    </style>
-</head>
-
-<body style="margin: 10%">
-    <h1>Slider <small>component</small></h1>
-    <div style="max-width: 400px; display: flex; flex-direction: column;">
-        <div class="row">
-            <div class="col">
-                <bcm-slider  range value="2" min="1" max="20" step="5" label-prefix="$"></bcm-slider>
+    <body style="margin: 10%">
+        <h1>Slider <small>component</small></h1>
+        <div style="max-width: 400px; display: flex; flex-direction: column;">
+            <div class="row">
+                <div class="col">
+                    <bcm-slider value="10" min="1" max="10" label-prefix="$"></bcm-slider>
+                </div>
             </div>
         </div>
-    </div>
-</body>
+
+        <script>
+            (async() => {
+                await customElements.whenDefined('bcm-slider')
+                const slider = document.querySelector('bcm-slider')
+
+                slider.addEventListener('bcm-change', (e) => console.log(e.detail))
+            })()
+        </script>
+    </body>
 </html>

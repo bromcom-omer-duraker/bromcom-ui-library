@@ -32,3 +32,9 @@ export interface IDragPoint {
     x: number;
     y: number;
 }
+
+export interface IOutValue {
+    value?: any;
+    endValue?: any;
+    startValue?: any;
+}

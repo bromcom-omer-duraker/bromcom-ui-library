@@ -1,6 +1,8 @@
-import { Component, h, Element, Host, Prop, State, Listen } from '@stencil/core'
-import { Direction, Directions, IAxisKeys, IThumbsOrder, ITransformPositions, IDragPoint } from './types'
+import { Component, h, Element, Host, Prop, State, Watch, Listen, Event, EventEmitter } from '@stencil/core'
+import { Direction, Directions, IAxisKeys, IThumbsOrder, ITransformPositions, IDragPoint, IOutValue } from './types'
 import cs from 'classnames'
+
+const stringify = JSON.stringify
 
 @Component({
     tag: 'bcm-slider',
@@ -16,7 +18,11 @@ export class BcmSlider {
     private activeThumb: HTMLElement
     private mouseDown: boolean = false
     private initialized: boolean = false
+    private valueParsed: boolean = false
+    private fireOnchange: boolean = false
     private hiddenTimeout: any = null
+    private value: Array<number> = [0]
+    private prevValue: string = ''
     
     /**
      * Component Element
@@ -29,13 +35,11 @@ export class BcmSlider {
     @Prop({ attribute: 'min'            }) min: number = 1
     @Prop({ attribute: 'max'            }) max: number = 10
     @Prop({ attribute: 'range'          }) range: boolean = false
-    @Prop({ attribute: 'range-start'    }) rangeStart: number = 1
-    @Prop({ attribute: 'range-end'      }) rangeEnd: number = 2
-    @Prop({ attribute: 'label-prefix'   }) labelPrefix: string = ''
+    @Prop({ attribute: 'label-prefix'   }) labelPrefix: string = '' 
     @Prop({ attribute: 'label-suffix'   }) labelSuffix: string = ''
     @Prop({ attribute: 'step'           }) step : number = 1
-    @Prop({ attribute: 'value'          }) value: number | Array<number> = 0
     @Prop({ attribute: 'direction'      }) direction: Direction = Directions.horizontal
+    @Prop({ attribute: 'value'          }) _value: Array<number> | string = '0'
 
     /**
      * Component States
@@ -43,17 +47,22 @@ export class BcmSlider {
     @State() items: Array<any> = []
     @State() currentContent: string = ''
 
+    /*
+     * Component Events
+     */
+    @Event({ eventName: 'bcm-change' }) change: EventEmitter
+
+
     /**
      * @ComponentMethod
      */
     componentWillLoad() {
-        const { min, max, step, labelPrefix, labelSuffix } = this
+        const { min, max, step } = this
 
         // Fill steps
         // #
-        this.items = this.generateRange(min, max, step).map(
-            item => labelPrefix + item + labelSuffix 
-        )
+        this.items = this.generateRange(min, max, step)
+        this.parseValue(this._value)
     }
 
 
@@ -64,13 +73,35 @@ export class BcmSlider {
         if (this.initialized) return
         !this.activeThumb && (this.activeThumb = this.thumb)
 
-        if (this.range) {
-            this.changeValue(this.rangeEnd - 1, this.thumb2)
-            this.changeValue(this.rangeStart - 1, this.thumb)
-        } else {
-            this.changeValue((this.value as number - 1))
-        }
+        // Set thumbs initial 
+        // positions
+        this.value.forEach((value, idx) => {
+            const thumb = idx === 1 ? this.thumb2 : void 0 
+            this.changeValue(this.findItemIndex(value), thumb, false, true)
+        })
+
         this.initialized = true
+    }
+
+    /**
+     * @desc
+     * @param newValue 
+     * @returns {void}
+     */
+    @Watch('_value')
+    parseValue(newValue: Array<number> | string) {
+
+        // Format value one time
+        // #
+        if (newValue && !this.valueParsed) {
+            const parsed: Array<any> = JSON.parse(newValue as string)
+
+            typeof parsed === 'number'
+                ? this.value = [parsed]
+                : this.value = parsed
+            ;
+            this.valueParsed = true
+        }
     }
 
     /**
@@ -192,6 +223,7 @@ export class BcmSlider {
      */
     setFillPosition(): void {
         const axisKeys: IAxisKeys = this.keysByAxis()
+        const isHorizontal = this.direction === Directions.horizontal
         const style: CSSStyleDeclaration = this.fill.style
 
         if (this.range) {
@@ -204,7 +236,13 @@ export class BcmSlider {
         }
         else {
             const transformThumb: ITransformPositions = this.getTransform(this.activeThumb)
-            style[axisKeys.size] = `${transformThumb[axisKeys.coord]}px`
+            const rectTrack: DOMRect = this.getRect(this.track)
+
+            style[axisKeys.size] = `${
+                (isHorizontal ? 0 : rectTrack.height) - 
+                transformThumb[axisKeys.coord] *
+                (isHorizontal ? -1 : 1)
+            }px`
         }
     }
 
@@ -282,49 +320,54 @@ export class BcmSlider {
      * @param idx 
      * @param thumb 
      */
-    changeValue(idx: number, thumb: HTMLElement = this.activeThumb): void {
+    changeValue(idx: number, thumb: HTMLElement = this.activeThumb, updateValue: boolean = true, initial: boolean = false): void {
         if (idx < 0 || idx > this.items.length - 1) return
-        
-        const axisKeys: IAxisKeys = this.keysByAxis()
+        if (initial) idx = (this.items.length - 1 ) - idx
+
         const isHorizontal: boolean = this.direction === Directions.horizontal
-        const stepElements: NodeListOf<HTMLElement> = this.el.shadowRoot.querySelectorAll('.step')
+        const axisKeys: IAxisKeys = this.keysByAxis()
+        const stepElements: NodeListOf<HTMLElement> = this.el.shadowRoot.querySelectorAll('.item')
         const rectThumb: DOMRect = this.getRect(thumb)
         const targetStepElement: HTMLElement = stepElements[idx]
-        const thumbMovingPos = targetStepElement[axisKeys.posOffset] - (rectThumb[axisKeys.size] / 2)
+        let thumbMovingPos = targetStepElement[axisKeys.posOffset] - (rectThumb[axisKeys.size] / 2)
 
         thumb.style.transform = isHorizontal
             ? `translate(${thumbMovingPos}px, -50%)`
             : `translate(-50%, ${thumbMovingPos}px)`
         
-        this.updateValue()
         this.setFillPosition()
+
+        // Update with new value
+        // #
+        updateValue && this.updateValue()
     }
 
     /**
      * @desc
      */
-    updateValue() {
-        if (!this.range) {
-            this.value = this.calculateValue()
-        }
+    updateValue({ triggerChange } = { triggerChange: true }): void {
 
         if (this.range) {
             const thumbs: IThumbsOrder = this.getThumbsOrder()
 
-            this.value = [
-                this.calculateValue(thumbs.first),
-                this.calculateValue(thumbs.second)
-            ]
+            this.value[0] = this.items[this.calculateValue(thumbs.first)]
+            this.value[1] = this.items[this.calculateValue(thumbs.second)]
         }
-
-        console.log( this.value)
+        else {
+            this.value[0] = this.items[this.calculateValue()]
+        }
+        
+        // Fire onChange event
+        // when only mouse up
+        this.prevValue !== stringify(this.value) && triggerChange && (this.fireOnchange = true)
+        this.prevValue = stringify(this.value)
     }
 
     /**
      * @desc
      * @param value 
      */
-    idxBounds(value: number) {
+    idxBounds(value: number): number {
         return value > this.items.length - 1 
             ? this.items.length - 1  
             : value < 0  
@@ -335,24 +378,68 @@ export class BcmSlider {
     /**
      * @desc
      */
-    getCurrentContent() {
+    getCurrentContent(): string {
         if (!this.thumb) return
+        const {labelPrefix, labelSuffix } = this
         let content: string = ''
 
         if (this.range) {
             const thumbs: IThumbsOrder = this.getThumbsOrder()
-            const valueFirstThumb = this.calculateValue(thumbs.first)
-            const valueSecondThumb = this.calculateValue(thumbs.second)
+            const valueFirstThumb = this.idxBounds(this.calculateValue(thumbs.first))
+            const valueSecondThumb = this.idxBounds(this.calculateValue(thumbs.second))
 
-            content = `
-                ${this.items[this.idxBounds(valueFirstThumb)]} - 
-                ${this.items[this.idxBounds(valueSecondThumb)]}`
+            content = `${labelPrefix + this.items[valueFirstThumb] + labelSuffix} - ${labelPrefix + this.items[valueSecondThumb] + labelSuffix}`
         }
         else {
-            content = this.items[this.idxBounds(this.value as number)]
+            content = labelPrefix + this.items[this.idxBounds(this.value[0])] + labelSuffix
         }
-    
         this.currentContent = content
+    }
+
+    /**
+     * @desc
+     */
+    findItemIndex(item: number) {
+        return this.items.indexOf(item)
+    }
+
+    /**
+     * @desc
+     */
+    getOutValue(): IOutValue {
+        const isVertical = this.direction === Directions.vertical
+        let out: IOutValue = {}
+
+        this.value.forEach((_, idx) => {
+            const outKey = this.range 
+                ? (idx === 0 ? isVertical ? 'end' : 'start' : isVertical ? 'start' : 'end' ) + 'Value' 
+                : 'value'
+            
+            out[outKey] = this.items[
+                isVertical 
+                    ? (this.items.length - 1) - this.findItemIndex(this.value[idx]) 
+                    : this.findItemIndex(this.value[idx])
+            ]
+        })
+
+        return out
+    }
+
+    /**
+     * @desc
+     */
+    triggerOnChange(): void {
+        if (this.fireOnchange) {
+            this.onChange()
+            this.fireOnchange = false
+        }
+    }
+
+    /**
+     * @desc
+     */
+    onChange(): void {
+        this.change.emit(this.getOutValue())
     }
 
     /**
@@ -368,6 +455,7 @@ export class BcmSlider {
         )
 
         this.setCurrentPosition()
+        this.triggerOnChange()
     }
 
     /**
@@ -405,6 +493,8 @@ export class BcmSlider {
             this.changeValue(this.calculateValue())
             this.setCurrentPosition()
             this.setCurrentVisibilty(false)
+            this.updateValue()
+            this.triggerOnChange()
         }
 
         this.mouseDown = false
@@ -430,6 +520,10 @@ export class BcmSlider {
                 range: this.range
             }
         )
+
+        const items = this.direction === Directions.horizontal
+            ? this.items
+            : this.items.slice(0).reverse()
 
         return (
             <Host>
@@ -481,12 +575,12 @@ export class BcmSlider {
                             >
                             </div>
                             
-                            {/* Steps */}
-                            <div class="steps">
+                            {/* Items */}
+                            <div class="items">
                                {
-                                   this.items.map(item => (
-                                       <span class="step">
-                                           <span class="label">{item}</span>
+                                   items.map(item => (
+                                       <span class="item">
+                                           <span class="label">{this.labelPrefix}{item}{this.labelSuffix}</span>
                                        </span>
                                    ))
                                }

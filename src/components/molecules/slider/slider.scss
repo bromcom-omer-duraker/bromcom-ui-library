@@ -4,8 +4,8 @@
 
 $slider-bounds: 60px;
 $slider-track-bounds: 4px;
-$slider-step-line-bounds: 10px;
-$slider-step-font-size: 12px;
+$slider-item-line-bounds: 10px;
+$slider-item-font-size: 12px;
 $slider-thumb-size: 16px;
 
 @mixin fix-size($size) {
@@ -67,9 +67,9 @@ $slider-thumb-size: 16px;
 }
 
 /**
- * Steps Rules
+ * items Rules
  */
-.steps {
+.items {
     position: relative;
     display: flex;
     align-items: center;
@@ -78,7 +78,7 @@ $slider-thumb-size: 16px;
     z-index: var(--bcm-z-index-0);
 }
 
-.steps .step {
+.items .item {
     position: relative;
     @include fix-size(1px);
     &:before, &:after {
@@ -96,10 +96,10 @@ $slider-thumb-size: 16px;
     }
 }
 
-.steps .label {
+.items .label {
     position: absolute;
     left: 50%;
-    top: ($slider-track-bounds / 2) + $slider-step-line-bounds + 3px;
+    top: ($slider-track-bounds / 2) + $slider-item-line-bounds + 3px;
     font-size: 12px;
     line-height: 12px;;
     pointer-events: none;
@@ -109,10 +109,10 @@ $slider-thumb-size: 16px;
 }
 
 .slider.horizontal {
-    .steps .step {
+    .items .item {
         &:before, &:after {
             width: 1px;
-            height: $slider-step-line-bounds;
+            height: $slider-item-line-bounds;
         }
         &:before {
             top: calc(100% + #{$slider-track-bounds / 2} + 1px);
@@ -126,14 +126,14 @@ $slider-thumb-size: 16px;
 }
 
 .slider.vertical {
-    .steps {
+    .items {
         flex-direction: column;
         height: 100%;
         width: $slider-track-bounds;
     }
-    .steps .step {
+    .items .item {
         &:before, &:after {
-            width: $slider-step-line-bounds;
+            width: $slider-item-line-bounds;
             height: 1px;
         }
         &:before {
@@ -146,9 +146,9 @@ $slider-thumb-size: 16px;
             left: calc(100% + #{$slider-track-bounds / 2} + 1px);
         }
     }
-    .steps .label {
+    .items .label {
         top: 50%;
-        left: ($slider-track-bounds / 2) + $slider-step-line-bounds + 3px;
+        left: ($slider-track-bounds / 2) + $slider-item-line-bounds + 3px;
         transform: translateY(-50%);
     }
 }
@@ -195,7 +195,6 @@ $slider-thumb-size: 16px;
  */
 .fill {
     position: absolute;
-    top: 0;
     left: 0;
     width: 0;
     height: 0;
@@ -206,12 +205,14 @@ $slider-thumb-size: 16px;
 
 .slider.horizontal {
     .fill {
+        top: 0;
         height: 100%;
     }
 }
 
 .slider.vertical {
     .fill {
+        bottom: 0;
         width: 100%;
     }
 }
