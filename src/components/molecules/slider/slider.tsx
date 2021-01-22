@@ -46,6 +46,7 @@ export class BcmSlider {
      */
     @State() items: Array<any> = []
     @State() currentContent: string = ''
+    @State() isHorizontal: boolean = true
 
     /*
      * Component Events
@@ -57,11 +58,14 @@ export class BcmSlider {
      * @ComponentMethod
      */
     componentWillLoad() {
-        const { min, max, step } = this
+        this.isHorizontal = this.direction === Directions.horizontal
 
-        // Fill steps
+        // Generate items
         // #
-        this.items = this.generateRange(min, max, step)
+        this.step <= 0 && (this.step = 1)
+
+        this.items = this.generateRange()
+        
         this.parseValue(this._value)
     }
 
@@ -103,14 +107,13 @@ export class BcmSlider {
             this.valueParsed = true
         }
     }
-
+    
     /**
-     * 
-     * @param min 
-     * @param max 
-     * @param step 
+     * @desc
      */
-    generateRange(min: number, max: number, step: number){
+    generateRange(){
+        const { min, max, step } = this
+
         let arr = [];
         for(let i: number = min; i <= max; i += step){
            arr.push(i);
@@ -145,13 +148,11 @@ export class BcmSlider {
      * @desc
      */
     keysByAxis(): IAxisKeys {
-        const isHorizontal = this.direction === Directions.horizontal
-        
         return {
-            pos: isHorizontal ? 'left' : 'top',
-            size: isHorizontal ? 'width' : 'height',
-            coord: isHorizontal ? 'x' : 'y',
-            posOffset: isHorizontal ? 'offsetLeft' : 'offsetTop'
+            pos: this.isHorizontal ? 'left' : 'top',
+            size: this.isHorizontal ? 'width' : 'height',
+            coord: this.isHorizontal ? 'x' : 'y',
+            posOffset: this.isHorizontal ? 'offsetLeft' : 'offsetTop'
         }
     }
 
@@ -174,7 +175,6 @@ export class BcmSlider {
      * @param event 
      */
     setThumbPosition(event: MouseEvent): void {
-        const isHorizontal: boolean = this.direction === Directions.horizontal
         const axisKeys: IAxisKeys = this.keysByAxis()
         const rectTrack: DOMRect = this.getRect(this.track)
         const rectThumb: DOMRect = this.getRect(this.activeThumb)
@@ -200,7 +200,7 @@ export class BcmSlider {
         // Restrict thumb position
         // #
         if ((thumbMovingPos <= (rectTrack[axisKeys.size] - (rectThumb[axisKeys.size] / 2)) && thumbMovingPos >= -(rectThumb[axisKeys.size] / 2)))
-            this.activeThumb.style.transform = isHorizontal
+            this.activeThumb.style.transform = this.isHorizontal
                 ? `translate(${thumbMovingPos}px, -50%)` // horizontal
                 : `translate(-50%, ${thumbMovingPos}px)` // vertical
     }
@@ -223,7 +223,6 @@ export class BcmSlider {
      */
     setFillPosition(): void {
         const axisKeys: IAxisKeys = this.keysByAxis()
-        const isHorizontal = this.direction === Directions.horizontal
         const style: CSSStyleDeclaration = this.fill.style
 
         if (this.range) {
@@ -239,9 +238,9 @@ export class BcmSlider {
             const rectTrack: DOMRect = this.getRect(this.track)
 
             style[axisKeys.size] = `${
-                (isHorizontal ? 0 : rectTrack.height) - 
+                (this.isHorizontal ? 0 : rectTrack.height) - 
                 transformThumb[axisKeys.coord] *
-                (isHorizontal ? -1 : 1)
+                (this.isHorizontal ? -1 : 1)
             }px`
         }
     }
@@ -322,16 +321,15 @@ export class BcmSlider {
      */
     changeValue(idx: number, thumb: HTMLElement = this.activeThumb, updateValue: boolean = true, initial: boolean = false): void {
         if (idx < 0 || idx > this.items.length - 1) return
-        if (initial) idx = (this.items.length - 1 ) - idx
+        if (initial && !this.isHorizontal) idx = (this.items.length - 1 ) - idx
 
-        const isHorizontal: boolean = this.direction === Directions.horizontal
         const axisKeys: IAxisKeys = this.keysByAxis()
         const stepElements: NodeListOf<HTMLElement> = this.el.shadowRoot.querySelectorAll('.item')
         const rectThumb: DOMRect = this.getRect(thumb)
         const targetStepElement: HTMLElement = stepElements[idx]
         let thumbMovingPos = targetStepElement[axisKeys.posOffset] - (rectThumb[axisKeys.size] / 2)
 
-        thumb.style.transform = isHorizontal
+        thumb.style.transform = this.isHorizontal
             ? `translate(${thumbMovingPos}px, -50%)`
             : `translate(-50%, ${thumbMovingPos}px)`
         
@@ -407,16 +405,16 @@ export class BcmSlider {
      * @desc
      */
     getOutValue(): IOutValue {
-        const isVertical = this.direction === Directions.vertical
         let out: IOutValue = {}
 
         this.value.forEach((_, idx) => {
             const outKey = this.range 
-                ? (idx === 0 ? isVertical ? 'end' : 'start' : isVertical ? 'start' : 'end' ) + 'Value' 
+                ? (idx === 0 ? !this.isHorizontal ? 'end' : 'start' 
+                    : !this.isHorizontal ? 'start' : 'end' ) + 'Value' 
                 : 'value'
             
             out[outKey] = this.items[
-                isVertical 
+                !this.isHorizontal 
                     ? (this.items.length - 1) - this.findItemIndex(this.value[idx]) 
                     : this.findItemIndex(this.value[idx])
             ]
