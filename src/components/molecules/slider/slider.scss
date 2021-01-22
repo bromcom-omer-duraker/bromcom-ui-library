@@ -34,11 +34,28 @@ $slider-thumb-size: 16px;
     flex-direction: column;
 }
 
+.slider:not(.disabled) {
+    &:hover {
+        .fill {
+            background-color: var(--bcm-color-prime-blue-7);
+        }
+        .thumb {
+            background-color: var(--bcm-color-prime-blue-7);
+        }
+    }
+}
 /**
  * Track Rules
  */
 .track-container {
     position: relative;
+    @at-root {
+        .slider.disabled {
+            .track-container {
+                opacity: 0.6;
+            }
+        }
+    }
 }
 
 .track {
@@ -166,6 +183,23 @@ $slider-thumb-size: 16px;
     touch-action: pan-x pan-y;
     background-color: var(--bcm-color-prime-blue-6);
     z-index: var(--bcm-z-index-2);
+    box-shadow: 0px 2px 0 rgba(54, 121, 171, 0);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.slider:not(.disabled) {
+    .thumb {
+        &:hover {
+            box-shadow: 0px 2px 4px rgba(54, 121, 171, 0.5);
+        }
+    }
+}
+
+.slider.disabled {
+    .thumb {
+        cursor: not-allowed;
+    }
 }
 
 .slider.horizontal {
@@ -200,6 +234,7 @@ $slider-thumb-size: 16px;
     height: 0;
     background-color: var(--bcm-color-prime-blue-6);
     z-index: var(--bcm-z-index-1);
+    transition: background-color 0.2s ease;
 }
 
 
@@ -324,15 +359,35 @@ $slider-thumb-size: 16px;
     color: var(--bcm-color-grey-8);
     -webkit-tap-highlight-color: transparent;
     @include fix-size(32px);
-    &:hover {
-        border-color: var(--bcm-color-prime-blue-7);
-        color: var(--bcm-color-prime-blue-7);
-        box-shadow: 0px 2px 4px rgba(54, 121, 171, 0.5);
+    @at-root {
+        .slider.disabled {
+            .button-control {
+                opacity: 0.6;
+            }
+        }
     }
-    &:active {
-        border-color: var(--bcm-color-prime-blue-6);
-        color: var(--bcm-color-prime-blue-6);
-        box-shadow: 0px 2px 4px rgba(54, 121, 171, 0);
+}
+
+.slider:not(.disabled) {
+    .button-control {
+        &:hover {
+            border-color: var(--bcm-color-prime-blue-7);
+            color: var(--bcm-color-prime-blue-7);
+            box-shadow: 0px 2px 4px rgba(54, 121, 171, 0.5);
+        }
+        &:active {
+            border-color: var(--bcm-color-prime-blue-6);
+            color: var(--bcm-color-prime-blue-6);
+            box-shadow: 0px 2px 4px rgba(54, 121, 171, 0);
+        }
+    }
+}
+
+.slider.disabled {
+    .button-control {
+        border-color: var(--bcm-color-grey-5);
+        background-color: var(--bcm-color-grey-3);
+        cursor: not-allowed;
     }
 }
 
@@ -341,3 +396,4 @@ $slider-thumb-size: 16px;
         display: none;
     }
 }
+

@@ -35,6 +35,7 @@ export class BcmSlider {
     @Prop({ attribute: 'min'            }) min: number = 1
     @Prop({ attribute: 'max'            }) max: number = 10
     @Prop({ attribute: 'range'          }) range: boolean = false
+    @Prop({ attribute: 'disabled'       }) disabled: boolean = false
     @Prop({ attribute: 'label-prefix'   }) labelPrefix: string = '' 
     @Prop({ attribute: 'label-suffix'   }) labelSuffix: string = ''
     @Prop({ attribute: 'step'           }) step : number = 1
@@ -63,7 +64,6 @@ export class BcmSlider {
         // Generate items
         // #
         this.step <= 0 && (this.step = 1)
-
         this.items = this.generateRange()
         
         this.parseValue(this._value)
@@ -445,8 +445,9 @@ export class BcmSlider {
      * @param type 
      */
     buttonChange(type: string): void {
-        const value = this.calculateValue()
+        if (this.disabled) return
 
+        const value = this.calculateValue()
         this.changeValue(type === 'increase'
             ? value + 1
             : value - 1 
@@ -462,7 +463,7 @@ export class BcmSlider {
      */
     @Listen('mousemove', { target: 'window' })
     handleMouseMove(event: MouseEvent): void {
-        if (!this.mouseDown) return
+        if (!this.mouseDown || this.disabled) return
 
         // Set elements position 
         // #
@@ -515,7 +516,8 @@ export class BcmSlider {
             'slider', 
             [this.direction],
             {
-                range: this.range
+                range: this.range,
+                disabled: this.disabled
             }
         )
 

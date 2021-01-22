@@ -25,6 +25,16 @@ export default {
                 type: { summary: 'boolean' }
             }
         },
+        disabled: {
+            control: 'boolean',
+            description: 'Enable/Disable slider',
+            defaultValue: false,
+            table: {
+                category: 'Properties',
+                defaultValue: { summary: false },
+                type: { summary: 'boolean' }
+            }
+        },
         min: {
             control: 'text',
             description: "Start value",
