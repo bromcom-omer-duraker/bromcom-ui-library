@@ -182,6 +182,14 @@ export namespace Components {
         "show": () => Promise<void>;
         "trigger": 'hover' | 'click' | 'focus';
     }
+    interface BcmProgress {
+        "decrement": (percent: number) => Promise<void>;
+        "increment": (percent: number) => Promise<void>;
+        "infoType": 'percent' | 'icon';
+        "percent": number;
+        "size": 'small' | 'medium';
+        "type": 'line' | 'line-rounded' | 'circle';
+    }
     interface BcmRadio {
         "buttonStyle": 'solid' | 'outline';
         "checked": boolean;
@@ -461,6 +469,12 @@ declare global {
         prototype: HTMLBcmPopoverElement;
         new (): HTMLBcmPopoverElement;
     };
+    interface HTMLBcmProgressElement extends Components.BcmProgress, HTMLStencilElement {
+    }
+    var HTMLBcmProgressElement: {
+        prototype: HTMLBcmProgressElement;
+        new (): HTMLBcmProgressElement;
+    };
     interface HTMLBcmRadioElement extends Components.BcmRadio, HTMLStencilElement {
     }
     var HTMLBcmRadioElement: {
@@ -585,6 +599,7 @@ declare global {
         "bcm-notification": HTMLBcmNotificationElement;
         "bcm-popconfirm": HTMLBcmPopconfirmElement;
         "bcm-popover": HTMLBcmPopoverElement;
+        "bcm-progress": HTMLBcmProgressElement;
         "bcm-radio": HTMLBcmRadioElement;
         "bcm-radio-group": HTMLBcmRadioGroupElement;
         "bcm-result": HTMLBcmResultElement;
@@ -771,6 +786,12 @@ declare namespace LocalJSX {
         "open"?: boolean;
         "placement"?: placementType;
         "trigger"?: 'hover' | 'click' | 'focus';
+    }
+    interface BcmProgress {
+        "infoType"?: 'percent' | 'icon';
+        "percent"?: number;
+        "size"?: 'small' | 'medium';
+        "type"?: 'line' | 'line-rounded' | 'circle';
     }
     interface BcmRadio {
         "buttonStyle"?: 'solid' | 'outline';
@@ -960,6 +981,7 @@ declare namespace LocalJSX {
         "bcm-notification": BcmNotification;
         "bcm-popconfirm": BcmPopconfirm;
         "bcm-popover": BcmPopover;
+        "bcm-progress": BcmProgress;
         "bcm-radio": BcmRadio;
         "bcm-radio-group": BcmRadioGroup;
         "bcm-result": BcmResult;
@@ -1004,6 +1026,7 @@ declare module "@stencil/core" {
             "bcm-notification": LocalJSX.BcmNotification & JSXBase.HTMLAttributes<HTMLBcmNotificationElement>;
             "bcm-popconfirm": LocalJSX.BcmPopconfirm & JSXBase.HTMLAttributes<HTMLBcmPopconfirmElement>;
             "bcm-popover": LocalJSX.BcmPopover & JSXBase.HTMLAttributes<HTMLBcmPopoverElement>;
+            "bcm-progress": LocalJSX.BcmProgress & JSXBase.HTMLAttributes<HTMLBcmProgressElement>;
             "bcm-radio": LocalJSX.BcmRadio & JSXBase.HTMLAttributes<HTMLBcmRadioElement>;
             "bcm-radio-group": LocalJSX.BcmRadioGroup & JSXBase.HTMLAttributes<HTMLBcmRadioGroupElement>;
             "bcm-result": LocalJSX.BcmResult & JSXBase.HTMLAttributes<HTMLBcmResultElement>;

@@ -1,37 +1,51 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-        <title>Stencil Component Starter</title>
 
-        <link rel="stylesheet" href="/build/bromcom-ui.css">
-        <script type="module" src="/build/bromcom-ui.esm.js"></script>
-        <script nomodule src="/build/bromcom-ui.js"></script>
-        <style>
-            bcm-divider {
-                margin: 10px 0;
-            }
-        </style>
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
 
-    <body style="margin: 10%">
-        <h1>Slider <small>component</small></h1>
-        <div style="max-width: 400px; display: flex; flex-direction: column;">
-            <div class="row">
-                <div class="col">
-                    <bcm-slider value="3" label-suffix="$"></bcm-slider>
-                </div>
-            </div>
-        </div>
+    <link rel="stylesheet" href="/build/bromcom-ui.css">
+    <script type="module" src="/build/bromcom-ui.esm.js"></script>
+    <script nomodule src="/build/bromcom-ui.js"></script>
+    <style>
+        bcm-divider {
+            margin: 10px 0;
+        }
+    </style>
+</head>
 
-        <script>
-            (async() => {
-                await customElements.whenDefined('bcm-slider')
-                const slider = document.querySelector('bcm-slider')
+<body style="margin: 10%">
+    <bcm-progress percent="0" type="line-rounded"></bcm-progress>
+    <bcm-progress info-type="icon" percent="0" size="small"></bcm-progress>
+    <bcm-progress info-type="icon" percent="0" type="line-rounded" size="small"></bcm-progress>
 
-                slider.addEventListener('bcm-change', (e) => console.log(e.detail))
-            })()
-        </script>
-    </body>
+    <div style="margin-top: 50px;">
+        <bcm-button id="inc">Increment</bcm-button>
+        <bcm-button id="dec">Decrement</bcm-button>
+    </div>
+    <script>
+        (async () => {
+            await customElements.whenDefined('bcm-progress')
+
+            const elements = document.querySelectorAll('bcm-progress');
+            
+            document.getElementById('inc').addEventListener('click', () => {
+                elements.forEach(el => {
+                    el.increment(25)
+                })
+            })
+            
+            document.getElementById('dec').addEventListener('click', () => {
+                elements.forEach(el => {
+                    el.decrement(25)
+                })
+            })
+
+        })();
+    </script>
+
+</body>
+
 </html>

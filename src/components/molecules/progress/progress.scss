@@ -1,0 +1,70 @@
+:host {
+    display: block;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+}
+
+.progress {
+    width: 200px;
+    height: 8px;
+    border: 0 none;
+    background: $grey-3;
+    appearance: none;
+
+    &.small {
+        height: 6px;
+    }
+
+    &.line-rounded {
+        &, &::-webkit-progress-value {
+            border-radius: 8px;
+        }
+
+        &::-moz-progress-bar {
+            border-radius: 8px;
+        }
+    }
+
+    &.completed {
+        &::-webkit-progress-value {
+            background-color: $green-6;
+        }
+        
+        &::-moz-progress-bar {
+            background-color: $green-6;
+        }
+    }
+    
+    &.not_completed {
+        &::-webkit-progress-value {
+            background-color: $red-5;
+        }
+        
+        &::-moz-progress-bar {
+            background-color: $red-5;
+        }
+    }
+    
+    &::-webkit-progress-bar {
+        background: transparent;
+    }
+
+    &::-webkit-progress-value {
+        background-color: $blue-6;
+        transition: .3s;
+    }
+    
+    &::-moz-progress-bar {
+        background-color: $blue-6;
+        transition: .3s;
+    }
+}
+
+.value {
+    margin-left: 8px;
+    color: $grey-8;
+    display: inline-flex;
+}
