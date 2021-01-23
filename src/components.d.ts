@@ -16,6 +16,7 @@ import { placementType } from "./components/molecules/tooltip/tooltip";
 import { OptionType } from "./components/molecules/radio/group";
 import { statusType } from "./components/molecules/result/result";
 import { OptionWithGroupType } from "./components/molecules/select/select";
+import { Direction } from "./components/molecules/slider/types";
 import { placementType as placementType1 } from "./components/molecules/tooltip/tooltip";
 export namespace Components {
     interface BcmAlert {
@@ -229,6 +230,20 @@ export namespace Components {
         "getLabel": () => Promise<string>;
         "selected": boolean;
         "value": string;
+    }
+    interface BcmSlider {
+        "_value": Array<number> | string;
+        "direction": Direction;
+        "disabled": boolean;
+        "labelPrefix": string;
+        "labelSuffix": string;
+        "max": number;
+        /**
+          * Component Properties
+         */
+        "min": number;
+        "range": boolean;
+        "step": number;
     }
     interface BcmSplitButton {
         "disabled": boolean;
@@ -482,6 +497,12 @@ declare global {
         prototype: HTMLBcmSelectOptionElement;
         new (): HTMLBcmSelectOptionElement;
     };
+    interface HTMLBcmSliderElement extends Components.BcmSlider, HTMLStencilElement {
+    }
+    var HTMLBcmSliderElement: {
+        prototype: HTMLBcmSliderElement;
+        new (): HTMLBcmSliderElement;
+    };
     interface HTMLBcmSplitButtonElement extends Components.BcmSplitButton, HTMLStencilElement {
     }
     var HTMLBcmSplitButtonElement: {
@@ -570,6 +591,7 @@ declare global {
         "bcm-select": HTMLBcmSelectElement;
         "bcm-select-group": HTMLBcmSelectGroupElement;
         "bcm-select-option": HTMLBcmSelectOptionElement;
+        "bcm-slider": HTMLBcmSliderElement;
         "bcm-split-button": HTMLBcmSplitButtonElement;
         "bcm-split-item": HTMLBcmSplitItemElement;
         "bcm-switch": HTMLBcmSwitchElement;
@@ -808,6 +830,21 @@ declare namespace LocalJSX {
         "selected"?: boolean;
         "value"?: string;
     }
+    interface BcmSlider {
+        "_value"?: Array<number> | string;
+        "direction"?: Direction;
+        "disabled"?: boolean;
+        "labelPrefix"?: string;
+        "labelSuffix"?: string;
+        "max"?: number;
+        /**
+          * Component Properties
+         */
+        "min"?: number;
+        "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "range"?: boolean;
+        "step"?: number;
+    }
     interface BcmSplitButton {
         "disabled"?: boolean;
         "icon"?: string;
@@ -929,6 +966,7 @@ declare namespace LocalJSX {
         "bcm-select": BcmSelect;
         "bcm-select-group": BcmSelectGroup;
         "bcm-select-option": BcmSelectOption;
+        "bcm-slider": BcmSlider;
         "bcm-split-button": BcmSplitButton;
         "bcm-split-item": BcmSplitItem;
         "bcm-switch": BcmSwitch;
@@ -972,6 +1010,7 @@ declare module "@stencil/core" {
             "bcm-select": LocalJSX.BcmSelect & JSXBase.HTMLAttributes<HTMLBcmSelectElement>;
             "bcm-select-group": LocalJSX.BcmSelectGroup & JSXBase.HTMLAttributes<HTMLBcmSelectGroupElement>;
             "bcm-select-option": LocalJSX.BcmSelectOption & JSXBase.HTMLAttributes<HTMLBcmSelectOptionElement>;
+            "bcm-slider": LocalJSX.BcmSlider & JSXBase.HTMLAttributes<HTMLBcmSliderElement>;
             "bcm-split-button": LocalJSX.BcmSplitButton & JSXBase.HTMLAttributes<HTMLBcmSplitButtonElement>;
             "bcm-split-item": LocalJSX.BcmSplitItem & JSXBase.HTMLAttributes<HTMLBcmSplitItemElement>;
             "bcm-switch": LocalJSX.BcmSwitch & JSXBase.HTMLAttributes<HTMLBcmSwitchElement>;
