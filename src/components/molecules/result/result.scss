@@ -1,0 +1,38 @@
+:host {
+    display: block;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: space('m') space('s');
+
+    .content {
+        margin-top: space('s');
+
+        .heading {
+            margin-bottom: space('xxs');
+        }
+
+        .heading, .desc {
+            display: block;
+            text-align: center;
+        }
+
+        .extra {
+            background-color: $grey-3;
+            padding: space('s') space('l');
+            margin: space('m') 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+
+            bcm-button:first-child:not(:only-child) {
+                margin-right: space('xxs');
+            }
+        }
+    }
+}

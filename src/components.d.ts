@@ -14,6 +14,7 @@ import { StatusProp as StatusProp1 } from "./components/molecules/message/types"
 import { TypeProp as TypeProp1 } from "./components/molecules/notification/types";
 import { placementType } from "./components/molecules/tooltip/tooltip";
 import { OptionType } from "./components/molecules/radio/group";
+import { statusType } from "./components/molecules/result/result";
 import { OptionWithGroupType } from "./components/molecules/select/select";
 import { placementType as placementType1 } from "./components/molecules/tooltip/tooltip";
 export namespace Components {
@@ -196,6 +197,16 @@ export namespace Components {
         "options": OptionType[] | string;
         "size": 'small' | 'medium' | 'large';
         "value": string | number;
+    }
+    interface BcmResult {
+        "desc": string;
+        "heading": string;
+        /**
+          * These event and prop names must change. ..Start..
+         */
+        "primaryButtonText": string;
+        "secondaryButtonText": string;
+        "status": statusType;
     }
     interface BcmSelect {
         "caption": string;
@@ -447,6 +458,12 @@ declare global {
         prototype: HTMLBcmRadioGroupElement;
         new (): HTMLBcmRadioGroupElement;
     };
+    interface HTMLBcmResultElement extends Components.BcmResult, HTMLStencilElement {
+    }
+    var HTMLBcmResultElement: {
+        prototype: HTMLBcmResultElement;
+        new (): HTMLBcmResultElement;
+    };
     interface HTMLBcmSelectElement extends Components.BcmSelect, HTMLStencilElement {
     }
     var HTMLBcmSelectElement: {
@@ -549,6 +566,7 @@ declare global {
         "bcm-popover": HTMLBcmPopoverElement;
         "bcm-radio": HTMLBcmRadioElement;
         "bcm-radio-group": HTMLBcmRadioGroupElement;
+        "bcm-result": HTMLBcmResultElement;
         "bcm-select": HTMLBcmSelectElement;
         "bcm-select-group": HTMLBcmSelectGroupElement;
         "bcm-select-option": HTMLBcmSelectOptionElement;
@@ -753,6 +771,18 @@ declare namespace LocalJSX {
         "size"?: 'small' | 'medium' | 'large';
         "value"?: string | number;
     }
+    interface BcmResult {
+        "desc"?: string;
+        "heading"?: string;
+        "onBcm-pb-click"?: (event: CustomEvent<any>) => void;
+        "onBcm-sb-click"?: (event: CustomEvent<any>) => void;
+        /**
+          * These event and prop names must change. ..Start..
+         */
+        "primaryButtonText"?: string;
+        "secondaryButtonText"?: string;
+        "status"?: statusType;
+    }
     interface BcmSelect {
         "caption"?: string;
         "captionType"?: 'primary' | 'success' | 'warning' | 'error' | 'default';
@@ -895,6 +925,7 @@ declare namespace LocalJSX {
         "bcm-popover": BcmPopover;
         "bcm-radio": BcmRadio;
         "bcm-radio-group": BcmRadioGroup;
+        "bcm-result": BcmResult;
         "bcm-select": BcmSelect;
         "bcm-select-group": BcmSelectGroup;
         "bcm-select-option": BcmSelectOption;
@@ -937,6 +968,7 @@ declare module "@stencil/core" {
             "bcm-popover": LocalJSX.BcmPopover & JSXBase.HTMLAttributes<HTMLBcmPopoverElement>;
             "bcm-radio": LocalJSX.BcmRadio & JSXBase.HTMLAttributes<HTMLBcmRadioElement>;
             "bcm-radio-group": LocalJSX.BcmRadioGroup & JSXBase.HTMLAttributes<HTMLBcmRadioGroupElement>;
+            "bcm-result": LocalJSX.BcmResult & JSXBase.HTMLAttributes<HTMLBcmResultElement>;
             "bcm-select": LocalJSX.BcmSelect & JSXBase.HTMLAttributes<HTMLBcmSelectElement>;
             "bcm-select-group": LocalJSX.BcmSelectGroup & JSXBase.HTMLAttributes<HTMLBcmSelectGroupElement>;
             "bcm-select-option": LocalJSX.BcmSelectOption & JSXBase.HTMLAttributes<HTMLBcmSelectOptionElement>;
