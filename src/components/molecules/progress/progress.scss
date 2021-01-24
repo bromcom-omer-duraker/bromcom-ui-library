@@ -1,5 +1,5 @@
 :host {
-    display: block;
+    display: inline-block;
 }
 
 .progress-container {
@@ -67,4 +67,40 @@
     margin-left: 8px;
     color: $grey-8;
     display: inline-flex;
+}
+
+.progress-circle {
+    transition: .35s stroke-dashoffset, .1s stroke;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    stroke: $grey-3;
+    stroke-width: 6px;
+    fill: transparent;
+    
+    &.bar {
+        stroke: $blue-6;
+    }
+
+    &.completed {
+        stroke: $green-6;
+    }
+
+    &.not_completed {
+        stroke: $red-5;
+    }
+}
+
+.progress-circle-container {
+    position: relative;
+
+    bcm-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    text {
+        fill: $grey-8;
+    }
 }

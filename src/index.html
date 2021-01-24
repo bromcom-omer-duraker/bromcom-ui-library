@@ -17,9 +17,18 @@
 </head>
 
 <body style="margin: 10%">
-    <bcm-progress percent="0" type="line-rounded"></bcm-progress>
-    <bcm-progress info-type="icon" percent="0" size="small"></bcm-progress>
-    <bcm-progress info-type="icon" percent="0" type="line-rounded" size="small"></bcm-progress>
+    <div>
+        <bcm-progress percent="0" type="line-rounded"></bcm-progress>
+        <bcm-progress info-type="icon" percent="0" size="small"></bcm-progress>
+        <bcm-progress info-type="icon" percent="0" type="line-rounded" size="small"></bcm-progress>
+    </div>
+
+    <div>
+        <bcm-progress info-type="percent" percent="0" type="circle" size="medium"></bcm-progress>
+        <bcm-progress info-type="icon" percent="0" type="circle" size="medium"></bcm-progress>
+        <bcm-progress info-type="percent" percent="0" type="circle" size="small"></bcm-progress>
+        <bcm-progress info-type="icon" percent="0" type="circle" size="small"></bcm-progress>
+    </div>
 
     <div style="margin-top: 50px;">
         <bcm-button id="inc">Increment</bcm-button>
@@ -30,13 +39,13 @@
             await customElements.whenDefined('bcm-progress')
 
             const elements = document.querySelectorAll('bcm-progress');
-            
+
             document.getElementById('inc').addEventListener('click', () => {
                 elements.forEach(el => {
                     el.increment(25)
                 })
             })
-            
+
             document.getElementById('dec').addEventListener('click', () => {
                 elements.forEach(el => {
                     el.decrement(25)

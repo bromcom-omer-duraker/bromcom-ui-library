@@ -187,6 +187,7 @@ export namespace Components {
         "increment": (percent: number) => Promise<void>;
         "infoType": 'percent' | 'icon';
         "percent": number;
+        "setPercent": (percent: number) => Promise<void>;
         "size": 'small' | 'medium';
         "type": 'line' | 'line-rounded' | 'circle';
     }
