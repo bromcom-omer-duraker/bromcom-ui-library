@@ -7,3 +7,168 @@
 @import 'border-radius.scss';
 @import 'media-query.scss';
 @import 'z-index.scss';
+
+/**
+ * Variables: Z-index
+ */
+ :root {
+    @include generatorZIndex();
+}
+
+/**
+ * Variables: Colors
+ */
+:root {
+    --bcm-color-white: '#ffffff';
+    --bcm-color-black: '#000000';
+    --bcm-color-prime-blue-1: #{$prime-blue-1};
+    --bcm-color-prime-blue-2: #{$prime-blue-2};
+    --bcm-color-prime-blue-3: #{$prime-blue-3};
+    --bcm-color-prime-blue-4: #{$prime-blue-4};
+    --bcm-color-prime-blue-5: #{$prime-blue-5};
+    --bcm-color-prime-blue-6: #{$prime-blue-6};
+    --bcm-color-prime-blue-7: #{$prime-blue-7};
+    --bcm-color-prime-blue-8: #{$prime-blue-8};
+    --bcm-color-prime-blue-9: #{$prime-blue-9};
+    --bcm-color-prime-blue-10: #{$prime-blue-10};
+    --bcm-color-grey-1: #{$grey-1};
+    --bcm-color-grey-2: #{$grey-2};
+    --bcm-color-grey-3: #{$grey-3};
+    --bcm-color-grey-4: #{$grey-4};
+    --bcm-color-grey-5: #{$grey-5};
+    --bcm-color-grey-6: #{$grey-6};
+    --bcm-color-grey-7: #{$grey-7};
+    --bcm-color-grey-8: #{$grey-8};
+    --bcm-color-grey-9: #{$grey-9};
+    --bcm-color-grey-10: #{$grey-10};
+    --bcm-color-blue-1: #{$blue-1};
+    --bcm-color-blue-2: #{$blue-2};
+    --bcm-color-blue-3: #{$blue-3};
+    --bcm-color-blue-4: #{$blue-4};
+    --bcm-color-blue-5: #{$blue-5};
+    --bcm-color-blue-6: #{$blue-6};
+    --bcm-color-blue-7: #{$blue-7};
+    --bcm-color-blue-8: #{$blue-8};
+    --bcm-color-blue-9: #{$blue-9};
+    --bcm-color-blue-10: #{$blue-10};
+    --bcm-color-warmyellow-1: #{$warmyellow-1};
+    --bcm-color-warmyellow-2: #{$warmyellow-2};
+    --bcm-color-warmyellow-3: #{$warmyellow-3};
+    --bcm-color-warmyellow-4: #{$warmyellow-4};
+    --bcm-color-warmyellow-5: #{$warmyellow-5};
+    --bcm-color-warmyellow-6: #{$warmyellow-6};
+    --bcm-color-warmyellow-7: #{$warmyellow-7};
+    --bcm-color-warmyellow-8: #{$warmyellow-8};
+    --bcm-color-warmyellow-9: #{$warmyellow-9};
+    --bcm-color-warmyellow-10: #{$warmyellow-10};
+    --bcm-color-yellow-1: #{$yellow-1};
+    --bcm-color-yellow-2: #{$yellow-2};
+    --bcm-color-yellow-3: #{$yellow-3};
+    --bcm-color-yellow-4: #{$yellow-4};
+    --bcm-color-yellow-5: #{$yellow-5};
+    --bcm-color-yellow-6: #{$yellow-6};
+    --bcm-color-yellow-7: #{$yellow-7};
+    --bcm-color-yellow-8: #{$yellow-8};
+    --bcm-color-yellow-9: #{$yellow-9};
+    --bcm-color-yellow-10: #{$yellow-10};
+    --bcm-color-limegreen-1: #{$limegreen-1};
+    --bcm-color-limegreen-2: #{$limegreen-2};
+    --bcm-color-limegreen-3: #{$limegreen-3};
+    --bcm-color-limegreen-4: #{$limegreen-4};
+    --bcm-color-limegreen-5: #{$limegreen-5};
+    --bcm-color-limegreen-6: #{$limegreen-6};
+    --bcm-color-limegreen-7: #{$limegreen-7};
+    --bcm-color-limegreen-8: #{$limegreen-8};
+    --bcm-color-limegreen-9: #{$limegreen-9};
+    --bcm-color-limegreen-10: #{$limegreen-10};
+    --bcm-color-red-1: #{$red-1};
+    --bcm-color-red-2: #{$red-2};
+    --bcm-color-red-3: #{$red-3};
+    --bcm-color-red-4: #{$red-4};
+    --bcm-color-red-5: #{$red-5};
+    --bcm-color-red-6: #{$red-6};
+    --bcm-color-red-7: #{$red-7};
+    --bcm-color-red-8: #{$red-8};
+    --bcm-color-red-9: #{$red-9};
+    --bcm-color-red-10: #{$red-10};
+    --bcm-color-darkorange-1: #{$darkorange-1};
+    --bcm-color-darkorange-2: #{$darkorange-2};
+    --bcm-color-darkorange-3: #{$darkorange-3};
+    --bcm-color-darkorange-4: #{$darkorange-4};
+    --bcm-color-darkorange-5: #{$darkorange-5};
+    --bcm-color-darkorange-6: #{$darkorange-6};
+    --bcm-color-darkorange-7: #{$darkorange-7};
+    --bcm-color-darkorange-8: #{$darkorange-8};
+    --bcm-color-darkorange-9: #{$darkorange-9};
+    --bcm-color-darkorange-10: #{$darkorange-10};
+    --bcm-color-orange-1: #{$orange-1};
+    --bcm-color-orange-2: #{$orange-2};
+    --bcm-color-orange-3: #{$orange-3};
+    --bcm-color-orange-4: #{$orange-4};
+    --bcm-color-orange-5: #{$orange-5};
+    --bcm-color-orange-6: #{$orange-6};
+    --bcm-color-orange-7: #{$orange-7};
+    --bcm-color-orange-8: #{$orange-8};
+    --bcm-color-orange-9: #{$orange-9};
+    --bcm-color-orange-10: #{$orange-10};
+    --bcm-color-green-1: #{$green-1};
+    --bcm-color-green-2: #{$green-2};
+    --bcm-color-green-3: #{$green-3};
+    --bcm-color-green-4: #{$green-4};
+    --bcm-color-green-5: #{$green-5};
+    --bcm-color-green-6: #{$green-6};
+    --bcm-color-green-7: #{$green-7};
+    --bcm-color-green-8: #{$green-8};
+    --bcm-color-green-9: #{$green-9};
+    --bcm-color-green-10: #{$green-10};
+    --bcm-color-turquosie-1: #{$turquosie-1};
+    --bcm-color-turquosie-2: #{$turquosie-2};
+    --bcm-color-turquosie-3: #{$turquosie-3};
+    --bcm-color-turquosie-4: #{$turquosie-4};
+    --bcm-color-turquosie-5: #{$turquosie-5};
+    --bcm-color-turquosie-6: #{$turquosie-6};
+    --bcm-color-turquosie-7: #{$turquosie-7};
+    --bcm-color-turquosie-8: #{$turquosie-8};
+    --bcm-color-turquosie-9: #{$turquosie-9};
+    --bcm-color-turquosie-10: #{$turquosie-10};
+    --bcm-color-cobaltblue-1: #{$cobaltblue-1};
+    --bcm-color-cobaltblue-2: #{$cobaltblue-2};
+    --bcm-color-cobaltblue-3: #{$cobaltblue-3};
+    --bcm-color-cobaltblue-4: #{$cobaltblue-4};
+    --bcm-color-cobaltblue-5: #{$cobaltblue-5};
+    --bcm-color-cobaltblue-6: #{$cobaltblue-6};
+    --bcm-color-cobaltblue-7: #{$cobaltblue-7};
+    --bcm-color-cobaltblue-8: #{$cobaltblue-8};
+    --bcm-color-cobaltblue-9: #{$cobaltblue-9};
+    --bcm-color-cobaltblue-10: #{$cobaltblue-10};
+    --bcm-color-magenta-1: #{$magenta-1};
+    --bcm-color-magenta-2: #{$magenta-2};
+    --bcm-color-magenta-3: #{$magenta-3};
+    --bcm-color-magenta-4: #{$magenta-4};
+    --bcm-color-magenta-5: #{$magenta-5};
+    --bcm-color-magenta-6: #{$magenta-6};
+    --bcm-color-magenta-7: #{$magenta-7};
+    --bcm-color-magenta-8: #{$magenta-8};
+    --bcm-color-magenta-9: #{$magenta-9};
+    --bcm-color-magenta-10: #{$magenta-10};
+    --bcm-color-purple-1: #{$purple-1};
+    --bcm-color-purple-2: #{$purple-2};
+    --bcm-color-purple-3: #{$purple-3};
+    --bcm-color-purple-4: #{$purple-4};
+    --bcm-color-purple-5: #{$purple-5};
+    --bcm-color-purple-6: #{$purple-6};
+    --bcm-color-purple-7: #{$purple-7};
+    --bcm-color-purple-8: #{$purple-8};
+    --bcm-color-purple-9: #{$purple-9};
+    --bcm-color-purple-10: #{$purple-10};
+}
+
+// All Elements
+* {
+    font-family: $font-roboto;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-weight: 400;
+}

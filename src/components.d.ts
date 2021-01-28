@@ -15,6 +15,8 @@ import { TypeProp as TypeProp1 } from "./components/molecules/notification/types
 import { placementType } from "./components/molecules/tooltip/tooltip";
 import { OptionType } from "./components/molecules/radio/group";
 import { OptionWithGroupType } from "./components/molecules/select/select";
+import { Direction } from "./components/molecules/slider/types";
+import { Direction as Direction1, SizeReference, StepStatuses } from "./components/molecules/steps/types";
 import { placementType as placementType1 } from "./components/molecules/tooltip/tooltip";
 export namespace Components {
     interface BcmAlert {
@@ -219,6 +221,19 @@ export namespace Components {
         "selected": boolean;
         "value": string;
     }
+    interface BcmSlider {
+        "_value": Array<number> | string;
+        "direction": Direction;
+        "labelPrefix": string;
+        "labelSuffix": string;
+        "max": number;
+        /**
+          * Component Properties
+         */
+        "min": number;
+        "range": boolean;
+        "step": number;
+    }
     interface BcmSplitButton {
         "disabled": boolean;
         "icon": string;
@@ -230,6 +245,49 @@ export namespace Components {
     interface BcmSplitItem {
         "icon": string;
         "iconPosition": 'prefix' | 'suffix';
+    }
+    interface BcmStep {
+        "description": string;
+        /**
+          * Component Properties
+         */
+        "icon": string;
+        "show": boolean;
+        "status": StepStatuses;
+    }
+    interface BcmSteps {
+        "direction": Direction;
+        /**
+          * Component Properties
+         */
+        "icon": string;
+        "mini": boolean;
+        /**
+          * @desc
+         */
+        "next": () => Promise<void>;
+        /**
+          * @desc
+         */
+        "prev": () => Promise<void>;
+        "sizeReference": SizeReference;
+    }
+    interface BcmStepsV1 {
+        "direction": Direction;
+        /**
+          * Component Properties
+         */
+        "icon": string;
+        "mini": boolean;
+        /**
+          * @desc
+         */
+        "next": () => Promise<void>;
+        /**
+          * @desc
+         */
+        "prev": () => Promise<void>;
+        "sizeReference": SizeReference;
     }
     interface BcmSwitch {
         "activeIcon": string;
@@ -465,6 +523,12 @@ declare global {
         prototype: HTMLBcmSelectOptionElement;
         new (): HTMLBcmSelectOptionElement;
     };
+    interface HTMLBcmSliderElement extends Components.BcmSlider, HTMLStencilElement {
+    }
+    var HTMLBcmSliderElement: {
+        prototype: HTMLBcmSliderElement;
+        new (): HTMLBcmSliderElement;
+    };
     interface HTMLBcmSplitButtonElement extends Components.BcmSplitButton, HTMLStencilElement {
     }
     var HTMLBcmSplitButtonElement: {
@@ -476,6 +540,24 @@ declare global {
     var HTMLBcmSplitItemElement: {
         prototype: HTMLBcmSplitItemElement;
         new (): HTMLBcmSplitItemElement;
+    };
+    interface HTMLBcmStepElement extends Components.BcmStep, HTMLStencilElement {
+    }
+    var HTMLBcmStepElement: {
+        prototype: HTMLBcmStepElement;
+        new (): HTMLBcmStepElement;
+    };
+    interface HTMLBcmStepsElement extends Components.BcmSteps, HTMLStencilElement {
+    }
+    var HTMLBcmStepsElement: {
+        prototype: HTMLBcmStepsElement;
+        new (): HTMLBcmStepsElement;
+    };
+    interface HTMLBcmStepsV1Element extends Components.BcmStepsV1, HTMLStencilElement {
+    }
+    var HTMLBcmStepsV1Element: {
+        prototype: HTMLBcmStepsV1Element;
+        new (): HTMLBcmStepsV1Element;
     };
     interface HTMLBcmSwitchElement extends Components.BcmSwitch, HTMLStencilElement {
     }
@@ -552,8 +634,12 @@ declare global {
         "bcm-select": HTMLBcmSelectElement;
         "bcm-select-group": HTMLBcmSelectGroupElement;
         "bcm-select-option": HTMLBcmSelectOptionElement;
+        "bcm-slider": HTMLBcmSliderElement;
         "bcm-split-button": HTMLBcmSplitButtonElement;
         "bcm-split-item": HTMLBcmSplitItemElement;
+        "bcm-step": HTMLBcmStepElement;
+        "bcm-steps": HTMLBcmStepsElement;
+        "bcm-steps-v1": HTMLBcmStepsV1Element;
         "bcm-switch": HTMLBcmSwitchElement;
         "bcm-tag": HTMLBcmTagElement;
         "bcm-text": HTMLBcmTextElement;
@@ -778,6 +864,20 @@ declare namespace LocalJSX {
         "selected"?: boolean;
         "value"?: string;
     }
+    interface BcmSlider {
+        "_value"?: Array<number> | string;
+        "direction"?: Direction;
+        "labelPrefix"?: string;
+        "labelSuffix"?: string;
+        "max"?: number;
+        /**
+          * Component Properties
+         */
+        "min"?: number;
+        "onBcm-change"?: (event: CustomEvent<any>) => void;
+        "range"?: boolean;
+        "step"?: number;
+    }
     interface BcmSplitButton {
         "disabled"?: boolean;
         "icon"?: string;
@@ -789,6 +889,33 @@ declare namespace LocalJSX {
     interface BcmSplitItem {
         "icon"?: string;
         "iconPosition"?: 'prefix' | 'suffix';
+    }
+    interface BcmStep {
+        "description"?: string;
+        /**
+          * Component Properties
+         */
+        "icon"?: string;
+        "show"?: boolean;
+        "status"?: StepStatuses;
+    }
+    interface BcmSteps {
+        "direction"?: Direction;
+        /**
+          * Component Properties
+         */
+        "icon"?: string;
+        "mini"?: boolean;
+        "sizeReference"?: SizeReference;
+    }
+    interface BcmStepsV1 {
+        "direction"?: Direction;
+        /**
+          * Component Properties
+         */
+        "icon"?: string;
+        "mini"?: boolean;
+        "sizeReference"?: SizeReference;
     }
     interface BcmSwitch {
         "activeIcon"?: string;
@@ -898,8 +1025,12 @@ declare namespace LocalJSX {
         "bcm-select": BcmSelect;
         "bcm-select-group": BcmSelectGroup;
         "bcm-select-option": BcmSelectOption;
+        "bcm-slider": BcmSlider;
         "bcm-split-button": BcmSplitButton;
         "bcm-split-item": BcmSplitItem;
+        "bcm-step": BcmStep;
+        "bcm-steps": BcmSteps;
+        "bcm-steps-v1": BcmStepsV1;
         "bcm-switch": BcmSwitch;
         "bcm-tag": BcmTag;
         "bcm-text": BcmText;
@@ -940,8 +1071,12 @@ declare module "@stencil/core" {
             "bcm-select": LocalJSX.BcmSelect & JSXBase.HTMLAttributes<HTMLBcmSelectElement>;
             "bcm-select-group": LocalJSX.BcmSelectGroup & JSXBase.HTMLAttributes<HTMLBcmSelectGroupElement>;
             "bcm-select-option": LocalJSX.BcmSelectOption & JSXBase.HTMLAttributes<HTMLBcmSelectOptionElement>;
+            "bcm-slider": LocalJSX.BcmSlider & JSXBase.HTMLAttributes<HTMLBcmSliderElement>;
             "bcm-split-button": LocalJSX.BcmSplitButton & JSXBase.HTMLAttributes<HTMLBcmSplitButtonElement>;
             "bcm-split-item": LocalJSX.BcmSplitItem & JSXBase.HTMLAttributes<HTMLBcmSplitItemElement>;
+            "bcm-step": LocalJSX.BcmStep & JSXBase.HTMLAttributes<HTMLBcmStepElement>;
+            "bcm-steps": LocalJSX.BcmSteps & JSXBase.HTMLAttributes<HTMLBcmStepsElement>;
+            "bcm-steps-v1": LocalJSX.BcmStepsV1 & JSXBase.HTMLAttributes<HTMLBcmStepsV1Element>;
             "bcm-switch": LocalJSX.BcmSwitch & JSXBase.HTMLAttributes<HTMLBcmSwitchElement>;
             "bcm-tag": LocalJSX.BcmTag & JSXBase.HTMLAttributes<HTMLBcmTagElement>;
             "bcm-text": LocalJSX.BcmText & JSXBase.HTMLAttributes<HTMLBcmTextElement>;

@@ -1,37 +1,166 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-        <title>Stencil Component Starter</title>
 
-        <link rel="stylesheet" href="/build/bromcom-ui.css">
-        <script type="module" src="/build/bromcom-ui.esm.js"></script>
-        <script nomodule src="/build/bromcom-ui.js"></script>
-        <style>
-            bcm-divider {
-                margin: 10px 0;
-            }
-        </style>
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
 
-    <body style="margin: 10%">
-        <h1>Slider <small>component</small></h1>
-        <div style="max-width: 400px; display: flex; flex-direction: column;">
-            <div class="row">
-                <div class="col">
-                    <bcm-slider value="[1, 7]" step="2" range direction="vertical" label-suffix="$"></bcm-slider>
-                </div>
+    <link rel="stylesheet" href="/build/bromcom-ui.css">
+    <script type="module" src="/build/bromcom-ui.esm.js"></script>
+    <script nomodule src="/build/bromcom-ui.js"></script>
+    <style>
+        bcm-divider {
+            margin: 10px 0;
+        }
+
+        body {
+            margin: 10%;
+        }
+
+        body {
+            align-items: center;
+            justify-content: center;
+        }
+
+        h4 {
+            margin-left: 10px;
+            color: #717171;
+        }
+
+        .user-form-wrapper {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            padding: 2em;
+            min-width: 600px;
+            max-width: 600px;
+        }
+
+        .row-group+.row-group {
+            margin-top: 20px;
+        }
+
+        .row-group .group-title {
+            margin: 8px 0;
+        }
+
+        .form-row {
+            display: flex;
+        }
+
+        .form-row+.form-row {
+            margin-top: 10px;
+        }
+
+        .form-row>*+* {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body style="margin: 5%">
+    <h1>Steps <small>component</small></h1>
+    <div style="max-width: 80%; display: flex; flex-direction: column;">
+        <div class="row">
+            <div class="col">
+                <bcm-steps class="steps" icon="number">
+                    <bcm-step title="Step 1" description="This is the description">
+                        <form class="user-form">
+                            <div class="user-form-wrapper">
+                                <div class="row-group">
+                                    <bcm-text class="group-title" scale="size-3">
+                                        Personal Information
+                                    </bcm-text>
+                                    <div class="form-row">
+                                        <bcm-input type="text" name="nickname" placeholder="nickname">
+                                            <bcm-icon slot="prefix" icon="user" color="grey-7"></bcm-icon>
+                                            <bcm-icon slot="prefix" icon="user" color="grey-7"></bcm-icon>
+                                        </bcm-input>
+                                    </div>
+                                    <div class="form-row">
+                                        <bcm-input type="text" name="mail" placeholder="e-mail">
+                                            <bcm-icon slot="prefix" icon="mail" color="grey-7"></bcm-icon>
+                                        </bcm-input>
+                                    </div>
+                                    <div class="form-row">
+                                        <bcm-radio-group name="gender">
+                                            <bcm-text scale="size-2" style="margin-right: 10px;">
+                                                Gender
+                                            </bcm-text>
+                                            <bcm-radio value="male">Male</bcm-radio>
+                                            <bcm-radio value="female">Female</bcm-radio>
+                                        </bcm-radio-group>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </bcm-step>
+                    <bcm-step title="Step 2" description="This is the description This is the description">
+                        <div class="user-form-wrapper">
+                            <div class="row-group">
+                                <bcm-text class="group-title" scale="size-3">
+                                    Bio
+                                </bcm-text>
+                                <div class="form-row">
+                                    <bcm-textarea name="bio" full-width max-length="200">
+                                    </bcm-textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </bcm-step>
+                    <bcm-step title="Step 3" description="This is the description">
+                        <div class="user-form-wrapper">
+                            <div class="row-group">
+                                <bcm-text class="group-title" scale="size-3">
+                                    Additional Information
+                                </bcm-text>
+                                <div class="form-row">
+                                    <bcm-checkbox-group name="additional" direction="vertical">
+                                        <bcm-checkbox name="checkbox2">
+                                            Kullanıcı Sözleşmesi, Gizlilik Politikası ve Açık Rıza ve Dijital
+                                            İletişim Metni'ni okudum, kabul ediyorum.
+                                        </bcm-checkbox>
+                                    </bcm-checkbox-group>
+                                </div>
+                            </div>
+                        </div>
+                    </bcm-step>
+                </bcm-steps>
             </div>
         </div>
+        <div class="row" style="margin-top: 40px;">
+            <div class="col">
+                <bcm-button class="prev">Prev</bcm-button>
+                <bcm-button class="next">Next</bcm-button>
+            </div>
+        </div>
+    </div>
 
-        <script>
-            (async() => {
-                await customElements.whenDefined('bcm-slider')
-                const slider = document.querySelector('bcm-slider')
+    <script>
+        const select = (el) => {
+            return document.querySelector(el)
+        }
 
-                slider.addEventListener('bcm-change', (e) => console.log(e.detail))
-            })()
-        </script>
-    </body>
+        (async () => {
+            await customElements.whenDefined('bcm-button')
+            await customElements.whenDefined('bcm-steps')
+
+            const prev = select('.prev')
+                , next = select('.next')
+                , steps = select('.steps')
+
+            steps.activeStep = 3
+
+            prev.addEventListener('click', () => {
+                steps.prev()
+            })
+            next.addEventListener('click', () => {
+                steps.next()
+            })
+        })()
+    </script>
+</body>
+
 </html>

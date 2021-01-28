@@ -1,0 +1,218 @@
+$step-item-horizontal-line-size: 150px;
+
+@mixin fix-size($size) {
+    max-width: $size;
+    max-height: $size;
+    min-width: $size;
+    min-height: $size;
+}
+
+.steps {
+    display: inline-block;
+    max-width: 100%;
+    &.full-width {
+        width: 100%;
+    }
+}
+
+.contents {
+    margin-top: 14px;
+}
+
+.items {
+    position: relative;
+    display: flex;
+}
+
+.item {
+    position: relative;
+    cursor: pointer;
+    .inner {
+        display: flex;
+        box-sizing: content-box;
+    }
+    .text-content {
+        display: flex;
+        flex-direction: column;
+    }
+    &:first-child {
+        padding-left: 0 !important;
+    }
+}
+
+.item:before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+}
+
+.item + .item {
+    padding-left: $step-item-horizontal-line-size - 10px;
+    margin-left: 10px;
+    &:before {
+        content: '';
+        position: absolute;
+        width: $step-item-horizontal-line-size - 20px;
+        height: 1px;
+        top: 16px;
+        left: 0;
+        background-color: var(--bcm-color-grey-4);
+        width: calc(var(--bcm-step-line-size) - 10px);
+    }
+}
+
+.item .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--bcm-color-grey-6);
+    color: var(--bcm-color-grey-6);
+    background-color: transparent;
+    margin-right: 8px;
+    @include fix-size(32px);
+    &.with-icon, &.dot {
+        border: none;
+    }
+    &.dot {
+        > span {
+            @include fix-size(10px);
+        }
+    }
+    > span {
+        text-align: center;
+        line-height: 16px;
+        @include fix-size(16px);
+    }
+}
+
+
+
+.icon .dot {
+    display: block;
+    background-color: var(--bcm-color-prime-blue-6);
+    border-radius: 50%;
+    @include fix-size(10px);
+}
+
+.item .title {
+    display: block;
+    font-size: 16px;
+    margin-top: 3px;
+    color: var(--bcm-color-grey-7);
+}
+
+.item .description {
+    display: block;
+    font-size: 14px;
+    margin-top: 3px;
+    color: var(--bcm-color-grey-7);
+}
+
+.steps.no-wrap-title {
+    .item {
+        .title {
+            white-space: nowrap;
+        }
+        .description {
+        }
+    }
+}
+
+.steps.no-wrap-description {
+    .item {
+        .description {
+            white-space: nowrap;
+        }
+        .title {
+        }
+    }
+}
+
+/**
+ * With Dot Rules
+ */
+.item.dot {
+    flex-direction: column;
+    text-align: center;
+    .icon {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.steps.vertical {
+    .item.dot {
+        text-align: left;
+    }
+    .icon {
+        margin-left: 0;
+    }
+}
+
+/**
+ * Active Rules
+ */
+.item.active {
+    .icon:not(.with-icon):not(.dot) {
+        border-color: transparent;
+        background-color: var(--bcm-color-prime-blue-6);
+        color: #fff;
+    }
+    .icon.with-icon {
+        color: var(--bcm-color-prime-blue-6);
+    }
+    .icon.dot {
+        > span, .dot {
+            @include fix-size(14px);
+        }
+    }
+    .title {
+        color: #262626;
+    }
+    &:before {
+        background-color: var(--bcm-color-blue-6);
+    }
+}
+
+/**
+ * Finished Rules
+ */
+.item.finished {
+    color: var(--bcm-color-prime-blue-6);
+    .title {
+        color: var(--bcm-color-grey-8);
+    }
+    .icon {
+        border-color: var(--bcm-color-prime-blue-6);;
+    }
+    &:before {
+        background-color: var(--bcm-color-blue-6);
+    }
+}
+
+/**
+ * Vertical layout Rules
+ */
+.steps.vertical {
+    display: flex;
+    .items {
+        flex-direction: column;
+    }
+    .contents {
+        margin-top: 0;
+        margin-left: 20px;
+    }
+    .item + .item {
+        padding-left: 0;
+        margin-left: 0;
+        padding-top: $step-item-horizontal-line-size - 10px;
+        &:before {
+            top: 0;
+            left: 16px;
+            width: 1px;
+            height: $step-item-horizontal-line-size - 20px;
+        }
+    }
+}
