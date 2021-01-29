@@ -15,6 +15,7 @@ export class BcmSteps {
     private firstRenderCalculation: boolean = false
     private itemLineSize: number = 0
     private initialDirection: Direction = null
+    private sequentialIncrease = 1
 
     /**
      * Component Element
@@ -24,10 +25,11 @@ export class BcmSteps {
     /**
      * Component Properties
      */
-    @Prop({ attribute: 'icon'       }) icon: string = 'number'
-    @Prop({ attribute: 'direction'  }) direction: Direction = Directions.horizontal
-    @Prop({ attribute: 'mini'       }) mini: boolean = false
-    @Prop({ attribute: 'item-size-reference' }) sizeReference: SizeReference = SizeReferences.none
+    @Prop({ attribute: 'icon'                   }) icon: string = 'number'
+    @Prop({ attribute: 'direction'              }) direction: Direction = Directions.horizontal
+    @Prop({ attribute: 'mini'                   }) mini: boolean = false
+    @Prop({ attribute: 'sequential'             }) sequential: boolean = false
+    @Prop({ attribute: 'item-size-reference'    }) sizeReference: SizeReference = SizeReferences.none
 
     /**
      * Component States
@@ -73,7 +75,7 @@ export class BcmSteps {
 
             // Activate current step
             // #
-            this.activateStep()
+            this.activateStep(-1, { init: true })
 
             forceUpdate(this.el)
             this.initialized = true
@@ -107,14 +109,27 @@ export class BcmSteps {
      * @desc
      * @param idx 
      */
-    activateStep(idx: number = -1) {
+    activateStep(idx: number = -1, { init } = { init: false }) {
         if (idx === this.activeStep) return
 
         idx < 0 && (idx = 0)
-        this.activeStep = idx
 
-        this.items.forEach((_, idx) => {
-            const item = this.items[idx]
+
+        // Sequential step control
+        // #
+        if (this.sequential && !init) {
+            if (idx > this.sequentialIncrease)
+                return 
+            this.sequentialIncrease = this.sequentialIncrease > idx + 1 
+                ? this.sequentialIncrease
+                : idx + 1
+        }
+        
+        this.activeStep = idx
+        console.log(this.activeStep, this.sequentialIncrease)
+
+        this.items.forEach((_, idx2) => {
+            const item = this.items[idx2]
 
             // Hide all steps
             // #
@@ -122,14 +137,13 @@ export class BcmSteps {
             
             // Set status finished if activated
             // #
-            item.status == StepStatuses.active 
-                 && (item.finished = true)
+            idx > idx2 && (item.finished = true)
 
             item.status = StepStatuses.none
-            
+
             // Apply this settings target
             // to target step
-            if (idx !== this.activeStep) return
+            if (idx2 !== this.activeStep) return
 
             item.el.show = true
             item.el.status = StepStatuses.active
@@ -262,6 +276,12 @@ export class BcmSteps {
                                     </div>
                                     <div class="title">{item.el.title}</div>
                                     <div class="line"></div>
+                                    {
+                                        this.icon === 'dot' && (
+                                            <div class="line-2"></div>
+                                        )
+                                        
+                                    }
                                 </div>
                                 <div class="description">
                                     {item.el.description}
