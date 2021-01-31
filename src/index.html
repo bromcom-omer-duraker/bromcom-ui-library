@@ -64,7 +64,7 @@
     <div style="max-width: 80%; display: flex; flex-direction: column;">
         <div class="row">
             <div class="col">
-                <bcm-steps class="steps" icon="user">
+                <bcm-steps class="steps" icon="dot" sequential>
                     <bcm-step title="Step 1" description="This is the description">
                         <form class="user-form">
                             <div class="user-form-wrapper">
@@ -136,6 +136,18 @@
                 <bcm-button class="next">Next</bcm-button>
             </div>
         </div>
+        <div class="row" style="margin-top: 40px;">
+            <div class="col">
+                <bcm-button class="set-step1-true">Set step1 validate true</bcm-button>
+                <bcm-button class="set-step1-false">Set step1 validate false</bcm-button>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 40px;">
+            <div class="col">
+                <bcm-button class="set-step2-true">Set step2 validate true</bcm-button>
+                <bcm-button class="set-step2-false">Set step2 validate false</bcm-button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -150,17 +162,32 @@
             const prev = select('.prev')
                 , next = select('.next')
                 , steps = select('.steps')
-
-            steps.activeStep = 3
-
+                , ss1t = select('.set-step1-true')
+                , ss1f = select('.set-step1-false')
+                , ss2t = select('.set-step2-true')
+                , ss2f = select('.set-step2-false')
+            
             prev.addEventListener('click', () => {
                 steps.prev()
             })
             next.addEventListener('click', () => {
                 steps.next()
             })
+
+            ss1t.addEventListener('click', () => {
+                steps.setStepCompleted(1, true)
+            })
+            ss1f.addEventListener('click', () => {
+                steps.setStepCompleted(1, false)
+            })
+            ss2t.addEventListener('click', () => {
+                steps.setStepCompleted(2, true)
+            })
+            ss2f.addEventListener('click', () => {
+                steps.setStepCompleted(2, false)
+            })
         })()
     </script>
-</body>
+</body> 
 
 </html>

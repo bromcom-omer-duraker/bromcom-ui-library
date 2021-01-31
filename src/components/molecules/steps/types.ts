@@ -42,4 +42,5 @@ export interface IItem {
     status?: StepStatuses;
     title?: string;
     description?: string;
+    completed?: boolean;
 }

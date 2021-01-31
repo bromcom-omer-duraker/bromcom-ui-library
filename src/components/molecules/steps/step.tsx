@@ -19,7 +19,6 @@ export class BcmStep {
 
     @Watch('status')
     statusChange(newValue) {
-        console.log(newValue)
     }
 
     render() {

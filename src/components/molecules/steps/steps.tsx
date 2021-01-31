@@ -42,7 +42,6 @@ export class BcmSteps {
      */
     componentWillLoad() {
         this.initialDirection = this.direction
-        console.log(this.sizeReference)
     }
 
 
@@ -67,6 +66,7 @@ export class BcmSteps {
                     this.items.push({
                         el: element,
                         finished: false,
+                        completed: false,
                         status: StepStatuses.waiting
                     })
                 }
@@ -118,15 +118,17 @@ export class BcmSteps {
         // Sequential step control
         // #
         if (this.sequential && !init) {
-            if (idx > this.sequentialIncrease)
+            /* if (idx > this.)
                 return 
-            this.sequentialIncrease = this.sequentialIncrease > idx + 1 
-                ? this.sequentialIncrease
-                : idx + 1
+            this. = this. > idx + 1 
+                ? this.
+                : idx + 1 */
+            
+            if (!this.items[this.activeStep].completed && !this.items[idx].completed)
+                return
         }
         
         this.activeStep = idx
-        console.log(this.activeStep, this.sequentialIncrease)
 
         this.items.forEach((_, idx2) => {
             const item = this.items[idx2]
@@ -217,6 +219,15 @@ export class BcmSteps {
             i = 0
         
         this.activateStep(i)
+    }
+
+    /**
+     * @desc
+     */
+    @Method()
+    async setStepCompleted(_step: number, status: boolean) {
+        const step = _step < 0 ? 0 : _step - 1
+        this.items[step].completed = status
     }
 
     render() {
