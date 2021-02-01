@@ -184,8 +184,9 @@ export namespace Components {
     }
     interface BcmProgress {
         "decrement": (percent: number) => Promise<void>;
+        "error": boolean;
         "increment": (percent: number) => Promise<void>;
-        "infoType": 'percent' | 'icon';
+        "info": 'percent' | 'icon';
         "percent": number;
         "setPercent": (percent: number) => Promise<void>;
         "size": 'small' | 'medium';
@@ -789,7 +790,8 @@ declare namespace LocalJSX {
         "trigger"?: 'hover' | 'click' | 'focus';
     }
     interface BcmProgress {
-        "infoType"?: 'percent' | 'icon';
+        "error"?: boolean;
+        "info"?: 'percent' | 'icon';
         "percent"?: number;
         "size"?: 'small' | 'medium';
         "type"?: 'line' | 'line-rounded' | 'circle';

@@ -1,20 +1,9 @@
 import { Component, h, Method, Prop, State, Watch, Element } from '@stencil/core'
 import cs from 'classnames'
-import { ColorPaletteTypes } from '../../../global/variables/colors'
-
-const icons = {
-    completed: ['check-circle', 'green-6'],
-    notCompleted: ['close-circle', 'grey-10']
-}
 
 const sizes = {
     small: ['size-1', 14],
     medium: ['size-2', 16]
-}
-
-const circleIcons = {
-    completed: ['check', 'green-6'],
-    notCompleted: ['close', 'grey-10']
 }
 
 /*
@@ -37,7 +26,8 @@ export class BcmProgress {
     @Prop({ mutable: true, reflect: true }) percent: number = 0
     @Prop() size: 'small' | 'medium' = 'medium'
     @Prop() type: 'line' | 'line-rounded' | 'circle'
-    @Prop() infoType: 'percent' | 'icon' = 'percent'
+    @Prop() info: 'percent' | 'icon' = 'icon'
+    @Prop() error: boolean = false
 
     @State() isCompleted: boolean = false
 
@@ -59,34 +49,51 @@ export class BcmProgress {
 
     @Method()
     async increment(percent: number) {
-        this.percent += percent
+        !this.error && (this.percent += percent)
     }
 
     @Method()
     async decrement(percent: number) {
-        this.percent -= percent
+        !this.error && (this.percent -= percent)
     }
 
     @Method()
     async setPercent(percent: number) {
-        this.percent = percent
+        !this.error && (this.percent = percent)
     }
 
     displayValue() {
         const [textSize, iconSize] = sizes[this.size]
 
-        if (this.infoType === 'percent') {
+        if (this.error) {
+            return (
+                <bcm-icon class="value" icon="close-circle" color="grey-10" size={iconSize as number} type="fill"></bcm-icon>
+            )
+        }
+
+        else if (this.info === 'percent' || !this.isCompleted) {
             return (
                 <text class={textSize + ' value'}>{this.percent}%</text>
             )
         }
 
-        else {
-            const completed = this.isCompleted ? 'completed' : 'notCompleted'
-            const [icon, color] = icons[completed]
+        return (
+            <bcm-icon class="value" icon="check-circle" color="green-6" size={iconSize as number} type="fill"></bcm-icon>
+        )
+    }
 
+    displayCircleIcon() {
+        const iconSize = circleSizes[this.size][3]
+
+        if (this.error) {
             return (
-                <bcm-icon class="value" icon={icon} color={color as ColorPaletteTypes} size={iconSize as number} type="fill"></bcm-icon>
+                <bcm-icon icon="close" color="grey-10" size={iconSize as number}></bcm-icon>
+            )
+        }
+
+        else if (this.info === 'icon' && this.isCompleted) {
+            return (
+                <bcm-icon icon="check" color="green-6" size={iconSize as number}></bcm-icon>
             )
         }
     }
@@ -112,15 +119,13 @@ export class BcmProgress {
 
     render() {
 
-        const isIcon = this.infoType === 'icon'
-        const completed = this.isCompleted ? 'completed' : 'notCompleted'
-        const [icon, color] = circleIcons[completed]
-        const [size, r, textSize, iconSize] = circleSizes[this.size]
+        const isIcon = this.info === 'icon'
+        const [size, r, textSize] = circleSizes[this.size]
         const xy = size as number / 2
 
         const completeState = {
             'completed': isIcon && this.isCompleted,
-            'not_completed': isIcon && !this.isCompleted
+            'error': this.error
         }
 
         const classes = cs(
@@ -147,9 +152,9 @@ export class BcmProgress {
                     <svg width={size} height={size}>
                         <circle class="progress-circle" r={r} cx={xy} cy={xy} />
                         <circle id="circle" class={circleClasses} r={r} cx={xy} cy={xy} />
-                        {this.infoType === 'percent' && <text x={xy} y={xy} text-anchor="middle" class={textSize as string} alignment-baseline="middle">{this.percent}%</text>}
+                        {(this.info === 'percent' || !this.isCompleted) && !this.error && <text x={xy} y={xy} text-anchor="middle" class={textSize as string} alignment-baseline="middle">{this.percent}%</text>}
                     </svg>
-                    {this.infoType === 'icon' && <bcm-icon icon={icon} color={color as ColorPaletteTypes} size={iconSize as number}></bcm-icon>}
+                    {this.displayCircleIcon()}
                 </div>
             )
         }

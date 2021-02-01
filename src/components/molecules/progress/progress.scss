@@ -38,7 +38,7 @@
         }
     }
     
-    &.not_completed {
+    &.error {
         &::-webkit-progress-value {
             background-color: $red-5;
         }
@@ -85,7 +85,7 @@
         stroke: $green-6;
     }
 
-    &.not_completed {
+    &.error {
         stroke: $red-5;
     }
 }
