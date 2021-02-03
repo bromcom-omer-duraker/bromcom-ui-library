@@ -25,7 +25,7 @@ export class BcmProgress {
 
     @Prop({ mutable: true, reflect: true }) percent: number = 0
     @Prop() size: 'small' | 'medium' = 'medium'
-    @Prop() type: 'line' | 'line-rounded' | 'circle'
+    @Prop() type: 'line' | 'line-rounded' | 'circle' = 'line-rounded'
     @Prop() info: 'percent' | 'icon' = 'icon'
     @Prop() error: boolean = false
 
