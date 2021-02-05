@@ -1,0 +1,98 @@
+.modal {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100vw;
+    height: 100vh;
+    padding: 40px;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: transparentize(black, 0.5);
+    box-sizing: border-box;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: border-radius('2');
+    background-color: #fff;
+    &.portrait {
+        max-width: 312px;
+    }
+    &.landscape {
+        max-width: 475px;
+    }
+}
+
+.text-content {
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--bcm-color-grey-8);
+    padding: space('s');
+}
+
+.title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-right: 24px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: var(--bcm-color-grey-9);
+    bcm-icon {
+        margin-right: space('xxs');
+    }
+}
+
+p {
+    &:not(.with-status) {
+        margin: 0;
+    }
+    &.with-status {
+        padding-left: 32px;
+    }
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: space('xs') space('s');
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;;
+    color: var(--bcm-color-grey-9);
+    background-color: var(--bcm-color-grey-1);
+    border-bottom: 1px solid var(--bcm-color-grey-5);
+    bcm-icon {
+        cursor: pointer;
+    }
+}
+
+footer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 10px space('xs');
+    border-top: 1px solid var(--bcm-color-grey-5);
+    background-color: var(--bcm-color-grey-2);
+    bcm-button + bcm-button {
+        margin-left: space('xxs');
+    }
+}
+
+.footer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    bcm-button + bcm-button {
+        margin-left: space('xxs');
+    }
+}

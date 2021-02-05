@@ -16,22 +16,72 @@
     </head>
 
     <body style="margin: 10%">
-        <h1>Slider <small>component</small></h1>
+        <h1>Modal <small>component</small></h1>
         <div style="max-width: 400px; display: flex; flex-direction: column;">
             <div class="row">
                 <div class="col">
-                    <bcm-slider value="3" label-suffix="$"></bcm-slider>
+                    <bcm-modal title="Basic Modal" status="success" type="confirmation">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </bcm-modal>
+                    <!-- <bcm-button class="btn-1">Open Modal</bcm-button> -->
                 </div>
             </div>
         </div>
 
+
+        <!-- Static -->
         <script>
             (async() => {
-                await customElements.whenDefined('bcm-slider')
-                const slider = document.querySelector('bcm-slider')
+                await customElements.whenDefined('bcm-modal')
+                const modal = document.querySelector('bcm-modal')
 
-                slider.addEventListener('bcm-change', (e) => console.log(e.detail))
+                modal.addEventListener('bcm-ok', () => {
+                    console.log('ok clicked')
+                })
+
+                modal.addEventListener('bcm-cancel', () => {
+                    console.log('cancel clicked')
+                    modal.close()
+                })
             })()
         </script>
+
+        <!-- Dynamic -->
+        <script>
+
+            /**
+             * @desc
+             * @returns {BcmModal}
+             */
+            /* const createModal = (title, content) => {
+                const modal = document.createElement('bcm-modal')
+                modal.title = title
+                modal.innerHTML = content
+                modal.status = 'error'
+                document.body.appendChild(modal)
+
+                return modal
+            }
+
+            (async() => {
+                await customElements.whenDefined('bcm-button')
+                const btn1 = document.querySelector('bcm-button')
+
+                btn1.addEventListener('click',() => {
+                    const modal = createModal('Lorem ipsum dolor sit amet, consectatur?', 'This is the modal content This is the modal content This is the modal content')
+
+                    modal.addEventListener('bcm-cancel', () => {
+                        modal.close()
+                    })
+
+                    modal.addEventListener('bcm-ok', () => {
+                        //modal.close()
+                        console.log('ok clicked')
+                    })
+                })
+            })() */
+        </script>
+
+        
     </body>
 </html>
