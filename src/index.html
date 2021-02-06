@@ -16,21 +16,50 @@
     </head>
 
     <body style="margin: 10%">
-        <h1>Slider <small>component</small></h1>
-        <div style="max-width: 400px; display: flex; flex-direction: column;">
+        <h1>Tabs <small>component</small></h1>
+        <div style="max-width: 1000px; display: flex; flex-direction: column;">
             <div class="row">
                 <div class="col">
-                    <bcm-slider value="3" label-suffix="$"></bcm-slider>
+                    <bcm-tabs size="small">
+                        <bcm-tab>
+                            Tab 1
+                        </bcm-tab>
+                        <bcm-tab>
+                            <bcm-icon slot="icon-prefix" icon="android" type="outlined"></bcm-icon>
+                            Tab 2
+                        </bcm-tab>
+                        <bcm-tab>
+                            <bcm-icon slot="icon-suffix" icon="android" type="outlined"></bcm-icon>
+                            Tab 3
+                        </bcm-tab>
+                        <bcm-tab closable>
+                            Tab 4
+                        </bcm-tab>
+                        <bcm-tab closable>
+                            <bcm-icon slot="icon-prefix" icon="android" type="outlined"></bcm-icon>
+                            Tab 5
+                        </bcm-tab>
+                        <bcm-tab closable>
+                            <bcm-icon slot="icon-suffix" icon="android" type="fill"></bcm-icon>
+                            Tab 6
+                        </bcm-tab>
+                        <bcm-tab closable disabled>
+                            <bcm-icon slot="icon-prefix" icon="android" type="fill"></bcm-icon>
+                            Tab 7
+                        </bcm-tab>
+                    </bcm-tabs>
                 </div>
             </div>
         </div>
 
         <script>
             (async() => {
-                await customElements.whenDefined('bcm-slider')
-                const slider = document.querySelector('bcm-slider')
+                await customElements.whenDefined('bcm-tabs')
+                const tabs = document.querySelector('bcm-tabs')
 
-                slider.addEventListener('bcm-change', (e) => console.log(e.detail))
+                tabs.addEventListener('bcm-change', (event) => {
+                    console.log(event.detail)
+                })
             })()
         </script>
     </body>
