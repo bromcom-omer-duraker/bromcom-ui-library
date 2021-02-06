@@ -1,0 +1,55 @@
+::slotted(bcm-tab:not(:last-child)) {
+    margin-right: space('m');
+}
+
+.tabs{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    &.large {
+        --bcm-tab-vertical-space: #{space('xs')};
+        --bcm-tab-font-size: 16px;
+        --bcm-tab-line-height: 24px;
+    }
+    &.medium {
+        --bcm-tab-vertical-space: 11px;
+        --bcm-tab-font-size: 14px;
+        --bcm-tab-line-height: 22px;
+    }
+    &.small {
+        --bcm-tab-vertical-space: 7px;
+        --bcm-tab-font-size: 14px;
+        --bcm-tab-line-height: 22px;
+    }
+    &.pane {
+        --bcm-tab-vertical-space: 9px;
+        --bcm-tab-font-size: 14px;
+        --bcm-tab-line-height: 22px;
+    }
+}
+
+.tabs:before {
+    content: '';
+    position: absolute;
+    top: var(--bcm-tabs-line-top);
+    left: var(--bcm-tabs-line-left);
+    width: var(--bcm-tabs-line-width);
+    height: 2px;
+    background-color: var(--bcm-color-prime-blue-6);
+}
+
+.tabs.animatable:before {
+    transition: all 0.4s ease;
+}
+
+/**
+ * Pane Rules
+ */
+.tabs.pane {
+    ::slotted(bcm-tab:not(:last-child)) {
+        margin-right: 2px;
+    }
+    &:before {
+        display: none;
+    }
+}

@@ -1,0 +1,65 @@
+slot {
+    &[name="icon-suffix"]::slotted(bcm-icon) {
+        margin-left: 10px;
+    }
+    &[name="icon-prefix"]::slotted(bcm-icon) {
+        margin-right: 10px;
+    }
+}
+
+.tab{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--bcm-tab-vertical-space) 14px var(--bcm-tab-vertical-space) 14px;
+    color: var(--bcm-color-grey-8);
+    font-size: var(--bcm-tab-font-size);
+    line-height: var(--bcm-tab-line-height);
+    cursor: pointer;
+    user-select: none;
+    &.active {
+        color: var(--bcm-color-prime-blue-6);
+    }
+}
+
+.tab:hover {
+    color: var(--bcm-color-prime-blue-5);
+}
+
+.tab:active, .tab:focus {
+    color: var(--bcm-color-prime-blue-7);
+}
+
+.tab[disabled], .tab.disabled {
+    color: var(--bcm-color-grey-6);
+    cursor: not-allowed;
+}
+
+/**
+ * Closable Rules
+ */
+.tab.closable:not(.pane) {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.tab.closable {
+    .close {
+        margin-left: 34px;
+    }
+}
+
+/**
+ * Pane Rules
+ */
+.tab.pane {
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-color: var(--bcm-color-grey-5);
+    background-color: var(--bcm-color-grey-3);
+    border-radius: border-radius('2') border-radius('2') 0 0;
+    &.active {
+        background-color: #ffffff;
+    }
+}
