@@ -16,11 +16,50 @@
     </head>
 
     <body style="margin: 10%">
-        <h1>Slider <small>component</small></h1>
+        <h1>Menu <small>component</small></h1>
         <div style="max-width: 400px; display: flex; flex-direction: column;">
             <div class="row">
                 <div class="col">
-                    <bcm-slider value="3" label-suffix="$"></bcm-slider>
+                    <div style="max-width: 280px">
+                        <bcm-menu>
+                            <bcm-menu-item>
+                                <bcm-icon slot="icon" icon="mail"></bcm-icon>
+                                Navigation One
+                            </bcm-menu-item>
+                            <bcm-menu-item>
+                                <bcm-icon slot="icon" icon="mail"></bcm-icon>
+                                Navigation Two
+                            </bcm-menu-item>
+                            <bcm-menu-group collapsible title="Navigation Three">
+                                <bcm-icon slot="icon" icon="mail"></bcm-icon>
+                                <bcm-menu-item>
+                                    Option
+                                </bcm-menu-item>
+                                <bcm-menu-item>
+                                    Option
+                                </bcm-menu-item>
+                            </bcm-menu-group>
+                            <bcm-divider></bcm-divider>
+                            <bcm-menu-group title="Navigation Three">
+                                <bcm-menu-item>
+                                    Option
+                                </bcm-menu-item>
+                                <bcm-menu-item>
+                                    Option
+                                </bcm-menu-item>
+                            </bcm-menu-group>
+                            <bcm-divider></bcm-divider>
+                            <bcm-menu-group title="Navigation Three">
+                                <bcm-icon slot="icon" icon="mail"></bcm-icon>
+                                <bcm-menu-item>
+                                    Option
+                                </bcm-menu-item>
+                                <bcm-menu-item>
+                                    Option
+                                </bcm-menu-item>
+                            </bcm-menu-group>
+                        </bcm-menu>
+                    </div>
                 </div>
             </div>
         </div>
@@ -28,9 +67,8 @@
         <script>
             (async() => {
                 await customElements.whenDefined('bcm-slider')
-                const slider = document.querySelector('bcm-slider')
+                const menu = document.querySelector('bcm-menu')
 
-                slider.addEventListener('bcm-change', (e) => console.log(e.detail))
             })()
         </script>
     </body>

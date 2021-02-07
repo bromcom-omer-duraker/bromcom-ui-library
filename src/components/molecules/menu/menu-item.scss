@@ -1,0 +1,28 @@
+::slotted(bcm-icon) {
+    margin-right: 10px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--bcm-color-grey-8);
+    cursor: pointer;
+    padding: 12px space('s');
+    &.selected {
+        background-color: var(--bcm-color-prime-blue-6);
+        color: #ffffff;
+    }
+    &.disabled {
+        color: var(--bcm-grey-6);
+    }
+    &:hover {
+        background-color: var(--bcm-color-prime-blue-1);
+        color: var(--bcm-color-prime-blue-6);
+    }
+    &:focus, &:active {
+        background-color: var(--bcm-color-prime-blue-7);
+        color: #ffffff;
+    }
+}
