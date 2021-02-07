@@ -1,4 +1,5 @@
 import { Component, Prop, h } from '@stencil/core';
+import cs from 'classnames'
 
 @Component({
     tag: 'bcm-comment',
@@ -6,7 +7,23 @@ import { Component, Prop, h } from '@stencil/core';
     shadow: true
 })
 export class BcmComment {
+    /**
+     * Component Properties
+     */
+    @Prop({ attribute: 'full-width' }) fullWidth: boolean = false
+
     render() {
-        return ('')
+        const classes = cs(
+            'comment',
+            {
+                'full-width': this.fullWidth
+            }
+        )
+
+        return (
+            <div class={classes}>
+                <slot />
+            </div>
+        )
     }
 }

@@ -12,12 +12,56 @@
 
     <body style="margin: 10%">
         <h1>Comment <small>component</small></h1>
-        <div style="max-width: 400px; display: flex; flex-direction: column;">
+        <div style="max-width: 1000px; display: flex; flex-direction: column;">
             <div class="row">
                 <div class="col">
-                    <bcm-comment></bcm-comment>
+                    <bcm-comment>
+                        <bcm-comment-item
+                            name="Han Solo"
+                            time="a day ago"
+                            user-image=""
+                            liked-count="20"
+                            disliked-count="0"
+                            comment="Continually fashion strategic metrics through interdependent partnerships. Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. Phosfluorescently leverage existing revolutionary alignments rather than client-centric process improvements."
+                        ></bcm-comment-item>
+                        <bcm-comment-item
+                            name="Han Solo"
+                            time="a day ago"
+                            user-image=""
+                            liked-count="10"
+                            disliked-count="40"
+                            comment="Continually fashion strategic metrics through interdependent partnerships. Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. Phosfluorescently leverage existing revolutionary alignments rather than client-centric process improvements."
+                        ></bcm-comment-item>
+                        <bcm-comment-item
+                            name="Han Solo"
+                            time="a day ago"
+                            user-image=""
+                            like-status="disliked"
+                            liked-count="200"
+                            disliked-count="50"
+                            comment="Continually fashion strategic metrics through interdependent partnerships. Dramatically disseminate enterprise-wide initiatives vis-a-vis distributed alignments. Phosfluorescently leverage existing revolutionary alignments rather than client-centric process improvements."
+                        ></bcm-comment-item>
+                        <bcm-comment-editor
+                            user-image=""
+                            placeholder="Textarea placeholder"
+                            button-text="Add comment"
+                        ></bcm-comment-editor>
+                    </bcm-comment>
                 </div>
             </div>
         </div>
+
+        <script>
+                const commentEditor = document.querySelector('bcm-comment-editor')
+                console.log(commentEditor.addEventListener('bcm-send-comment', (event) => {
+                    console.log(event.detail)
+                }))
+
+
+            /* (async () => {
+                await customElements.whenDefined('bcm-comment')
+
+            })() */
+        </script>
     </body>
 </html>
