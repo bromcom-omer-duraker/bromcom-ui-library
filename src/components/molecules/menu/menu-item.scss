@@ -17,11 +17,14 @@
     &.disabled {
         color: var(--bcm-grey-6);
     }
-    &:hover {
+    &.padding {
+        padding-left: space('xl');
+    }
+    &:hover:not(.selected) {
         background-color: var(--bcm-color-prime-blue-1);
         color: var(--bcm-color-prime-blue-6);
     }
-    &:focus, &:active {
+    &:focus:not(.selected), &:active:not(.selected) {
         background-color: var(--bcm-color-prime-blue-7);
         color: #ffffff;
     }

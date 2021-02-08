@@ -1,3 +1,11 @@
+.menu-group {
+    &.padding {
+        .inner {
+            padding-left: space('xl');
+        }
+    }
+}
+
 .title {
     display: flex;
     align-items: center;

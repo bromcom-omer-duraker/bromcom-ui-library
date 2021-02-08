@@ -1,4 +1,4 @@
-import { Component, Prop, h, State } from '@stencil/core';
+import { Component, Prop, h, Event, EventEmitter, Host, Element } from '@stencil/core';
 import cs from 'classnames'
 
 @Component({
@@ -7,17 +7,39 @@ import cs from 'classnames'
     shadow: true
 })
 export class BcmMenuGroup {
+    @Element() el: HTMLElement
 
     /**
      * Component Properties
      */
     @Prop({ attribute: 'title'          }) _title: string = ''
     @Prop({ attribute: 'collapsible'    }) collapsible: boolean = false
-    
+    @Prop({ attribute: 'open'           }) open: boolean = false
+    @Prop({ attribute: 'padding'        }) padding: boolean = false
+
     /**
-     * Component States
+     * Component Events
      */
-    @State() open: boolean = false
+    @Event({ eventName: 'bcm-menu-item-selected' }) menuItemSelected: EventEmitter
+
+     /**
+     * @ComponentMethod
+     */
+    componentDidRender() {
+        let slotElements: HTMLElement[]
+        let query = this.el.shadowRoot.querySelector('slot:not([name])')
+
+        slotElements = (query as HTMLSlotElement).assignedElements() as HTMLElement[]
+
+        // Get only bcm-menu-item elements from 
+        // slot childs
+        slotElements.map((element: any) => {
+            console.log(element.tagName)
+            String(element.tagName).toLowerCase() == 'bcm-menu-item' || String(element.tagName).toLowerCase() == 'bcm-menu-group' 
+                && (element.padding = true)
+        })
+    }
+    
 
     /**
      * @desc
@@ -27,12 +49,20 @@ export class BcmMenuGroup {
         this.open = !this.open
     }
 
+    /**
+     * @desc
+     */
+    handleMenuItemSelected(selected) {
+        if (selected && !this.open) this.open = true
+    }    
+
     render() {
 
         const classes = cs(
             'menu-group',
             {
-                'collapsible': this.collapsible
+                'collapsible': this.collapsible,
+                'padding': this.padding
             }
         )
 
@@ -44,29 +74,31 @@ export class BcmMenuGroup {
         )
 
         return (
-            <div class={classes}>
-                <div class="title" onClick={() => this.handleTitleClick()}>
-                    <div class="text-content">
-                        <slot name="icon" />
-                        {this._title}
+            <Host on-bcm-menu-item-selected={(event) => this.handleMenuItemSelected(event.detail)}>
+                <div class={classes}>
+                    <div class="title" onClick={() => this.handleTitleClick()}>
+                        <div class="text-content">
+                            <slot name="icon" />
+                            {this._title}
+                        </div>
+                        {
+                            this.collapsible && (
+                                <bcm-icon
+                                    class="collapse-icon"
+                                    size={8}
+                                    icon={this.open ? 'caret-up' : 'caret-down'}
+                                    type="fill"
+                                    color="grey-10"
+                                ></bcm-icon>
+                            )
+                        }
+                        
                     </div>
-                    {
-                        this.collapsible && (
-                            <bcm-icon
-                                class="collapse-icon"
-                                size={8}
-                                icon={this.open ? 'caret-up' : 'caret-down'}
-                                type="fill"
-                                color="grey-10"
-                            ></bcm-icon>
-                        )
-                    }
-                    
+                    <div class={innerClasses}>
+                        <slot />
+                    </div>
                 </div>
-                <div class={innerClasses}>
-                    <slot />
-                </div>
-            </div>
+            </Host>
         )
     }
 }

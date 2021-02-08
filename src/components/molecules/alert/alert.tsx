@@ -29,8 +29,9 @@ export class BcmAlert {
      */
     @State() hasSlot: boolean = false
 
+  
     /**
-     * @desc
+     * @ComponentMethod
      */
     componentDidRender() {
         this.hasSlot = !!this.el.shadowRoot.querySelector('slot').assignedNodes().length
